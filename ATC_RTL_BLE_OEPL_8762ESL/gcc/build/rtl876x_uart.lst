@@ -1,0 +1,558 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"rtl876x_uart.c"
+  14              		.text
+  15              		.section	.text.UART_DeInit,"ax",%progbits
+  16              		.align	1
+  17              		.global	UART_DeInit
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	UART_DeInit:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0A4B     		ldr	r3, .L6
+  27 0004 9842     		cmp	r0, r3
+  28 0006 03D0     		beq	.L4
+  29 0008 094B     		ldr	r3, .L6+4
+  30 000a 9842     		cmp	r0, r3
+  31 000c 06D0     		beq	.L5
+  32              	.L1:
+  33              		@ sp needed
+  34 000e 10BD     		pop	{r4, pc}
+  35              	.L4:
+  36 0010 0022     		movs	r2, #0
+  37 0012 0849     		ldr	r1, .L6+8
+  38 0014 0848     		ldr	r0, .L6+12
+  39 0016 FFF7FEFF 		bl	RCC_PeriphClockCmd
+  40 001a F8E7     		b	.L1
+  41              	.L5:
+  42 001c 8020     		movs	r0, #128
+  43 001e 0022     		movs	r2, #0
+  44 0020 0649     		ldr	r1, .L6+16
+  45 0022 4001     		lsls	r0, r0, #5
+  46 0024 FFF7FEFF 		bl	RCC_PeriphClockCmd
+  47 0028 F1E7     		b	.L1
+  48              	.L7:
+  49 002a C046     		.align	2
+  50              	.L6:
+  51 002c 00200140 		.word	1073815552
+  52 0030 00100140 		.word	1073811456
+  53 0034 01000040 		.word	1073741825
+  54 0038 01000008 		.word	134217729
+  55 003c 00100020 		.word	536875008
+  57              		.section	.text.UART_Init,"ax",%progbits
+  58              		.align	1
+  59              		.global	UART_Init
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 2
+
+
+  60              		.syntax unified
+  61              		.code	16
+  62              		.thumb_func
+  64              	UART_Init:
+  65              		@ args = 0, pretend = 0, frame = 0
+  66              		@ frame_needed = 0, uses_anonymous_args = 0
+  67 0000 10B5     		push	{r4, lr}
+  68 0002 C368     		ldr	r3, [r0, #12]
+  69 0004 8022     		movs	r2, #128
+  70 0006 9343     		bics	r3, r2
+  71 0008 C360     		str	r3, [r0, #12]
+  72 000a 0023     		movs	r3, #0
+  73 000c 4360     		str	r3, [r0, #4]
+  74 000e 4369     		ldr	r3, [r0, #20]
+  75 0010 8368     		ldr	r3, [r0, #8]
+  76 0012 0624     		movs	r4, #6
+  77 0014 2343     		orrs	r3, r4
+  78 0016 8360     		str	r3, [r0, #8]
+  79 0018 C368     		ldr	r3, [r0, #12]
+  80 001a 1343     		orrs	r3, r2
+  81 001c C360     		str	r3, [r0, #12]
+  82 001e 036A     		ldr	r3, [r0, #32]
+  83 0020 EA34     		adds	r4, r4, #234
+  84 0022 A343     		bics	r3, r4
+  85 0024 0362     		str	r3, [r0, #32]
+  86 0026 046A     		ldr	r4, [r0, #32]
+  87 0028 8B88     		ldrh	r3, [r1, #4]
+  88 002a 1B01     		lsls	r3, r3, #4
+  89 002c 2343     		orrs	r3, r4
+  90 002e 0362     		str	r3, [r0, #32]
+  91 0030 C369     		ldr	r3, [r0, #28]
+  92 0032 254C     		ldr	r4, .L12
+  93 0034 2340     		ands	r3, r4
+  94 0036 C361     		str	r3, [r0, #28]
+  95 0038 C469     		ldr	r4, [r0, #28]
+  96 003a 0B88     		ldrh	r3, [r1]
+  97 003c 1B04     		lsls	r3, r3, #16
+  98 003e 2343     		orrs	r3, r4
+  99 0040 C361     		str	r3, [r0, #28]
+ 100 0042 8B78     		ldrb	r3, [r1, #2]
+ 101 0044 0360     		str	r3, [r0]
+ 102 0046 4B88     		ldrh	r3, [r1, #2]
+ 103 0048 1B0A     		lsrs	r3, r3, #8
+ 104 004a 4360     		str	r3, [r0, #4]
+ 105 004c C368     		ldr	r3, [r0, #12]
+ 106 004e 9343     		bics	r3, r2
+ 107 0050 C360     		str	r3, [r0, #12]
+ 108 0052 4B89     		ldrh	r3, [r1, #10]
+ 109 0054 0A89     		ldrh	r2, [r1, #8]
+ 110 0056 1343     		orrs	r3, r2
+ 111 0058 CA88     		ldrh	r2, [r1, #6]
+ 112 005a 1343     		orrs	r3, r2
+ 113 005c C360     		str	r3, [r0, #12]
+ 114 005e 8B89     		ldrh	r3, [r1, #12]
+ 115 0060 1B04     		lsls	r3, r3, #16
+ 116 0062 CA89     		ldrh	r2, [r1, #14]
+ 117 0064 1202     		lsls	r2, r2, #8
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 3
+
+
+ 118 0066 1343     		orrs	r3, r2
+ 119 0068 8A8A     		ldrh	r2, [r1, #20]
+ 120 006a 1343     		orrs	r3, r2
+ 121 006c 0122     		movs	r2, #1
+ 122 006e 1343     		orrs	r3, r2
+ 123 0070 8360     		str	r3, [r0, #8]
+ 124 0072 0369     		ldr	r3, [r0, #16]
+ 125 0074 2132     		adds	r2, r2, #33
+ 126 0076 9343     		bics	r3, r2
+ 127 0078 0361     		str	r3, [r0, #16]
+ 128 007a 0269     		ldr	r2, [r0, #16]
+ 129 007c 4B8A     		ldrh	r3, [r1, #18]
+ 130 007e 1343     		orrs	r3, r2
+ 131 0080 0361     		str	r3, [r0, #16]
+ 132 0082 0B8A     		ldrh	r3, [r1, #16]
+ 133 0084 0364     		str	r3, [r0, #64]
+ 134 0086 8B8A     		ldrh	r3, [r1, #20]
+ 135 0088 082B     		cmp	r3, #8
+ 136 008a 00D0     		beq	.L11
+ 137              	.L8:
+ 138              		@ sp needed
+ 139 008c 10BD     		pop	{r4, pc}
+ 140              	.L11:
+ 141 008e CB8A     		ldrh	r3, [r1, #22]
+ 142 0090 002B     		cmp	r3, #0
+ 143 0092 0AD0     		beq	.L10
+ 144 0094 836A     		ldr	r3, [r0, #40]
+ 145 0096 F822     		movs	r2, #248
+ 146 0098 9343     		bics	r3, r2
+ 147 009a 8362     		str	r3, [r0, #40]
+ 148 009c 846A     		ldr	r4, [r0, #40]
+ 149 009e 8B7E     		ldrb	r3, [r1, #26]
+ 150 00a0 DB00     		lsls	r3, r3, #3
+ 151 00a2 2343     		orrs	r3, r4
+ 152 00a4 F63A     		subs	r2, r2, #246
+ 153 00a6 1343     		orrs	r3, r2
+ 154 00a8 8362     		str	r3, [r0, #40]
+ 155              	.L10:
+ 156 00aa 0B8B     		ldrh	r3, [r1, #24]
+ 157 00ac 002B     		cmp	r3, #0
+ 158 00ae EDD0     		beq	.L8
+ 159 00b0 836A     		ldr	r3, [r0, #40]
+ 160 00b2 064A     		ldr	r2, .L12+4
+ 161 00b4 1340     		ands	r3, r2
+ 162 00b6 8362     		str	r3, [r0, #40]
+ 163 00b8 846A     		ldr	r4, [r0, #40]
+ 164 00ba CB7E     		ldrb	r3, [r1, #27]
+ 165 00bc 1B02     		lsls	r3, r3, #8
+ 166 00be 2343     		orrs	r3, r4
+ 167 00c0 0422     		movs	r2, #4
+ 168 00c2 1343     		orrs	r3, r2
+ 169 00c4 8362     		str	r3, [r0, #40]
+ 170 00c6 E1E7     		b	.L8
+ 171              	.L13:
+ 172              		.align	2
+ 173              	.L12:
+ 174 00c8 FFFF00F8 		.word	-134152193
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 4
+
+
+ 175 00cc FFC0FFFF 		.word	-16129
+ 177              		.section	.text.UART_StructInit,"ax",%progbits
+ 178              		.align	1
+ 179              		.global	UART_StructInit
+ 180              		.syntax unified
+ 181              		.code	16
+ 182              		.thumb_func
+ 184              	UART_StructInit:
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187              		@ link register save eliminated.
+ 188 0000 1423     		movs	r3, #20
+ 189 0002 4380     		strh	r3, [r0, #2]
+ 190 0004 083B     		subs	r3, r3, #8
+ 191 0006 8380     		strh	r3, [r0, #4]
+ 192 0008 094B     		ldr	r3, .L15
+ 193 000a 0380     		strh	r3, [r0]
+ 194 000c 0122     		movs	r2, #1
+ 195 000e C280     		strh	r2, [r0, #6]
+ 196 0010 0023     		movs	r3, #0
+ 197 0012 0381     		strh	r3, [r0, #8]
+ 198 0014 4381     		strh	r3, [r0, #10]
+ 199 0016 1021     		movs	r1, #16
+ 200 0018 8181     		strh	r1, [r0, #12]
+ 201 001a C181     		strh	r1, [r0, #14]
+ 202 001c 0282     		strh	r2, [r0, #16]
+ 203 001e 4382     		strh	r3, [r0, #18]
+ 204 0020 8382     		strh	r3, [r0, #20]
+ 205 0022 C382     		strh	r3, [r0, #22]
+ 206 0024 0383     		strh	r3, [r0, #24]
+ 207 0026 0F33     		adds	r3, r3, #15
+ 208 0028 8376     		strb	r3, [r0, #26]
+ 209 002a 0123     		movs	r3, #1
+ 210 002c C376     		strb	r3, [r0, #27]
+ 211              		@ sp needed
+ 212 002e 7047     		bx	lr
+ 213              	.L16:
+ 214              		.align	2
+ 215              	.L15:
+ 216 0030 52020000 		.word	594
+ 218              		.section	.text.UART_MaskINTConfig,"ax",%progbits
+ 219              		.align	1
+ 220              		.global	UART_MaskINTConfig
+ 221              		.syntax unified
+ 222              		.code	16
+ 223              		.thumb_func
+ 225              	UART_MaskINTConfig:
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228              		@ link register save eliminated.
+ 229 0000 002A     		cmp	r2, #0
+ 230 0002 03D0     		beq	.L18
+ 231 0004 036D     		ldr	r3, [r0, #80]
+ 232 0006 1943     		orrs	r1, r3
+ 233 0008 0165     		str	r1, [r0, #80]
+ 234              	.L17:
+ 235              		@ sp needed
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 5
+
+
+ 236 000a 7047     		bx	lr
+ 237              	.L18:
+ 238 000c 036D     		ldr	r3, [r0, #80]
+ 239 000e 8B43     		bics	r3, r1
+ 240 0010 0365     		str	r3, [r0, #80]
+ 241 0012 FAE7     		b	.L17
+ 243              		.section	.text.UART_INTConfig,"ax",%progbits
+ 244              		.align	1
+ 245              		.global	UART_INTConfig
+ 246              		.syntax unified
+ 247              		.code	16
+ 248              		.thumb_func
+ 250              	UART_INTConfig:
+ 251              		@ args = 0, pretend = 0, frame = 0
+ 252              		@ frame_needed = 0, uses_anonymous_args = 0
+ 253 0000 10B5     		push	{r4, lr}
+ 254 0002 0B06     		lsls	r3, r1, #24
+ 255 0004 26D5     		bpl	.L21
+ 256 0006 012A     		cmp	r2, #1
+ 257 0008 0CD0     		beq	.L33
+ 258 000a 036C     		ldr	r3, [r0, #64]
+ 259 000c 5B00     		lsls	r3, r3, #1
+ 260 000e 5B08     		lsrs	r3, r3, #1
+ 261 0010 0364     		str	r3, [r0, #64]
+ 262 0012 836C     		ldr	r3, [r0, #72]
+ 263 0014 0122     		movs	r2, #1
+ 264 0016 9343     		bics	r3, r2
+ 265 0018 8364     		str	r3, [r0, #72]
+ 266 001a 4B06     		lsls	r3, r1, #25
+ 267 001c 1ED4     		bmi	.L25
+ 268 001e 8B06     		lsls	r3, r1, #26
+ 269 0020 22D1     		bne	.L30
+ 270 0022 24E0     		b	.L20
+ 271              	.L33:
+ 272 0024 426C     		ldr	r2, [r0, #68]
+ 273 0026 0124     		movs	r4, #1
+ 274 0028 2243     		orrs	r2, r4
+ 275 002a 4264     		str	r2, [r0, #68]
+ 276 002c 836C     		ldr	r3, [r0, #72]
+ 277 002e 2343     		orrs	r3, r4
+ 278 0030 8364     		str	r3, [r0, #72]
+ 279 0032 026C     		ldr	r2, [r0, #64]
+ 280 0034 8023     		movs	r3, #128
+ 281 0036 1B06     		lsls	r3, r3, #24
+ 282 0038 1343     		orrs	r3, r2
+ 283 003a 0364     		str	r3, [r0, #64]
+ 284 003c 4B06     		lsls	r3, r1, #25
+ 285 003e 1CD5     		bpl	.L34
+ 286              	.L23:
+ 287 0040 C369     		ldr	r3, [r0, #28]
+ 288 0042 8022     		movs	r2, #128
+ 289 0044 1343     		orrs	r3, r2
+ 290 0046 C361     		str	r3, [r0, #28]
+ 291 0048 8B06     		lsls	r3, r1, #26
+ 292 004a 10D0     		beq	.L20
+ 293              	.L28:
+ 294 004c 4368     		ldr	r3, [r0, #4]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 6
+
+
+ 295 004e 1943     		orrs	r1, r3
+ 296 0050 4160     		str	r1, [r0, #4]
+ 297 0052 0CE0     		b	.L20
+ 298              	.L21:
+ 299 0054 4B06     		lsls	r3, r1, #25
+ 300 0056 0BD5     		bpl	.L27
+ 301 0058 012A     		cmp	r2, #1
+ 302 005a F1D0     		beq	.L23
+ 303              	.L25:
+ 304 005c C369     		ldr	r3, [r0, #28]
+ 305 005e 8022     		movs	r2, #128
+ 306 0060 9343     		bics	r3, r2
+ 307 0062 C361     		str	r3, [r0, #28]
+ 308 0064 8B06     		lsls	r3, r1, #26
+ 309 0066 02D0     		beq	.L20
+ 310              	.L30:
+ 311 0068 4368     		ldr	r3, [r0, #4]
+ 312 006a 8B43     		bics	r3, r1
+ 313 006c 4360     		str	r3, [r0, #4]
+ 314              	.L20:
+ 315              		@ sp needed
+ 316 006e 10BD     		pop	{r4, pc}
+ 317              	.L27:
+ 318 0070 8B06     		lsls	r3, r1, #26
+ 319 0072 FCD0     		beq	.L20
+ 320 0074 012A     		cmp	r2, #1
+ 321 0076 F7D1     		bne	.L30
+ 322 0078 E8E7     		b	.L28
+ 323              	.L34:
+ 324 007a 8B06     		lsls	r3, r1, #26
+ 325 007c F7D0     		beq	.L20
+ 326 007e E5E7     		b	.L28
+ 328              		.section	.text.UART_SendData,"ax",%progbits
+ 329              		.align	1
+ 330              		.global	UART_SendData
+ 331              		.syntax unified
+ 332              		.code	16
+ 333              		.thumb_func
+ 335              	UART_SendData:
+ 336              		@ args = 0, pretend = 0, frame = 0
+ 337              		@ frame_needed = 0, uses_anonymous_args = 0
+ 338              		@ link register save eliminated.
+ 339 0000 002A     		cmp	r2, #0
+ 340 0002 08D0     		beq	.L35
+ 341 0004 0B00     		movs	r3, r1
+ 342 0006 8918     		adds	r1, r1, r2
+ 343 0008 89B2     		uxth	r1, r1
+ 344              	.L37:
+ 345 000a 1A78     		ldrb	r2, [r3]
+ 346 000c 4262     		str	r2, [r0, #36]
+ 347 000e 0133     		adds	r3, r3, #1
+ 348 0010 9AB2     		uxth	r2, r3
+ 349 0012 9142     		cmp	r1, r2
+ 350 0014 F9D1     		bne	.L37
+ 351              	.L35:
+ 352              		@ sp needed
+ 353 0016 7047     		bx	lr
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 7
+
+
+ 355              		.section	.text.UART_ReceiveData,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	UART_ReceiveData
+ 358              		.syntax unified
+ 359              		.code	16
+ 360              		.thumb_func
+ 362              	UART_ReceiveData:
+ 363              		@ args = 0, pretend = 0, frame = 0
+ 364              		@ frame_needed = 0, uses_anonymous_args = 0
+ 365              		@ link register save eliminated.
+ 366 0000 002A     		cmp	r2, #0
+ 367 0002 08D0     		beq	.L39
+ 368 0004 0B00     		movs	r3, r1
+ 369 0006 8918     		adds	r1, r1, r2
+ 370 0008 89B2     		uxth	r1, r1
+ 371              	.L41:
+ 372 000a 426A     		ldr	r2, [r0, #36]
+ 373 000c 1A70     		strb	r2, [r3]
+ 374 000e 0133     		adds	r3, r3, #1
+ 375 0010 9AB2     		uxth	r2, r3
+ 376 0012 9142     		cmp	r1, r2
+ 377 0014 F9D1     		bne	.L41
+ 378              	.L39:
+ 379              		@ sp needed
+ 380 0016 7047     		bx	lr
+ 382              		.section	.text.UART_SetBaudRate,"ax",%progbits
+ 383              		.align	1
+ 384              		.global	UART_SetBaudRate
+ 385              		.syntax unified
+ 386              		.code	16
+ 387              		.thumb_func
+ 389              	UART_SetBaudRate:
+ 390              		@ args = 0, pretend = 0, frame = 0
+ 391              		@ frame_needed = 0, uses_anonymous_args = 0
+ 392 0000 70B5     		push	{r4, r5, r6, lr}
+ 393 0002 C568     		ldr	r5, [r0, #12]
+ 394 0004 8024     		movs	r4, #128
+ 395 0006 2543     		orrs	r5, r4
+ 396 0008 C560     		str	r5, [r0, #12]
+ 397 000a 056A     		ldr	r5, [r0, #32]
+ 398 000c F026     		movs	r6, #240
+ 399 000e B543     		bics	r5, r6
+ 400 0010 0562     		str	r5, [r0, #32]
+ 401 0012 056A     		ldr	r5, [r0, #32]
+ 402 0014 1201     		lsls	r2, r2, #4
+ 403 0016 2A43     		orrs	r2, r5
+ 404 0018 0262     		str	r2, [r0, #32]
+ 405 001a C269     		ldr	r2, [r0, #28]
+ 406 001c 074D     		ldr	r5, .L44
+ 407 001e 2A40     		ands	r2, r5
+ 408 0020 C261     		str	r2, [r0, #28]
+ 409 0022 C269     		ldr	r2, [r0, #28]
+ 410 0024 1B04     		lsls	r3, r3, #16
+ 411 0026 1343     		orrs	r3, r2
+ 412 0028 C361     		str	r3, [r0, #28]
+ 413 002a FF23     		movs	r3, #255
+ 414 002c 0B40     		ands	r3, r1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 8
+
+
+ 415 002e 0360     		str	r3, [r0]
+ 416 0030 090A     		lsrs	r1, r1, #8
+ 417 0032 4160     		str	r1, [r0, #4]
+ 418 0034 C368     		ldr	r3, [r0, #12]
+ 419 0036 A343     		bics	r3, r4
+ 420 0038 C360     		str	r3, [r0, #12]
+ 421              		@ sp needed
+ 422 003a 70BD     		pop	{r4, r5, r6, pc}
+ 423              	.L45:
+ 424              		.align	2
+ 425              	.L44:
+ 426 003c FFFF00F8 		.word	-134152193
+ 428              		.section	.text.UART_SetParams,"ax",%progbits
+ 429              		.align	1
+ 430              		.global	UART_SetParams
+ 431              		.syntax unified
+ 432              		.code	16
+ 433              		.thumb_func
+ 435              	UART_SetParams:
+ 436              		@ args = 0, pretend = 0, frame = 0
+ 437              		@ frame_needed = 0, uses_anonymous_args = 0
+ 438              		@ link register save eliminated.
+ 439 0000 1343     		orrs	r3, r2
+ 440 0002 1943     		orrs	r1, r3
+ 441 0004 C160     		str	r1, [r0, #12]
+ 442              		@ sp needed
+ 443 0006 7047     		bx	lr
+ 445              		.section	.text.UART_LoopBackCmd,"ax",%progbits
+ 446              		.align	1
+ 447              		.global	UART_LoopBackCmd
+ 448              		.syntax unified
+ 449              		.code	16
+ 450              		.thumb_func
+ 452              	UART_LoopBackCmd:
+ 453              		@ args = 0, pretend = 0, frame = 0
+ 454              		@ frame_needed = 0, uses_anonymous_args = 0
+ 455              		@ link register save eliminated.
+ 456 0000 0129     		cmp	r1, #1
+ 457 0002 04D0     		beq	.L50
+ 458 0004 0369     		ldr	r3, [r0, #16]
+ 459 0006 1022     		movs	r2, #16
+ 460 0008 9343     		bics	r3, r2
+ 461 000a 0361     		str	r3, [r0, #16]
+ 462              	.L47:
+ 463              		@ sp needed
+ 464 000c 7047     		bx	lr
+ 465              	.L50:
+ 466 000e 0369     		ldr	r3, [r0, #16]
+ 467 0010 1022     		movs	r2, #16
+ 468 0012 1343     		orrs	r3, r2
+ 469 0014 0361     		str	r3, [r0, #16]
+ 470 0016 F9E7     		b	.L47
+ 472              		.section	.text.UART_GetFlagStatus,"ax",%progbits
+ 473              		.align	1
+ 474              		.global	UART_GetFlagStatus
+ 475              		.syntax unified
+ 476              		.code	16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 9
+
+
+ 477              		.thumb_func
+ 479              	UART_GetFlagStatus:
+ 480              		@ args = 0, pretend = 0, frame = 0
+ 481              		@ frame_needed = 0, uses_anonymous_args = 0
+ 482              		@ link register save eliminated.
+ 483 0000 8023     		movs	r3, #128
+ 484 0002 1B01     		lsls	r3, r3, #4
+ 485 0004 9942     		cmp	r1, r3
+ 486 0006 0DD0     		beq	.L56
+ 487 0008 8023     		movs	r3, #128
+ 488 000a DB00     		lsls	r3, r3, #3
+ 489 000c 9942     		cmp	r1, r3
+ 490 000e 0DD0     		beq	.L57
+ 491 0010 8023     		movs	r3, #128
+ 492 0012 9B00     		lsls	r3, r3, #2
+ 493 0014 9942     		cmp	r1, r3
+ 494 0016 0DD0     		beq	.L58
+ 495 0018 4069     		ldr	r0, [r0, #20]
+ 496 001a 0140     		ands	r1, r0
+ 497 001c 4B1E     		subs	r3, r1, #1
+ 498 001e 9941     		sbcs	r1, r1, r3
+ 499 0020 C8B2     		uxtb	r0, r1
+ 500 0022 02E0     		b	.L53
+ 501              	.L56:
+ 502 0024 816D     		ldr	r1, [r0, #88]
+ 503 0026 0120     		movs	r0, #1
+ 504 0028 0840     		ands	r0, r1
+ 505              	.L53:
+ 506              		@ sp needed
+ 507 002a 7047     		bx	lr
+ 508              	.L57:
+ 509 002c 416D     		ldr	r1, [r0, #84]
+ 510 002e 0120     		movs	r0, #1
+ 511 0030 0840     		ands	r0, r1
+ 512 0032 FAE7     		b	.L53
+ 513              	.L58:
+ 514 0034 416C     		ldr	r1, [r0, #68]
+ 515 0036 0120     		movs	r0, #1
+ 516 0038 0840     		ands	r0, r1
+ 517 003a F6E7     		b	.L53
+ 519              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtl876x_uart.c
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:16     .text.UART_DeInit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:22     .text.UART_DeInit:00000000 UART_DeInit
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:51     .text.UART_DeInit:0000002c $d
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:58     .text.UART_Init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:64     .text.UART_Init:00000000 UART_Init
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:174    .text.UART_Init:000000c8 $d
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:178    .text.UART_StructInit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:184    .text.UART_StructInit:00000000 UART_StructInit
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:216    .text.UART_StructInit:00000030 $d
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:219    .text.UART_MaskINTConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:225    .text.UART_MaskINTConfig:00000000 UART_MaskINTConfig
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:244    .text.UART_INTConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:250    .text.UART_INTConfig:00000000 UART_INTConfig
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:329    .text.UART_SendData:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:335    .text.UART_SendData:00000000 UART_SendData
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:356    .text.UART_ReceiveData:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:362    .text.UART_ReceiveData:00000000 UART_ReceiveData
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:383    .text.UART_SetBaudRate:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:389    .text.UART_SetBaudRate:00000000 UART_SetBaudRate
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:426    .text.UART_SetBaudRate:0000003c $d
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:429    .text.UART_SetParams:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:435    .text.UART_SetParams:00000000 UART_SetParams
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:446    .text.UART_LoopBackCmd:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:452    .text.UART_LoopBackCmd:00000000 UART_LoopBackCmd
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:473    .text.UART_GetFlagStatus:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccCVEvs3.s:479    .text.UART_GetFlagStatus:00000000 UART_GetFlagStatus
+
+UNDEFINED SYMBOLS
+RCC_PeriphClockCmd

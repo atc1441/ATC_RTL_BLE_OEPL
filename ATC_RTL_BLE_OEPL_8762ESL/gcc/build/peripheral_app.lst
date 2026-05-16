@@ -1,0 +1,1719 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"peripheral_app.c"
+  14              		.text
+  15              		.section	.text.epd_poll_timer_cb,"ax",%progbits
+  16              		.align	1
+  17              		.syntax unified
+  18              		.code	16
+  19              		.thumb_func
+  21              	epd_poll_timer_cb:
+  22              		@ args = 0, pretend = 0, frame = 8
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 00B5     		push	{lr}
+  25 0002 83B0     		sub	sp, sp, #12
+  26 0004 2123     		movs	r3, #33
+  27 0006 6A46     		mov	r2, sp
+  28 0008 1380     		strh	r3, [r2]
+  29 000a 0023     		movs	r3, #0
+  30 000c 5380     		strh	r3, [r2, #2]
+  31 000e 0193     		str	r3, [sp, #4]
+  32 0010 6846     		mov	r0, sp
+  33 0012 FFF7FEFF 		bl	app_send_msg_to_apptask
+  34 0016 03B0     		add	sp, sp, #12
+  35              		@ sp needed
+  36 0018 00BD     		pop	{pc}
+  38              		.section	.rodata.ble_addr_early_init.str1.4,"aMS",%progbits,1
+  39              		.align	2
+  40              	.LC1:
+  41 0000 4F757220 		.ascii	"Our MAC: %02X:%02X:%02X:%02X:%02X:%02X\012\000"
+  41      4D41433A 
+  41      20253032 
+  41      583A2530 
+  41      32583A25 
+  42              		.align	2
+  43              	.LC3:
+  44 0028 4D414320 		.ascii	"MAC EDIT: Default stock MAC detected. Generating ra"
+  44      45444954 
+  44      3A204465 
+  44      6661756C 
+  44      74207374 
+  45 005b 6E646F6D 		.ascii	"ndom MAC...\012\000"
+  45      204D4143 
+  45      2E2E2E0A 
+  45      00
+  46              		.section	.text.ble_addr_early_init,"ax",%progbits
+  47              		.align	1
+  48              		.global	ble_addr_early_init
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 2
+
+
+  49              		.syntax unified
+  50              		.code	16
+  51              		.thumb_func
+  53              	ble_addr_early_init:
+  54              		@ args = 0, pretend = 0, frame = 8
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  56 0000 30B5     		push	{r4, r5, lr}
+  57 0002 87B0     		sub	sp, sp, #28
+  58 0004 264C     		ldr	r4, .L7
+  59 0006 8020     		movs	r0, #128
+  60 0008 2100     		movs	r1, r4
+  61 000a 8000     		lsls	r0, r0, #2
+  62 000c FFF7FEFF 		bl	gap_get_param
+  63 0010 E378     		ldrb	r3, [r4, #3]
+  64 0012 2279     		ldrb	r2, [r4, #4]
+  65 0014 6179     		ldrb	r1, [r4, #5]
+  66 0016 2078     		ldrb	r0, [r4]
+  67 0018 0290     		str	r0, [sp, #8]
+  68 001a 6078     		ldrb	r0, [r4, #1]
+  69 001c 0190     		str	r0, [sp, #4]
+  70 001e A078     		ldrb	r0, [r4, #2]
+  71 0020 0090     		str	r0, [sp]
+  72 0022 2048     		ldr	r0, .L7+4
+  73 0024 FFF7FEFF 		bl	uart_printf
+  74 0028 2378     		ldrb	r3, [r4]
+  75 002a 002B     		cmp	r3, #0
+  76 002c 03D1     		bne	.L2
+  77 002e 1C4B     		ldr	r3, .L7
+  78 0030 5B78     		ldrb	r3, [r3, #1]
+  79 0032 E02B     		cmp	r3, #224
+  80 0034 01D0     		beq	.L5
+  81              	.L2:
+  82 0036 07B0     		add	sp, sp, #28
+  83              		@ sp needed
+  84 0038 30BD     		pop	{r4, r5, pc}
+  85              	.L5:
+  86 003a 194B     		ldr	r3, .L7
+  87 003c 9B78     		ldrb	r3, [r3, #2]
+  88 003e 4C2B     		cmp	r3, #76
+  89 0040 F9D1     		bne	.L2
+  90 0042 174B     		ldr	r3, .L7
+  91 0044 DB78     		ldrb	r3, [r3, #3]
+  92 0046 872B     		cmp	r3, #135
+  93 0048 F5D1     		bne	.L2
+  94 004a 154B     		ldr	r3, .L7
+  95 004c 1B79     		ldrb	r3, [r3, #4]
+  96 004e 632B     		cmp	r3, #99
+  97 0050 F1D1     		bne	.L2
+  98 0052 134B     		ldr	r3, .L7
+  99 0054 5B79     		ldrb	r3, [r3, #5]
+ 100 0056 252B     		cmp	r3, #37
+ 101 0058 EDD1     		bne	.L2
+ 102 005a 1348     		ldr	r0, .L7+8
+ 103 005c FFF7FEFF 		bl	uart_printf
+ 104 0060 124D     		ldr	r5, .L7+12
+ 105 0062 2800     		movs	r0, r5
+ 106 0064 FFF7FEFF 		bl	platform_random
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 3
+
+
+ 107 0068 0400     		movs	r4, r0
+ 108 006a 2800     		movs	r0, r5
+ 109 006c FFF7FEFF 		bl	platform_random
+ 110 0070 E1B2     		uxtb	r1, r4
+ 111 0072 04AB     		add	r3, sp, #16
+ 112 0074 1970     		strb	r1, [r3]
+ 113 0076 220A     		lsrs	r2, r4, #8
+ 114 0078 D2B2     		uxtb	r2, r2
+ 115 007a 5A70     		strb	r2, [r3, #1]
+ 116 007c 240C     		lsrs	r4, r4, #16
+ 117 007e 9C70     		strb	r4, [r3, #2]
+ 118 0080 D870     		strb	r0, [r3, #3]
+ 119 0082 040A     		lsrs	r4, r0, #8
+ 120 0084 1C71     		strb	r4, [r3, #4]
+ 121 0086 000C     		lsrs	r0, r0, #16
+ 122 0088 5871     		strb	r0, [r3, #5]
+ 123 008a 0029     		cmp	r1, #0
+ 124 008c 01D1     		bne	.L4
+ 125 008e E02A     		cmp	r2, #224
+ 126 0090 03D0     		beq	.L6
+ 127              	.L4:
+ 128 0092 04A8     		add	r0, sp, #16
+ 129 0094 FFF7FEFF 		bl	mac_edit_update
+ 130 0098 CDE7     		b	.L2
+ 131              	.L6:
+ 132 009a DF3A     		subs	r2, r2, #223
+ 133 009c 1A70     		strb	r2, [r3]
+ 134 009e F8E7     		b	.L4
+ 135              	.L8:
+ 136              		.align	2
+ 137              	.L7:
+ 138 00a0 00000000 		.word	.LANCHOR0
+ 139 00a4 00000000 		.word	.LC1
+ 140 00a8 28000000 		.word	.LC3
+ 141 00ac FFFFFF00 		.word	16777215
+ 143              		.section	.text.get_capabilities,"ax",%progbits
+ 144              		.align	1
+ 145              		.global	get_capabilities
+ 146              		.syntax unified
+ 147              		.code	16
+ 148              		.thumb_func
+ 150              	get_capabilities:
+ 151              		@ args = 0, pretend = 0, frame = 0
+ 152              		@ frame_needed = 0, uses_anonymous_args = 0
+ 153              		@ link register save eliminated.
+ 154 0000 0A4B     		ldr	r3, .L13
+ 155 0002 DA6E     		ldr	r2, [r3, #108]
+ 156 0004 120A     		lsrs	r2, r2, #8
+ 157 0006 7021     		movs	r1, #112
+ 158 0008 585C     		ldrb	r0, [r3, r1]
+ 159 000a 0006     		lsls	r0, r0, #24
+ 160 000c 1043     		orrs	r0, r2
+ 161 000e 431E     		subs	r3, r0, #1
+ 162 0010 9841     		sbcs	r0, r0, r3
+ 163 0012 0330     		adds	r0, r0, #3
+ 164 0014 FF30     		adds	r0, r0, #255
+ 165 0016 054B     		ldr	r3, .L13
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 4
+
+
+ 166 0018 1A6F     		ldr	r2, [r3, #112]
+ 167 001a 120A     		lsrs	r2, r2, #8
+ 168 001c 0431     		adds	r1, r1, #4
+ 169 001e 5B5C     		ldrb	r3, [r3, r1]
+ 170 0020 1B06     		lsls	r3, r3, #24
+ 171 0022 1343     		orrs	r3, r2
+ 172 0024 01D0     		beq	.L11
+ 173 0026 C023     		movs	r3, #192
+ 174 0028 1843     		orrs	r0, r3
+ 175              	.L11:
+ 176              		@ sp needed
+ 177 002a 7047     		bx	lr
+ 178              	.L14:
+ 179              		.align	2
+ 180              	.L13:
+ 181 002c 00000000 		.word	settings
+ 183              		.section	.text.app_send_custom_notification,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	app_send_custom_notification
+ 186              		.syntax unified
+ 187              		.code	16
+ 188              		.thumb_func
+ 190              	app_send_custom_notification:
+ 191              		@ args = 0, pretend = 0, frame = 0
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 193 0000 10B5     		push	{r4, lr}
+ 194 0002 0C00     		movs	r4, r1
+ 195 0004 1300     		movs	r3, r2
+ 196 0006 034A     		ldr	r2, .L16
+ 197 0008 1178     		ldrb	r1, [r2]
+ 198 000a 2200     		movs	r2, r4
+ 199 000c FFF7FEFF 		bl	custom_service_send_notification
+ 200              		@ sp needed
+ 201 0010 10BD     		pop	{r4, pc}
+ 202              	.L17:
+ 203 0012 C046     		.align	2
+ 204              	.L16:
+ 205 0014 00000000 		.word	.LANCHOR1
+ 207              		.section	.rodata.set_adv_data.str1.4,"aMS",%progbits,1
+ 208              		.align	2
+ 209              	.LC12:
+ 210 0000 52544C5F 		.ascii	"RTL_%02X%02X%02X\000"
+ 210      25303258 
+ 210      25303258 
+ 210      25303258 
+ 210      00
+ 211              		.section	.text.set_adv_data,"ax",%progbits
+ 212              		.align	1
+ 213              		.global	set_adv_data
+ 214              		.syntax unified
+ 215              		.code	16
+ 216              		.thumb_func
+ 218              	set_adv_data:
+ 219              		@ args = 0, pretend = 0, frame = 32
+ 220              		@ frame_needed = 0, uses_anonymous_args = 0
+ 221 0000 70B5     		push	{r4, r5, r6, lr}
+ 222 0002 8AB0     		sub	sp, sp, #40
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 5
+
+
+ 223 0004 0500     		movs	r5, r0
+ 224 0006 294C     		ldr	r4, .L23
+ 225 0008 0223     		movs	r3, #2
+ 226 000a 2370     		strb	r3, [r4]
+ 227 000c 0122     		movs	r2, #1
+ 228 000e 6270     		strb	r2, [r4, #1]
+ 229 0010 0432     		adds	r2, r2, #4
+ 230 0012 A270     		strb	r2, [r4, #2]
+ 231 0014 0932     		adds	r2, r2, #9
+ 232 0016 E270     		strb	r2, [r4, #3]
+ 233 0018 F132     		adds	r2, r2, #241
+ 234 001a 2271     		strb	r2, [r4, #4]
+ 235 001c C83A     		subs	r2, r2, #200
+ 236 001e 6271     		strb	r2, [r4, #5]
+ 237 0020 243A     		subs	r2, r2, #36
+ 238 0022 A271     		strb	r2, [r4, #6]
+ 239 0024 E371     		strb	r3, [r4, #7]
+ 240 0026 224B     		ldr	r3, .L23+4
+ 241 0028 9B89     		ldrh	r3, [r3, #12]
+ 242 002a 2381     		strh	r3, [r4, #8]
+ 243 002c 4323     		movs	r3, #67
+ 244 002e 6381     		strh	r3, [r4, #10]
+ 245 0030 FFF7FEFF 		bl	get_capabilities
+ 246 0034 A081     		strh	r0, [r4, #12]
+ 247 0036 E581     		strh	r5, [r4, #14]
+ 248 0038 1E4B     		ldr	r3, .L23+8
+ 249 003a 1B78     		ldrb	r3, [r3]
+ 250 003c 002B     		cmp	r3, #0
+ 251 003e 2ED0     		beq	.L19
+ 252 0040 5BB2     		sxtb	r3, r3
+ 253              	.L20:
+ 254 0042 1A4D     		ldr	r5, .L23
+ 255 0044 2B74     		strb	r3, [r5, #16]
+ 256 0046 6B7C     		ldrb	r3, [r5, #17]
+ 257 0048 0133     		adds	r3, r3, #1
+ 258 004a 6B74     		strb	r3, [r5, #17]
+ 259 004c 1A49     		ldr	r1, .L23+12
+ 260 004e 4B78     		ldrb	r3, [r1, #1]
+ 261 0050 8A78     		ldrb	r2, [r1, #2]
+ 262 0052 1A4E     		ldr	r6, .L23+16
+ 263 0054 0978     		ldrb	r1, [r1]
+ 264 0056 0091     		str	r1, [sp]
+ 265 0058 1949     		ldr	r1, .L23+20
+ 266 005a 3000     		movs	r0, r6
+ 267 005c FFF7FEFF 		bl	sprintf
+ 268 0060 02AC     		add	r4, sp, #8
+ 269 0062 0C23     		movs	r3, #12
+ 270 0064 2370     		strb	r3, [r4]
+ 271 0066 033B     		subs	r3, r3, #3
+ 272 0068 6370     		strb	r3, [r4, #1]
+ 273 006a 0A22     		movs	r2, #10
+ 274 006c 3100     		movs	r1, r6
+ 275 006e 0A20     		movs	r0, #10
+ 276 0070 6844     		add	r0, r0, sp
+ 277 0072 FFF7FEFF 		bl	memcpy
+ 278 0076 0023     		movs	r3, #0
+ 279 0078 2373     		strb	r3, [r4, #12]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 6
+
+
+ 280 007a 2A00     		movs	r2, r5
+ 281 007c 1221     		movs	r1, #18
+ 282 007e 1148     		ldr	r0, .L23+24
+ 283 0080 FFF7FEFF 		bl	le_adv_set_param
+ 284 0084 2200     		movs	r2, r4
+ 285 0086 0D21     		movs	r1, #13
+ 286 0088 0F48     		ldr	r0, .L23+28
+ 287 008a FFF7FEFF 		bl	le_adv_set_param
+ 288 008e 0F4B     		ldr	r3, .L23+32
+ 289 0090 1A78     		ldrb	r2, [r3]
+ 290 0092 0C23     		movs	r3, #12
+ 291 0094 1340     		ands	r3, r2
+ 292 0096 082B     		cmp	r3, #8
+ 293 0098 05D0     		beq	.L22
+ 294              	.L18:
+ 295 009a 0AB0     		add	sp, sp, #40
+ 296              		@ sp needed
+ 297 009c 70BD     		pop	{r4, r5, r6, pc}
+ 298              	.L19:
+ 299 009e 0C4B     		ldr	r3, .L23+36
+ 300 00a0 1B78     		ldrb	r3, [r3]
+ 301 00a2 5BB2     		sxtb	r3, r3
+ 302 00a4 CDE7     		b	.L20
+ 303              	.L22:
+ 304 00a6 FFF7FEFF 		bl	le_adv_update_param
+ 305 00aa F6E7     		b	.L18
+ 306              	.L24:
+ 307              		.align	2
+ 308              	.L23:
+ 309 00ac 00000000 		.word	.LANCHOR2
+ 310 00b0 00000000 		.word	settings
+ 311 00b4 00000000 		.word	.LANCHOR3
+ 312 00b8 00000000 		.word	.LANCHOR0
+ 313 00bc 00000000 		.word	.LANCHOR5
+ 314 00c0 00000000 		.word	.LC12
+ 315 00c4 61020000 		.word	609
+ 316 00c8 62020000 		.word	610
+ 317 00cc 00000000 		.word	.LANCHOR6
+ 318 00d0 00000000 		.word	.LANCHOR4
+ 320              		.section	.rodata.app_update_adv_data.str1.4,"aMS",%progbits,1
+ 321              		.align	2
+ 322              	.LC16:
+ 323 0000 6170705F 		.ascii	"app_update_adv_data: len %d too long\012\000"
+ 323      75706461 
+ 323      74655F61 
+ 323      64765F64 
+ 323      6174613A 
+ 324 0026 0000     		.align	2
+ 325              	.LC19:
+ 326 0028 6C655F61 		.ascii	"le_adv_update_param failed: 0x%x\012\000"
+ 326      64765F75 
+ 326      70646174 
+ 326      655F7061 
+ 326      72616D20 
+ 327 004a 0000     		.align	2
+ 328              	.LC21:
+ 329 004c 6C655F61 		.ascii	"le_adv_set_param failed: 0x%x\012\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 7
+
+
+ 329      64765F73 
+ 329      65745F70 
+ 329      6172616D 
+ 329      20666169 
+ 330              		.section	.text.app_update_adv_data,"ax",%progbits
+ 331              		.align	1
+ 332              		.global	app_update_adv_data
+ 333              		.syntax unified
+ 334              		.code	16
+ 335              		.thumb_func
+ 337              	app_update_adv_data:
+ 338              		@ args = 0, pretend = 0, frame = 0
+ 339              		@ frame_needed = 0, uses_anonymous_args = 0
+ 340 0000 10B5     		push	{r4, lr}
+ 341 0002 0200     		movs	r2, r0
+ 342 0004 1F29     		cmp	r1, #31
+ 343 0006 16D8     		bhi	.L31
+ 344 0008 1048     		ldr	r0, .L32
+ 345 000a FFF7FEFF 		bl	le_adv_set_param
+ 346 000e 011E     		subs	r1, r0, #0
+ 347 0010 16D1     		bne	.L28
+ 348 0012 0F4B     		ldr	r3, .L32+4
+ 349 0014 1A78     		ldrb	r2, [r3]
+ 350 0016 0C23     		movs	r3, #12
+ 351 0018 1340     		ands	r3, r2
+ 352 001a 0120     		movs	r0, #1
+ 353 001c 082B     		cmp	r3, #8
+ 354 001e 0ED1     		bne	.L27
+ 355 0020 FFF7FEFF 		bl	le_adv_update_param
+ 356 0024 0100     		movs	r1, r0
+ 357 0026 0120     		movs	r0, #1
+ 358 0028 0029     		cmp	r1, #0
+ 359 002a 08D0     		beq	.L27
+ 360 002c 0948     		ldr	r0, .L32+8
+ 361 002e FFF7FEFF 		bl	uart_printf
+ 362 0032 0020     		movs	r0, #0
+ 363 0034 03E0     		b	.L27
+ 364              	.L31:
+ 365 0036 0848     		ldr	r0, .L32+12
+ 366 0038 FFF7FEFF 		bl	uart_printf
+ 367 003c 0020     		movs	r0, #0
+ 368              	.L27:
+ 369              		@ sp needed
+ 370 003e 10BD     		pop	{r4, pc}
+ 371              	.L28:
+ 372 0040 0648     		ldr	r0, .L32+16
+ 373 0042 FFF7FEFF 		bl	uart_printf
+ 374 0046 0020     		movs	r0, #0
+ 375 0048 F9E7     		b	.L27
+ 376              	.L33:
+ 377 004a C046     		.align	2
+ 378              	.L32:
+ 379 004c 61020000 		.word	609
+ 380 0050 00000000 		.word	.LANCHOR6
+ 381 0054 28000000 		.word	.LC19
+ 382 0058 00000000 		.word	.LC16
+ 383 005c 4C000000 		.word	.LC21
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 8
+
+
+ 385              		.section	.rodata.app_handle_dev_state_evt.str1.4,"aMS",%progbits,1
+ 386              		.align	2
+ 387              	.LC23:
+ 388 0000 5B495D20 		.ascii	"[I] app_handle_dev_state_evt: init state %d, adv st"
+ 388      6170705F 
+ 388      68616E64 
+ 388      6C655F64 
+ 388      65765F73 
+ 389 0033 61746520 		.ascii	"ate %d, cause 0x%x\012\000"
+ 389      25642C20 
+ 389      63617573 
+ 389      65203078 
+ 389      25780A00 
+ 390 0047 00       		.align	2
+ 391              	.LC26:
+ 392 0048 5B495D20 		.ascii	"[I] GAP stack ready\012\000"
+ 392      47415020 
+ 392      73746163 
+ 392      6B207265 
+ 392      6164790A 
+ 393 005d 000000   		.align	2
+ 394              	.LC28:
+ 395 0060 6570645F 		.ascii	"epd_poll\000"
+ 395      706F6C6C 
+ 395      00
+ 396 0069 000000   		.align	2
+ 397              	.LC33:
+ 398 006c 5B495D20 		.ascii	"[I] GAP adv stoped: because connection created\012\000"
+ 398      47415020 
+ 398      61647620 
+ 398      73746F70 
+ 398      65643A20 
+ 399              		.align	2
+ 400              	.LC35:
+ 401 009c 5B495D20 		.ascii	"[I] GAP adv stoped\012\000"
+ 401      47415020 
+ 401      61647620 
+ 401      73746F70 
+ 401      65640A00 
+ 402              		.align	2
+ 403              	.LC37:
+ 404 00b0 5B495D20 		.ascii	"[I] GAP adv start\012\000"
+ 404      47415020 
+ 404      61647620 
+ 404      73746172 
+ 404      740A00
+ 405              		.section	.text.app_handle_dev_state_evt,"ax",%progbits
+ 406              		.align	1
+ 407              		.global	app_handle_dev_state_evt
+ 408              		.syntax unified
+ 409              		.code	16
+ 410              		.thumb_func
+ 412              	app_handle_dev_state_evt:
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 0, uses_anonymous_args = 0
+ 415 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 416 0002 83B0     		sub	sp, sp, #12
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 9
+
+
+ 417 0004 041C     		adds	r4, r0, #0
+ 418 0006 0B00     		movs	r3, r1
+ 419 0008 2207     		lsls	r2, r4, #28
+ 420 000a 920F     		lsrs	r2, r2, #30
+ 421 000c E107     		lsls	r1, r4, #31
+ 422 000e C90F     		lsrs	r1, r1, #31
+ 423 0010 2348     		ldr	r0, .L41
+ 424 0012 FFF7FEFF 		bl	uart_printf
+ 425 0016 E5B2     		uxtb	r5, r4
+ 426 0018 224B     		ldr	r3, .L41+4
+ 427 001a 1B78     		ldrb	r3, [r3]
+ 428 001c 6B40     		eors	r3, r5
+ 429 001e DB07     		lsls	r3, r3, #31
+ 430 0020 01D5     		bpl	.L35
+ 431 0022 EB07     		lsls	r3, r5, #31
+ 432 0024 0FD4     		bmi	.L39
+ 433              	.L35:
+ 434 0026 1F4B     		ldr	r3, .L41+4
+ 435 0028 1B78     		ldrb	r3, [r3]
+ 436 002a 6B40     		eors	r3, r5
+ 437 002c 0C22     		movs	r2, #12
+ 438 002e 1A42     		tst	r2, r3
+ 439 0030 2DD0     		beq	.L36
+ 440 0032 0C23     		movs	r3, #12
+ 441 0034 2A40     		ands	r2, r5
+ 442 0036 2B42     		tst	r3, r5
+ 443 0038 27D1     		bne	.L37
+ 444 003a AB07     		lsls	r3, r5, #30
+ 445 003c 21D5     		bpl	.L38
+ 446 003e 1A48     		ldr	r0, .L41+8
+ 447 0040 FFF7FEFF 		bl	uart_printf
+ 448 0044 23E0     		b	.L36
+ 449              	.L39:
+ 450 0046 1948     		ldr	r0, .L41+12
+ 451 0048 FFF7FEFF 		bl	uart_printf
+ 452 004c 184F     		ldr	r7, .L41+16
+ 453 004e 194B     		ldr	r3, .L41+20
+ 454 0050 0193     		str	r3, [sp, #4]
+ 455 0052 0123     		movs	r3, #1
+ 456 0054 0093     		str	r3, [sp]
+ 457 0056 C733     		adds	r3, r3, #199
+ 458 0058 0022     		movs	r2, #0
+ 459 005a 1749     		ldr	r1, .L41+24
+ 460 005c 3800     		movs	r0, r7
+ 461 005e FFF7FEFF 		bl	os_timer_create
+ 462 0062 FFF7FEFF 		bl	battery_measure_mv
+ 463 0066 0600     		movs	r6, r0
+ 464 0068 0100     		movs	r1, r0
+ 465 006a 1448     		ldr	r0, .L41+28
+ 466 006c FFF7FEFF 		bl	boot_screen_draw
+ 467 0070 3800     		movs	r0, r7
+ 468 0072 FFF7FEFF 		bl	os_timer_start
+ 469 0076 3000     		movs	r0, r6
+ 470 0078 FFF7FEFF 		bl	set_adv_data
+ 471 007c FFF7FEFF 		bl	le_adv_start
+ 472 0080 D1E7     		b	.L35
+ 473              	.L38:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 10
+
+
+ 474 0082 0F48     		ldr	r0, .L41+32
+ 475 0084 FFF7FEFF 		bl	uart_printf
+ 476 0088 01E0     		b	.L36
+ 477              	.L37:
+ 478 008a 082A     		cmp	r2, #8
+ 479 008c 03D0     		beq	.L40
+ 480              	.L36:
+ 481 008e 054B     		ldr	r3, .L41+4
+ 482 0090 1C70     		strb	r4, [r3]
+ 483 0092 03B0     		add	sp, sp, #12
+ 484              		@ sp needed
+ 485 0094 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 486              	.L40:
+ 487 0096 0B48     		ldr	r0, .L41+36
+ 488 0098 FFF7FEFF 		bl	uart_printf
+ 489 009c F7E7     		b	.L36
+ 490              	.L42:
+ 491 009e C046     		.align	2
+ 492              	.L41:
+ 493 00a0 00000000 		.word	.LC23
+ 494 00a4 00000000 		.word	.LANCHOR6
+ 495 00a8 6C000000 		.word	.LC33
+ 496 00ac 48000000 		.word	.LC26
+ 497 00b0 00000000 		.word	.LANCHOR7
+ 498 00b4 00000000 		.word	epd_poll_timer_cb
+ 499 00b8 60000000 		.word	.LC28
+ 500 00bc 00000000 		.word	.LANCHOR0
+ 501 00c0 9C000000 		.word	.LC35
+ 502 00c4 B0000000 		.word	.LC37
+ 504              		.section	.rodata.app_handle_conn_state_evt.str1.4,"aMS",%progbits,1
+ 505              		.align	2
+ 506              	.LC40:
+ 507 0000 5B495D20 		.ascii	"[I] app_handle_conn_state_evt: conn_id %d old_state"
+ 507      6170705F 
+ 507      68616E64 
+ 507      6C655F63 
+ 507      6F6E6E5F 
+ 508 0033 20256420 		.ascii	" %d new_state %d, disc_cause 0x%x\012\000"
+ 508      6E65775F 
+ 508      73746174 
+ 508      65202564 
+ 508      2C206469 
+ 509 0056 0000     		.align	2
+ 510              	.LC42:
+ 511 0058 5B455D20 		.ascii	"[E] app_handle_conn_state_evt: connection lost caus"
+ 511      6170705F 
+ 511      68616E64 
+ 511      6C655F63 
+ 511      6F6E6E5F 
+ 512 008b 65203078 		.ascii	"e 0x%x\012\000"
+ 512      25780A00 
+ 513 0093 00       		.align	2
+ 514              	.LC44:
+ 515 0094 5B495D20 		.ascii	"[I] GAP_CONN_STATE_CONNECTED:remote_bd %s, remote_a"
+ 515      4741505F 
+ 515      434F4E4E 
+ 515      5F535441 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 11
+
+
+ 515      54455F43 
+ 516 00c7 6464725F 		.ascii	"ddr_type %d, conn_interval 0x%x, conn_latency 0x%x,"
+ 516      74797065 
+ 516      2025642C 
+ 516      20636F6E 
+ 516      6E5F696E 
+ 517 00fa 20636F6E 		.ascii	" conn_supervision_timeout 0x%x\012\000"
+ 517      6E5F7375 
+ 517      70657276 
+ 517      6973696F 
+ 517      6E5F7469 
+ 518              		.section	.text.app_handle_conn_state_evt,"ax",%progbits
+ 519              		.align	1
+ 520              		.global	app_handle_conn_state_evt
+ 521              		.syntax unified
+ 522              		.code	16
+ 523              		.thumb_func
+ 525              	app_handle_conn_state_evt:
+ 526              		@ args = 0, pretend = 0, frame = 16
+ 527              		@ frame_needed = 0, uses_anonymous_args = 0
+ 528 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 529 0002 CE46     		mov	lr, r9
+ 530 0004 4746     		mov	r7, r8
+ 531 0006 80B5     		push	{r7, lr}
+ 532 0008 87B0     		sub	sp, sp, #28
+ 533 000a 0500     		movs	r5, r0
+ 534 000c 0C00     		movs	r4, r1
+ 535 000e 1600     		movs	r6, r2
+ 536 0010 274B     		ldr	r3, .L49
+ 537 0012 1A78     		ldrb	r2, [r3]
+ 538 0014 0096     		str	r6, [sp]
+ 539 0016 0B00     		movs	r3, r1
+ 540 0018 0100     		movs	r1, r0
+ 541 001a 2648     		ldr	r0, .L49+4
+ 542 001c FFF7FEFF 		bl	uart_printf
+ 543 0020 002C     		cmp	r4, #0
+ 544 0022 08D0     		beq	.L44
+ 545 0024 022C     		cmp	r4, #2
+ 546 0026 15D0     		beq	.L45
+ 547              	.L46:
+ 548 0028 214B     		ldr	r3, .L49
+ 549 002a 1C70     		strb	r4, [r3]
+ 550 002c 07B0     		add	sp, sp, #28
+ 551              		@ sp needed
+ 552 002e C0BC     		pop	{r6, r7}
+ 553 0030 B946     		mov	r9, r7
+ 554 0032 B046     		mov	r8, r6
+ 555 0034 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 556              	.L44:
+ 557 0036 1423     		movs	r3, #20
+ 558 0038 FF33     		adds	r3, r3, #255
+ 559 003a 9E42     		cmp	r6, r3
+ 560 003c 02D0     		beq	.L47
+ 561 003e 0333     		adds	r3, r3, #3
+ 562 0040 9E42     		cmp	r6, r3
+ 563 0042 02D1     		bne	.L48
+ 564              	.L47:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 12
+
+
+ 565 0044 FFF7FEFF 		bl	le_adv_start
+ 566 0048 EEE7     		b	.L46
+ 567              	.L48:
+ 568 004a 3100     		movs	r1, r6
+ 569 004c 1A48     		ldr	r0, .L49+8
+ 570 004e FFF7FEFF 		bl	uart_printf
+ 571 0052 F7E7     		b	.L47
+ 572              	.L45:
+ 573 0054 0A23     		movs	r3, #10
+ 574 0056 6B44     		add	r3, r3, sp
+ 575 0058 9946     		mov	r9, r3
+ 576 005a 2A00     		movs	r2, r5
+ 577 005c 1900     		movs	r1, r3
+ 578 005e 1748     		ldr	r0, .L49+12
+ 579 0060 FFF7FEFF 		bl	le_get_conn_param
+ 580 0064 03AE     		add	r6, sp, #12
+ 581 0066 2A00     		movs	r2, r5
+ 582 0068 3100     		movs	r1, r6
+ 583 006a 1548     		ldr	r0, .L49+16
+ 584 006c FFF7FEFF 		bl	le_get_conn_param
+ 585 0070 0E27     		movs	r7, #14
+ 586 0072 6F44     		add	r7, r7, sp
+ 587 0074 9D20     		movs	r0, #157
+ 588 0076 2A00     		movs	r2, r5
+ 589 0078 3900     		movs	r1, r7
+ 590 007a 8000     		lsls	r0, r0, #2
+ 591 007c FFF7FEFF 		bl	le_get_conn_param
+ 592 0080 0923     		movs	r3, #9
+ 593 0082 6B44     		add	r3, r3, sp
+ 594 0084 9846     		mov	r8, r3
+ 595 0086 1A00     		movs	r2, r3
+ 596 0088 04A9     		add	r1, sp, #16
+ 597 008a 2800     		movs	r0, r5
+ 598 008c FFF7FEFF 		bl	le_get_conn_addr
+ 599 0090 04A8     		add	r0, sp, #16
+ 600 0092 FFF7FEFF 		bl	uart_bdaddr_str
+ 601 0096 0100     		movs	r1, r0
+ 602 0098 4B46     		mov	r3, r9
+ 603 009a 1B88     		ldrh	r3, [r3]
+ 604 009c 4246     		mov	r2, r8
+ 605 009e 1278     		ldrb	r2, [r2]
+ 606 00a0 3888     		ldrh	r0, [r7]
+ 607 00a2 0190     		str	r0, [sp, #4]
+ 608 00a4 3088     		ldrh	r0, [r6]
+ 609 00a6 0090     		str	r0, [sp]
+ 610 00a8 0648     		ldr	r0, .L49+20
+ 611 00aa FFF7FEFF 		bl	uart_printf
+ 612 00ae BBE7     		b	.L46
+ 613              	.L50:
+ 614              		.align	2
+ 615              	.L49:
+ 616 00b0 00000000 		.word	.LANCHOR8
+ 617 00b4 00000000 		.word	.LC40
+ 618 00b8 58000000 		.word	.LC42
+ 619 00bc 72020000 		.word	626
+ 620 00c0 73020000 		.word	627
+ 621 00c4 94000000 		.word	.LC44
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 13
+
+
+ 623              		.section	.rodata.app_handle_authen_state_evt.str1.4,"aMS",%progbits,1
+ 624              		.align	2
+ 625              	.LC46:
+ 626 0000 5B495D20 		.ascii	"[I] app_handle_authen_state_evt:conn_id %d, cause 0"
+ 626      6170705F 
+ 626      68616E64 
+ 626      6C655F61 
+ 626      75746865 
+ 627 0033 7825780A 		.ascii	"x%x\012\000"
+ 627      00
+ 628              		.align	2
+ 629              	.LC48:
+ 630 0038 5B495D20 		.ascii	"[I] app_handle_authen_state_evt: GAP_AUTHEN_STATE_S"
+ 630      6170705F 
+ 630      68616E64 
+ 630      6C655F61 
+ 630      75746865 
+ 631 006b 54415254 		.ascii	"TARTED\012\000"
+ 631      45440A00 
+ 632 0073 00       		.align	2
+ 633              	.LC50:
+ 634 0074 5B495D20 		.ascii	"[I] app_handle_authen_state_evt: GAP_AUTHEN_STATE_C"
+ 634      6170705F 
+ 634      68616E64 
+ 634      6C655F61 
+ 634      75746865 
+ 635 00a7 4F4D504C 		.ascii	"OMPLETE pair success\012\000"
+ 635      45544520 
+ 635      70616972 
+ 635      20737563 
+ 635      63657373 
+ 636 00bd 000000   		.align	2
+ 637              	.LC52:
+ 638 00c0 5B495D20 		.ascii	"[I] app_handle_authen_state_evt: GAP_AUTHEN_STATE_C"
+ 638      6170705F 
+ 638      68616E64 
+ 638      6C655F61 
+ 638      75746865 
+ 639 00f3 4F4D504C 		.ascii	"OMPLETE pair failed\012\000"
+ 639      45544520 
+ 639      70616972 
+ 639      20666169 
+ 639      6C65640A 
+ 640              		.align	2
+ 641              	.LC54:
+ 642 0108 5B455D20 		.ascii	"[E] app_handle_authen_state_evt: unknown newstate %"
+ 642      6170705F 
+ 642      68616E64 
+ 642      6C655F61 
+ 642      75746865 
+ 643 013b 640A00   		.ascii	"d\012\000"
+ 644              		.section	.text.app_handle_authen_state_evt,"ax",%progbits
+ 645              		.align	1
+ 646              		.global	app_handle_authen_state_evt
+ 647              		.syntax unified
+ 648              		.code	16
+ 649              		.thumb_func
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 14
+
+
+ 651              	app_handle_authen_state_evt:
+ 652              		@ args = 0, pretend = 0, frame = 0
+ 653              		@ frame_needed = 0, uses_anonymous_args = 0
+ 654 0000 70B5     		push	{r4, r5, r6, lr}
+ 655 0002 0C00     		movs	r4, r1
+ 656 0004 1500     		movs	r5, r2
+ 657 0006 0100     		movs	r1, r0
+ 658 0008 0C48     		ldr	r0, .L58
+ 659 000a FFF7FEFF 		bl	uart_printf
+ 660 000e 002C     		cmp	r4, #0
+ 661 0010 06D0     		beq	.L52
+ 662 0012 012C     		cmp	r4, #1
+ 663 0014 08D0     		beq	.L53
+ 664 0016 2100     		movs	r1, r4
+ 665 0018 0948     		ldr	r0, .L58+4
+ 666 001a FFF7FEFF 		bl	uart_printf
+ 667 001e 02E0     		b	.L51
+ 668              	.L52:
+ 669 0020 0848     		ldr	r0, .L58+8
+ 670 0022 FFF7FEFF 		bl	uart_printf
+ 671              	.L51:
+ 672              		@ sp needed
+ 673 0026 70BD     		pop	{r4, r5, r6, pc}
+ 674              	.L53:
+ 675 0028 002D     		cmp	r5, #0
+ 676 002a 03D1     		bne	.L56
+ 677 002c 0648     		ldr	r0, .L58+12
+ 678 002e FFF7FEFF 		bl	uart_printf
+ 679 0032 F8E7     		b	.L51
+ 680              	.L56:
+ 681 0034 0548     		ldr	r0, .L58+16
+ 682 0036 FFF7FEFF 		bl	uart_printf
+ 683 003a F4E7     		b	.L51
+ 684              	.L59:
+ 685              		.align	2
+ 686              	.L58:
+ 687 003c 00000000 		.word	.LC46
+ 688 0040 08010000 		.word	.LC54
+ 689 0044 38000000 		.word	.LC48
+ 690 0048 74000000 		.word	.LC50
+ 691 004c C0000000 		.word	.LC52
+ 693              		.section	.rodata.app_handle_conn_mtu_info_evt.str1.4,"aMS",%progbits,1
+ 694              		.align	2
+ 695              	.LC56:
+ 696 0000 5B495D20 		.ascii	"[I] app_handle_conn_mtu_info_evt: conn_id %d, mtu_s"
+ 696      6170705F 
+ 696      68616E64 
+ 696      6C655F63 
+ 696      6F6E6E5F 
+ 697 0033 697A6520 		.ascii	"ize %d\012\000"
+ 697      25640A00 
+ 698              		.section	.text.app_handle_conn_mtu_info_evt,"ax",%progbits
+ 699              		.align	1
+ 700              		.global	app_handle_conn_mtu_info_evt
+ 701              		.syntax unified
+ 702              		.code	16
+ 703              		.thumb_func
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 15
+
+
+ 705              	app_handle_conn_mtu_info_evt:
+ 706              		@ args = 0, pretend = 0, frame = 0
+ 707              		@ frame_needed = 0, uses_anonymous_args = 0
+ 708 0000 10B5     		push	{r4, lr}
+ 709 0002 0A00     		movs	r2, r1
+ 710 0004 0100     		movs	r1, r0
+ 711 0006 0248     		ldr	r0, .L61
+ 712 0008 FFF7FEFF 		bl	uart_printf
+ 713              		@ sp needed
+ 714 000c 10BD     		pop	{r4, pc}
+ 715              	.L62:
+ 716 000e C046     		.align	2
+ 717              	.L61:
+ 718 0010 00000000 		.word	.LC56
+ 720              		.section	.rodata.app_handle_conn_param_update_evt.str1.4,"aMS",%progbits,1
+ 721              		.align	2
+ 722              	.LC58:
+ 723 0000 5B495D20 		.ascii	"[I] app_handle_conn_param_update_evt update success"
+ 723      6170705F 
+ 723      68616E64 
+ 723      6C655F63 
+ 723      6F6E6E5F 
+ 724 0033 3A636F6E 		.ascii	":conn_interval 0x%x, conn_slave_latency 0x%x, conn_"
+ 724      6E5F696E 
+ 724      74657276 
+ 724      616C2030 
+ 724      7825782C 
+ 725 0066 73757065 		.ascii	"supervision_timeout 0x%x\012\000"
+ 725      72766973 
+ 725      696F6E5F 
+ 725      74696D65 
+ 725      6F757420 
+ 726              		.align	2
+ 727              	.LC60:
+ 728 0080 5B455D20 		.ascii	"[E] app_handle_conn_param_update_evt update failed:"
+ 728      6170705F 
+ 728      68616E64 
+ 728      6C655F63 
+ 728      6F6E6E5F 
+ 729 00b3 20636175 		.ascii	" cause 0x%x\012\000"
+ 729      73652030 
+ 729      7825780A 
+ 729      00
+ 730              		.align	2
+ 731              	.LC62:
+ 732 00c0 5B495D20 		.ascii	"[I] app_handle_conn_param_update_evt update pending"
+ 732      6170705F 
+ 732      68616E64 
+ 732      6C655F63 
+ 732      6F6E6E5F 
+ 733 00f3 2E0A00   		.ascii	".\012\000"
+ 734              		.section	.text.app_handle_conn_param_update_evt,"ax",%progbits
+ 735              		.align	1
+ 736              		.global	app_handle_conn_param_update_evt
+ 737              		.syntax unified
+ 738              		.code	16
+ 739              		.thumb_func
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 16
+
+
+ 741              	app_handle_conn_param_update_evt:
+ 742              		@ args = 0, pretend = 0, frame = 8
+ 743              		@ frame_needed = 0, uses_anonymous_args = 0
+ 744 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 745 0002 83B0     		sub	sp, sp, #12
+ 746 0004 0400     		movs	r4, r0
+ 747 0006 0129     		cmp	r1, #1
+ 748 0008 21D0     		beq	.L64
+ 749 000a 0229     		cmp	r1, #2
+ 750 000c 24D0     		beq	.L65
+ 751 000e 0029     		cmp	r1, #0
+ 752 0010 01D0     		beq	.L67
+ 753              	.L63:
+ 754 0012 03B0     		add	sp, sp, #12
+ 755              		@ sp needed
+ 756 0014 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 757              	.L67:
+ 758 0016 6B46     		mov	r3, sp
+ 759 0018 9D1C     		adds	r5, r3, #2
+ 760 001a 0200     		movs	r2, r0
+ 761 001c 2900     		movs	r1, r5
+ 762 001e 1048     		ldr	r0, .L68
+ 763 0020 FFF7FEFF 		bl	le_get_conn_param
+ 764 0024 01AE     		add	r6, sp, #4
+ 765 0026 2200     		movs	r2, r4
+ 766 0028 3100     		movs	r1, r6
+ 767 002a 0E48     		ldr	r0, .L68+4
+ 768 002c FFF7FEFF 		bl	le_get_conn_param
+ 769 0030 6B46     		mov	r3, sp
+ 770 0032 9F1D     		adds	r7, r3, #6
+ 771 0034 9D20     		movs	r0, #157
+ 772 0036 2200     		movs	r2, r4
+ 773 0038 3900     		movs	r1, r7
+ 774 003a 8000     		lsls	r0, r0, #2
+ 775 003c FFF7FEFF 		bl	le_get_conn_param
+ 776 0040 3B88     		ldrh	r3, [r7]
+ 777 0042 3288     		ldrh	r2, [r6]
+ 778 0044 2988     		ldrh	r1, [r5]
+ 779 0046 0848     		ldr	r0, .L68+8
+ 780 0048 FFF7FEFF 		bl	uart_printf
+ 781 004c E1E7     		b	.L63
+ 782              	.L64:
+ 783 004e 1100     		movs	r1, r2
+ 784 0050 0648     		ldr	r0, .L68+12
+ 785 0052 FFF7FEFF 		bl	uart_printf
+ 786 0056 DCE7     		b	.L63
+ 787              	.L65:
+ 788 0058 0548     		ldr	r0, .L68+16
+ 789 005a FFF7FEFF 		bl	uart_printf
+ 790 005e D8E7     		b	.L63
+ 791              	.L69:
+ 792              		.align	2
+ 793              	.L68:
+ 794 0060 72020000 		.word	626
+ 795 0064 73020000 		.word	627
+ 796 0068 00000000 		.word	.LC58
+ 797 006c 80000000 		.word	.LC60
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 17
+
+
+ 798 0070 C0000000 		.word	.LC62
+ 800              		.section	.rodata.app_handle_gap_msg.str1.4,"aMS",%progbits,1
+ 801              		.align	2
+ 802              	.LC65:
+ 803 0000 5B495D20 		.ascii	"[I] GAP_MSG_LE_BOND_JUST_WORK\012\000"
+ 803      4741505F 
+ 803      4D53475F 
+ 803      4C455F42 
+ 803      4F4E445F 
+ 804 001f 00       		.align	2
+ 805              	.LC67:
+ 806 0020 5B495D20 		.ascii	"[I] GAP_MSG_LE_BOND_PASSKEY_DISPLAY:passkey %lu\012"
+ 806      4741505F 
+ 806      4D53475F 
+ 806      4C455F42 
+ 806      4F4E445F 
+ 807 0050 00       		.ascii	"\000"
+ 808 0051 000000   		.align	2
+ 809              	.LC69:
+ 810 0054 5B495D20 		.ascii	"[I] GAP_MSG_LE_BOND_USER_CONFIRMATION: passkey %lu\012"
+ 810      4741505F 
+ 810      4D53475F 
+ 810      4C455F42 
+ 810      4F4E445F 
+ 811 0087 00       		.ascii	"\000"
+ 812              		.align	2
+ 813              	.LC71:
+ 814 0088 5B495D20 		.ascii	"[I] GAP_MSG_LE_BOND_PASSKEY_INPUT: conn_id %d\012\000"
+ 814      4741505F 
+ 814      4D53475F 
+ 814      4C455F42 
+ 814      4F4E445F 
+ 815 00b7 00       		.align	2
+ 816              	.LC75:
+ 817 00b8 5B495D20 		.ascii	"[I] GAP_MSG_LE_BOND_OOB_INPUT\012\000"
+ 817      4741505F 
+ 817      4D53475F 
+ 817      4C455F42 
+ 817      4F4E445F 
+ 818 00d7 00       		.align	2
+ 819              	.LC77:
+ 820 00d8 5B455D20 		.ascii	"[E] app_handle_gap_msg: unknown subtype %d\012\000"
+ 820      6170705F 
+ 820      68616E64 
+ 820      6C655F67 
+ 820      61705F6D 
+ 821              		.section	.text.app_handle_gap_msg,"ax",%progbits
+ 822              		.align	1
+ 823              		.global	app_handle_gap_msg
+ 824              		.syntax unified
+ 825              		.code	16
+ 826              		.thumb_func
+ 828              	app_handle_gap_msg:
+ 829              		@ args = 0, pretend = 0, frame = 24
+ 830              		@ frame_needed = 0, uses_anonymous_args = 0
+ 831 0000 30B5     		push	{r4, r5, lr}
+ 832 0002 87B0     		sub	sp, sp, #28
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 18
+
+
+ 833 0004 0400     		movs	r4, r0
+ 834 0006 011D     		adds	r1, r0, #4
+ 835 0008 0422     		movs	r2, #4
+ 836 000a 05A8     		add	r0, sp, #20
+ 837 000c FFF7FEFF 		bl	memcpy
+ 838 0010 6188     		ldrh	r1, [r4, #2]
+ 839 0012 0A29     		cmp	r1, #10
+ 840 0014 00D9     		bls	.LCB775
+ 841 0016 73E0     		b	.L71	@long jump
+ 842              	.LCB775:
+ 843 0018 8B00     		lsls	r3, r1, #2
+ 844 001a 3B4A     		ldr	r2, .L84
+ 845 001c D358     		ldr	r3, [r2, r3]
+ 846 001e 9F46     		mov	pc, r3
+ 847              		.section	.rodata.app_handle_gap_msg,"a",%progbits
+ 848              		.align	2
+ 849              	.L73:
+ 850 0000 00010000 		.word	.L71
+ 851 0004 20000000 		.word	.L82
+ 852 0008 2E000000 		.word	.L81
+ 853 000c 48000000 		.word	.L80
+ 854 0010 3C000000 		.word	.L79
+ 855 0014 56000000 		.word	.L78
+ 856 0018 76000000 		.word	.L77
+ 857 001c BA000000 		.word	.L76
+ 858 0020 D2000000 		.word	.L75
+ 859 0024 98000000 		.word	.L74
+ 860 0028 64000000 		.word	.L72
+ 861              		.section	.text.app_handle_gap_msg
+ 862              	.L82:
+ 863 0020 05AB     		add	r3, sp, #20
+ 864 0022 5988     		ldrh	r1, [r3, #2]
+ 865 0024 1878     		ldrb	r0, [r3]
+ 866 0026 FFF7FEFF 		bl	app_handle_dev_state_evt
+ 867              	.L70:
+ 868 002a 07B0     		add	sp, sp, #28
+ 869              		@ sp needed
+ 870 002c 30BD     		pop	{r4, r5, pc}
+ 871              	.L81:
+ 872 002e 05AB     		add	r3, sp, #20
+ 873 0030 5A88     		ldrh	r2, [r3, #2]
+ 874 0032 5978     		ldrb	r1, [r3, #1]
+ 875 0034 1878     		ldrb	r0, [r3]
+ 876 0036 FFF7FEFF 		bl	app_handle_conn_state_evt
+ 877 003a F6E7     		b	.L70
+ 878              	.L79:
+ 879 003c 05AB     		add	r3, sp, #20
+ 880 003e 5988     		ldrh	r1, [r3, #2]
+ 881 0040 1878     		ldrb	r0, [r3]
+ 882 0042 FFF7FEFF 		bl	app_handle_conn_mtu_info_evt
+ 883 0046 F0E7     		b	.L70
+ 884              	.L80:
+ 885 0048 05AB     		add	r3, sp, #20
+ 886 004a 5A88     		ldrh	r2, [r3, #2]
+ 887 004c 5978     		ldrb	r1, [r3, #1]
+ 888 004e 1878     		ldrb	r0, [r3]
+ 889 0050 FFF7FEFF 		bl	app_handle_conn_param_update_evt
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 19
+
+
+ 890 0054 E9E7     		b	.L70
+ 891              	.L78:
+ 892 0056 05AB     		add	r3, sp, #20
+ 893 0058 5A88     		ldrh	r2, [r3, #2]
+ 894 005a 5978     		ldrb	r1, [r3, #1]
+ 895 005c 1878     		ldrb	r0, [r3]
+ 896 005e FFF7FEFF 		bl	app_handle_authen_state_evt
+ 897 0062 E2E7     		b	.L70
+ 898              	.L72:
+ 899 0064 05AB     		add	r3, sp, #20
+ 900 0066 1878     		ldrb	r0, [r3]
+ 901 0068 0121     		movs	r1, #1
+ 902 006a FFF7FEFF 		bl	le_bond_just_work_confirm
+ 903 006e 2748     		ldr	r0, .L84+4
+ 904 0070 FFF7FEFF 		bl	uart_printf
+ 905 0074 D9E7     		b	.L70
+ 906              	.L77:
+ 907 0076 0023     		movs	r3, #0
+ 908 0078 0193     		str	r3, [sp, #4]
+ 909 007a 05AB     		add	r3, sp, #20
+ 910 007c 1C78     		ldrb	r4, [r3]
+ 911 007e 01A9     		add	r1, sp, #4
+ 912 0080 2000     		movs	r0, r4
+ 913 0082 FFF7FEFF 		bl	le_bond_get_display_key
+ 914 0086 0199     		ldr	r1, [sp, #4]
+ 915 0088 2148     		ldr	r0, .L84+8
+ 916 008a FFF7FEFF 		bl	uart_printf
+ 917 008e 0121     		movs	r1, #1
+ 918 0090 2000     		movs	r0, r4
+ 919 0092 FFF7FEFF 		bl	le_bond_passkey_display_confirm
+ 920 0096 C8E7     		b	.L70
+ 921              	.L74:
+ 922 0098 0023     		movs	r3, #0
+ 923 009a 0193     		str	r3, [sp, #4]
+ 924 009c 05AB     		add	r3, sp, #20
+ 925 009e 1C78     		ldrb	r4, [r3]
+ 926 00a0 01A9     		add	r1, sp, #4
+ 927 00a2 2000     		movs	r0, r4
+ 928 00a4 FFF7FEFF 		bl	le_bond_get_display_key
+ 929 00a8 0199     		ldr	r1, [sp, #4]
+ 930 00aa 1A48     		ldr	r0, .L84+12
+ 931 00ac FFF7FEFF 		bl	uart_printf
+ 932 00b0 0121     		movs	r1, #1
+ 933 00b2 2000     		movs	r0, r4
+ 934 00b4 FFF7FEFF 		bl	le_bond_user_confirm
+ 935 00b8 B7E7     		b	.L70
+ 936              	.L76:
+ 937 00ba 05AB     		add	r3, sp, #20
+ 938 00bc 1C78     		ldrb	r4, [r3]
+ 939 00be 2100     		movs	r1, r4
+ 940 00c0 1548     		ldr	r0, .L84+16
+ 941 00c2 FFF7FEFF 		bl	uart_printf
+ 942 00c6 0122     		movs	r2, #1
+ 943 00c8 1449     		ldr	r1, .L84+20
+ 944 00ca 2000     		movs	r0, r4
+ 945 00cc FFF7FEFF 		bl	le_bond_passkey_input_confirm
+ 946 00d0 ABE7     		b	.L70
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 20
+
+
+ 947              	.L75:
+ 948 00d2 01AC     		add	r4, sp, #4
+ 949 00d4 124B     		ldr	r3, .L84+24
+ 950 00d6 2200     		movs	r2, r4
+ 951 00d8 23CB     		ldmia	r3!, {r0, r1, r5}
+ 952 00da 23C2     		stmia	r2!, {r0, r1, r5}
+ 953 00dc 1B68     		ldr	r3, [r3]
+ 954 00de 1360     		str	r3, [r2]
+ 955 00e0 05AB     		add	r3, sp, #20
+ 956 00e2 1D78     		ldrb	r5, [r3]
+ 957 00e4 0F48     		ldr	r0, .L84+28
+ 958 00e6 FFF7FEFF 		bl	uart_printf
+ 959 00ea 8420     		movs	r0, #132
+ 960 00ec 2200     		movs	r2, r4
+ 961 00ee 1021     		movs	r1, #16
+ 962 00f0 8000     		lsls	r0, r0, #2
+ 963 00f2 FFF7FEFF 		bl	le_bond_set_param
+ 964 00f6 0121     		movs	r1, #1
+ 965 00f8 2800     		movs	r0, r5
+ 966 00fa FFF7FEFF 		bl	le_bond_oob_input_confirm
+ 967 00fe 94E7     		b	.L70
+ 968              	.L71:
+ 969 0100 0948     		ldr	r0, .L84+32
+ 970 0102 FFF7FEFF 		bl	uart_printf
+ 971 0106 90E7     		b	.L70
+ 972              	.L85:
+ 973              		.align	2
+ 974              	.L84:
+ 975 0108 00000000 		.word	.L73
+ 976 010c 00000000 		.word	.LC65
+ 977 0110 20000000 		.word	.LC67
+ 978 0114 54000000 		.word	.LC69
+ 979 0118 88000000 		.word	.LC71
+ 980 011c 38900D00 		.word	888888
+ 981 0120 00000000 		.word	.LANCHOR9
+ 982 0124 B8000000 		.word	.LC75
+ 983 0128 D8000000 		.word	.LC77
+ 985              		.section	.rodata.app_handle_io_msg.str1.4,"aMS",%progbits,1
+ 986              		.align	2
+ 987              	.LC81:
+ 988 0000 4F54413A 		.ascii	"OTA: starting apply fw_size=%lu\012\000"
+ 988      20737461 
+ 988      7274696E 
+ 988      67206170 
+ 988      706C7920 
+ 989              		.section	.text.app_handle_io_msg,"ax",%progbits
+ 990              		.align	1
+ 991              		.global	app_handle_io_msg
+ 992              		.syntax unified
+ 993              		.code	16
+ 994              		.thumb_func
+ 996              	app_handle_io_msg:
+ 997              		@ args = 0, pretend = 0, frame = 16
+ 998              		@ frame_needed = 0, uses_anonymous_args = 0
+ 999 0000 10B5     		push	{r4, lr}
+ 1000 0002 84B0     		sub	sp, sp, #16
+ 1001 0004 0290     		str	r0, [sp, #8]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 21
+
+
+ 1002 0006 0391     		str	r1, [sp, #12]
+ 1003 0008 80B2     		uxth	r0, r0
+ 1004 000a 2128     		cmp	r0, #33
+ 1005 000c 27D0     		beq	.L87
+ 1006 000e 0CD8     		bhi	.L88
+ 1007 0010 0028     		cmp	r0, #0
+ 1008 0012 1FD0     		beq	.L89
+ 1009 0014 2028     		cmp	r0, #32
+ 1010 0016 20D1     		bne	.L86
+ 1011 0018 02AB     		add	r3, sp, #8
+ 1012 001a 9978     		ldrb	r1, [r3, #2]
+ 1013 001c 0398     		ldr	r0, [sp, #12]
+ 1014 001e FFF7FEFF 		bl	drawImageAtAddress
+ 1015 0022 1548     		ldr	r0, .L93
+ 1016 0024 FFF7FEFF 		bl	os_timer_start
+ 1017 0028 17E0     		b	.L86
+ 1018              	.L88:
+ 1019 002a 2228     		cmp	r0, #34
+ 1020 002c 15D1     		bne	.L86
+ 1021 002e 124C     		ldr	r4, .L93
+ 1022 0030 2000     		movs	r0, r4
+ 1023 0032 FFF7FEFF 		bl	os_timer_stop
+ 1024 0036 FFF7FEFF 		bl	le_adv_stop
+ 1025 003a 039B     		ldr	r3, [sp, #12]
+ 1026 003c 0193     		str	r3, [sp, #4]
+ 1027 003e 1900     		movs	r1, r3
+ 1028 0040 0E48     		ldr	r0, .L93+4
+ 1029 0042 FFF7FEFF 		bl	uart_printf
+ 1030 0046 0398     		ldr	r0, [sp, #12]
+ 1031 0048 FFF7FEFF 		bl	ota_apply
+ 1032 004c 2000     		movs	r0, r4
+ 1033 004e FFF7FEFF 		bl	os_timer_start
+ 1034 0052 02E0     		b	.L86
+ 1035              	.L89:
+ 1036 0054 02A8     		add	r0, sp, #8
+ 1037 0056 FFF7FEFF 		bl	app_handle_gap_msg
+ 1038              	.L86:
+ 1039 005a 04B0     		add	sp, sp, #16
+ 1040              		@ sp needed
+ 1041 005c 10BD     		pop	{r4, pc}
+ 1042              	.L87:
+ 1043 005e 084B     		ldr	r3, .L93+8
+ 1044 0060 1B78     		ldrb	r3, [r3]
+ 1045 0062 002B     		cmp	r3, #0
+ 1046 0064 F9D0     		beq	.L86
+ 1047 0066 FFF7FEFF 		bl	epd_refresh_done
+ 1048 006a 0028     		cmp	r0, #0
+ 1049 006c F5D0     		beq	.L86
+ 1050 006e 0248     		ldr	r0, .L93
+ 1051 0070 FFF7FEFF 		bl	os_timer_stop
+ 1052 0074 F1E7     		b	.L86
+ 1053              	.L94:
+ 1054 0076 C046     		.align	2
+ 1055              	.L93:
+ 1056 0078 00000000 		.word	.LANCHOR7
+ 1057 007c 00000000 		.word	.LC81
+ 1058 0080 00000000 		.word	g_epd_refreshing
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 22
+
+
+ 1060              		.section	.rodata.app_gap_callback.str1.4,"aMS",%progbits,1
+ 1061              		.align	2
+ 1062              	.LC83:
+ 1063 0000 5B495D20 		.ascii	"[I] GAP_MSG_LE_DATA_LEN_CHANGE_INFO: conn_id %d, tx"
+ 1063      4741505F 
+ 1063      4D53475F 
+ 1063      4C455F44 
+ 1063      4154415F 
+ 1064 0033 206F6374 		.ascii	" octets 0x%x, max_tx_time 0x%x\012\000"
+ 1064      65747320 
+ 1064      30782578 
+ 1064      2C206D61 
+ 1064      785F7478 
+ 1065 0053 00       		.align	2
+ 1066              	.LC85:
+ 1067 0054 4741505F 		.ascii	"GAP_MSG_LE_SET_RAND_ADDR: cause 0x%x\012\000"
+ 1067      4D53475F 
+ 1067      4C455F53 
+ 1067      45545F52 
+ 1067      414E445F 
+ 1068 007a 0000     		.align	2
+ 1069              	.LC87:
+ 1070 007c 5B495D20 		.ascii	"[I] GAP_MSG_LE_MODIFY_WHITE_LIST: operation %d, cau"
+ 1070      4741505F 
+ 1070      4D53475F 
+ 1070      4C455F4D 
+ 1070      4F444946 
+ 1071 00af 73652030 		.ascii	"se 0x%x\012\000"
+ 1071      7825780A 
+ 1071      00
+ 1072              		.align	2
+ 1073              	.LC89:
+ 1074 00b8 5B495D20 		.ascii	"[I] app_gap_callback GAP_MSG_LE_ADV_UPDATE_PARAM\012"
+ 1074      6170705F 
+ 1074      6761705F 
+ 1074      63616C6C 
+ 1074      6261636B 
+ 1075 00e9 00       		.ascii	"\000"
+ 1076 00ea 0000     		.align	2
+ 1077              	.LC91:
+ 1078 00ec 5B455D20 		.ascii	"[E] app_gap_callback: unhandled cb_type 0x%x\012\000"
+ 1078      6170705F 
+ 1078      6761705F 
+ 1078      63616C6C 
+ 1078      6261636B 
+ 1079              		.section	.text.app_gap_callback,"ax",%progbits
+ 1080              		.align	1
+ 1081              		.global	app_gap_callback
+ 1082              		.syntax unified
+ 1083              		.code	16
+ 1084              		.thumb_func
+ 1086              	app_gap_callback:
+ 1087              		@ args = 0, pretend = 0, frame = 0
+ 1088              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1089 0000 10B5     		push	{r4, lr}
+ 1090 0002 1428     		cmp	r0, #20
+ 1091 0004 10D0     		beq	.L96
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 23
+
+
+ 1092 0006 09D8     		bhi	.L97
+ 1093 0008 0128     		cmp	r0, #1
+ 1094 000a 16D0     		beq	.L98
+ 1095 000c 0228     		cmp	r0, #2
+ 1096 000e 1BD1     		bne	.L100
+ 1097 0010 0B68     		ldr	r3, [r1]
+ 1098 0012 1988     		ldrh	r1, [r3]
+ 1099 0014 0F48     		ldr	r0, .L103
+ 1100 0016 FFF7FEFF 		bl	uart_printf
+ 1101 001a 0CE0     		b	.L102
+ 1102              	.L97:
+ 1103 001c 4028     		cmp	r0, #64
+ 1104 001e 13D1     		bne	.L100
+ 1105 0020 0D48     		ldr	r0, .L103+4
+ 1106 0022 FFF7FEFF 		bl	uart_printf
+ 1107 0026 06E0     		b	.L102
+ 1108              	.L96:
+ 1109 0028 0968     		ldr	r1, [r1]
+ 1110 002a 8B88     		ldrh	r3, [r1, #4]
+ 1111 002c 4A88     		ldrh	r2, [r1, #2]
+ 1112 002e 0978     		ldrb	r1, [r1]
+ 1113 0030 0A48     		ldr	r0, .L103+8
+ 1114 0032 FFF7FEFF 		bl	uart_printf
+ 1115              	.L102:
+ 1116 0036 0020     		movs	r0, #0
+ 1117              		@ sp needed
+ 1118 0038 10BD     		pop	{r4, pc}
+ 1119              	.L98:
+ 1120 003a 0B68     		ldr	r3, [r1]
+ 1121 003c 5A88     		ldrh	r2, [r3, #2]
+ 1122 003e 1978     		ldrb	r1, [r3]
+ 1123 0040 0748     		ldr	r0, .L103+12
+ 1124 0042 FFF7FEFF 		bl	uart_printf
+ 1125 0046 F6E7     		b	.L102
+ 1126              	.L100:
+ 1127 0048 0100     		movs	r1, r0
+ 1128 004a 0648     		ldr	r0, .L103+16
+ 1129 004c FFF7FEFF 		bl	uart_printf
+ 1130 0050 F1E7     		b	.L102
+ 1131              	.L104:
+ 1132 0052 C046     		.align	2
+ 1133              	.L103:
+ 1134 0054 54000000 		.word	.LC85
+ 1135 0058 B8000000 		.word	.LC89
+ 1136 005c 00000000 		.word	.LC83
+ 1137 0060 7C000000 		.word	.LC87
+ 1138 0064 EC000000 		.word	.LC91
+ 1140              		.section	.rodata.app_profile_callback.str1.4,"aMS",%progbits,1
+ 1141              		.align	2
+ 1142              	.LC93:
+ 1143 0000 5B495D20 		.ascii	"[I] PROFILE_EVT_SRV_REG_COMPLETE: result %d\012\000"
+ 1143      50524F46 
+ 1143      494C455F 
+ 1143      4556545F 
+ 1143      5352565F 
+ 1144 002d 000000   		.align	2
+ 1145              	.LC95:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 24
+
+
+ 1146 0030 5B495D20 		.ascii	"[I] PROFILE_EVT_SEND_DATA_COMPLETE success\012\000"
+ 1146      50524F46 
+ 1146      494C455F 
+ 1146      4556545F 
+ 1146      53454E44 
+ 1147              		.align	2
+ 1148              	.LC97:
+ 1149 005c 5B455D20 		.ascii	"[E] PROFILE_EVT_SEND_DATA_COMPLETE failed\012\000"
+ 1149      50524F46 
+ 1149      494C455F 
+ 1149      4556545F 
+ 1149      53454E44 
+ 1150 0087 00       		.align	2
+ 1151              	.LC100:
+ 1152 0088 5741524E 		.ascii	"WARN: RX write too short (%d)\012\000"
+ 1152      3A205258 
+ 1152      20777269 
+ 1152      74652074 
+ 1152      6F6F2073 
+ 1153 00a7 00       		.align	2
+ 1154              	.LC102:
+ 1155 00a8 5B495D20 		.ascii	"[I] Custom Service Notify Enabled\012\000"
+ 1155      43757374 
+ 1155      6F6D2053 
+ 1155      65727669 
+ 1155      6365204E 
+ 1156 00cb 00       		.align	2
+ 1157              	.LC104:
+ 1158 00cc 5B495D20 		.ascii	"[I] Custom Service Notify Disabled\012\000"
+ 1158      43757374 
+ 1158      6F6D2053 
+ 1158      65727669 
+ 1158      6365204E 
+ 1159              		.section	.text.app_profile_callback,"ax",%progbits
+ 1160              		.align	1
+ 1161              		.global	app_profile_callback
+ 1162              		.syntax unified
+ 1163              		.code	16
+ 1164              		.thumb_func
+ 1166              	app_profile_callback:
+ 1167              		@ args = 0, pretend = 0, frame = 0
+ 1168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1169 0000 10B5     		push	{r4, lr}
+ 1170 0002 FF28     		cmp	r0, #255
+ 1171 0004 05D0     		beq	.L114
+ 1172 0006 1E4B     		ldr	r3, .L116
+ 1173 0008 1B78     		ldrb	r3, [r3]
+ 1174 000a 8342     		cmp	r3, r0
+ 1175 000c 16D0     		beq	.L115
+ 1176              	.L109:
+ 1177 000e 0020     		movs	r0, #0
+ 1178              		@ sp needed
+ 1179 0010 10BD     		pop	{r4, pc}
+ 1180              	.L114:
+ 1181 0012 0B78     		ldrb	r3, [r1]
+ 1182 0014 002B     		cmp	r3, #0
+ 1183 0016 08D0     		beq	.L107
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 25
+
+
+ 1184 0018 012B     		cmp	r3, #1
+ 1185 001a F8D1     		bne	.L109
+ 1186 001c 0B89     		ldrh	r3, [r1, #8]
+ 1187 001e 002B     		cmp	r3, #0
+ 1188 0020 08D1     		bne	.L110
+ 1189 0022 1848     		ldr	r0, .L116+4
+ 1190 0024 FFF7FEFF 		bl	uart_printf
+ 1191 0028 F1E7     		b	.L109
+ 1192              	.L107:
+ 1193 002a 8978     		ldrb	r1, [r1, #2]
+ 1194 002c 1648     		ldr	r0, .L116+8
+ 1195 002e FFF7FEFF 		bl	uart_printf
+ 1196 0032 ECE7     		b	.L109
+ 1197              	.L110:
+ 1198 0034 1548     		ldr	r0, .L116+12
+ 1199 0036 FFF7FEFF 		bl	uart_printf
+ 1200 003a E8E7     		b	.L109
+ 1201              	.L115:
+ 1202 003c 4B78     		ldrb	r3, [r1, #1]
+ 1203 003e 022B     		cmp	r3, #2
+ 1204 0040 16D0     		beq	.L111
+ 1205 0042 032B     		cmp	r3, #3
+ 1206 0044 18D0     		beq	.L112
+ 1207 0046 012B     		cmp	r3, #1
+ 1208 0048 E1D1     		bne	.L109
+ 1209 004a 4B88     		ldrh	r3, [r1, #2]
+ 1210 004c 012B     		cmp	r3, #1
+ 1211 004e 0AD9     		bls	.L113
+ 1212 0050 4C68     		ldr	r4, [r1, #4]
+ 1213 0052 A21C     		adds	r2, r4, #2
+ 1214 0054 023B     		subs	r3, r3, #2
+ 1215 0056 99B2     		uxth	r1, r3
+ 1216 0058 2378     		ldrb	r3, [r4]
+ 1217 005a 1B02     		lsls	r3, r3, #8
+ 1218 005c 6078     		ldrb	r0, [r4, #1]
+ 1219 005e 1843     		orrs	r0, r3
+ 1220 0060 FFF7FEFF 		bl	zb_ble_hci_cmd_handler
+ 1221 0064 D3E7     		b	.L109
+ 1222              	.L113:
+ 1223 0066 1900     		movs	r1, r3
+ 1224 0068 0948     		ldr	r0, .L116+16
+ 1225 006a FFF7FEFF 		bl	uart_printf
+ 1226 006e CEE7     		b	.L109
+ 1227              	.L111:
+ 1228 0070 0848     		ldr	r0, .L116+20
+ 1229 0072 FFF7FEFF 		bl	uart_printf
+ 1230 0076 CAE7     		b	.L109
+ 1231              	.L112:
+ 1232 0078 0748     		ldr	r0, .L116+24
+ 1233 007a FFF7FEFF 		bl	uart_printf
+ 1234 007e C6E7     		b	.L109
+ 1235              	.L117:
+ 1236              		.align	2
+ 1237              	.L116:
+ 1238 0080 00000000 		.word	.LANCHOR1
+ 1239 0084 30000000 		.word	.LC95
+ 1240 0088 00000000 		.word	.LC93
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 26
+
+
+ 1241 008c 5C000000 		.word	.LC97
+ 1242 0090 88000000 		.word	.LC100
+ 1243 0094 A8000000 		.word	.LC102
+ 1244 0098 CC000000 		.word	.LC104
+ 1246              		.global	device_name
+ 1247              		.global	epd_read_temperature
+ 1248              		.global	adc_temperature
+ 1249              		.global	settings
+ 1250              		.global	ble_adv_data
+ 1251              		.global	gap_conn_state
+ 1252              		.global	gap_dev_state
+ 1253              		.global	custom_srv_id
+ 1254              		.section	.rodata
+ 1255              		.align	2
+ 1256              		.set	.LANCHOR9,. + 0
+ 1257              	.LC73:
+ 1258 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1258      00000000 
+ 1258      00000000 
+ 1258      00
+ 1259 000d 000000   		.ascii	"\000\000\000"
+ 1260              		.section	.bss.ble_adv_data,"aw",%nobits
+ 1261              		.align	2
+ 1262              		.set	.LANCHOR2,. + 0
+ 1265              	ble_adv_data:
+ 1266 0000 00000000 		.space	18
+ 1266      00000000 
+ 1266      00000000 
+ 1266      00000000 
+ 1266      0000
+ 1267              		.section	.bss.custom_srv_id,"aw",%nobits
+ 1268              		.set	.LANCHOR1,. + 0
+ 1271              	custom_srv_id:
+ 1272 0000 00       		.space	1
+ 1273              		.section	.bss.epd_poll_timer,"aw",%nobits
+ 1274              		.align	2
+ 1275              		.set	.LANCHOR7,. + 0
+ 1278              	epd_poll_timer:
+ 1279 0000 00000000 		.space	4
+ 1280              		.section	.bss.epd_read_temperature,"aw",%nobits
+ 1281              		.set	.LANCHOR3,. + 0
+ 1284              	epd_read_temperature:
+ 1285 0000 00       		.space	1
+ 1286              		.section	.bss.g_ble_rand_addr,"aw",%nobits
+ 1287              		.align	2
+ 1288              		.set	.LANCHOR0,. + 0
+ 1291              	g_ble_rand_addr:
+ 1292 0000 00000000 		.space	6
+ 1292      0000
+ 1293              		.section	.bss.gap_conn_state,"aw",%nobits
+ 1294              		.set	.LANCHOR8,. + 0
+ 1297              	gap_conn_state:
+ 1298 0000 00       		.space	1
+ 1299              		.section	.bss.gap_dev_state,"aw",%nobits
+ 1300              		.align	2
+ 1301              		.set	.LANCHOR6,. + 0
+ 1304              	gap_dev_state:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 27
+
+
+ 1305 0000 00       		.space	1
+ 1306              		.section	.data.adc_temperature,"aw"
+ 1307              		.set	.LANCHOR4,. + 0
+ 1310              	adc_temperature:
+ 1311 0000 19       		.byte	25
+ 1312              		.section	.data.device_name,"aw"
+ 1313              		.align	2
+ 1314              		.set	.LANCHOR5,. + 0
+ 1317              	device_name:
+ 1318 0000 52544C5F 		.ascii	"RTL_000000\000"
+ 1318      30303030 
+ 1318      303000
+ 1319              		.section	.data.settings,"aw"
+ 1320              		.align	2
+ 1323              	settings:
+ 1324 0000 00000000 		.space	12
+ 1324      00000000 
+ 1324      00000000 
+ 1325 000c 4100     		.short	65
+ 1326 000e 01       		.byte	1
+ 1327 000f 0100     		.2byte	1
+ 1328 0011 0000     		.2byte	0
+ 1329 0013 00       		.byte	0
+ 1330 0014 0000     		.short	0
+ 1331 0016 1001     		.short	272
+ 1332 0018 1803     		.short	792
+ 1333 001a 0000     		.short	0
+ 1334 001c 0000     		.short	0
+ 1335 001e 02       		.byte	2
+ 1336 001f 01       		.byte	1
+ 1337 0020 00       		.byte	0
+ 1338 0021 00000000 		.space	145
+ 1338      00000000 
+ 1338      00000000 
+ 1338      00000000 
+ 1338      00000000 
+ 1339              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 28
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 peripheral_app.c
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:16     .text.epd_poll_timer_cb:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:21     .text.epd_poll_timer_cb:00000000 epd_poll_timer_cb
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:39     .rodata.ble_addr_early_init.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:47     .text.ble_addr_early_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:53     .text.ble_addr_early_init:00000000 ble_addr_early_init
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:138    .text.ble_addr_early_init:000000a0 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:144    .text.get_capabilities:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:150    .text.get_capabilities:00000000 get_capabilities
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:181    .text.get_capabilities:0000002c $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1323   .data.settings:00000000 settings
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:184    .text.app_send_custom_notification:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:190    .text.app_send_custom_notification:00000000 app_send_custom_notification
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:205    .text.app_send_custom_notification:00000014 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:208    .rodata.set_adv_data.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:212    .text.set_adv_data:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:218    .text.set_adv_data:00000000 set_adv_data
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:309    .text.set_adv_data:000000ac $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:321    .rodata.app_update_adv_data.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:331    .text.app_update_adv_data:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:337    .text.app_update_adv_data:00000000 app_update_adv_data
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:379    .text.app_update_adv_data:0000004c $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:386    .rodata.app_handle_dev_state_evt.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:406    .text.app_handle_dev_state_evt:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:412    .text.app_handle_dev_state_evt:00000000 app_handle_dev_state_evt
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:493    .text.app_handle_dev_state_evt:000000a0 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:505    .rodata.app_handle_conn_state_evt.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:519    .text.app_handle_conn_state_evt:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:525    .text.app_handle_conn_state_evt:00000000 app_handle_conn_state_evt
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:616    .text.app_handle_conn_state_evt:000000b0 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:624    .rodata.app_handle_authen_state_evt.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:645    .text.app_handle_authen_state_evt:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:651    .text.app_handle_authen_state_evt:00000000 app_handle_authen_state_evt
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:687    .text.app_handle_authen_state_evt:0000003c $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:694    .rodata.app_handle_conn_mtu_info_evt.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:699    .text.app_handle_conn_mtu_info_evt:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:705    .text.app_handle_conn_mtu_info_evt:00000000 app_handle_conn_mtu_info_evt
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:718    .text.app_handle_conn_mtu_info_evt:00000010 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:721    .rodata.app_handle_conn_param_update_evt.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:735    .text.app_handle_conn_param_update_evt:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:741    .text.app_handle_conn_param_update_evt:00000000 app_handle_conn_param_update_evt
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:794    .text.app_handle_conn_param_update_evt:00000060 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:801    .rodata.app_handle_gap_msg.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:822    .text.app_handle_gap_msg:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:828    .text.app_handle_gap_msg:00000000 app_handle_gap_msg
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:848    .rodata.app_handle_gap_msg:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:975    .text.app_handle_gap_msg:00000108 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:986    .rodata.app_handle_io_msg.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:990    .text.app_handle_io_msg:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:996    .text.app_handle_io_msg:00000000 app_handle_io_msg
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1056   .text.app_handle_io_msg:00000078 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1061   .rodata.app_gap_callback.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1080   .text.app_gap_callback:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1086   .text.app_gap_callback:00000000 app_gap_callback
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1134   .text.app_gap_callback:00000054 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1141   .rodata.app_profile_callback.str1.4:00000000 $d
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccz77LYE.s 			page 29
+
+
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1160   .text.app_profile_callback:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1166   .text.app_profile_callback:00000000 app_profile_callback
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1238   .text.app_profile_callback:00000080 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1317   .data.device_name:00000000 device_name
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1284   .bss.epd_read_temperature:00000000 epd_read_temperature
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1310   .data.adc_temperature:00000000 adc_temperature
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1265   .bss.ble_adv_data:00000000 ble_adv_data
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1297   .bss.gap_conn_state:00000000 gap_conn_state
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1304   .bss.gap_dev_state:00000000 gap_dev_state
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1271   .bss.custom_srv_id:00000000 custom_srv_id
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1255   .rodata:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1261   .bss.ble_adv_data:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1272   .bss.custom_srv_id:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1274   .bss.epd_poll_timer:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1278   .bss.epd_poll_timer:00000000 epd_poll_timer
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1285   .bss.epd_read_temperature:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1287   .bss.g_ble_rand_addr:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1291   .bss.g_ble_rand_addr:00000000 g_ble_rand_addr
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1298   .bss.gap_conn_state:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1300   .bss.gap_dev_state:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1313   .data.device_name:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccz77LYE.s:1320   .data.settings:00000000 $d
+
+UNDEFINED SYMBOLS
+app_send_msg_to_apptask
+gap_get_param
+uart_printf
+platform_random
+mac_edit_update
+custom_service_send_notification
+sprintf
+memcpy
+le_adv_set_param
+le_adv_update_param
+os_timer_create
+battery_measure_mv
+boot_screen_draw
+os_timer_start
+le_adv_start
+le_get_conn_param
+le_get_conn_addr
+uart_bdaddr_str
+le_bond_just_work_confirm
+le_bond_get_display_key
+le_bond_passkey_display_confirm
+le_bond_user_confirm
+le_bond_passkey_input_confirm
+le_bond_set_param
+le_bond_oob_input_confirm
+drawImageAtAddress
+os_timer_stop
+le_adv_stop
+ota_apply
+epd_refresh_done
+g_epd_refreshing
+zb_ble_hci_cmd_handler

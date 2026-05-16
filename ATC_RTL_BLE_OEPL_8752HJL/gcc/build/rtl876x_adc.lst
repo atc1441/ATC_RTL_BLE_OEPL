@@ -1,0 +1,880 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"rtl876x_adc.c"
+  14              		.text
+  15              		.section	.text.ADC_DeInit,"ax",%progbits
+  16              		.align	1
+  17              		.global	ADC_DeInit
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	ADC_DeInit:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0020     		movs	r0, #0
+  27 0004 FFF7FEFF 		bl	pmu_request_ldo_audio_ref_call
+  28 0008 C221     		movs	r1, #194
+  29 000a 0022     		movs	r2, #0
+  30 000c C905     		lsls	r1, r1, #23
+  31 000e 0248     		ldr	r0, .L2
+  32 0010 FFF7FEFF 		bl	RCC_PeriphClockCmd
+  33              		@ sp needed
+  34 0014 10BD     		pop	{r4, pc}
+  35              	.L3:
+  36 0016 C046     		.align	2
+  37              	.L2:
+  38 0018 0100000C 		.word	201326593
+  40              		.section	.rodata.ADC_Init.str1.4,"aMS",%progbits,1
+  41              		.align	2
+  42              	.LC2:
+  43 0000 2849535F 		.ascii	"(IS_SCHEDULE_TABLE(ADC_InitStruct->ADC_SchIndex[ind"
+  43      53434845 
+  43      44554C45 
+  43      5F544142 
+  43      4C452841 
+  44 0033 65785D29 		.ascii	"ex])) assert failed! Func: %s. Line: %d.\000"
+  44      29206173 
+  44      73657274 
+  44      20666169 
+  44      6C656421 
+  45              		.section	.text.ADC_Init,"ax",%progbits
+  46              		.align	1
+  47              		.global	ADC_Init
+  48              		.syntax unified
+  49              		.code	16
+  50              		.thumb_func
+  52              	ADC_Init:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 2
+
+
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  56 0002 DE46     		mov	lr, fp
+  57 0004 5746     		mov	r7, r10
+  58 0006 4E46     		mov	r6, r9
+  59 0008 4546     		mov	r5, r8
+  60 000a E0B5     		push	{r5, r6, r7, lr}
+  61 000c 0F00     		movs	r7, r1
+  62 000e 1C37     		adds	r7, r7, #28
+  63 0010 2C23     		movs	r3, #44
+  64 0012 9A46     		mov	r10, r3
+  65 0014 8A44     		add	r10, r10, r1
+  66 0016 3C00     		movs	r4, r7
+  67 0018 814B     		ldr	r3, .L20
+  68 001a 9B46     		mov	fp, r3
+  69 001c 814B     		ldr	r3, .L20+4
+  70 001e 9946     		mov	r9, r3
+  71 0020 8846     		mov	r8, r1
+  72 0022 5546     		mov	r5, r10
+  73 0024 8246     		mov	r10, r0
+  74 0026 22E0     		b	.L7
+  75              	.L5:
+  76 0028 FA20     		movs	r0, #250
+  77 002a 8000     		lsls	r0, r0, #2
+  78 002c 5B46     		mov	r3, fp
+  79 002e 1B68     		ldr	r3, [r3]
+  80 0030 9847     		blx	r3
+  81 0032 9426     		movs	r6, #148
+  82 0034 B605     		lsls	r6, r6, #22
+  83 0036 4623     		movs	r3, #70
+  84 0038 4A46     		mov	r2, r9
+  85 003a 7B49     		ldr	r1, .L20+8
+  86 003c 3000     		movs	r0, r6
+  87 003e FFF7FEFF 		bl	log_direct_app
+  88 0042 4623     		movs	r3, #70
+  89 0044 4A46     		mov	r2, r9
+  90 0046 7849     		ldr	r1, .L20+8
+  91 0048 3000     		movs	r0, r6
+  92 004a FFF7FEFF 		bl	log_direct_app
+  93 004e 0123     		movs	r3, #1
+  94 0050 1A78     		ldrb	r2, [r3]
+  95 0052 0022     		movs	r2, #0
+  96 0054 1A70     		strb	r2, [r3]
+  97 0056 5A78     		ldrb	r2, [r3, #1]
+  98 0058 0022     		movs	r2, #0
+  99 005a 5A70     		strb	r2, [r3, #1]
+ 100 005c 9A78     		ldrb	r2, [r3, #2]
+ 101 005e 0022     		movs	r2, #0
+ 102 0060 9A70     		strb	r2, [r3, #2]
+ 103 0062 DA78     		ldrb	r2, [r3, #3]
+ 104 0064 0022     		movs	r2, #0
+ 105 0066 DA70     		strb	r2, [r3, #3]
+ 106              	.L6:
+ 107 0068 0234     		adds	r4, r4, #2
+ 108 006a AC42     		cmp	r4, r5
+ 109 006c 07D0     		beq	.L16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 3
+
+
+ 110              	.L7:
+ 111 006e 2288     		ldrh	r2, [r4]
+ 112 0070 0F23     		movs	r3, #15
+ 113 0072 1340     		ands	r3, r2
+ 114 0074 062B     		cmp	r3, #6
+ 115 0076 D7D0     		beq	.L5
+ 116 0078 0F2A     		cmp	r2, #15
+ 117 007a F5D1     		bne	.L6
+ 118 007c D4E7     		b	.L5
+ 119              	.L16:
+ 120 007e 5646     		mov	r6, r10
+ 121 0080 4546     		mov	r5, r8
+ 122 0082 8B24     		movs	r4, #139
+ 123 0084 6400     		lsls	r4, r4, #1
+ 124 0086 2000     		movs	r0, r4
+ 125 0088 FFF7FEFF 		bl	btaon_fast_read_safe
+ 126 008c 1021     		movs	r1, #16
+ 127 008e 0143     		orrs	r1, r0
+ 128 0090 89B2     		uxth	r1, r1
+ 129 0092 2000     		movs	r0, r4
+ 130 0094 FFF7FEFF 		bl	btaon_fast_write
+ 131 0098 2000     		movs	r0, r4
+ 132 009a FFF7FEFF 		bl	btaon_fast_read_safe
+ 133 009e 8021     		movs	r1, #128
+ 134 00a0 C900     		lsls	r1, r1, #3
+ 135 00a2 0143     		orrs	r1, r0
+ 136 00a4 89B2     		uxth	r1, r1
+ 137 00a6 2000     		movs	r0, r4
+ 138 00a8 FFF7FEFF 		bl	btaon_fast_write
+ 139 00ac 5F4B     		ldr	r3, .L20+12
+ 140 00ae 1B78     		ldrb	r3, [r3]
+ 141 00b0 DBB2     		uxtb	r3, r3
+ 142 00b2 012B     		cmp	r3, #1
+ 143 00b4 00D9     		bls	.LCB125
+ 144 00b6 7DE0     		b	.L17	@long jump
+ 145              	.LCB125:
+ 146              	.L8:
+ 147 00b8 F368     		ldr	r3, [r6, #12]
+ 148 00ba 3F22     		movs	r2, #63
+ 149 00bc 9343     		bics	r3, r2
+ 150 00be F360     		str	r3, [r6, #12]
+ 151 00c0 AB6D     		ldr	r3, [r5, #88]
+ 152 00c2 002B     		cmp	r3, #0
+ 153 00c4 07D1     		bne	.L9
+ 154 00c6 326D     		ldr	r2, [r6, #80]
+ 155 00c8 6B6E     		ldr	r3, [r5, #100]
+ 156 00ca A96E     		ldr	r1, [r5, #104]
+ 157 00cc 0B43     		orrs	r3, r1
+ 158 00ce E96E     		ldr	r1, [r5, #108]
+ 159 00d0 0B43     		orrs	r3, r1
+ 160 00d2 1343     		orrs	r3, r2
+ 161 00d4 3365     		str	r3, [r6, #80]
+ 162              	.L9:
+ 163 00d6 0120     		movs	r0, #1
+ 164 00d8 FFF7FEFF 		bl	pmu_request_ldo_audio_ref_call
+ 165 00dc 326D     		ldr	r2, [r6, #80]
+ 166 00de 2B6E     		ldr	r3, [r5, #96]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 4
+
+
+ 167 00e0 9B01     		lsls	r3, r3, #6
+ 168 00e2 E021     		movs	r1, #224
+ 169 00e4 4900     		lsls	r1, r1, #1
+ 170 00e6 0B40     		ands	r3, r1
+ 171 00e8 A96D     		ldr	r1, [r5, #88]
+ 172 00ea 0A43     		orrs	r2, r1
+ 173 00ec 1343     		orrs	r3, r2
+ 174 00ee 3365     		str	r3, [r6, #80]
+ 175 00f0 336D     		ldr	r3, [r6, #80]
+ 176 00f2 EA6D     		ldr	r2, [r5, #92]
+ 177 00f4 1343     		orrs	r3, r2
+ 178 00f6 3365     		str	r3, [r6, #80]
+ 179 00f8 2B6F     		ldr	r3, [r5, #112]
+ 180 00fa 012B     		cmp	r3, #1
+ 181 00fc 00D1     		bne	.LCB170
+ 182 00fe 71E0     		b	.L18	@long jump
+ 183              	.LCB170:
+ 184              	.L10:
+ 185 0100 8023     		movs	r3, #128
+ 186 0102 5B04     		lsls	r3, r3, #17
+ 187 0104 6A6D     		ldr	r2, [r5, #84]
+ 188 0106 9A42     		cmp	r2, r3
+ 189 0108 00D1     		bne	.LCB177
+ 190 010a 76E0     		b	.L19	@long jump
+ 191              	.LCB177:
+ 192 010c B368     		ldr	r3, [r6, #8]
+ 193 010e 1B0C     		lsrs	r3, r3, #16
+ 194 0110 1B04     		lsls	r3, r3, #16
+ 195 0112 B360     		str	r3, [r6, #8]
+ 196 0114 3100     		movs	r1, r6
+ 197 0116 1031     		adds	r1, r1, #16
+ 198 0118 3023     		movs	r3, #48
+ 199 011a 9C46     		mov	ip, r3
+ 200 011c B444     		add	ip, ip, r6
+ 201 011e F824     		movs	r4, #248
+ 202 0120 6403     		lsls	r4, r4, #13
+ 203 0122 1F20     		movs	r0, #31
+ 204 0124 2B00     		movs	r3, r5
+ 205 0126 6546     		mov	r5, ip
+ 206 0128 9C46     		mov	ip, r3
+ 207              	.L13:
+ 208 012a 7B88     		ldrh	r3, [r7, #2]
+ 209 012c 1B04     		lsls	r3, r3, #16
+ 210 012e 2340     		ands	r3, r4
+ 211 0130 3A88     		ldrh	r2, [r7]
+ 212 0132 0240     		ands	r2, r0
+ 213 0134 1343     		orrs	r3, r2
+ 214 0136 08C1     		stmia	r1!, {r3}
+ 215 0138 0437     		adds	r7, r7, #4
+ 216 013a A942     		cmp	r1, r5
+ 217 013c F5D1     		bne	.L13
+ 218 013e 6546     		mov	r5, ip
+ 219 0140 AB8F     		ldrh	r3, [r5, #60]
+ 220 0142 B360     		str	r3, [r6, #8]
+ 221              	.L12:
+ 222 0144 AB68     		ldr	r3, [r5, #8]
+ 223 0146 6A69     		ldr	r2, [r5, #20]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 5
+
+
+ 224 0148 1343     		orrs	r3, r2
+ 225 014a AA69     		ldr	r2, [r5, #24]
+ 226 014c 1343     		orrs	r3, r2
+ 227 014e EA68     		ldr	r2, [r5, #12]
+ 228 0150 1205     		lsls	r2, r2, #20
+ 229 0152 FC21     		movs	r1, #252
+ 230 0154 8904     		lsls	r1, r1, #18
+ 231 0156 0A40     		ands	r2, r1
+ 232 0158 1343     		orrs	r3, r2
+ 233 015a 2A69     		ldr	r2, [r5, #16]
+ 234 015c 9203     		lsls	r2, r2, #14
+ 235 015e FC21     		movs	r1, #252
+ 236 0160 0903     		lsls	r1, r1, #12
+ 237 0162 0A40     		ands	r2, r1
+ 238 0164 1343     		orrs	r3, r2
+ 239 0166 7360     		str	r3, [r6, #4]
+ 240 0168 AB6C     		ldr	r3, [r5, #72]
+ 241 016a 6A6C     		ldr	r2, [r5, #68]
+ 242 016c 1343     		orrs	r3, r2
+ 243 016e 2A6C     		ldr	r2, [r5, #64]
+ 244 0170 1343     		orrs	r3, r2
+ 245 0172 EA6C     		ldr	r2, [r5, #76]
+ 246 0174 1204     		lsls	r2, r2, #16
+ 247 0176 2E49     		ldr	r1, .L20+16
+ 248 0178 0A40     		ands	r2, r1
+ 249 017a 1343     		orrs	r3, r2
+ 250 017c 7365     		str	r3, [r6, #84]
+ 251 017e B26D     		ldr	r2, [r6, #88]
+ 252 0180 C023     		movs	r3, #192
+ 253 0182 1B01     		lsls	r3, r3, #4
+ 254 0184 1343     		orrs	r3, r2
+ 255 0186 B365     		str	r3, [r6, #88]
+ 256 0188 2B68     		ldr	r3, [r5]
+ 257 018a 9B04     		lsls	r3, r3, #18
+ 258 018c 9B0C     		lsrs	r3, r3, #18
+ 259 018e 6A68     		ldr	r2, [r5, #4]
+ 260 0190 1343     		orrs	r3, r2
+ 261 0192 F365     		str	r3, [r6, #92]
+ 262 0194 7268     		ldr	r2, [r6, #4]
+ 263 0196 8023     		movs	r3, #128
+ 264 0198 DB04     		lsls	r3, r3, #19
+ 265 019a 1343     		orrs	r3, r2
+ 266 019c 7360     		str	r3, [r6, #4]
+ 267 019e F268     		ldr	r2, [r6, #12]
+ 268 01a0 FC23     		movs	r3, #252
+ 269 01a2 9B01     		lsls	r3, r3, #6
+ 270 01a4 1343     		orrs	r3, r2
+ 271 01a6 F360     		str	r3, [r6, #12]
+ 272              		@ sp needed
+ 273 01a8 F0BC     		pop	{r4, r5, r6, r7}
+ 274 01aa BB46     		mov	fp, r7
+ 275 01ac B246     		mov	r10, r6
+ 276 01ae A946     		mov	r9, r5
+ 277 01b0 A046     		mov	r8, r4
+ 278 01b2 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 279              	.L17:
+ 280 01b4 2000     		movs	r0, r4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 6
+
+
+ 281 01b6 FFF7FEFF 		bl	btaon_fast_read_safe
+ 282 01ba 1E49     		ldr	r1, .L20+20
+ 283 01bc 0840     		ands	r0, r1
+ 284 01be 8021     		movs	r1, #128
+ 285 01c0 4901     		lsls	r1, r1, #5
+ 286 01c2 0143     		orrs	r1, r0
+ 287 01c4 2000     		movs	r0, r4
+ 288 01c6 FFF7FEFF 		bl	btaon_fast_write
+ 289 01ca 063C     		subs	r4, r4, #6
+ 290 01cc 2000     		movs	r0, r4
+ 291 01ce FFF7FEFF 		bl	btaon_fast_read_safe
+ 292 01d2 1949     		ldr	r1, .L20+24
+ 293 01d4 0140     		ands	r1, r0
+ 294 01d6 B020     		movs	r0, #176
+ 295 01d8 0002     		lsls	r0, r0, #8
+ 296 01da 0143     		orrs	r1, r0
+ 297 01dc 2000     		movs	r0, r4
+ 298 01de FFF7FEFF 		bl	btaon_fast_write
+ 299 01e2 69E7     		b	.L8
+ 300              	.L18:
+ 301 01e4 8023     		movs	r3, #128
+ 302 01e6 1B02     		lsls	r3, r3, #8
+ 303 01e8 EA6D     		ldr	r2, [r5, #92]
+ 304 01ea 9A42     		cmp	r2, r3
+ 305 01ec 00D0     		beq	.LCB320
+ 306 01ee 87E7     		b	.L10	@long jump
+ 307              	.LCB320:
+ 308 01f0 0B4B     		ldr	r3, .L20
+ 309 01f2 1B68     		ldr	r3, [r3]
+ 310 01f4 0820     		movs	r0, #8
+ 311 01f6 9847     		blx	r3
+ 312 01f8 82E7     		b	.L10
+ 313              	.L19:
+ 314 01fa 326D     		ldr	r2, [r6, #80]
+ 315 01fc 2B6D     		ldr	r3, [r5, #80]
+ 316 01fe 1A43     		orrs	r2, r3
+ 317 0200 8023     		movs	r3, #128
+ 318 0202 5B04     		lsls	r3, r3, #17
+ 319 0204 1343     		orrs	r3, r2
+ 320 0206 3365     		str	r3, [r6, #80]
+ 321 0208 B368     		ldr	r3, [r6, #8]
+ 322 020a 1B0C     		lsrs	r3, r3, #16
+ 323 020c 1B04     		lsls	r3, r3, #16
+ 324 020e B360     		str	r3, [r6, #8]
+ 325 0210 AB8B     		ldrh	r3, [r5, #28]
+ 326 0212 3361     		str	r3, [r6, #16]
+ 327 0214 B368     		ldr	r3, [r6, #8]
+ 328 0216 0122     		movs	r2, #1
+ 329 0218 1343     		orrs	r3, r2
+ 330 021a B360     		str	r3, [r6, #8]
+ 331 021c 92E7     		b	.L12
+ 332              	.L21:
+ 333 021e C046     		.align	2
+ 334              	.L20:
+ 335 0220 00000000 		.word	platform_delay_ms
+ 336 0224 00000000 		.word	.LANCHOR0
+ 337 0228 00000000 		.word	.LC2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 7
+
+
+ 338 022c 49112000 		.word	2101577
+ 339 0230 0000FF0F 		.word	268369920
+ 340 0234 FFDF0000 		.word	57343
+ 341 0238 FFBF0000 		.word	49151
+ 343              		.section	.text.ADC_StructInit,"ax",%progbits
+ 344              		.align	1
+ 345              		.global	ADC_StructInit
+ 346              		.syntax unified
+ 347              		.code	16
+ 348              		.thumb_func
+ 350              	ADC_StructInit:
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353              		@ link register save eliminated.
+ 354 0000 FF23     		movs	r3, #255
+ 355 0002 0360     		str	r3, [r0]
+ 356 0004 0023     		movs	r3, #0
+ 357 0006 4360     		str	r3, [r0, #4]
+ 358 0008 8360     		str	r3, [r0, #8]
+ 359 000a 0A22     		movs	r2, #10
+ 360 000c C260     		str	r2, [r0, #12]
+ 361 000e 093A     		subs	r2, r2, #9
+ 362 0010 0261     		str	r2, [r0, #16]
+ 363 0012 8021     		movs	r1, #128
+ 364 0014 8901     		lsls	r1, r1, #6
+ 365 0016 4161     		str	r1, [r0, #20]
+ 366 0018 8361     		str	r3, [r0, #24]
+ 367 001a 8383     		strh	r3, [r0, #28]
+ 368 001c C383     		strh	r3, [r0, #30]
+ 369 001e 0384     		strh	r3, [r0, #32]
+ 370 0020 4384     		strh	r3, [r0, #34]
+ 371 0022 8384     		strh	r3, [r0, #36]
+ 372 0024 C384     		strh	r3, [r0, #38]
+ 373 0026 0385     		strh	r3, [r0, #40]
+ 374 0028 4385     		strh	r3, [r0, #42]
+ 375 002a 8385     		strh	r3, [r0, #44]
+ 376 002c C385     		strh	r3, [r0, #46]
+ 377 002e 0386     		strh	r3, [r0, #48]
+ 378 0030 4386     		strh	r3, [r0, #50]
+ 379 0032 8386     		strh	r3, [r0, #52]
+ 380 0034 C386     		strh	r3, [r0, #54]
+ 381 0036 0387     		strh	r3, [r0, #56]
+ 382 0038 4387     		strh	r3, [r0, #58]
+ 383 003a 8387     		strh	r3, [r0, #60]
+ 384 003c 0364     		str	r3, [r0, #64]
+ 385 003e 4364     		str	r3, [r0, #68]
+ 386 0040 8364     		str	r3, [r0, #72]
+ 387 0042 C364     		str	r3, [r0, #76]
+ 388 0044 4365     		str	r3, [r0, #84]
+ 389 0046 0365     		str	r3, [r0, #80]
+ 390 0048 8365     		str	r3, [r0, #88]
+ 391 004a C365     		str	r3, [r0, #92]
+ 392 004c 0266     		str	r2, [r0, #96]
+ 393 004e 1F32     		adds	r2, r2, #31
+ 394 0050 4266     		str	r2, [r0, #100]
+ 395 0052 1C3A     		subs	r2, r2, #28
+ 396 0054 8266     		str	r2, [r0, #104]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 8
+
+
+ 397 0056 C366     		str	r3, [r0, #108]
+ 398 0058 0367     		str	r3, [r0, #112]
+ 399              		@ sp needed
+ 400 005a 7047     		bx	lr
+ 402              		.section	.text.ADC_Cmd,"ax",%progbits
+ 403              		.align	1
+ 404              		.global	ADC_Cmd
+ 405              		.syntax unified
+ 406              		.code	16
+ 407              		.thumb_func
+ 409              	ADC_Cmd:
+ 410              		@ args = 0, pretend = 0, frame = 0
+ 411              		@ frame_needed = 0, uses_anonymous_args = 0
+ 412              		@ link register save eliminated.
+ 413 0000 012A     		cmp	r2, #1
+ 414 0002 04D0     		beq	.L26
+ 415 0004 4368     		ldr	r3, [r0, #4]
+ 416 0006 0322     		movs	r2, #3
+ 417 0008 9343     		bics	r3, r2
+ 418 000a 4360     		str	r3, [r0, #4]
+ 419              	.L23:
+ 420              		@ sp needed
+ 421 000c 7047     		bx	lr
+ 422              	.L26:
+ 423 000e 036D     		ldr	r3, [r0, #80]
+ 424 0010 4368     		ldr	r3, [r0, #4]
+ 425 0012 0232     		adds	r2, r2, #2
+ 426 0014 9343     		bics	r3, r2
+ 427 0016 4360     		str	r3, [r0, #4]
+ 428 0018 4368     		ldr	r3, [r0, #4]
+ 429 001a 1943     		orrs	r1, r3
+ 430 001c 4160     		str	r1, [r0, #4]
+ 431 001e F5E7     		b	.L23
+ 433              		.section	.text.ADC_INTConfig,"ax",%progbits
+ 434              		.align	1
+ 435              		.global	ADC_INTConfig
+ 436              		.syntax unified
+ 437              		.code	16
+ 438              		.thumb_func
+ 440              	ADC_INTConfig:
+ 441              		@ args = 0, pretend = 0, frame = 0
+ 442              		@ frame_needed = 0, uses_anonymous_args = 0
+ 443              		@ link register save eliminated.
+ 444 0000 002A     		cmp	r2, #0
+ 445 0002 03D0     		beq	.L28
+ 446 0004 C368     		ldr	r3, [r0, #12]
+ 447 0006 1943     		orrs	r1, r3
+ 448 0008 C160     		str	r1, [r0, #12]
+ 449              	.L27:
+ 450              		@ sp needed
+ 451 000a 7047     		bx	lr
+ 452              	.L28:
+ 453 000c C368     		ldr	r3, [r0, #12]
+ 454 000e 8B43     		bics	r3, r1
+ 455 0010 C360     		str	r3, [r0, #12]
+ 456 0012 FAE7     		b	.L27
+ 458              		.section	.text.ADC_ReadRawData,"ax",%progbits
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 9
+
+
+ 459              		.align	1
+ 460              		.global	ADC_ReadRawData
+ 461              		.syntax unified
+ 462              		.code	16
+ 463              		.thumb_func
+ 465              	ADC_ReadRawData:
+ 466              		@ args = 0, pretend = 0, frame = 0
+ 467              		@ frame_needed = 0, uses_anonymous_args = 0
+ 468              		@ link register save eliminated.
+ 469 0000 CB07     		lsls	r3, r1, #31
+ 470 0002 04D5     		bpl	.L31
+ 471 0004 4908     		lsrs	r1, r1, #1
+ 472 0006 8900     		lsls	r1, r1, #2
+ 473 0008 4118     		adds	r1, r0, r1
+ 474 000a 488E     		ldrh	r0, [r1, #50]
+ 475              	.L32:
+ 476              		@ sp needed
+ 477 000c 7047     		bx	lr
+ 478              	.L31:
+ 479 000e 4908     		lsrs	r1, r1, #1
+ 480 0010 8900     		lsls	r1, r1, #2
+ 481 0012 4118     		adds	r1, r0, r1
+ 482 0014 088E     		ldrh	r0, [r1, #48]
+ 483 0016 F9E7     		b	.L32
+ 485              		.section	.text.ADC_ReadAvgRawData,"ax",%progbits
+ 486              		.align	1
+ 487              		.global	ADC_ReadAvgRawData
+ 488              		.syntax unified
+ 489              		.code	16
+ 490              		.thumb_func
+ 492              	ADC_ReadAvgRawData:
+ 493              		@ args = 0, pretend = 0, frame = 0
+ 494              		@ frame_needed = 0, uses_anonymous_args = 0
+ 495              		@ link register save eliminated.
+ 496 0000 006B     		ldr	r0, [r0, #48]
+ 497 0002 80B2     		uxth	r0, r0
+ 498              		@ sp needed
+ 499 0004 7047     		bx	lr
+ 501              		.section	.text.ADC_ReadFIFO,"ax",%progbits
+ 502              		.align	1
+ 503              		.global	ADC_ReadFIFO
+ 504              		.syntax unified
+ 505              		.code	16
+ 506              		.thumb_func
+ 508              	ADC_ReadFIFO:
+ 509              		@ args = 0, pretend = 0, frame = 0
+ 510              		@ frame_needed = 0, uses_anonymous_args = 0
+ 511              		@ link register save eliminated.
+ 512 0000 0068     		ldr	r0, [r0]
+ 513 0002 0005     		lsls	r0, r0, #20
+ 514 0004 000D     		lsrs	r0, r0, #20
+ 515              		@ sp needed
+ 516 0006 7047     		bx	lr
+ 518              		.section	.text.ADC_ReadFIFOData,"ax",%progbits
+ 519              		.align	1
+ 520              		.global	ADC_ReadFIFOData
+ 521              		.syntax unified
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 10
+
+
+ 522              		.code	16
+ 523              		.thumb_func
+ 525              	ADC_ReadFIFOData:
+ 526              		@ args = 0, pretend = 0, frame = 0
+ 527              		@ frame_needed = 0, uses_anonymous_args = 0
+ 528 0000 10B5     		push	{r4, lr}
+ 529 0002 531E     		subs	r3, r2, #1
+ 530 0004 9BB2     		uxth	r3, r3
+ 531 0006 002A     		cmp	r2, #0
+ 532 0008 07D0     		beq	.L35
+ 533 000a 044C     		ldr	r4, .L39
+ 534              	.L37:
+ 535 000c 0268     		ldr	r2, [r0]
+ 536 000e 0A80     		strh	r2, [r1]
+ 537 0010 013B     		subs	r3, r3, #1
+ 538 0012 9BB2     		uxth	r3, r3
+ 539 0014 0231     		adds	r1, r1, #2
+ 540 0016 A342     		cmp	r3, r4
+ 541 0018 F8D1     		bne	.L37
+ 542              	.L35:
+ 543              		@ sp needed
+ 544 001a 10BD     		pop	{r4, pc}
+ 545              	.L40:
+ 546              		.align	2
+ 547              	.L39:
+ 548 001c FFFF0000 		.word	65535
+ 550              		.section	.text.ADC_GetFIFODataLen,"ax",%progbits
+ 551              		.align	1
+ 552              		.global	ADC_GetFIFODataLen
+ 553              		.syntax unified
+ 554              		.code	16
+ 555              		.thumb_func
+ 557              	ADC_GetFIFODataLen:
+ 558              		@ args = 0, pretend = 0, frame = 0
+ 559              		@ frame_needed = 0, uses_anonymous_args = 0
+ 560              		@ link register save eliminated.
+ 561 0000 8068     		ldr	r0, [r0, #8]
+ 562 0002 8002     		lsls	r0, r0, #10
+ 563 0004 800E     		lsrs	r0, r0, #26
+ 564              		@ sp needed
+ 565 0006 7047     		bx	lr
+ 567              		.section	.text.ADC_SchIndexConfig,"ax",%progbits
+ 568              		.align	1
+ 569              		.global	ADC_SchIndexConfig
+ 570              		.syntax unified
+ 571              		.code	16
+ 572              		.thumb_func
+ 574              	ADC_SchIndexConfig:
+ 575              		@ args = 0, pretend = 0, frame = 0
+ 576              		@ frame_needed = 0, uses_anonymous_args = 0
+ 577              		@ link register save eliminated.
+ 578 0000 D307     		lsls	r3, r2, #31
+ 579 0002 08D5     		bpl	.L43
+ 580 0004 1030     		adds	r0, r0, #16
+ 581 0006 5208     		lsrs	r2, r2, #1
+ 582 0008 9200     		lsls	r2, r2, #2
+ 583 000a 8018     		adds	r0, r0, r2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 11
+
+
+ 584 000c 0904     		lsls	r1, r1, #16
+ 585 000e 0368     		ldr	r3, [r0]
+ 586 0010 1943     		orrs	r1, r3
+ 587 0012 0160     		str	r1, [r0]
+ 588              	.L42:
+ 589              		@ sp needed
+ 590 0014 7047     		bx	lr
+ 591              	.L43:
+ 592 0016 1030     		adds	r0, r0, #16
+ 593 0018 5208     		lsrs	r2, r2, #1
+ 594 001a 9200     		lsls	r2, r2, #2
+ 595 001c 8018     		adds	r0, r0, r2
+ 596 001e 0368     		ldr	r3, [r0]
+ 597 0020 1943     		orrs	r1, r3
+ 598 0022 0160     		str	r1, [r0]
+ 599 0024 F6E7     		b	.L42
+ 601              		.section	.text.ADC_SchTableConfig,"ax",%progbits
+ 602              		.align	1
+ 603              		.global	ADC_SchTableConfig
+ 604              		.syntax unified
+ 605              		.code	16
+ 606              		.thumb_func
+ 608              	ADC_SchTableConfig:
+ 609              		@ args = 0, pretend = 0, frame = 0
+ 610              		@ frame_needed = 0, uses_anonymous_args = 0
+ 611              		@ link register save eliminated.
+ 612 0000 CB07     		lsls	r3, r1, #31
+ 613 0002 08D5     		bpl	.L46
+ 614 0004 1030     		adds	r0, r0, #16
+ 615 0006 4908     		lsrs	r1, r1, #1
+ 616 0008 8900     		lsls	r1, r1, #2
+ 617 000a 4018     		adds	r0, r0, r1
+ 618 000c 1204     		lsls	r2, r2, #16
+ 619 000e 0368     		ldr	r3, [r0]
+ 620 0010 1A43     		orrs	r2, r3
+ 621 0012 0260     		str	r2, [r0]
+ 622              	.L45:
+ 623              		@ sp needed
+ 624 0014 7047     		bx	lr
+ 625              	.L46:
+ 626 0016 1030     		adds	r0, r0, #16
+ 627 0018 4908     		lsrs	r1, r1, #1
+ 628 001a 8900     		lsls	r1, r1, #2
+ 629 001c 4018     		adds	r0, r0, r1
+ 630 001e 0368     		ldr	r3, [r0]
+ 631 0020 1A43     		orrs	r2, r3
+ 632 0022 0260     		str	r2, [r0]
+ 633 0024 F6E7     		b	.L45
+ 635              		.section	.text.ADC_BitMapConfig,"ax",%progbits
+ 636              		.align	1
+ 637              		.global	ADC_BitMapConfig
+ 638              		.syntax unified
+ 639              		.code	16
+ 640              		.thumb_func
+ 642              	ADC_BitMapConfig:
+ 643              		@ args = 0, pretend = 0, frame = 0
+ 644              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 12
+
+
+ 645              		@ link register save eliminated.
+ 646 0000 012A     		cmp	r2, #1
+ 647 0002 03D0     		beq	.L51
+ 648 0004 8368     		ldr	r3, [r0, #8]
+ 649 0006 8B43     		bics	r3, r1
+ 650 0008 8360     		str	r3, [r0, #8]
+ 651              	.L48:
+ 652              		@ sp needed
+ 653 000a 7047     		bx	lr
+ 654              	.L51:
+ 655 000c 8368     		ldr	r3, [r0, #8]
+ 656 000e 1943     		orrs	r1, r3
+ 657 0010 8160     		str	r1, [r0, #8]
+ 658 0012 FAE7     		b	.L48
+ 660              		.section	.text.ADC_ManualPowerOnCmd,"ax",%progbits
+ 661              		.align	1
+ 662              		.global	ADC_ManualPowerOnCmd
+ 663              		.syntax unified
+ 664              		.code	16
+ 665              		.thumb_func
+ 667              	ADC_ManualPowerOnCmd:
+ 668              		@ args = 0, pretend = 0, frame = 0
+ 669              		@ frame_needed = 0, uses_anonymous_args = 0
+ 670              		@ link register save eliminated.
+ 671 0000 0029     		cmp	r1, #0
+ 672 0002 05D0     		beq	.L53
+ 673 0004 026D     		ldr	r2, [r0, #80]
+ 674 0006 8023     		movs	r3, #128
+ 675 0008 1B03     		lsls	r3, r3, #12
+ 676 000a 1343     		orrs	r3, r2
+ 677 000c 0365     		str	r3, [r0, #80]
+ 678              	.L52:
+ 679              		@ sp needed
+ 680 000e 7047     		bx	lr
+ 681              	.L53:
+ 682 0010 036D     		ldr	r3, [r0, #80]
+ 683 0012 024A     		ldr	r2, .L55
+ 684 0014 1340     		ands	r3, r2
+ 685 0016 0365     		str	r3, [r0, #80]
+ 686 0018 F9E7     		b	.L52
+ 687              	.L56:
+ 688 001a C046     		.align	2
+ 689              	.L55:
+ 690 001c FFFFF7FF 		.word	-524289
+ 692              		.section	.text.ADC_WriteFIFOCmd,"ax",%progbits
+ 693              		.align	1
+ 694              		.global	ADC_WriteFIFOCmd
+ 695              		.syntax unified
+ 696              		.code	16
+ 697              		.thumb_func
+ 699              	ADC_WriteFIFOCmd:
+ 700              		@ args = 0, pretend = 0, frame = 0
+ 701              		@ frame_needed = 0, uses_anonymous_args = 0
+ 702              		@ link register save eliminated.
+ 703 0000 0029     		cmp	r1, #0
+ 704 0002 05D1     		bne	.L58
+ 705 0004 026D     		ldr	r2, [r0, #80]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 13
+
+
+ 706 0006 8023     		movs	r3, #128
+ 707 0008 9B03     		lsls	r3, r3, #14
+ 708 000a 1343     		orrs	r3, r2
+ 709 000c 0365     		str	r3, [r0, #80]
+ 710              	.L57:
+ 711              		@ sp needed
+ 712 000e 7047     		bx	lr
+ 713              	.L58:
+ 714 0010 036D     		ldr	r3, [r0, #80]
+ 715 0012 024A     		ldr	r2, .L60
+ 716 0014 1340     		ands	r3, r2
+ 717 0016 0365     		str	r3, [r0, #80]
+ 718 0018 F9E7     		b	.L57
+ 719              	.L61:
+ 720 001a C046     		.align	2
+ 721              	.L60:
+ 722 001c FFFFDFFF 		.word	-2097153
+ 724              		.section	.text.ADC_BypassCmd,"ax",%progbits
+ 725              		.align	1
+ 726              		.global	ADC_BypassCmd
+ 727              		.syntax unified
+ 728              		.code	16
+ 729              		.thumb_func
+ 731              	ADC_BypassCmd:
+ 732              		@ args = 0, pretend = 0, frame = 0
+ 733              		@ frame_needed = 0, uses_anonymous_args = 0
+ 734 0000 70B5     		push	{r4, r5, r6, lr}
+ 735 0002 0400     		movs	r4, r0
+ 736 0004 0029     		cmp	r1, #0
+ 737 0006 0CD0     		beq	.L63
+ 738 0008 8C25     		movs	r5, #140
+ 739 000a 6D00     		lsls	r5, r5, #1
+ 740 000c 2800     		movs	r0, r5
+ 741 000e FFF7FEFF 		bl	btaon_fast_read_safe
+ 742 0012 0121     		movs	r1, #1
+ 743 0014 A140     		lsls	r1, r1, r4
+ 744 0016 0143     		orrs	r1, r0
+ 745 0018 89B2     		uxth	r1, r1
+ 746 001a 2800     		movs	r0, r5
+ 747 001c FFF7FEFF 		bl	btaon_fast_write
+ 748              	.L62:
+ 749              		@ sp needed
+ 750 0020 70BD     		pop	{r4, r5, r6, pc}
+ 751              	.L63:
+ 752 0022 8C25     		movs	r5, #140
+ 753 0024 6D00     		lsls	r5, r5, #1
+ 754 0026 2800     		movs	r0, r5
+ 755 0028 FFF7FEFF 		bl	btaon_fast_read_safe
+ 756 002c 0123     		movs	r3, #1
+ 757 002e A340     		lsls	r3, r3, r4
+ 758 0030 9843     		bics	r0, r3
+ 759 0032 81B2     		uxth	r1, r0
+ 760 0034 2800     		movs	r0, r5
+ 761 0036 FFF7FEFF 		bl	btaon_fast_write
+ 762 003a F1E7     		b	.L62
+ 764              		.section	.text.ADC_GetINTStatus,"ax",%progbits
+ 765              		.align	1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 14
+
+
+ 766              		.global	ADC_GetINTStatus
+ 767              		.syntax unified
+ 768              		.code	16
+ 769              		.thumb_func
+ 771              	ADC_GetINTStatus:
+ 772              		@ args = 0, pretend = 0, frame = 0
+ 773              		@ frame_needed = 0, uses_anonymous_args = 0
+ 774              		@ link register save eliminated.
+ 775 0000 C068     		ldr	r0, [r0, #12]
+ 776 0002 0904     		lsls	r1, r1, #16
+ 777 0004 0840     		ands	r0, r1
+ 778 0006 431E     		subs	r3, r0, #1
+ 779 0008 9841     		sbcs	r0, r0, r3
+ 780 000a C0B2     		uxtb	r0, r0
+ 781              		@ sp needed
+ 782 000c 7047     		bx	lr
+ 784              		.section	.text.ADC_ClearINTPendingBit,"ax",%progbits
+ 785              		.align	1
+ 786              		.global	ADC_ClearINTPendingBit
+ 787              		.syntax unified
+ 788              		.code	16
+ 789              		.thumb_func
+ 791              	ADC_ClearINTPendingBit:
+ 792              		@ args = 0, pretend = 0, frame = 0
+ 793              		@ frame_needed = 0, uses_anonymous_args = 0
+ 794              		@ link register save eliminated.
+ 795 0000 C368     		ldr	r3, [r0, #12]
+ 796 0002 0902     		lsls	r1, r1, #8
+ 797 0004 1943     		orrs	r1, r3
+ 798 0006 C160     		str	r1, [r0, #12]
+ 799              		@ sp needed
+ 800 0008 7047     		bx	lr
+ 802              		.section	.rodata.__func__.0,"a"
+ 803              		.align	2
+ 804              		.set	.LANCHOR0,. + 0
+ 807              	__func__.0:
+ 808 0000 4144435F 		.ascii	"ADC_Init\000"
+ 808      496E6974 
+ 808      00
+ 809              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtl876x_adc.c
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:16     .text.ADC_DeInit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:22     .text.ADC_DeInit:00000000 ADC_DeInit
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:38     .text.ADC_DeInit:00000018 $d
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:41     .rodata.ADC_Init.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:46     .text.ADC_Init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:52     .text.ADC_Init:00000000 ADC_Init
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:335    .text.ADC_Init:00000220 $d
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:344    .text.ADC_StructInit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:350    .text.ADC_StructInit:00000000 ADC_StructInit
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:403    .text.ADC_Cmd:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:409    .text.ADC_Cmd:00000000 ADC_Cmd
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:434    .text.ADC_INTConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:440    .text.ADC_INTConfig:00000000 ADC_INTConfig
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:459    .text.ADC_ReadRawData:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:465    .text.ADC_ReadRawData:00000000 ADC_ReadRawData
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:486    .text.ADC_ReadAvgRawData:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:492    .text.ADC_ReadAvgRawData:00000000 ADC_ReadAvgRawData
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:502    .text.ADC_ReadFIFO:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:508    .text.ADC_ReadFIFO:00000000 ADC_ReadFIFO
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:519    .text.ADC_ReadFIFOData:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:525    .text.ADC_ReadFIFOData:00000000 ADC_ReadFIFOData
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:548    .text.ADC_ReadFIFOData:0000001c $d
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:551    .text.ADC_GetFIFODataLen:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:557    .text.ADC_GetFIFODataLen:00000000 ADC_GetFIFODataLen
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:568    .text.ADC_SchIndexConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:574    .text.ADC_SchIndexConfig:00000000 ADC_SchIndexConfig
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:602    .text.ADC_SchTableConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:608    .text.ADC_SchTableConfig:00000000 ADC_SchTableConfig
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:636    .text.ADC_BitMapConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:642    .text.ADC_BitMapConfig:00000000 ADC_BitMapConfig
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:661    .text.ADC_ManualPowerOnCmd:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:667    .text.ADC_ManualPowerOnCmd:00000000 ADC_ManualPowerOnCmd
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:690    .text.ADC_ManualPowerOnCmd:0000001c $d
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:693    .text.ADC_WriteFIFOCmd:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:699    .text.ADC_WriteFIFOCmd:00000000 ADC_WriteFIFOCmd
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:722    .text.ADC_WriteFIFOCmd:0000001c $d
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:725    .text.ADC_BypassCmd:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:731    .text.ADC_BypassCmd:00000000 ADC_BypassCmd
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:765    .text.ADC_GetINTStatus:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:771    .text.ADC_GetINTStatus:00000000 ADC_GetINTStatus
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:785    .text.ADC_ClearINTPendingBit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:791    .text.ADC_ClearINTPendingBit:00000000 ADC_ClearINTPendingBit
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:803    .rodata.__func__.0:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc3DYY7g.s:807    .rodata.__func__.0:00000000 __func__.0
+
+UNDEFINED SYMBOLS
+pmu_request_ldo_audio_ref_call
+RCC_PeriphClockCmd
+log_direct_app
+btaon_fast_read_safe
+btaon_fast_write
+platform_delay_ms

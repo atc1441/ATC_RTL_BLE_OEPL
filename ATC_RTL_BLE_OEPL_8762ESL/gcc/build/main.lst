@@ -1,0 +1,672 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              		.section	.text.io_dlps_enter_cb,"ax",%progbits
+  16              		.align	1
+  17              		.global	io_dlps_enter_cb
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	io_dlps_enter_cb:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0021     		movs	r1, #0
+  27 0004 1820     		movs	r0, #24
+  28 0006 FFF7FEFF 		bl	Pad_ControlSelectValue
+  29 000a 0021     		movs	r1, #0
+  30 000c 1920     		movs	r0, #25
+  31 000e FFF7FEFF 		bl	Pad_ControlSelectValue
+  32 0012 0021     		movs	r1, #0
+  33 0014 2320     		movs	r0, #35
+  34 0016 FFF7FEFF 		bl	Pad_ControlSelectValue
+  35 001a 0021     		movs	r1, #0
+  36 001c 2020     		movs	r0, #32
+  37 001e FFF7FEFF 		bl	Pad_ControlSelectValue
+  38 0022 0021     		movs	r1, #0
+  39 0024 2220     		movs	r0, #34
+  40 0026 FFF7FEFF 		bl	Pad_ControlSelectValue
+  41 002a 0021     		movs	r1, #0
+  42 002c 2120     		movs	r0, #33
+  43 002e FFF7FEFF 		bl	Pad_ControlSelectValue
+  44 0032 114B     		ldr	r3, .L4
+  45 0034 1B78     		ldrb	r3, [r3]
+  46 0036 002B     		cmp	r3, #0
+  47 0038 00D1     		bne	.L3
+  48              	.L1:
+  49              		@ sp needed
+  50 003a 10BD     		pop	{r4, pc}
+  51              	.L3:
+  52 003c 0021     		movs	r1, #0
+  53 003e 0220     		movs	r0, #2
+  54 0040 FFF7FEFF 		bl	Pad_ControlSelectValue
+  55 0044 0021     		movs	r1, #0
+  56 0046 0520     		movs	r0, #5
+  57 0048 FFF7FEFF 		bl	Pad_ControlSelectValue
+  58 004c 0021     		movs	r1, #0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 2
+
+
+  59 004e 0020     		movs	r0, #0
+  60 0050 FFF7FEFF 		bl	Pad_ControlSelectValue
+  61 0054 0021     		movs	r1, #0
+  62 0056 0420     		movs	r0, #4
+  63 0058 FFF7FEFF 		bl	Pad_ControlSelectValue
+  64 005c 0021     		movs	r1, #0
+  65 005e 0620     		movs	r0, #6
+  66 0060 FFF7FEFF 		bl	Pad_ControlSelectValue
+  67 0064 0021     		movs	r1, #0
+  68 0066 0120     		movs	r0, #1
+  69 0068 FFF7FEFF 		bl	Pad_ControlSelectValue
+  70 006c 0021     		movs	r1, #0
+  71 006e 1A20     		movs	r0, #26
+  72 0070 FFF7FEFF 		bl	Pad_ControlSelectValue
+  73 0074 E1E7     		b	.L1
+  74              	.L5:
+  75 0076 C046     		.align	2
+  76              	.L4:
+  77 0078 00000000 		.word	g_epd_refreshing
+  79              		.section	.text.io_dlps_exit_cb,"ax",%progbits
+  80              		.align	1
+  81              		.global	io_dlps_exit_cb
+  82              		.syntax unified
+  83              		.code	16
+  84              		.thumb_func
+  86              	io_dlps_exit_cb:
+  87              		@ args = 0, pretend = 0, frame = 0
+  88              		@ frame_needed = 0, uses_anonymous_args = 0
+  89 0000 10B5     		push	{r4, lr}
+  90 0002 FFF7FEFF 		bl	AON_WDG_Restart
+  91 0006 0121     		movs	r1, #1
+  92 0008 1820     		movs	r0, #24
+  93 000a FFF7FEFF 		bl	Pad_ControlSelectValue
+  94 000e 0121     		movs	r1, #1
+  95 0010 1920     		movs	r0, #25
+  96 0012 FFF7FEFF 		bl	Pad_ControlSelectValue
+  97 0016 0122     		movs	r2, #1
+  98 0018 1349     		ldr	r1, .L9
+  99 001a 1448     		ldr	r0, .L9+4
+ 100 001c FFF7FEFF 		bl	RCC_PeriphClockCmd
+ 101 0020 FFF7FEFF 		bl	SPI_Flash_enable_GPIO
+ 102 0024 124B     		ldr	r3, .L9+8
+ 103 0026 1B78     		ldrb	r3, [r3]
+ 104 0028 002B     		cmp	r3, #0
+ 105 002a 00D1     		bne	.L8
+ 106              	.L6:
+ 107              		@ sp needed
+ 108 002c 10BD     		pop	{r4, pc}
+ 109              	.L8:
+ 110 002e 0121     		movs	r1, #1
+ 111 0030 0220     		movs	r0, #2
+ 112 0032 FFF7FEFF 		bl	Pad_ControlSelectValue
+ 113 0036 0121     		movs	r1, #1
+ 114 0038 0520     		movs	r0, #5
+ 115 003a FFF7FEFF 		bl	Pad_ControlSelectValue
+ 116 003e 0121     		movs	r1, #1
+ 117 0040 0020     		movs	r0, #0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 3
+
+
+ 118 0042 FFF7FEFF 		bl	Pad_ControlSelectValue
+ 119 0046 0121     		movs	r1, #1
+ 120 0048 0420     		movs	r0, #4
+ 121 004a FFF7FEFF 		bl	Pad_ControlSelectValue
+ 122 004e 0121     		movs	r1, #1
+ 123 0050 0620     		movs	r0, #6
+ 124 0052 FFF7FEFF 		bl	Pad_ControlSelectValue
+ 125 0056 0121     		movs	r1, #1
+ 126 0058 0120     		movs	r0, #1
+ 127 005a FFF7FEFF 		bl	Pad_ControlSelectValue
+ 128 005e 0121     		movs	r1, #1
+ 129 0060 1A20     		movs	r0, #26
+ 130 0062 FFF7FEFF 		bl	Pad_ControlSelectValue
+ 131 0066 E1E7     		b	.L6
+ 132              	.L10:
+ 133              		.align	2
+ 134              	.L9:
+ 135 0068 01000040 		.word	1073741825
+ 136 006c 01000008 		.word	134217729
+ 137 0070 00000000 		.word	g_epd_refreshing
+ 139              		.section	.text.app_le_gap_init,"ax",%progbits
+ 140              		.align	1
+ 141              		.global	app_le_gap_init
+ 142              		.syntax unified
+ 143              		.code	16
+ 144              		.thumb_func
+ 146              	app_le_gap_init:
+ 147              		@ args = 0, pretend = 0, frame = 40
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 150 0002 DE46     		mov	lr, fp
+ 151 0004 5746     		mov	r7, r10
+ 152 0006 4E46     		mov	r6, r9
+ 153 0008 4546     		mov	r5, r8
+ 154 000a E0B5     		push	{r5, r6, r7, lr}
+ 155 000c 8BB0     		sub	sp, sp, #44
+ 156 000e FFF7FEFF 		bl	ble_addr_early_init
+ 157 0012 2623     		movs	r3, #38
+ 158 0014 6B44     		add	r3, r3, sp
+ 159 0016 9B46     		mov	fp, r3
+ 160 0018 0023     		movs	r3, #0
+ 161 001a 0022     		movs	r2, #0
+ 162 001c 5946     		mov	r1, fp
+ 163 001e 0B80     		strh	r3, [r1]
+ 164 0020 2521     		movs	r1, #37
+ 165 0022 6944     		add	r1, r1, sp
+ 166 0024 8A46     		mov	r10, r1
+ 167 0026 0021     		movs	r1, #0
+ 168 0028 5046     		mov	r0, r10
+ 169 002a 0270     		strb	r2, [r0]
+ 170 002c 09A8     		add	r0, sp, #36
+ 171 002e 8146     		mov	r9, r0
+ 172 0030 0170     		strb	r1, [r0]
+ 173 0032 2320     		movs	r0, #35
+ 174 0034 6844     		add	r0, r0, sp
+ 175 0036 8046     		mov	r8, r0
+ 176 0038 0170     		strb	r1, [r0]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 4
+
+
+ 177 003a 07AF     		add	r7, sp, #28
+ 178 003c 0793     		str	r3, [sp, #28]
+ 179 003e BB80     		strh	r3, [r7, #4]
+ 180 0040 0721     		movs	r1, #7
+ 181 0042 6846     		mov	r0, sp
+ 182 0044 C176     		strb	r1, [r0, #27]
+ 183 0046 8276     		strb	r2, [r0, #26]
+ 184 0048 C821     		movs	r1, #200
+ 185 004a 0901     		lsls	r1, r1, #4
+ 186 004c 0183     		strh	r1, [r0, #24]
+ 187 004e C182     		strh	r1, [r0, #22]
+ 188 0050 4275     		strb	r2, [r0, #21]
+ 189 0052 4382     		strh	r3, [r0, #18]
+ 190 0054 0321     		movs	r1, #3
+ 191 0056 4174     		strb	r1, [r0, #17]
+ 192 0058 04AE     		add	r6, sp, #16
+ 193 005a 3270     		strb	r2, [r6]
+ 194 005c 0F25     		movs	r5, #15
+ 195 005e 6D44     		add	r5, r5, sp
+ 196 0060 2A70     		strb	r2, [r5]
+ 197 0062 0293     		str	r3, [sp, #8]
+ 198 0064 841D     		adds	r4, r0, #6
+ 199 0066 C380     		strh	r3, [r0, #6]
+ 200 0068 384A     		ldr	r2, .L12
+ 201 006a 0831     		adds	r1, r1, #8
+ 202 006c 3848     		ldr	r0, .L12+4
+ 203 006e FFF7FEFF 		bl	le_set_gap_param
+ 204 0072 5A46     		mov	r2, fp
+ 205 0074 0221     		movs	r1, #2
+ 206 0076 3748     		ldr	r0, .L12+8
+ 207 0078 FFF7FEFF 		bl	le_set_gap_param
+ 208 007c 5246     		mov	r2, r10
+ 209 007e 0121     		movs	r1, #1
+ 210 0080 3548     		ldr	r0, .L12+12
+ 211 0082 FFF7FEFF 		bl	le_set_gap_param
+ 212 0086 4A46     		mov	r2, r9
+ 213 0088 0121     		movs	r1, #1
+ 214 008a 3448     		ldr	r0, .L12+16
+ 215 008c FFF7FEFF 		bl	le_adv_set_param
+ 216 0090 9920     		movs	r0, #153
+ 217 0092 4246     		mov	r2, r8
+ 218 0094 0121     		movs	r1, #1
+ 219 0096 8000     		lsls	r0, r0, #2
+ 220 0098 FFF7FEFF 		bl	le_adv_set_param
+ 221 009c 3A00     		movs	r2, r7
+ 222 009e 0621     		movs	r1, #6
+ 223 00a0 2F48     		ldr	r0, .L12+20
+ 224 00a2 FFF7FEFF 		bl	le_adv_set_param
+ 225 00a6 1B23     		movs	r3, #27
+ 226 00a8 6B44     		add	r3, r3, sp
+ 227 00aa 1A00     		movs	r2, r3
+ 228 00ac 0121     		movs	r1, #1
+ 229 00ae 2D48     		ldr	r0, .L12+24
+ 230 00b0 FFF7FEFF 		bl	le_adv_set_param
+ 231 00b4 1A23     		movs	r3, #26
+ 232 00b6 6B44     		add	r3, r3, sp
+ 233 00b8 1A00     		movs	r2, r3
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 5
+
+
+ 234 00ba 0121     		movs	r1, #1
+ 235 00bc 2A48     		ldr	r0, .L12+28
+ 236 00be FFF7FEFF 		bl	le_adv_set_param
+ 237 00c2 9A20     		movs	r0, #154
+ 238 00c4 06AA     		add	r2, sp, #24
+ 239 00c6 0221     		movs	r1, #2
+ 240 00c8 8000     		lsls	r0, r0, #2
+ 241 00ca FFF7FEFF 		bl	le_adv_set_param
+ 242 00ce 1623     		movs	r3, #22
+ 243 00d0 6B44     		add	r3, r3, sp
+ 244 00d2 1A00     		movs	r2, r3
+ 245 00d4 0221     		movs	r1, #2
+ 246 00d6 2548     		ldr	r0, .L12+32
+ 247 00d8 FFF7FEFF 		bl	le_adv_set_param
+ 248 00dc 0020     		movs	r0, #0
+ 249 00de FFF7FEFF 		bl	set_adv_data
+ 250 00e2 1523     		movs	r3, #21
+ 251 00e4 6B44     		add	r3, r3, sp
+ 252 00e6 1A00     		movs	r2, r3
+ 253 00e8 0121     		movs	r1, #1
+ 254 00ea 2148     		ldr	r0, .L12+36
+ 255 00ec FFF7FEFF 		bl	gap_set_param
+ 256 00f0 1223     		movs	r3, #18
+ 257 00f2 6B44     		add	r3, r3, sp
+ 258 00f4 1A00     		movs	r2, r3
+ 259 00f6 0221     		movs	r1, #2
+ 260 00f8 1E48     		ldr	r0, .L12+40
+ 261 00fa FFF7FEFF 		bl	gap_set_param
+ 262 00fe 8120     		movs	r0, #129
+ 263 0100 1123     		movs	r3, #17
+ 264 0102 6B44     		add	r3, r3, sp
+ 265 0104 1A00     		movs	r2, r3
+ 266 0106 0121     		movs	r1, #1
+ 267 0108 8000     		lsls	r0, r0, #2
+ 268 010a FFF7FEFF 		bl	gap_set_param
+ 269 010e 3200     		movs	r2, r6
+ 270 0110 0121     		movs	r1, #1
+ 271 0112 1948     		ldr	r0, .L12+44
+ 272 0114 FFF7FEFF 		bl	gap_set_param
+ 273 0118 02AA     		add	r2, sp, #8
+ 274 011a 0421     		movs	r1, #4
+ 275 011c 1748     		ldr	r0, .L12+48
+ 276 011e FFF7FEFF 		bl	le_bond_set_param
+ 277 0122 2A00     		movs	r2, r5
+ 278 0124 0121     		movs	r1, #1
+ 279 0126 1648     		ldr	r0, .L12+52
+ 280 0128 FFF7FEFF 		bl	le_bond_set_param
+ 281 012c 8520     		movs	r0, #133
+ 282 012e 2200     		movs	r2, r4
+ 283 0130 0221     		movs	r1, #2
+ 284 0132 8000     		lsls	r0, r0, #2
+ 285 0134 FFF7FEFF 		bl	le_bond_set_param
+ 286 0138 1248     		ldr	r0, .L12+56
+ 287 013a FFF7FEFF 		bl	le_register_app_cb
+ 288 013e 0BB0     		add	sp, sp, #44
+ 289              		@ sp needed
+ 290 0140 F0BC     		pop	{r4, r5, r6, r7}
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 6
+
+
+ 291 0142 BB46     		mov	fp, r7
+ 292 0144 B246     		mov	r10, r6
+ 293 0146 A946     		mov	r9, r5
+ 294 0148 A046     		mov	r8, r4
+ 295 014a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 296              	.L13:
+ 297              		.align	2
+ 298              	.L12:
+ 299 014c 00000000 		.word	device_name
+ 300 0150 22020000 		.word	546
+ 301 0154 21020000 		.word	545
+ 302 0158 23020000 		.word	547
+ 303 015c 63020000 		.word	611
+ 304 0160 65020000 		.word	613
+ 305 0164 66020000 		.word	614
+ 306 0168 67020000 		.word	615
+ 307 016c 69020000 		.word	617
+ 308 0170 02020000 		.word	514
+ 309 0174 03020000 		.word	515
+ 310 0178 05020000 		.word	517
+ 311 017c 11020000 		.word	529
+ 312 0180 12020000 		.word	530
+ 313 0184 00000000 		.word	app_gap_callback
+ 315              		.section	.text.app_le_profile_init,"ax",%progbits
+ 316              		.align	1
+ 317              		.global	app_le_profile_init
+ 318              		.syntax unified
+ 319              		.code	16
+ 320              		.thumb_func
+ 322              	app_le_profile_init:
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325 0000 10B5     		push	{r4, lr}
+ 326 0002 0120     		movs	r0, #1
+ 327 0004 FFF7FEFF 		bl	server_init
+ 328 0008 044C     		ldr	r4, .L15
+ 329 000a 2000     		movs	r0, r4
+ 330 000c FFF7FEFF 		bl	custom_service_add_service
+ 331 0010 034B     		ldr	r3, .L15+4
+ 332 0012 1870     		strb	r0, [r3]
+ 333 0014 2000     		movs	r0, r4
+ 334 0016 FFF7FEFF 		bl	server_register_app_cb
+ 335              		@ sp needed
+ 336 001a 10BD     		pop	{r4, pc}
+ 337              	.L16:
+ 338              		.align	2
+ 339              	.L15:
+ 340 001c 00000000 		.word	app_profile_callback
+ 341 0020 00000000 		.word	custom_srv_id
+ 343              		.section	.text.nfc_board_init,"ax",%progbits
+ 344              		.align	1
+ 345              		.global	nfc_board_init
+ 346              		.syntax unified
+ 347              		.code	16
+ 348              		.thumb_func
+ 350              	nfc_board_init:
+ 351              		@ args = 0, pretend = 0, frame = 16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 7
+
+
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353 0000 30B5     		push	{r4, r5, lr}
+ 354 0002 87B0     		sub	sp, sp, #28
+ 355 0004 0024     		movs	r4, #0
+ 356 0006 0194     		str	r4, [sp, #4]
+ 357 0008 0125     		movs	r5, #1
+ 358 000a 0095     		str	r5, [sp]
+ 359 000c 0223     		movs	r3, #2
+ 360 000e 0122     		movs	r2, #1
+ 361 0010 0121     		movs	r1, #1
+ 362 0012 1220     		movs	r0, #18
+ 363 0014 FFF7FEFF 		bl	Pad_Config
+ 364 0018 0194     		str	r4, [sp, #4]
+ 365 001a 0094     		str	r4, [sp]
+ 366 001c 0223     		movs	r3, #2
+ 367 001e 0122     		movs	r2, #1
+ 368 0020 0121     		movs	r1, #1
+ 369 0022 1420     		movs	r0, #20
+ 370 0024 FFF7FEFF 		bl	Pad_Config
+ 371 0028 0194     		str	r4, [sp, #4]
+ 372 002a 0094     		str	r4, [sp]
+ 373 002c 0223     		movs	r3, #2
+ 374 002e 0122     		movs	r2, #1
+ 375 0030 0121     		movs	r1, #1
+ 376 0032 1520     		movs	r0, #21
+ 377 0034 FFF7FEFF 		bl	Pad_Config
+ 378 0038 5A21     		movs	r1, #90
+ 379 003a 1220     		movs	r0, #18
+ 380 003c FFF7FEFF 		bl	Pinmux_Config
+ 381 0040 5A21     		movs	r1, #90
+ 382 0042 1420     		movs	r0, #20
+ 383 0044 FFF7FEFF 		bl	Pinmux_Config
+ 384 0048 5A21     		movs	r1, #90
+ 385 004a 1520     		movs	r0, #21
+ 386 004c FFF7FEFF 		bl	Pinmux_Config
+ 387 0050 02A8     		add	r0, sp, #8
+ 388 0052 FFF7FEFF 		bl	GPIO_StructInit
+ 389 0056 1220     		movs	r0, #18
+ 390 0058 FFF7FEFF 		bl	GPIO_GetPin
+ 391 005c 0290     		str	r0, [sp, #8]
+ 392 005e 6B46     		mov	r3, sp
+ 393 0060 1D73     		strb	r5, [r3, #12]
+ 394 0062 02A8     		add	r0, sp, #8
+ 395 0064 FFF7FEFF 		bl	GPIO_Init
+ 396 0068 1220     		movs	r0, #18
+ 397 006a FFF7FEFF 		bl	GPIO_GetPin
+ 398 006e 144A     		ldr	r2, .L18
+ 399 0070 1368     		ldr	r3, [r2]
+ 400 0072 8343     		bics	r3, r0
+ 401 0074 1360     		str	r3, [r2]
+ 402 0076 1420     		movs	r0, #20
+ 403 0078 FFF7FEFF 		bl	GPIO_GetPin
+ 404 007c 0500     		movs	r5, r0
+ 405 007e 1520     		movs	r0, #21
+ 406 0080 FFF7FEFF 		bl	GPIO_GetPin
+ 407 0084 0543     		orrs	r5, r0
+ 408 0086 0295     		str	r5, [sp, #8]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 8
+
+
+ 409 0088 6B46     		mov	r3, sp
+ 410 008a 1C73     		strb	r4, [r3, #12]
+ 411 008c 02A8     		add	r0, sp, #8
+ 412 008e FFF7FEFF 		bl	GPIO_Init
+ 413 0092 0021     		movs	r1, #0
+ 414 0094 1220     		movs	r0, #18
+ 415 0096 FFF7FEFF 		bl	Pinmux_Config
+ 416 009a 0021     		movs	r1, #0
+ 417 009c 1420     		movs	r0, #20
+ 418 009e FFF7FEFF 		bl	Pinmux_Config
+ 419 00a2 0021     		movs	r1, #0
+ 420 00a4 1520     		movs	r0, #21
+ 421 00a6 FFF7FEFF 		bl	Pinmux_Config
+ 422 00aa 1220     		movs	r0, #18
+ 423 00ac FFF7FEFF 		bl	Pinmux_Deinit
+ 424 00b0 1420     		movs	r0, #20
+ 425 00b2 FFF7FEFF 		bl	Pinmux_Deinit
+ 426 00b6 1520     		movs	r0, #21
+ 427 00b8 FFF7FEFF 		bl	Pinmux_Deinit
+ 428 00bc 07B0     		add	sp, sp, #28
+ 429              		@ sp needed
+ 430 00be 30BD     		pop	{r4, r5, pc}
+ 431              	.L19:
+ 432              		.align	2
+ 433              	.L18:
+ 434 00c0 00100040 		.word	1073745920
+ 436              		.section	.text.board_init,"ax",%progbits
+ 437              		.align	1
+ 438              		.global	board_init
+ 439              		.syntax unified
+ 440              		.code	16
+ 441              		.thumb_func
+ 443              	board_init:
+ 444              		@ args = 0, pretend = 0, frame = 0
+ 445              		@ frame_needed = 0, uses_anonymous_args = 0
+ 446 0000 10B5     		push	{r4, lr}
+ 447 0002 FFF7FEFF 		bl	uart_print_init
+ 448              		@ sp needed
+ 449 0006 10BD     		pop	{r4, pc}
+ 451              		.section	.rodata.driver_init.str1.4,"aMS",%progbits,1
+ 452              		.align	2
+ 453              	.LC6:
+ 454 0000 64726976 		.ascii	"driver_init: start\012\000"
+ 454      65725F69 
+ 454      6E69743A 
+ 454      20737461 
+ 454      72740A00 
+ 455              		.align	2
+ 456              	.LC8:
+ 457 0014 64726976 		.ascii	"driver_init: flash ready\012\000"
+ 457      65725F69 
+ 457      6E69743A 
+ 457      20666C61 
+ 457      73682072 
+ 458 002e 0000     		.align	2
+ 459              	.LC10:
+ 460 0030 64726976 		.ascii	"driver_init: ADC ready\012\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 9
+
+
+ 460      65725F69 
+ 460      6E69743A 
+ 460      20414443 
+ 460      20726561 
+ 461              		.section	.text.driver_init,"ax",%progbits
+ 462              		.align	1
+ 463              		.global	driver_init
+ 464              		.syntax unified
+ 465              		.code	16
+ 466              		.thumb_func
+ 468              	driver_init:
+ 469              		@ args = 0, pretend = 0, frame = 0
+ 470              		@ frame_needed = 0, uses_anonymous_args = 0
+ 471 0000 10B5     		push	{r4, lr}
+ 472 0002 0648     		ldr	r0, .L22
+ 473 0004 FFF7FEFF 		bl	uart_printf
+ 474 0008 FFF7FEFF 		bl	FLASH_Init
+ 475 000c 0448     		ldr	r0, .L22+4
+ 476 000e FFF7FEFF 		bl	uart_printf
+ 477 0012 0448     		ldr	r0, .L22+8
+ 478 0014 FFF7FEFF 		bl	uart_printf
+ 479              		@ sp needed
+ 480 0018 10BD     		pop	{r4, pc}
+ 481              	.L23:
+ 482 001a C046     		.align	2
+ 483              	.L22:
+ 484 001c 00000000 		.word	.LC6
+ 485 0020 14000000 		.word	.LC8
+ 486 0024 30000000 		.word	.LC10
+ 488              		.section	.text.pwr_mgr_init,"ax",%progbits
+ 489              		.align	1
+ 490              		.global	pwr_mgr_init
+ 491              		.syntax unified
+ 492              		.code	16
+ 493              		.thumb_func
+ 495              	pwr_mgr_init:
+ 496              		@ args = 0, pretend = 0, frame = 0
+ 497              		@ frame_needed = 0, uses_anonymous_args = 0
+ 498 0000 10B5     		push	{r4, lr}
+ 499 0002 074B     		ldr	r3, .L25
+ 500 0004 074A     		ldr	r2, .L25+4
+ 501 0006 1A60     		str	r2, [r3]
+ 502 0008 074B     		ldr	r3, .L25+8
+ 503 000a 084A     		ldr	r2, .L25+12
+ 504 000c 1A60     		str	r2, [r3]
+ 505 000e FFF7FEFF 		bl	DLPS_IORegister
+ 506 0012 0020     		movs	r0, #0
+ 507 0014 FFF7FEFF 		bl	btmac_pm_set_power_mode
+ 508 0018 0220     		movs	r0, #2
+ 509 001a FFF7FEFF 		bl	platform_pm_set_power_mode
+ 510              		@ sp needed
+ 511 001e 10BD     		pop	{r4, pc}
+ 512              	.L26:
+ 513              		.align	2
+ 514              	.L25:
+ 515 0020 00000000 		.word	User_IO_EnterDlpsCB
+ 516 0024 00000000 		.word	io_dlps_enter_cb
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 10
+
+
+ 517 0028 00000000 		.word	User_IO_ExitDlpsCB
+ 518 002c 00000000 		.word	io_dlps_exit_cb
+ 520              		.section	.text.task_init,"ax",%progbits
+ 521              		.align	1
+ 522              		.global	task_init
+ 523              		.syntax unified
+ 524              		.code	16
+ 525              		.thumb_func
+ 527              	task_init:
+ 528              		@ args = 0, pretend = 0, frame = 0
+ 529              		@ frame_needed = 0, uses_anonymous_args = 0
+ 530 0000 10B5     		push	{r4, lr}
+ 531 0002 FFF7FEFF 		bl	app_task_init
+ 532              		@ sp needed
+ 533 0006 10BD     		pop	{r4, pc}
+ 535              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 536              		.align	2
+ 537              	.LC16:
+ 538 0000 424C4520 		.ascii	"BLE Peripheral booting...\012\000"
+ 538      50657269 
+ 538      70686572 
+ 538      616C2062 
+ 538      6F6F7469 
+ 539              		.section	.text.main,"ax",%progbits
+ 540              		.align	1
+ 541              		.global	main
+ 542              		.syntax unified
+ 543              		.code	16
+ 544              		.thumb_func
+ 546              	main:
+ 547              		@ args = 0, pretend = 0, frame = 0
+ 548              		@ frame_needed = 0, uses_anonymous_args = 0
+ 549 0000 10B5     		push	{r4, lr}
+ 550 0002 FFF7FEFF 		bl	uart_print_init
+ 551 0006 0A48     		ldr	r0, .L29
+ 552 0008 FFF7FEFF 		bl	uart_printf
+ 553 000c 0120     		movs	r0, #1
+ 554 000e FFF7FEFF 		bl	le_gap_init
+ 555 0012 FFF7FEFF 		bl	gap_lib_init
+ 556 0016 FFF7FEFF 		bl	app_le_gap_init
+ 557 001a FFF7FEFF 		bl	app_le_profile_init
+ 558 001e FFF7FEFF 		bl	pwr_mgr_init
+ 559 0022 FFF7FEFF 		bl	app_task_init
+ 560 0026 FFF7FEFF 		bl	os_sched_start
+ 561 002a 0020     		movs	r0, #0
+ 562              		@ sp needed
+ 563 002c 10BD     		pop	{r4, pc}
+ 564              	.L30:
+ 565 002e C046     		.align	2
+ 566              	.L29:
+ 567 0030 00000000 		.word	.LC16
+ 569              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:16     .text.io_dlps_enter_cb:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:22     .text.io_dlps_enter_cb:00000000 io_dlps_enter_cb
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:77     .text.io_dlps_enter_cb:00000078 $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:80     .text.io_dlps_exit_cb:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:86     .text.io_dlps_exit_cb:00000000 io_dlps_exit_cb
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:135    .text.io_dlps_exit_cb:00000068 $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:140    .text.app_le_gap_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:146    .text.app_le_gap_init:00000000 app_le_gap_init
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:299    .text.app_le_gap_init:0000014c $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:316    .text.app_le_profile_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:322    .text.app_le_profile_init:00000000 app_le_profile_init
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:340    .text.app_le_profile_init:0000001c $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:344    .text.nfc_board_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:350    .text.nfc_board_init:00000000 nfc_board_init
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:434    .text.nfc_board_init:000000c0 $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:437    .text.board_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:443    .text.board_init:00000000 board_init
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:452    .rodata.driver_init.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:462    .text.driver_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:468    .text.driver_init:00000000 driver_init
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:484    .text.driver_init:0000001c $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:489    .text.pwr_mgr_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:495    .text.pwr_mgr_init:00000000 pwr_mgr_init
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:515    .text.pwr_mgr_init:00000020 $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:521    .text.task_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:527    .text.task_init:00000000 task_init
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:536    .rodata.main.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:540    .text.main:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:546    .text.main:00000000 main
+C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s:567    .text.main:00000030 $d
+
+UNDEFINED SYMBOLS
+Pad_ControlSelectValue
+g_epd_refreshing
+AON_WDG_Restart
+RCC_PeriphClockCmd
+SPI_Flash_enable_GPIO
+ble_addr_early_init
+le_set_gap_param
+le_adv_set_param
+set_adv_data
+gap_set_param
+le_bond_set_param
+le_register_app_cb
+device_name
+app_gap_callback
+server_init
+custom_service_add_service
+server_register_app_cb
+app_profile_callback
+custom_srv_id
+Pad_Config
+Pinmux_Config
+GPIO_StructInit
+GPIO_GetPin
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccbnxI5x.s 			page 12
+
+
+GPIO_Init
+Pinmux_Deinit
+uart_print_init
+uart_printf
+FLASH_Init
+DLPS_IORegister
+btmac_pm_set_power_mode
+platform_pm_set_power_mode
+User_IO_EnterDlpsCB
+User_IO_ExitDlpsCB
+app_task_init
+le_gap_init
+gap_lib_init
+os_sched_start

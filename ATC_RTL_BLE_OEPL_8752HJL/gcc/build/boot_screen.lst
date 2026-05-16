@@ -1,0 +1,639 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"boot_screen.c"
+  14              		.text
+  15              		.global	__aeabi_idiv
+  16              		.global	__aeabi_idivmod
+  17              		.section	.text.render_lines_rotated,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.code	16
+  21              		.thumb_func
+  23              	render_lines_rotated:
+  24              		@ args = 0, pretend = 0, frame = 24
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  27 0002 DE46     		mov	lr, fp
+  28 0004 5746     		mov	r7, r10
+  29 0006 4E46     		mov	r6, r9
+  30 0008 4546     		mov	r5, r8
+  31 000a E0B5     		push	{r5, r6, r7, lr}
+  32 000c 87B0     		sub	sp, sp, #28
+  33 000e 0390     		str	r0, [sp, #12]
+  34 0010 8B46     		mov	fp, r1
+  35 0012 8B00     		lsls	r3, r1, #2
+  36 0014 CB1A     		subs	r3, r1, r3
+  37 0016 DB00     		lsls	r3, r3, #3
+  38 0018 E033     		adds	r3, r3, #224
+  39 001a 5C10     		asrs	r4, r3, #1
+  40 001c 0594     		str	r4, [sp, #20]
+  41 001e 1020     		movs	r0, #16
+  42 0020 FFF7FEFF 		bl	epd_cmd
+  43 0024 0023     		movs	r3, #0
+  44 0026 0193     		str	r3, [sp, #4]
+  45 0028 0527     		movs	r7, #5
+  46 002a 7F42     		rsbs	r7, r7, #0
+  47 002c 3B1B     		subs	r3, r7, r4
+  48 002e 9A46     		mov	r10, r3
+  49 0030 4AE0     		b	.L2
+  50              	.L11:
+  51 0032 1821     		movs	r1, #24
+  52 0034 2800     		movs	r0, r5
+  53 0036 FFF7FEFF 		bl	__aeabi_idiv
+  54 003a 8046     		mov	r8, r0
+  55 003c 8345     		cmp	fp, r0
+  56 003e 2CDD     		ble	.L3
+  57 0040 1821     		movs	r1, #24
+  58 0042 2800     		movs	r0, r5
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 2
+
+
+  59 0044 FFF7FEFF 		bl	__aeabi_idivmod
+  60 0048 0F00     		movs	r7, r1
+  61 004a 0F29     		cmp	r1, #15
+  62 004c 25DC     		bgt	.L3
+  63 004e 019B     		ldr	r3, [sp, #4]
+  64 0050 0733     		adds	r3, r3, #7
+  65 0052 22DB     		blt	.L3
+  66 0054 4346     		mov	r3, r8
+  67 0056 9800     		lsls	r0, r3, #2
+  68 0058 039B     		ldr	r3, [sp, #12]
+  69 005a C358     		ldr	r3, [r0, r3]
+  70 005c 9846     		mov	r8, r3
+  71 005e 1800     		movs	r0, r3
+  72 0060 FFF7FEFF 		bl	strlen
+  73 0064 029B     		ldr	r3, [sp, #8]
+  74 0066 8342     		cmp	r3, r0
+  75 0068 17DA     		bge	.L3
+  76 006a 4246     		mov	r2, r8
+  77 006c D35C     		ldrb	r3, [r2, r3]
+  78 006e 1A00     		movs	r2, r3
+  79 0070 203A     		subs	r2, r2, #32
+  80 0072 5E2A     		cmp	r2, #94
+  81 0074 11D8     		bhi	.L3
+  82 0076 F90F     		lsrs	r1, r7, #31
+  83 0078 CF19     		adds	r7, r1, r7
+  84 007a 7F10     		asrs	r7, r7, #1
+  85 007c D300     		lsls	r3, r2, #3
+  86 007e 204A     		ldr	r2, .L12
+  87 0080 9446     		mov	ip, r2
+  88 0082 6344     		add	r3, r3, ip
+  89 0084 DB5D     		ldrb	r3, [r3, r7]
+  90 0086 049A     		ldr	r2, [sp, #16]
+  91 0088 1A42     		tst	r2, r3
+  92 008a 06D0     		beq	.L3
+  93              	.L4:
+  94 008c 013D     		subs	r5, r5, #1
+  95 008e AE42     		cmp	r6, r5
+  96 0090 07D0     		beq	.L10
+  97              	.L5:
+  98 0092 A400     		lsls	r4, r4, #2
+  99 0094 E4B2     		uxtb	r4, r4
+ 100 0096 002D     		cmp	r5, #0
+ 101 0098 CBDA     		bge	.L11
+ 102              	.L3:
+ 103 009a 4B46     		mov	r3, r9
+ 104 009c 1C43     		orrs	r4, r3
+ 105 009e E4B2     		uxtb	r4, r4
+ 106 00a0 F4E7     		b	.L4
+ 107              	.L10:
+ 108 00a2 2000     		movs	r0, r4
+ 109 00a4 FFF7FEFF 		bl	epd_data
+ 110 00a8 043E     		subs	r6, r6, #4
+ 111 00aa 5645     		cmp	r6, r10
+ 112 00ac 04D0     		beq	.L6
+ 113              	.L8:
+ 114 00ae 351D     		adds	r5, r6, #4
+ 115 00b0 0024     		movs	r4, #0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 3
+
+
+ 116 00b2 0123     		movs	r3, #1
+ 117 00b4 9946     		mov	r9, r3
+ 118 00b6 ECE7     		b	.L5
+ 119              	.L6:
+ 120 00b8 019B     		ldr	r3, [sp, #4]
+ 121 00ba 0133     		adds	r3, r3, #1
+ 122 00bc 1A00     		movs	r2, r3
+ 123 00be 0193     		str	r3, [sp, #4]
+ 124 00c0 F023     		movs	r3, #240
+ 125 00c2 5B00     		lsls	r3, r3, #1
+ 126 00c4 9A42     		cmp	r2, r3
+ 127 00c6 13D0     		beq	.L1
+ 128              	.L2:
+ 129 00c8 0198     		ldr	r0, [sp, #4]
+ 130 00ca C217     		asrs	r2, r0, #31
+ 131 00cc 0723     		movs	r3, #7
+ 132 00ce 1900     		movs	r1, r3
+ 133 00d0 1140     		ands	r1, r2
+ 134 00d2 8446     		mov	ip, r0
+ 135 00d4 6144     		add	r1, r1, ip
+ 136 00d6 C910     		asrs	r1, r1, #3
+ 137 00d8 0291     		str	r1, [sp, #8]
+ 138 00da 520F     		lsrs	r2, r2, #29
+ 139 00dc 8118     		adds	r1, r0, r2
+ 140 00de 0B40     		ands	r3, r1
+ 141 00e0 9B1A     		subs	r3, r3, r2
+ 142 00e2 0122     		movs	r2, #1
+ 143 00e4 9A40     		lsls	r2, r2, r3
+ 144 00e6 0492     		str	r2, [sp, #16]
+ 145 00e8 DB26     		movs	r6, #219
+ 146 00ea 059B     		ldr	r3, [sp, #20]
+ 147 00ec F61A     		subs	r6, r6, r3
+ 148 00ee DEE7     		b	.L8
+ 149              	.L1:
+ 150 00f0 07B0     		add	sp, sp, #28
+ 151              		@ sp needed
+ 152 00f2 F0BC     		pop	{r4, r5, r6, r7}
+ 153 00f4 BB46     		mov	fp, r7
+ 154 00f6 B246     		mov	r10, r6
+ 155 00f8 A946     		mov	r9, r5
+ 156 00fa A046     		mov	r8, r4
+ 157 00fc F0BD     		pop	{r4, r5, r6, r7, pc}
+ 158              	.L13:
+ 159 00fe C046     		.align	2
+ 160              	.L12:
+ 161 0100 00000000 		.word	font8
+ 163              		.section	.rodata.boot_screen_draw.str1.4,"aMS",%progbits,1
+ 164              		.align	2
+ 165              	.LC1:
+ 166 0000 204F7065 		.ascii	" OpenEpaperLink RTL8752HJL\000"
+ 166      6E457061 
+ 166      7065724C 
+ 166      696E6B20 
+ 166      52544C38 
+ 167 001b 00       		.align	2
+ 168              	.LC3:
+ 169 001c 20424C45 		.ascii	" BLE Name: RTL_%02X%02X%02X\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 4
+
+
+ 169      204E616D 
+ 169      653A2052 
+ 169      544C5F25 
+ 169      30325825 
+ 170              		.align	2
+ 171              	.LC5:
+ 172 0038 204D4143 		.ascii	" MAC: %02X:%02X:%02X:%02X:%02X:%02X\000"
+ 172      3A202530 
+ 172      32583A25 
+ 172      3032583A 
+ 172      25303258 
+ 173              		.align	2
+ 174              	.LC7:
+ 175 005c 20424154 		.ascii	" BAT: %u mV\000"
+ 175      3A202575 
+ 175      206D5600 
+ 176              		.align	2
+ 177              	.LC9:
+ 178 0068 2046573A 		.ascii	" FW:  v%04X\000"
+ 178      20207625 
+ 178      30345800 
+ 179              		.align	2
+ 180              	.LC11:
+ 181 0074 20415443 		.ascii	" ATC1441 Compiled on: May 16 2026 16:40:40\000"
+ 181      31343431 
+ 181      20436F6D 
+ 181      70696C65 
+ 181      64206F6E 
+ 182 009f 00       		.align	2
+ 183              	.LC13:
+ 184 00a0 424F4F54 		.ascii	"BOOT refresh triggered\012\000"
+ 184      20726566 
+ 184      72657368 
+ 184      20747269 
+ 184      67676572 
+ 185              		.section	.text.boot_screen_draw,"ax",%progbits
+ 186              		.align	1
+ 187              		.global	boot_screen_draw
+ 188              		.syntax unified
+ 189              		.code	16
+ 190              		.thumb_func
+ 192              	boot_screen_draw:
+ 193              		@ args = 0, pretend = 0, frame = 504
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 195 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 196 0002 CE46     		mov	lr, r9
+ 197 0004 4746     		mov	r7, r8
+ 198 0006 80B5     		push	{r7, lr}
+ 199 0008 394C     		ldr	r4, .L15
+ 200 000a A544     		add	sp, sp, r4
+ 201 000c 0400     		movs	r4, r0
+ 202 000e 0E00     		movs	r6, r1
+ 203 0010 0CAD     		add	r5, sp, #48
+ 204 0012 384A     		ldr	r2, .L15+4
+ 205 0014 2800     		movs	r0, r5
+ 206 0016 8ACA     		ldmia	r2!, {r1, r3, r7}
+ 207 0018 8AC0     		stmia	r0!, {r1, r3, r7}
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 5
+
+
+ 208 001a 8ACA     		ldmia	r2!, {r1, r3, r7}
+ 209 001c 8AC0     		stmia	r0!, {r1, r3, r7}
+ 210 001e 1388     		ldrh	r3, [r2]
+ 211 0020 0380     		strh	r3, [r0]
+ 212 0022 9378     		ldrb	r3, [r2, #2]
+ 213 0024 8370     		strb	r3, [r0, #2]
+ 214 0026 A378     		ldrb	r3, [r4, #2]
+ 215 0028 20AA     		add	r2, sp, #128
+ 216 002a 9046     		mov	r8, r2
+ 217 002c 2278     		ldrb	r2, [r4]
+ 218 002e 0192     		str	r2, [sp, #4]
+ 219 0030 6278     		ldrb	r2, [r4, #1]
+ 220 0032 0092     		str	r2, [sp]
+ 221 0034 304A     		ldr	r2, .L15+8
+ 222 0036 5021     		movs	r1, #80
+ 223 0038 4046     		mov	r0, r8
+ 224 003a FFF7FEFF 		bl	snprintf
+ 225 003e 6379     		ldrb	r3, [r4, #5]
+ 226 0040 34AF     		add	r7, sp, #208
+ 227 0042 2278     		ldrb	r2, [r4]
+ 228 0044 0492     		str	r2, [sp, #16]
+ 229 0046 6278     		ldrb	r2, [r4, #1]
+ 230 0048 0392     		str	r2, [sp, #12]
+ 231 004a A278     		ldrb	r2, [r4, #2]
+ 232 004c 0292     		str	r2, [sp, #8]
+ 233 004e E278     		ldrb	r2, [r4, #3]
+ 234 0050 0192     		str	r2, [sp, #4]
+ 235 0052 2279     		ldrb	r2, [r4, #4]
+ 236 0054 0092     		str	r2, [sp]
+ 237 0056 294A     		ldr	r2, .L15+12
+ 238 0058 5021     		movs	r1, #80
+ 239 005a 3800     		movs	r0, r7
+ 240 005c FFF7FEFF 		bl	snprintf
+ 241 0060 48AB     		add	r3, sp, #288
+ 242 0062 9946     		mov	r9, r3
+ 243 0064 3300     		movs	r3, r6
+ 244 0066 264A     		ldr	r2, .L15+16
+ 245 0068 5021     		movs	r1, #80
+ 246 006a 4846     		mov	r0, r9
+ 247 006c FFF7FEFF 		bl	snprintf
+ 248 0070 5CAE     		add	r6, sp, #368
+ 249 0072 4723     		movs	r3, #71
+ 250 0074 234A     		ldr	r2, .L15+20
+ 251 0076 5021     		movs	r1, #80
+ 252 0078 3000     		movs	r0, r6
+ 253 007a FFF7FEFF 		bl	snprintf
+ 254 007e 70AB     		add	r3, sp, #448
+ 255 0080 9C46     		mov	ip, r3
+ 256 0082 214B     		ldr	r3, .L15+24
+ 257 0084 6246     		mov	r2, ip
+ 258 0086 13CB     		ldmia	r3!, {r0, r1, r4}
+ 259 0088 13C2     		stmia	r2!, {r0, r1, r4}
+ 260 008a 13CB     		ldmia	r3!, {r0, r1, r4}
+ 261 008c 13C2     		stmia	r2!, {r0, r1, r4}
+ 262 008e 13CB     		ldmia	r3!, {r0, r1, r4}
+ 263 0090 13C2     		stmia	r2!, {r0, r1, r4}
+ 264 0092 1868     		ldr	r0, [r3]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 6
+
+
+ 265 0094 1060     		str	r0, [r2]
+ 266 0096 9888     		ldrh	r0, [r3, #4]
+ 267 0098 9080     		strh	r0, [r2, #4]
+ 268 009a 9B79     		ldrb	r3, [r3, #6]
+ 269 009c 9371     		strb	r3, [r2, #6]
+ 270 009e 0695     		str	r5, [sp, #24]
+ 271 00a0 4346     		mov	r3, r8
+ 272 00a2 0793     		str	r3, [sp, #28]
+ 273 00a4 0897     		str	r7, [sp, #32]
+ 274 00a6 4B46     		mov	r3, r9
+ 275 00a8 0993     		str	r3, [sp, #36]
+ 276 00aa 0A96     		str	r6, [sp, #40]
+ 277 00ac 6346     		mov	r3, ip
+ 278 00ae 0B93     		str	r3, [sp, #44]
+ 279 00b0 FFF7FEFF 		bl	epd_board_init
+ 280 00b4 FFF7FEFF 		bl	epd_init
+ 281 00b8 0621     		movs	r1, #6
+ 282 00ba 06A8     		add	r0, sp, #24
+ 283 00bc FFF7FEFF 		bl	render_lines_rotated
+ 284 00c0 1248     		ldr	r0, .L15+28
+ 285 00c2 FFF7FEFF 		bl	uart_printf
+ 286 00c6 0420     		movs	r0, #4
+ 287 00c8 FFF7FEFF 		bl	epd_cmd
+ 288 00cc FFF7FEFF 		bl	epd_wait_busy
+ 289 00d0 0F4B     		ldr	r3, .L15+32
+ 290 00d2 0122     		movs	r2, #1
+ 291 00d4 1A70     		strb	r2, [r3]
+ 292 00d6 0022     		movs	r2, #0
+ 293 00d8 0121     		movs	r1, #1
+ 294 00da 1220     		movs	r0, #18
+ 295 00dc FFF7FEFF 		bl	epd_write
+ 296 00e0 8523     		movs	r3, #133
+ 297 00e2 9B00     		lsls	r3, r3, #2
+ 298 00e4 9D44     		add	sp, sp, r3
+ 299              		@ sp needed
+ 300 00e6 C0BC     		pop	{r6, r7}
+ 301 00e8 B946     		mov	r9, r7
+ 302 00ea B046     		mov	r8, r6
+ 303 00ec F0BD     		pop	{r4, r5, r6, r7, pc}
+ 304              	.L16:
+ 305 00ee C046     		.align	2
+ 306              	.L15:
+ 307 00f0 ECFDFFFF 		.word	-532
+ 308 00f4 00000000 		.word	.LC1
+ 309 00f8 1C000000 		.word	.LC3
+ 310 00fc 38000000 		.word	.LC5
+ 311 0100 5C000000 		.word	.LC7
+ 312 0104 68000000 		.word	.LC9
+ 313 0108 74000000 		.word	.LC11
+ 314 010c A0000000 		.word	.LC13
+ 315 0110 00000000 		.word	g_epd_refreshing
+ 317              		.section	.rodata.boot_screen_show_error.str1.4,"aMS",%progbits,1
+ 318              		.align	2
+ 319              	.LC16:
+ 320 0000 4550445F 		.ascii	"EPD_ERR refresh triggered\012\000"
+ 320      45525220 
+ 320      72656672 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 7
+
+
+ 320      65736820 
+ 320      74726967 
+ 321              		.section	.text.boot_screen_show_error,"ax",%progbits
+ 322              		.align	1
+ 323              		.global	boot_screen_show_error
+ 324              		.syntax unified
+ 325              		.code	16
+ 326              		.thumb_func
+ 328              	boot_screen_show_error:
+ 329              		@ args = 0, pretend = 0, frame = 0
+ 330              		@ frame_needed = 0, uses_anonymous_args = 0
+ 331 0000 70B5     		push	{r4, r5, r6, lr}
+ 332 0002 0400     		movs	r4, r0
+ 333 0004 0D00     		movs	r5, r1
+ 334 0006 FFF7FEFF 		bl	epd_board_init
+ 335 000a FFF7FEFF 		bl	epd_init
+ 336 000e 2900     		movs	r1, r5
+ 337 0010 2000     		movs	r0, r4
+ 338 0012 FFF7FEFF 		bl	render_lines_rotated
+ 339 0016 0848     		ldr	r0, .L18
+ 340 0018 FFF7FEFF 		bl	uart_printf
+ 341 001c 0420     		movs	r0, #4
+ 342 001e FFF7FEFF 		bl	epd_cmd
+ 343 0022 FFF7FEFF 		bl	epd_wait_busy
+ 344 0026 054B     		ldr	r3, .L18+4
+ 345 0028 0122     		movs	r2, #1
+ 346 002a 1A70     		strb	r2, [r3]
+ 347 002c 0022     		movs	r2, #0
+ 348 002e 0121     		movs	r1, #1
+ 349 0030 1220     		movs	r0, #18
+ 350 0032 FFF7FEFF 		bl	epd_write
+ 351              		@ sp needed
+ 352 0036 70BD     		pop	{r4, r5, r6, pc}
+ 353              	.L19:
+ 354              		.align	2
+ 355              	.L18:
+ 356 0038 00000000 		.word	.LC16
+ 357 003c 00000000 		.word	g_epd_refreshing
+ 359              		.section	.rodata.font8,"a"
+ 360              		.align	2
+ 363              	font8:
+ 364 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 364      00000000 
+ 365 0008 183C3C18 		.ascii	"\030<<\030\030\000\030\000"
+ 365      18001800 
+ 366 0010 36360000 		.ascii	"66\000\000\000\000\000\000"
+ 366      00000000 
+ 367 0018 36367F36 		.ascii	"66\1776\17766\000"
+ 367      7F363600 
+ 368 0020 0C3E031E 		.ascii	"\014>\003\0360\037\006\000"
+ 368      301F0600 
+ 369 0028 00633318 		.ascii	"\000c3\030\014fc\000"
+ 369      0C666300 
+ 370 0030 1C361C6E 		.ascii	"\0346\034n;3n\000"
+ 370      3B336E00 
+ 371 0038 06060300 		.ascii	"\006\006\003\000\000\000\000\000"
+ 371      00000000 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 8
+
+
+ 372 0040 180C0606 		.ascii	"\030\014\006\006\006\014\030\000"
+ 372      060C1800 
+ 373 0048 060C1818 		.ascii	"\006\014\030\030\030\014\006\000"
+ 373      180C0600 
+ 374 0050 00663CFF 		.ascii	"\000f<\377<f\000\000"
+ 374      3C660000 
+ 375 0058 000C0C3F 		.ascii	"\000\014\014?\014\014\000\000"
+ 375      0C0C0000 
+ 376 0060 00000000 		.ascii	"\000\000\000\000\000\014\014\006"
+ 376      000C0C06 
+ 377 0068 0000003F 		.ascii	"\000\000\000?\000\000\000\000"
+ 377      00000000 
+ 378 0070 00000000 		.ascii	"\000\000\000\000\000\014\014\000"
+ 378      000C0C00 
+ 379 0078 6030180C 		.ascii	"`0\030\014\006\003\001\000"
+ 379      06030100 
+ 380 0080 3E63737B 		.ascii	">cs{og>\000"
+ 380      6F673E00 
+ 381 0088 0C0E0C0C 		.ascii	"\014\016\014\014\014\014?\000"
+ 381      0C0C3F00 
+ 382 0090 1E33301C 		.ascii	"\03630\034\0063?\000"
+ 382      06333F00 
+ 383 0098 1E33301C 		.ascii	"\03630\03403\036\000"
+ 383      30331E00 
+ 384 00a0 383C3633 		.ascii	"8<63\1770x\000"
+ 384      7F307800 
+ 385 00a8 3F031F30 		.ascii	"?\003\037003\036\000"
+ 385      30331E00 
+ 386 00b0 1C06031F 		.ascii	"\034\006\003\03733\036\000"
+ 386      33331E00 
+ 387 00b8 3F333018 		.ascii	"?30\030\014\014\014\000"
+ 387      0C0C0C00 
+ 388 00c0 1E33331E 		.ascii	"\03633\03633\036\000"
+ 388      33331E00 
+ 389 00c8 1E33333E 		.ascii	"\03633>0\030\016\000"
+ 389      30180E00 
+ 390 00d0 000C0C00 		.ascii	"\000\014\014\000\000\014\014\000"
+ 390      000C0C00 
+ 391 00d8 000C0C00 		.ascii	"\000\014\014\000\000\014\014\006"
+ 391      000C0C06 
+ 392 00e0 180C0603 		.ascii	"\030\014\006\003\006\014\030\000"
+ 392      060C1800 
+ 393 00e8 00003F00 		.ascii	"\000\000?\000\000?\000\000"
+ 393      003F0000 
+ 394 00f0 060C1830 		.ascii	"\006\014\0300\030\014\006\000"
+ 394      180C0600 
+ 395 00f8 1E333018 		.ascii	"\03630\030\014\000\014\000"
+ 395      0C000C00 
+ 396 0100 3E636F6B 		.ascii	">cokkc>\000"
+ 396      6B633E00 
+ 397 0108 0C1E3333 		.ascii	"\014\03633?33\000"
+ 397      3F333300 
+ 398 0110 3F66663E 		.ascii	"?ff>ff?\000"
+ 398      66663F00 
+ 399 0118 3C660303 		.ascii	"<f\003\003\003f<\000"
+ 399      03663C00 
+ 400 0120 1F366666 		.ascii	"\0376fff6\037\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 9
+
+
+ 400      66361F00 
+ 401 0128 7F46161E 		.ascii	"\177F\026\036\026F\177\000"
+ 401      16467F00 
+ 402 0130 7F46161E 		.ascii	"\177F\026\036\026\006\017\000"
+ 402      16060F00 
+ 403 0138 3C660303 		.ascii	"<f\003\003sf|\000"
+ 403      73667C00 
+ 404 0140 3333333F 		.ascii	"333?333\000"
+ 404      33333300 
+ 405 0148 1E0C0C0C 		.ascii	"\036\014\014\014\014\014\036\000"
+ 405      0C0C1E00 
+ 406 0150 78303030 		.ascii	"x00033\036\000"
+ 406      33331E00 
+ 407 0158 6766361E 		.ascii	"gf6\0366fg\000"
+ 407      36666700 
+ 408 0160 0F060606 		.ascii	"\017\006\006\006Ff\177\000"
+ 408      46667F00 
+ 409 0168 63777F7F 		.ascii	"cw\177\177kcc\000"
+ 409      6B636300 
+ 410 0170 63676F7B 		.ascii	"cgo{scc\000"
+ 410      73636300 
+ 411 0178 1C366363 		.ascii	"\0346ccc6\034\000"
+ 411      63361C00 
+ 412 0180 3F66663E 		.ascii	"?ff>\006\006\017\000"
+ 412      06060F00 
+ 413 0188 1E333333 		.ascii	"\036333;\0368\000"
+ 413      3B1E3800 
+ 414 0190 3F66663E 		.ascii	"?ff>6fg\000"
+ 414      36666700 
+ 415 0198 1E33070E 		.ascii	"\0363\007\01683\036\000"
+ 415      38331E00 
+ 416 01a0 3F2D0C0C 		.ascii	"?-\014\014\014\014\036\000"
+ 416      0C0C1E00 
+ 417 01a8 33333333 		.ascii	"333333?\000"
+ 417      33333F00 
+ 418 01b0 33333333 		.ascii	"33333\036\014\000"
+ 418      331E0C00 
+ 419 01b8 6363636B 		.ascii	"ccck\177wc\000"
+ 419      7F776300 
+ 420 01c0 6363361C 		.ascii	"cc6\034\0346c\000"
+ 420      1C366300 
+ 421 01c8 3333331E 		.ascii	"333\036\014\014\036\000"
+ 421      0C0C1E00 
+ 422 01d0 7F633118 		.ascii	"\177c1\030Lf\177\000"
+ 422      4C667F00 
+ 423 01d8 1E060606 		.ascii	"\036\006\006\006\006\006\036\000"
+ 423      06061E00 
+ 424 01e0 03060C18 		.ascii	"\003\006\014\0300`@\000"
+ 424      30604000 
+ 425 01e8 1E181818 		.ascii	"\036\030\030\030\030\030\036\000"
+ 425      18181E00 
+ 426 01f0 081C3663 		.ascii	"\010\0346c\000\000\000\000"
+ 426      00000000 
+ 427 01f8 00000000 		.ascii	"\000\000\000\000\000\000\000\377"
+ 427      000000FF 
+ 428 0200 0C0C1800 		.ascii	"\014\014\030\000\000\000\000\000"
+ 428      00000000 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 10
+
+
+ 429 0208 00001E30 		.ascii	"\000\000\0360>3n\000"
+ 429      3E336E00 
+ 430 0210 0706063E 		.ascii	"\007\006\006>ff;\000"
+ 430      66663B00 
+ 431 0218 00001E33 		.ascii	"\000\000\0363\0033\036\000"
+ 431      03331E00 
+ 432 0220 3830303E 		.ascii	"800>33n\000"
+ 432      33336E00 
+ 433 0228 00001E33 		.ascii	"\000\000\0363?\003\036\000"
+ 433      3F031E00 
+ 434 0230 1C36060F 		.ascii	"\0346\006\017\006\006\017\000"
+ 434      06060F00 
+ 435 0238 00006E33 		.ascii	"\000\000n33>0\037"
+ 435      333E301F 
+ 436 0240 0706366E 		.ascii	"\007\0066nffg\000"
+ 436      66666700 
+ 437 0248 0C000E0C 		.ascii	"\014\000\016\014\014\014\036\000"
+ 437      0C0C1E00 
+ 438 0250 30003030 		.ascii	"0\00000033\036"
+ 438      3033331E 
+ 439 0258 07066636 		.ascii	"\007\006f6\0366g\000"
+ 439      1E366700 
+ 440 0260 0E0C0C0C 		.ascii	"\016\014\014\014\014\014\036\000"
+ 440      0C0C1E00 
+ 441 0268 0000337F 		.ascii	"\000\0003\177\177kc\000"
+ 441      7F6B6300 
+ 442 0270 00001F33 		.ascii	"\000\000\0373333\000"
+ 442      33333300 
+ 443 0278 00001E33 		.ascii	"\000\000\036333\036\000"
+ 443      33331E00 
+ 444 0280 00003B66 		.ascii	"\000\000;ff>\006\017"
+ 444      663E060F 
+ 445 0288 00006E33 		.ascii	"\000\000n33>0x"
+ 445      333E3078 
+ 446 0290 00003B6E 		.ascii	"\000\000;nf\006\017\000"
+ 446      66060F00 
+ 447 0298 00001E03 		.ascii	"\000\000\036\003\0360\037\000"
+ 447      1E301F00 
+ 448 02a0 080C3E0C 		.ascii	"\010\014>\014\014,\030\000"
+ 448      0C2C1800 
+ 449 02a8 00003333 		.ascii	"\000\0003333n\000"
+ 449      33336E00 
+ 450 02b0 00003333 		.ascii	"\000\000333\036\014\000"
+ 450      331E0C00 
+ 451 02b8 0000636B 		.ascii	"\000\000ck\177\1776\000"
+ 451      7F7F3600 
+ 452 02c0 00006336 		.ascii	"\000\000c6\0346c\000"
+ 452      1C366300 
+ 453 02c8 00003333 		.ascii	"\000\000333>0\037"
+ 453      333E301F 
+ 454 02d0 00003F19 		.ascii	"\000\000?\031\014&?\000"
+ 454      0C263F00 
+ 455 02d8 380C0C07 		.ascii	"8\014\014\007\014\0148\000"
+ 455      0C0C3800 
+ 456 02e0 18181800 		.ascii	"\030\030\030\000\030\030\030\000"
+ 456      18181800 
+ 457 02e8 070C0C38 		.ascii	"\007\014\0148\014\014\007\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 11
+
+
+ 457      0C0C0700 
+ 458 02f0 6E3B0000 		.ascii	"n;\000\000\000\000\000\000"
+ 458      00000000 
+ 459              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 boot_screen.c
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:18     .text.render_lines_rotated:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:23     .text.render_lines_rotated:00000000 render_lines_rotated
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:161    .text.render_lines_rotated:00000100 $d
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:363    .rodata.font8:00000000 font8
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:164    .rodata.boot_screen_draw.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:186    .text.boot_screen_draw:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:192    .text.boot_screen_draw:00000000 boot_screen_draw
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:307    .text.boot_screen_draw:000000f0 $d
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:318    .rodata.boot_screen_show_error.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:322    .text.boot_screen_show_error:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:328    .text.boot_screen_show_error:00000000 boot_screen_show_error
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:356    .text.boot_screen_show_error:00000038 $d
+C:\Users\pc\AppData\Local\Temp\ccGKmaAZ.s:360    .rodata.font8:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_idiv
+__aeabi_idivmod
+epd_cmd
+strlen
+epd_data
+snprintf
+epd_board_init
+epd_init
+uart_printf
+epd_wait_busy
+epd_write
+g_epd_refreshing

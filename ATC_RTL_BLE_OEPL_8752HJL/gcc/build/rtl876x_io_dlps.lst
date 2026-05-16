@@ -1,0 +1,728 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"rtl876x_io_dlps.c"
+  14              		.text
+  15              		.section	.app.data_ram.text,"ax",%progbits
+  16              		.align	1
+  17              		.global	DLPS_IO_EnterDlpsCb
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	DLPS_IO_EnterDlpsCb:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  26 0002 FFF7FEFF 		bl	platform_pm_get_power_mode
+  27 0006 0128     		cmp	r0, #1
+  28 0008 00D1     		bne	.LCB8
+  29 000a B7E0     		b	.L8	@long jump
+  30              	.LCB8:
+  31              	.L2:
+  32 000c 5E4B     		ldr	r3, .L9
+  33 000e 8022     		movs	r2, #128
+  34 0010 0121     		movs	r1, #1
+  35 0012 9950     		str	r1, [r3, r2]
+  36 0014 1968     		ldr	r1, [r3]
+  37 0016 5D4A     		ldr	r2, .L9+4
+  38 0018 1160     		str	r1, [r2]
+  39 001a 8021     		movs	r1, #128
+  40 001c 4900     		lsls	r1, r1, #1
+  41 001e 5B58     		ldr	r3, [r3, r1]
+  42 0020 5360     		str	r3, [r2, #4]
+  43 0022 0023     		movs	r3, #0
+  44 0024 584C     		ldr	r4, .L9
+  45 0026 5A48     		ldr	r0, .L9+8
+  46              	.L3:
+  47 0028 1A00     		movs	r2, r3
+  48 002a C032     		adds	r2, r2, #192
+  49 002c 9200     		lsls	r2, r2, #2
+  50 002e 1159     		ldr	r1, [r2, r4]
+  51 0030 9A00     		lsls	r2, r3, #2
+  52 0032 1150     		str	r1, [r2, r0]
+  53 0034 0133     		adds	r3, r3, #1
+  54 0036 082B     		cmp	r3, #8
+  55 0038 F6D1     		bne	.L3
+  56 003a 564B     		ldr	r3, .L9+12
+  57 003c 9A68     		ldr	r2, [r3, #8]
+  58 003e 534B     		ldr	r3, .L9+4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 2
+
+
+  59 0040 9A60     		str	r2, [r3, #8]
+  60 0042 554B     		ldr	r3, .L9+16
+  61 0044 DA68     		ldr	r2, [r3, #12]
+  62 0046 554B     		ldr	r3, .L9+20
+  63 0048 1A60     		str	r2, [r3]
+  64 004a 554A     		ldr	r2, .L9+24
+  65 004c 0023     		movs	r3, #0
+  66 004e 5548     		ldr	r0, .L9+28
+  67              	.L4:
+  68 0050 9900     		lsls	r1, r3, #2
+  69 0052 0958     		ldr	r1, [r1, r0]
+  70 0054 02C2     		stmia	r2!, {r1}
+  71 0056 0133     		adds	r3, r3, #1
+  72 0058 0A2B     		cmp	r3, #10
+  73 005a F9D1     		bne	.L4
+  74 005c 524B     		ldr	r3, .L9+32
+  75 005e 1B68     		ldr	r3, [r3]
+  76 0060 002B     		cmp	r3, #0
+  77 0062 00D0     		beq	.L5
+  78 0064 9847     		blx	r3
+  79              	.L5:
+  80 0066 514C     		ldr	r4, .L9+36
+  81 0068 E268     		ldr	r2, [r4, #12]
+  82 006a 8023     		movs	r3, #128
+  83 006c DB04     		lsls	r3, r3, #19
+  84 006e 1343     		orrs	r3, r2
+  85 0070 E360     		str	r3, [r4, #12]
+  86 0072 E268     		ldr	r2, [r4, #12]
+  87 0074 8023     		movs	r3, #128
+  88 0076 5B05     		lsls	r3, r3, #21
+  89 0078 1343     		orrs	r3, r2
+  90 007a E360     		str	r3, [r4, #12]
+  91 007c 8025     		movs	r5, #128
+  92 007e ED05     		lsls	r5, r5, #23
+  93 0080 8727     		movs	r7, #135
+  94 0082 BF00     		lsls	r7, r7, #2
+  95 0084 EB59     		ldr	r3, [r5, r7]
+  96 0086 0122     		movs	r2, #1
+  97 0088 1343     		orrs	r3, r2
+  98 008a EB51     		str	r3, [r5, r7]
+  99 008c 8E22     		movs	r2, #142
+ 100 008e 9200     		lsls	r2, r2, #2
+ 101 0090 AB58     		ldr	r3, [r5, r2]
+ 102 0092 C026     		movs	r6, #192
+ 103 0094 B604     		lsls	r6, r6, #18
+ 104 0096 3343     		orrs	r3, r6
+ 105 0098 AB50     		str	r3, [r5, r2]
+ 106 009a 454A     		ldr	r2, .L9+40
+ 107 009c 5168     		ldr	r1, [r2, #4]
+ 108 009e 454B     		ldr	r3, .L9+44
+ 109 00a0 1960     		str	r1, [r3]
+ 110 00a2 9168     		ldr	r1, [r2, #8]
+ 111 00a4 5960     		str	r1, [r3, #4]
+ 112 00a6 D168     		ldr	r1, [r2, #12]
+ 113 00a8 9960     		str	r1, [r3, #8]
+ 114 00aa 1169     		ldr	r1, [r2, #16]
+ 115 00ac D960     		str	r1, [r3, #12]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 3
+
+
+ 116 00ae 5169     		ldr	r1, [r2, #20]
+ 117 00b0 1961     		str	r1, [r3, #16]
+ 118 00b2 9169     		ldr	r1, [r2, #24]
+ 119 00b4 5961     		str	r1, [r3, #20]
+ 120 00b6 D169     		ldr	r1, [r2, #28]
+ 121 00b8 9961     		str	r1, [r3, #24]
+ 122 00ba 116A     		ldr	r1, [r2, #32]
+ 123 00bc D961     		str	r1, [r3, #28]
+ 124 00be 516A     		ldr	r1, [r2, #36]
+ 125 00c0 1962     		str	r1, [r3, #32]
+ 126 00c2 916A     		ldr	r1, [r2, #40]
+ 127 00c4 5962     		str	r1, [r3, #36]
+ 128 00c6 D16A     		ldr	r1, [r2, #44]
+ 129 00c8 9962     		str	r1, [r3, #40]
+ 130 00ca 116D     		ldr	r1, [r2, #80]
+ 131 00cc D962     		str	r1, [r3, #44]
+ 132 00ce 516D     		ldr	r1, [r2, #84]
+ 133 00d0 1963     		str	r1, [r3, #48]
+ 134 00d2 916D     		ldr	r1, [r2, #88]
+ 135 00d4 5963     		str	r1, [r3, #52]
+ 136 00d6 D26D     		ldr	r2, [r2, #92]
+ 137 00d8 9A63     		str	r2, [r3, #56]
+ 138 00da 8820     		movs	r0, #136
+ 139 00dc 4000     		lsls	r0, r0, #1
+ 140 00de FFF7FEFF 		bl	btaon_fast_read_safe
+ 141 00e2 354B     		ldr	r3, .L9+48
+ 142 00e4 1880     		strh	r0, [r3]
+ 143 00e6 EA59     		ldr	r2, [r5, r7]
+ 144 00e8 8023     		movs	r3, #128
+ 145 00ea 5B00     		lsls	r3, r3, #1
+ 146 00ec 1343     		orrs	r3, r2
+ 147 00ee EB51     		str	r3, [r5, r7]
+ 148 00f0 8C23     		movs	r3, #140
+ 149 00f2 9B00     		lsls	r3, r3, #2
+ 150 00f4 EA58     		ldr	r2, [r5, r3]
+ 151 00f6 1643     		orrs	r6, r2
+ 152 00f8 EE50     		str	r6, [r5, r3]
+ 153 00fa 304A     		ldr	r2, .L9+52
+ 154 00fc 1168     		ldr	r1, [r2]
+ 155 00fe 304B     		ldr	r3, .L9+56
+ 156 0100 1960     		str	r1, [r3]
+ 157 0102 5168     		ldr	r1, [r2, #4]
+ 158 0104 5960     		str	r1, [r3, #4]
+ 159 0106 9168     		ldr	r1, [r2, #8]
+ 160 0108 9960     		str	r1, [r3, #8]
+ 161 010a 116B     		ldr	r1, [r2, #48]
+ 162 010c D960     		str	r1, [r3, #12]
+ 163 010e 516B     		ldr	r1, [r2, #52]
+ 164 0110 1961     		str	r1, [r3, #16]
+ 165 0112 916B     		ldr	r1, [r2, #56]
+ 166 0114 5961     		str	r1, [r3, #20]
+ 167 0116 D16B     		ldr	r1, [r2, #60]
+ 168 0118 9961     		str	r1, [r3, #24]
+ 169 011a 916C     		ldr	r1, [r2, #72]
+ 170 011c D961     		str	r1, [r3, #28]
+ 171 011e 2949     		ldr	r1, .L9+60
+ 172 0120 0968     		ldr	r1, [r1]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 4
+
+
+ 173 0122 1962     		str	r1, [r3, #32]
+ 174 0124 926E     		ldr	r2, [r2, #104]
+ 175 0126 5A62     		str	r2, [r3, #36]
+ 176 0128 2269     		ldr	r2, [r4, #16]
+ 177 012a 8023     		movs	r3, #128
+ 178 012c 5B01     		lsls	r3, r3, #5
+ 179 012e 1343     		orrs	r3, r2
+ 180 0130 2361     		str	r3, [r4, #16]
+ 181 0132 226B     		ldr	r2, [r4, #48]
+ 182 0134 C023     		movs	r3, #192
+ 183 0136 9B01     		lsls	r3, r3, #6
+ 184 0138 1343     		orrs	r3, r2
+ 185 013a 2363     		str	r3, [r4, #48]
+ 186 013c 224B     		ldr	r3, .L9+64
+ 187 013e DA68     		ldr	r2, [r3, #12]
+ 188 0140 8020     		movs	r0, #128
+ 189 0142 0243     		orrs	r2, r0
+ 190 0144 DA60     		str	r2, [r3, #12]
+ 191 0146 1968     		ldr	r1, [r3]
+ 192 0148 204A     		ldr	r2, .L9+68
+ 193 014a 1160     		str	r1, [r2]
+ 194 014c 5968     		ldr	r1, [r3, #4]
+ 195 014e 5160     		str	r1, [r2, #4]
+ 196 0150 D968     		ldr	r1, [r3, #12]
+ 197 0152 8143     		bics	r1, r0
+ 198 0154 D960     		str	r1, [r3, #12]
+ 199 0156 5968     		ldr	r1, [r3, #4]
+ 200 0158 9160     		str	r1, [r2, #8]
+ 201 015a D968     		ldr	r1, [r3, #12]
+ 202 015c 1161     		str	r1, [r2, #16]
+ 203 015e 1969     		ldr	r1, [r3, #16]
+ 204 0160 5161     		str	r1, [r2, #20]
+ 205 0162 D969     		ldr	r1, [r3, #28]
+ 206 0164 9161     		str	r1, [r2, #24]
+ 207 0166 196A     		ldr	r1, [r3, #32]
+ 208 0168 D161     		str	r1, [r2, #28]
+ 209 016a 196C     		ldr	r1, [r3, #64]
+ 210 016c 1162     		str	r1, [r2, #32]
+ 211 016e 996C     		ldr	r1, [r3, #72]
+ 212 0170 5162     		str	r1, [r2, #36]
+ 213 0172 996A     		ldr	r1, [r3, #40]
+ 214 0174 9162     		str	r1, [r2, #40]
+ 215 0176 1B6D     		ldr	r3, [r3, #80]
+ 216 0178 D362     		str	r3, [r2, #44]
+ 217              		@ sp needed
+ 218 017a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 219              	.L8:
+ 220 017c CF21     		movs	r1, #207
+ 221 017e 0430     		adds	r0, r0, #4
+ 222 0180 FFF7FEFF 		bl	btaon_fast_write_safe_8b
+ 223 0184 42E7     		b	.L2
+ 224              	.L10:
+ 225 0186 C046     		.align	2
+ 226              	.L9:
+ 227 0188 00E100E0 		.word	-536813312
+ 228 018c 00000000 		.word	.LANCHOR0
+ 229 0190 00000000 		.word	.LANCHOR1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 5
+
+
+ 230 0194 00ED00E0 		.word	-536810240
+ 231 0198 00600040 		.word	1073766400
+ 232 019c 00000000 		.word	.LANCHOR2
+ 233 01a0 00000000 		.word	.LANCHOR3
+ 234 01a4 80020040 		.word	1073742464
+ 235 01a8 00000000 		.word	.LANCHOR4
+ 236 01ac 00020040 		.word	1073742336
+ 237 01b0 00000140 		.word	1073807360
+ 238 01b4 00000000 		.word	.LANCHOR5
+ 239 01b8 00000000 		.word	.LANCHOR6
+ 240 01bc 00100040 		.word	1073745920
+ 241 01c0 00000000 		.word	.LANCHOR7
+ 242 01c4 44030040 		.word	1073742660
+ 243 01c8 00100140 		.word	1073811456
+ 244 01cc 00000000 		.word	.LANCHOR8
+ 246              		.align	1
+ 247              		.global	DLPS_IO_ExitDlpsCb
+ 248              		.syntax unified
+ 249              		.code	16
+ 250              		.thumb_func
+ 252              	DLPS_IO_ExitDlpsCb:
+ 253              		@ args = 0, pretend = 0, frame = 16
+ 254              		@ frame_needed = 0, uses_anonymous_args = 0
+ 255 01d0 F0B5     		push	{r4, r5, r6, r7, lr}
+ 256 01d2 CE46     		mov	lr, r9
+ 257 01d4 4746     		mov	r7, r8
+ 258 01d6 80B5     		push	{r7, lr}
+ 259 01d8 85B0     		sub	sp, sp, #20
+ 260 01da 7A4A     		ldr	r2, .L19
+ 261 01dc 0023     		movs	r3, #0
+ 262 01de 7A4C     		ldr	r4, .L19+4
+ 263              	.L12:
+ 264 01e0 01CA     		ldmia	r2!, {r0}
+ 265 01e2 9900     		lsls	r1, r3, #2
+ 266 01e4 0851     		str	r0, [r1, r4]
+ 267 01e6 0133     		adds	r3, r3, #1
+ 268 01e8 0A2B     		cmp	r3, #10
+ 269 01ea F9D1     		bne	.L12
+ 270 01ec 774E     		ldr	r6, .L19+8
+ 271 01ee F368     		ldr	r3, [r6, #12]
+ 272 01f0 8020     		movs	r0, #128
+ 273 01f2 C004     		lsls	r0, r0, #19
+ 274 01f4 0343     		orrs	r3, r0
+ 275 01f6 F360     		str	r3, [r6, #12]
+ 276 01f8 F268     		ldr	r2, [r6, #12]
+ 277 01fa 8023     		movs	r3, #128
+ 278 01fc 5B05     		lsls	r3, r3, #21
+ 279 01fe 1343     		orrs	r3, r2
+ 280 0200 F360     		str	r3, [r6, #12]
+ 281 0202 8027     		movs	r7, #128
+ 282 0204 FF05     		lsls	r7, r7, #23
+ 283 0206 8723     		movs	r3, #135
+ 284 0208 9B00     		lsls	r3, r3, #2
+ 285 020a 9946     		mov	r9, r3
+ 286 020c FB58     		ldr	r3, [r7, r3]
+ 287 020e 0124     		movs	r4, #1
+ 288 0210 2343     		orrs	r3, r4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 6
+
+
+ 289 0212 4A46     		mov	r2, r9
+ 290 0214 BB50     		str	r3, [r7, r2]
+ 291 0216 1C32     		adds	r2, r2, #28
+ 292 0218 BB58     		ldr	r3, [r7, r2]
+ 293 021a C021     		movs	r1, #192
+ 294 021c 8904     		lsls	r1, r1, #18
+ 295 021e 8846     		mov	r8, r1
+ 296 0220 0B43     		orrs	r3, r1
+ 297 0222 BB50     		str	r3, [r7, r2]
+ 298 0224 6A4B     		ldr	r3, .L19+12
+ 299 0226 DA68     		ldr	r2, [r3, #12]
+ 300 0228 1F21     		movs	r1, #31
+ 301 022a 8A43     		bics	r2, r1
+ 302 022c DA60     		str	r2, [r3, #12]
+ 303 022e 694A     		ldr	r2, .L19+16
+ 304 0230 D16A     		ldr	r1, [r2, #44]
+ 305 0232 1965     		str	r1, [r3, #80]
+ 306 0234 9968     		ldr	r1, [r3, #8]
+ 307 0236 090C     		lsrs	r1, r1, #16
+ 308 0238 0904     		lsls	r1, r1, #16
+ 309 023a 9960     		str	r1, [r3, #8]
+ 310 023c D168     		ldr	r1, [r2, #12]
+ 311 023e 1961     		str	r1, [r3, #16]
+ 312 0240 1169     		ldr	r1, [r2, #16]
+ 313 0242 5961     		str	r1, [r3, #20]
+ 314 0244 5169     		ldr	r1, [r2, #20]
+ 315 0246 9961     		str	r1, [r3, #24]
+ 316 0248 9169     		ldr	r1, [r2, #24]
+ 317 024a D961     		str	r1, [r3, #28]
+ 318 024c D169     		ldr	r1, [r2, #28]
+ 319 024e 1962     		str	r1, [r3, #32]
+ 320 0250 116A     		ldr	r1, [r2, #32]
+ 321 0252 5962     		str	r1, [r3, #36]
+ 322 0254 516A     		ldr	r1, [r2, #36]
+ 323 0256 9962     		str	r1, [r3, #40]
+ 324 0258 916A     		ldr	r1, [r2, #40]
+ 325 025a D962     		str	r1, [r3, #44]
+ 326 025c 5168     		ldr	r1, [r2, #4]
+ 327 025e 9960     		str	r1, [r3, #8]
+ 328 0260 0321     		movs	r1, #3
+ 329 0262 1568     		ldr	r5, [r2]
+ 330 0264 8D43     		bics	r5, r1
+ 331 0266 5D60     		str	r5, [r3, #4]
+ 332 0268 116B     		ldr	r1, [r2, #48]
+ 333 026a 5965     		str	r1, [r3, #84]
+ 334 026c 516B     		ldr	r1, [r2, #52]
+ 335 026e 9965     		str	r1, [r3, #88]
+ 336 0270 916B     		ldr	r1, [r2, #56]
+ 337 0272 D965     		str	r1, [r3, #92]
+ 338 0274 5968     		ldr	r1, [r3, #4]
+ 339 0276 0843     		orrs	r0, r1
+ 340 0278 5860     		str	r0, [r3, #4]
+ 341 027a D968     		ldr	r1, [r3, #12]
+ 342 027c F825     		movs	r5, #248
+ 343 027e 6D01     		lsls	r5, r5, #5
+ 344 0280 2943     		orrs	r1, r5
+ 345 0282 D960     		str	r1, [r3, #12]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 7
+
+
+ 346 0284 9268     		ldr	r2, [r2, #8]
+ 347 0286 DA60     		str	r2, [r3, #12]
+ 348 0288 534B     		ldr	r3, .L19+20
+ 349 028a 1988     		ldrh	r1, [r3]
+ 350 028c 8820     		movs	r0, #136
+ 351 028e 4000     		lsls	r0, r0, #1
+ 352 0290 FFF7FEFF 		bl	btaon_fast_write
+ 353 0294 4B46     		mov	r3, r9
+ 354 0296 FA58     		ldr	r2, [r7, r3]
+ 355 0298 1D3B     		subs	r3, r3, #29
+ 356 029a FF3B     		subs	r3, r3, #255
+ 357 029c 1343     		orrs	r3, r2
+ 358 029e 4A46     		mov	r2, r9
+ 359 02a0 BB50     		str	r3, [r7, r2]
+ 360 02a2 1432     		adds	r2, r2, #20
+ 361 02a4 BB58     		ldr	r3, [r7, r2]
+ 362 02a6 4146     		mov	r1, r8
+ 363 02a8 0B43     		orrs	r3, r1
+ 364 02aa BB50     		str	r3, [r7, r2]
+ 365 02ac 4B4A     		ldr	r2, .L19+24
+ 366 02ae 5168     		ldr	r1, [r2, #4]
+ 367 02b0 4B4B     		ldr	r3, .L19+28
+ 368 02b2 5960     		str	r1, [r3, #4]
+ 369 02b4 9068     		ldr	r0, [r2, #8]
+ 370 02b6 9860     		str	r0, [r3, #8]
+ 371 02b8 1069     		ldr	r0, [r2, #16]
+ 372 02ba 5863     		str	r0, [r3, #52]
+ 373 02bc 5069     		ldr	r0, [r2, #20]
+ 374 02be 9863     		str	r0, [r3, #56]
+ 375 02c0 9069     		ldr	r0, [r2, #24]
+ 376 02c2 D863     		str	r0, [r3, #60]
+ 377 02c4 D069     		ldr	r0, [r2, #28]
+ 378 02c6 9864     		str	r0, [r3, #72]
+ 379 02c8 1068     		ldr	r0, [r2]
+ 380 02ca 1860     		str	r0, [r3]
+ 381 02cc C943     		mvns	r1, r1
+ 382 02ce D964     		str	r1, [r3, #76]
+ 383 02d0 D168     		ldr	r1, [r2, #12]
+ 384 02d2 1963     		str	r1, [r3, #48]
+ 385 02d4 4349     		ldr	r1, .L19+32
+ 386 02d6 106A     		ldr	r0, [r2, #32]
+ 387 02d8 0860     		str	r0, [r1]
+ 388 02da 526A     		ldr	r2, [r2, #36]
+ 389 02dc 9A66     		str	r2, [r3, #104]
+ 390 02de 3269     		ldr	r2, [r6, #16]
+ 391 02e0 8023     		movs	r3, #128
+ 392 02e2 5B01     		lsls	r3, r3, #5
+ 393 02e4 1343     		orrs	r3, r2
+ 394 02e6 3361     		str	r3, [r6, #16]
+ 395 02e8 326B     		ldr	r2, [r6, #48]
+ 396 02ea C023     		movs	r3, #192
+ 397 02ec 9B01     		lsls	r3, r3, #6
+ 398 02ee 1343     		orrs	r3, r2
+ 399 02f0 3363     		str	r3, [r6, #48]
+ 400 02f2 3D4B     		ldr	r3, .L19+36
+ 401 02f4 DA68     		ldr	r2, [r3, #12]
+ 402 02f6 8026     		movs	r6, #128
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 8
+
+
+ 403 02f8 3243     		orrs	r2, r6
+ 404 02fa DA60     		str	r2, [r3, #12]
+ 405 02fc 3B4A     		ldr	r2, .L19+40
+ 406 02fe D069     		ldr	r0, [r2, #28]
+ 407 0300 1862     		str	r0, [r3, #32]
+ 408 0302 9169     		ldr	r1, [r2, #24]
+ 409 0304 D961     		str	r1, [r3, #28]
+ 410 0306 1168     		ldr	r1, [r2]
+ 411 0308 1960     		str	r1, [r3]
+ 412 030a 5168     		ldr	r1, [r2, #4]
+ 413 030c 5960     		str	r1, [r3, #4]
+ 414 030e D968     		ldr	r1, [r3, #12]
+ 415 0310 B143     		bics	r1, r6
+ 416 0312 D960     		str	r1, [r3, #12]
+ 417 0314 460D     		lsrs	r6, r0, #21
+ 418 0316 0821     		movs	r1, #8
+ 419 0318 3140     		ands	r1, r6
+ 420 031a 800C     		lsrs	r0, r0, #18
+ 421 031c 0540     		ands	r5, r0
+ 422 031e 0D43     		orrs	r5, r1
+ 423 0320 2C43     		orrs	r4, r5
+ 424 0322 9C60     		str	r4, [r3, #8]
+ 425 0324 1169     		ldr	r1, [r2, #16]
+ 426 0326 D960     		str	r1, [r3, #12]
+ 427 0328 5169     		ldr	r1, [r2, #20]
+ 428 032a 1961     		str	r1, [r3, #16]
+ 429 032c 9168     		ldr	r1, [r2, #8]
+ 430 032e 5960     		str	r1, [r3, #4]
+ 431 0330 116A     		ldr	r1, [r2, #32]
+ 432 0332 1964     		str	r1, [r3, #64]
+ 433 0334 516A     		ldr	r1, [r2, #36]
+ 434 0336 9964     		str	r1, [r3, #72]
+ 435 0338 916A     		ldr	r1, [r2, #40]
+ 436 033a 9962     		str	r1, [r3, #40]
+ 437 033c D26A     		ldr	r2, [r2, #44]
+ 438 033e 1A65     		str	r2, [r3, #80]
+ 439 0340 2B4B     		ldr	r3, .L19+44
+ 440 0342 1B68     		ldr	r3, [r3]
+ 441 0344 002B     		cmp	r3, #0
+ 442 0346 00D0     		beq	.L13
+ 443 0348 9847     		blx	r3
+ 444              	.L13:
+ 445 034a 0023     		movs	r3, #0
+ 446 034c 6A46     		mov	r2, sp
+ 447 034e 1371     		strb	r3, [r2, #4]
+ 448 0350 0133     		adds	r3, r3, #1
+ 449 0352 1373     		strb	r3, [r2, #12]
+ 450 0354 0233     		adds	r3, r3, #2
+ 451 0356 0293     		str	r3, [sp, #8]
+ 452 0358 01A8     		add	r0, sp, #4
+ 453 035a FFF7FEFF 		bl	NVIC_Init
+ 454 035e 254B     		ldr	r3, .L19+48
+ 455 0360 1A68     		ldr	r2, [r3]
+ 456 0362 5B68     		ldr	r3, [r3, #4]
+ 457 0364 1342     		tst	r3, r2
+ 458 0366 25D1     		bne	.L18
+ 459              	.L14:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 9
+
+
+ 460 0368 234B     		ldr	r3, .L19+52
+ 461 036a 1B68     		ldr	r3, [r3]
+ 462 036c 2349     		ldr	r1, .L19+56
+ 463 036e C022     		movs	r2, #192
+ 464 0370 9200     		lsls	r2, r2, #2
+ 465 0372 8858     		ldr	r0, [r1, r2]
+ 466 0374 224C     		ldr	r4, .L19+60
+ 467 0376 2340     		ands	r3, r4
+ 468 0378 0343     		orrs	r3, r0
+ 469 037a 8B50     		str	r3, [r1, r2]
+ 470 037c 0123     		movs	r3, #1
+ 471 037e 1E4C     		ldr	r4, .L19+52
+ 472 0380 0800     		movs	r0, r1
+ 473              	.L15:
+ 474 0382 9A00     		lsls	r2, r3, #2
+ 475 0384 1159     		ldr	r1, [r2, r4]
+ 476 0386 1A00     		movs	r2, r3
+ 477 0388 C032     		adds	r2, r2, #192
+ 478 038a 9200     		lsls	r2, r2, #2
+ 479 038c 1150     		str	r1, [r2, r0]
+ 480 038e 0133     		adds	r3, r3, #1
+ 481 0390 082B     		cmp	r3, #8
+ 482 0392 F6D1     		bne	.L15
+ 483 0394 174B     		ldr	r3, .L19+48
+ 484 0396 9968     		ldr	r1, [r3, #8]
+ 485 0398 1A4A     		ldr	r2, .L19+64
+ 486 039a 9160     		str	r1, [r2, #8]
+ 487 039c 1A4A     		ldr	r2, .L19+68
+ 488 039e 1168     		ldr	r1, [r2]
+ 489 03a0 1A4A     		ldr	r2, .L19+72
+ 490 03a2 D160     		str	r1, [r2, #12]
+ 491 03a4 1A68     		ldr	r2, [r3]
+ 492 03a6 154B     		ldr	r3, .L19+56
+ 493 03a8 1A60     		str	r2, [r3]
+ 494 03aa 05B0     		add	sp, sp, #20
+ 495              		@ sp needed
+ 496 03ac C0BC     		pop	{r6, r7}
+ 497 03ae B946     		mov	r9, r7
+ 498 03b0 B046     		mov	r8, r6
+ 499 03b2 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 500              	.L18:
+ 501 03b4 0F4B     		ldr	r3, .L19+48
+ 502 03b6 5B68     		ldr	r3, [r3, #4]
+ 503 03b8 0122     		movs	r2, #1
+ 504 03ba 1549     		ldr	r1, .L19+76
+ 505 03bc 1548     		ldr	r0, .L19+80
+ 506 03be FFF7FEFF 		bl	log_buffer
+ 507 03c2 D1E7     		b	.L14
+ 508              	.L20:
+ 509              		.align	2
+ 510              	.L19:
+ 511 03c4 00000000 		.word	.LANCHOR3
+ 512 03c8 80020040 		.word	1073742464
+ 513 03cc 00020040 		.word	1073742336
+ 514 03d0 00000140 		.word	1073807360
+ 515 03d4 00000000 		.word	.LANCHOR5
+ 516 03d8 00000000 		.word	.LANCHOR6
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 10
+
+
+ 517 03dc 00000000 		.word	.LANCHOR7
+ 518 03e0 00100040 		.word	1073745920
+ 519 03e4 44030040 		.word	1073742660
+ 520 03e8 00100140 		.word	1073811456
+ 521 03ec 00000000 		.word	.LANCHOR8
+ 522 03f0 00000000 		.word	.LANCHOR9
+ 523 03f4 00000000 		.word	.LANCHOR0
+ 524 03f8 00000000 		.word	.LANCHOR1
+ 525 03fc 00E100E0 		.word	-536813312
+ 526 0400 00FF00FF 		.word	-16711936
+ 527 0404 00ED00E0 		.word	-536810240
+ 528 0408 00000000 		.word	.LANCHOR2
+ 529 040c 00600040 		.word	1073766400
+ 530 0410 00000000 		.word	.LANCHOR10
+ 531 0414 01011025 		.word	621805825
+ 533              		.section	.text.DLPS_IORegister,"ax",%progbits
+ 534              		.align	1
+ 535              		.global	DLPS_IORegister
+ 536              		.syntax unified
+ 537              		.code	16
+ 538              		.thumb_func
+ 540              	DLPS_IORegister:
+ 541              		@ args = 0, pretend = 0, frame = 0
+ 542              		@ frame_needed = 0, uses_anonymous_args = 0
+ 543 0000 10B5     		push	{r4, lr}
+ 544 0002 054C     		ldr	r4, .L22
+ 545 0004 0221     		movs	r1, #2
+ 546 0006 0548     		ldr	r0, .L22+4
+ 547 0008 2368     		ldr	r3, [r4]
+ 548 000a 9847     		blx	r3
+ 549 000c 2368     		ldr	r3, [r4]
+ 550 000e 0521     		movs	r1, #5
+ 551 0010 0348     		ldr	r0, .L22+8
+ 552 0012 9847     		blx	r3
+ 553              		@ sp needed
+ 554 0014 10BD     		pop	{r4, pc}
+ 555              	.L23:
+ 556 0016 C046     		.align	2
+ 557              	.L22:
+ 558 0018 00000000 		.word	platform_pm_register_callback_func
+ 559 001c 00000000 		.word	DLPS_IO_EnterDlpsCb
+ 560 0020 00000000 		.word	DLPS_IO_ExitDlpsCb
+ 562              		.global	PeriIntStoreReg
+ 563              		.global	CPU_StoreReg_IP
+ 564              		.global	CPU_StoreReg
+ 565              		.global	User_IO_ExitDlpsCB
+ 566              		.global	User_IO_EnterDlpsCB
+ 567              		.global	UART0_StoreReg
+ 568              		.global	GPIO_StoreReg
+ 569              		.global	AON_StoreReg
+ 570              		.global	ADC_StoreReg
+ 571              		.global	Pinmux_StoreReg
+ 572              		.section	.TRACE,"a"
+ 573              		.align	2
+ 574              		.set	.LANCHOR10,. + 0
+ 577              	format.0:
+ 578 0000 21212A6D 		.ascii	"!!*miss interrupt: pending register: 0x%x\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 11
+
+
+ 578      69737320 
+ 578      696E7465 
+ 578      72727570 
+ 578      743A2070 
+ 579              		.section	.bss.ADC_StoreReg,"aw",%nobits
+ 580              		.align	2
+ 581              		.set	.LANCHOR5,. + 0
+ 584              	ADC_StoreReg:
+ 585 0000 00000000 		.space	60
+ 585      00000000 
+ 585      00000000 
+ 585      00000000 
+ 585      00000000 
+ 586              		.section	.bss.AON_StoreReg,"aw",%nobits
+ 587              		.align	1
+ 588              		.set	.LANCHOR6,. + 0
+ 591              	AON_StoreReg:
+ 592 0000 0000     		.space	2
+ 593              		.section	.bss.CPU_StoreReg,"aw",%nobits
+ 594              		.align	2
+ 595              		.set	.LANCHOR0,. + 0
+ 598              	CPU_StoreReg:
+ 599 0000 00000000 		.space	12
+ 599      00000000 
+ 599      00000000 
+ 600              		.section	.bss.CPU_StoreReg_IP,"aw",%nobits
+ 601              		.align	2
+ 602              		.set	.LANCHOR1,. + 0
+ 605              	CPU_StoreReg_IP:
+ 606 0000 00000000 		.space	32
+ 606      00000000 
+ 606      00000000 
+ 606      00000000 
+ 606      00000000 
+ 607              		.section	.bss.GPIO_StoreReg,"aw",%nobits
+ 608              		.align	2
+ 609              		.set	.LANCHOR7,. + 0
+ 612              	GPIO_StoreReg:
+ 613 0000 00000000 		.space	40
+ 613      00000000 
+ 613      00000000 
+ 613      00000000 
+ 613      00000000 
+ 614              		.section	.bss.PeriIntStoreReg,"aw",%nobits
+ 615              		.align	2
+ 616              		.set	.LANCHOR2,. + 0
+ 619              	PeriIntStoreReg:
+ 620 0000 00000000 		.space	4
+ 621              		.section	.bss.Pinmux_StoreReg,"aw",%nobits
+ 622              		.align	2
+ 623              		.set	.LANCHOR3,. + 0
+ 626              	Pinmux_StoreReg:
+ 627 0000 00000000 		.space	40
+ 627      00000000 
+ 627      00000000 
+ 627      00000000 
+ 627      00000000 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 12
+
+
+ 628              		.section	.bss.UART0_StoreReg,"aw",%nobits
+ 629              		.align	2
+ 630              		.set	.LANCHOR8,. + 0
+ 633              	UART0_StoreReg:
+ 634 0000 00000000 		.space	48
+ 634      00000000 
+ 634      00000000 
+ 634      00000000 
+ 634      00000000 
+ 635              		.section	.bss.User_IO_EnterDlpsCB,"aw",%nobits
+ 636              		.align	2
+ 637              		.set	.LANCHOR4,. + 0
+ 640              	User_IO_EnterDlpsCB:
+ 641 0000 00000000 		.space	4
+ 642              		.section	.bss.User_IO_ExitDlpsCB,"aw",%nobits
+ 643              		.align	2
+ 644              		.set	.LANCHOR9,. + 0
+ 647              	User_IO_ExitDlpsCB:
+ 648 0000 00000000 		.space	4
+ 649              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtl876x_io_dlps.c
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:16     .app.data_ram.text:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:22     .app.data_ram.text:00000000 DLPS_IO_EnterDlpsCb
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:227    .app.data_ram.text:00000188 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:246    .app.data_ram.text:000001d0 $t
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:252    .app.data_ram.text:000001d0 DLPS_IO_ExitDlpsCb
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:511    .app.data_ram.text:000003c4 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:534    .text.DLPS_IORegister:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:540    .text.DLPS_IORegister:00000000 DLPS_IORegister
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:558    .text.DLPS_IORegister:00000018 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:619    .bss.PeriIntStoreReg:00000000 PeriIntStoreReg
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:605    .bss.CPU_StoreReg_IP:00000000 CPU_StoreReg_IP
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:598    .bss.CPU_StoreReg:00000000 CPU_StoreReg
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:647    .bss.User_IO_ExitDlpsCB:00000000 User_IO_ExitDlpsCB
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:640    .bss.User_IO_EnterDlpsCB:00000000 User_IO_EnterDlpsCB
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:633    .bss.UART0_StoreReg:00000000 UART0_StoreReg
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:612    .bss.GPIO_StoreReg:00000000 GPIO_StoreReg
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:591    .bss.AON_StoreReg:00000000 AON_StoreReg
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:584    .bss.ADC_StoreReg:00000000 ADC_StoreReg
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:626    .bss.Pinmux_StoreReg:00000000 Pinmux_StoreReg
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:573    .TRACE:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:577    .TRACE:00000000 format.0
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:580    .bss.ADC_StoreReg:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:587    .bss.AON_StoreReg:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:594    .bss.CPU_StoreReg:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:601    .bss.CPU_StoreReg_IP:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:608    .bss.GPIO_StoreReg:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:615    .bss.PeriIntStoreReg:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:622    .bss.Pinmux_StoreReg:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:629    .bss.UART0_StoreReg:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:636    .bss.User_IO_EnterDlpsCB:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccqFXPbg.s:643    .bss.User_IO_ExitDlpsCB:00000000 $d
+
+UNDEFINED SYMBOLS
+platform_pm_get_power_mode
+btaon_fast_read_safe
+btaon_fast_write_safe_8b
+btaon_fast_write
+NVIC_Init
+log_buffer
+platform_pm_register_callback_func

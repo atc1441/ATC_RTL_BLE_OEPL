@@ -1,0 +1,544 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"retarget.c"
+  14              		.text
+  15              		.section	.text.uart_print_init,"ax",%progbits
+  16              		.align	1
+  17              		.global	uart_print_init
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	uart_print_init:
+  23              		@ args = 0, pretend = 0, frame = 32
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 70B5     		push	{r4, r5, r6, lr}
+  26 0002 8AB0     		sub	sp, sp, #40
+  27 0004 0122     		movs	r2, #1
+  28 0006 1849     		ldr	r1, .L2
+  29 0008 1848     		ldr	r0, .L2+4
+  30 000a FFF7FEFF 		bl	RCC_PeriphClockCmd
+  31 000e 0126     		movs	r6, #1
+  32 0010 0196     		str	r6, [sp, #4]
+  33 0012 0096     		str	r6, [sp]
+  34 0014 0223     		movs	r3, #2
+  35 0016 0122     		movs	r2, #1
+  36 0018 0121     		movs	r1, #1
+  37 001a 1820     		movs	r0, #24
+  38 001c FFF7FEFF 		bl	Pad_Config
+  39 0020 0025     		movs	r5, #0
+  40 0022 0195     		str	r5, [sp, #4]
+  41 0024 0095     		str	r5, [sp]
+  42 0026 0023     		movs	r3, #0
+  43 0028 0122     		movs	r2, #1
+  44 002a 0121     		movs	r1, #1
+  45 002c 1920     		movs	r0, #25
+  46 002e FFF7FEFF 		bl	Pad_Config
+  47 0032 2321     		movs	r1, #35
+  48 0034 1820     		movs	r0, #24
+  49 0036 FFF7FEFF 		bl	Pinmux_Config
+  50 003a 2421     		movs	r1, #36
+  51 003c 1920     		movs	r0, #25
+  52 003e FFF7FEFF 		bl	Pinmux_Config
+  53 0042 03AC     		add	r4, sp, #12
+  54 0044 2000     		movs	r0, r4
+  55 0046 FFF7FEFF 		bl	UART_StructInit
+  56 004a 3023     		movs	r3, #48
+  57 004c 6380     		strh	r3, [r4, #2]
+  58 004e 2E3B     		subs	r3, r3, #46
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 2
+
+
+  59 0050 A380     		strh	r3, [r4, #4]
+  60 0052 0133     		adds	r3, r3, #1
+  61 0054 2380     		strh	r3, [r4]
+  62 0056 E680     		strh	r6, [r4, #6]
+  63 0058 2581     		strh	r5, [r4, #8]
+  64 005a 6581     		strh	r5, [r4, #10]
+  65 005c 2100     		movs	r1, r4
+  66 005e 0448     		ldr	r0, .L2+8
+  67 0060 FFF7FEFF 		bl	UART_Init
+  68 0064 0AB0     		add	sp, sp, #40
+  69              		@ sp needed
+  70 0066 70BD     		pop	{r4, r5, r6, pc}
+  71              	.L3:
+  72              		.align	2
+  73              	.L2:
+  74 0068 01000040 		.word	1073741825
+  75 006c 01000008 		.word	134217729
+  76 0070 00200140 		.word	1073815552
+  78              		.section	.text.uart_puts,"ax",%progbits
+  79              		.align	1
+  80              		.global	uart_puts
+  81              		.syntax unified
+  82              		.code	16
+  83              		.thumb_func
+  85              	uart_puts:
+  86              		@ args = 0, pretend = 0, frame = 8
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88 0000 30B5     		push	{r4, r5, lr}
+  89 0002 83B0     		sub	sp, sp, #12
+  90 0004 0400     		movs	r4, r0
+  91 0006 0122     		movs	r2, #1
+  92 0008 1549     		ldr	r1, .L16
+  93 000a 1648     		ldr	r0, .L16+4
+  94 000c FFF7FEFF 		bl	RCC_PeriphClockCmd
+  95 0010 2378     		ldrb	r3, [r4]
+  96 0012 002B     		cmp	r3, #0
+  97 0014 22D0     		beq	.L4
+  98 0016 2000     		movs	r0, r4
+  99 0018 134C     		ldr	r4, .L16+8
+ 100 001a 144A     		ldr	r2, .L16+12
+ 101 001c 2021     		movs	r1, #32
+ 102 001e 0D25     		movs	r5, #13
+ 103 0020 10E0     		b	.L11
+ 104              	.L15:
+ 105 0022 0094     		str	r4, [sp]
+ 106              	.L8:
+ 107 0024 5369     		ldr	r3, [r2, #20]
+ 108 0026 1942     		tst	r1, r3
+ 109 0028 04D1     		bne	.L7
+ 110 002a 009B     		ldr	r3, [sp]
+ 111 002c 013B     		subs	r3, r3, #1
+ 112 002e 0093     		str	r3, [sp]
+ 113 0030 002B     		cmp	r3, #0
+ 114 0032 F7D1     		bne	.L8
+ 115              	.L7:
+ 116 0034 5562     		str	r5, [r2, #36]
+ 117 0036 07E0     		b	.L6
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 3
+
+
+ 118              	.L9:
+ 119 0038 0378     		ldrb	r3, [r0]
+ 120 003a 5362     		str	r3, [r2, #36]
+ 121 003c 0130     		adds	r0, r0, #1
+ 122 003e 0378     		ldrb	r3, [r0]
+ 123 0040 002B     		cmp	r3, #0
+ 124 0042 0BD0     		beq	.L4
+ 125              	.L11:
+ 126 0044 0A2B     		cmp	r3, #10
+ 127 0046 ECD0     		beq	.L15
+ 128              	.L6:
+ 129 0048 0194     		str	r4, [sp, #4]
+ 130              	.L10:
+ 131 004a 5369     		ldr	r3, [r2, #20]
+ 132 004c 1942     		tst	r1, r3
+ 133 004e F3D1     		bne	.L9
+ 134 0050 019B     		ldr	r3, [sp, #4]
+ 135 0052 013B     		subs	r3, r3, #1
+ 136 0054 0193     		str	r3, [sp, #4]
+ 137 0056 002B     		cmp	r3, #0
+ 138 0058 F7D1     		bne	.L10
+ 139 005a EDE7     		b	.L9
+ 140              	.L4:
+ 141 005c 03B0     		add	sp, sp, #12
+ 142              		@ sp needed
+ 143 005e 30BD     		pop	{r4, r5, pc}
+ 144              	.L17:
+ 145              		.align	2
+ 146              	.L16:
+ 147 0060 01000040 		.word	1073741825
+ 148 0064 01000008 		.word	134217729
+ 149 0068 10270000 		.word	10000
+ 150 006c 00200140 		.word	1073815552
+ 152              		.section	.rodata.uart_bdaddr_str.str1.4,"aMS",%progbits,1
+ 153              		.align	2
+ 154              	.LC1:
+ 155 0000 3F3F3A3F 		.ascii	"??:??:??:??:??:??\000"
+ 155      3F3A3F3F 
+ 155      3A3F3F3A 
+ 155      3F3F3A3F 
+ 155      3F00
+ 156 0012 0000     		.align	2
+ 157              	.LC3:
+ 158 0014 25303258 		.ascii	"%02X:%02X:%02X:%02X:%02X:%02X\000"
+ 158      3A253032 
+ 158      583A2530 
+ 158      32583A25 
+ 158      3032583A 
+ 159              		.section	.text.uart_bdaddr_str,"ax",%progbits
+ 160              		.align	1
+ 161              		.global	uart_bdaddr_str
+ 162              		.syntax unified
+ 163              		.code	16
+ 164              		.thumb_func
+ 166              	uart_bdaddr_str:
+ 167              		@ args = 0, pretend = 0, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 4
+
+
+ 169 0000 10B5     		push	{r4, lr}
+ 170 0002 86B0     		sub	sp, sp, #24
+ 171 0004 0028     		cmp	r0, #0
+ 172 0006 13D0     		beq	.L20
+ 173 0008 4379     		ldrb	r3, [r0, #5]
+ 174 000a 0A4C     		ldr	r4, .L21
+ 175 000c 0278     		ldrb	r2, [r0]
+ 176 000e 0492     		str	r2, [sp, #16]
+ 177 0010 4278     		ldrb	r2, [r0, #1]
+ 178 0012 0392     		str	r2, [sp, #12]
+ 179 0014 8278     		ldrb	r2, [r0, #2]
+ 180 0016 0292     		str	r2, [sp, #8]
+ 181 0018 C278     		ldrb	r2, [r0, #3]
+ 182 001a 0192     		str	r2, [sp, #4]
+ 183 001c 0279     		ldrb	r2, [r0, #4]
+ 184 001e 0092     		str	r2, [sp]
+ 185 0020 054A     		ldr	r2, .L21+4
+ 186 0022 1221     		movs	r1, #18
+ 187 0024 2000     		movs	r0, r4
+ 188 0026 FFF7FEFF 		bl	snprintf
+ 189 002a 2000     		movs	r0, r4
+ 190              	.L18:
+ 191 002c 06B0     		add	sp, sp, #24
+ 192              		@ sp needed
+ 193 002e 10BD     		pop	{r4, pc}
+ 194              	.L20:
+ 195 0030 0248     		ldr	r0, .L21+8
+ 196 0032 FBE7     		b	.L18
+ 197              	.L22:
+ 198              		.align	2
+ 199              	.L21:
+ 200 0034 00000000 		.word	.LANCHOR0
+ 201 0038 14000000 		.word	.LC3
+ 202 003c 00000000 		.word	.LC1
+ 204              		.section	.text.uart_printf,"ax",%progbits
+ 205              		.align	1
+ 206              		.global	uart_printf
+ 207              		.syntax unified
+ 208              		.code	16
+ 209              		.thumb_func
+ 211              	uart_printf:
+ 212              		@ args = 4, pretend = 16, frame = 264
+ 213              		@ frame_needed = 0, uses_anonymous_args = 1
+ 214 0000 0FB4     		push	{r0, r1, r2, r3}
+ 215 0002 10B5     		push	{r4, lr}
+ 216 0004 C2B0     		sub	sp, sp, #264
+ 217 0006 44AB     		add	r3, sp, #272
+ 218 0008 04CB     		ldmia	r3!, {r2}
+ 219 000a 0193     		str	r3, [sp, #4]
+ 220 000c 8021     		movs	r1, #128
+ 221 000e 4900     		lsls	r1, r1, #1
+ 222 0010 02A8     		add	r0, sp, #8
+ 223 0012 FFF7FEFF 		bl	vsnprintf
+ 224 0016 041E     		subs	r4, r0, #0
+ 225 0018 05DC     		bgt	.L25
+ 226              	.L23:
+ 227 001a 2000     		movs	r0, r4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 5
+
+
+ 228 001c 42B0     		add	sp, sp, #264
+ 229              		@ sp needed
+ 230 001e 10BC     		pop	{r4}
+ 231 0020 08BC     		pop	{r3}
+ 232 0022 04B0     		add	sp, sp, #16
+ 233 0024 1847     		bx	r3
+ 234              	.L25:
+ 235 0026 02A8     		add	r0, sp, #8
+ 236 0028 FFF7FEFF 		bl	uart_puts
+ 237 002c F5E7     		b	.L23
+ 239              		.section	.rodata.HardFault_Handler_C.str1.4,"aMS",%progbits,1
+ 240              		.align	2
+ 241              	.LC5:
+ 242 0000 0D0A2A2A 		.ascii	"\015\012*** HARDFAULT / PLATFORM ERROR ***\015\012\000"
+ 242      2A204841 
+ 242      52444641 
+ 242      554C5420 
+ 242      2F20504C 
+ 243 0027 00       		.align	2
+ 244              	.LC7:
+ 245 0028 5230203D 		.ascii	"R0 =0x%08X  R1 =0x%08X\015\012\000"
+ 245      30782530 
+ 245      38582020 
+ 245      5231203D 
+ 245      30782530 
+ 246 0041 000000   		.align	2
+ 247              	.LC9:
+ 248 0044 5232203D 		.ascii	"R2 =0x%08X  R3 =0x%08X\015\012\000"
+ 248      30782530 
+ 248      38582020 
+ 248      5233203D 
+ 248      30782530 
+ 249 005d 000000   		.align	2
+ 250              	.LC11:
+ 251 0060 5231323D 		.ascii	"R12=0x%08X  LR =0x%08X\015\012\000"
+ 251      30782530 
+ 251      38582020 
+ 251      4C52203D 
+ 251      30782530 
+ 252 0079 000000   		.align	2
+ 253              	.LC13:
+ 254 007c 5043203D 		.ascii	"PC =0x%08X  xPSR=0x%08X\015\012\000"
+ 254      30782530 
+ 254      38582020 
+ 254      78505352 
+ 254      3D307825 
+ 255 0096 0000     		.align	2
+ 256              	.LC15:
+ 257 0098 48465352 		.ascii	"HFSR=0x%08X CFSR=0x%08X\015\012\000"
+ 257      3D307825 
+ 257      30385820 
+ 257      43465352 
+ 257      3D307825 
+ 258 00b2 0000     		.align	2
+ 259              	.LC17:
+ 260 00b4 2D2D2D20 		.ascii	"--- halted ---\015\012\000"
+ 260      68616C74 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 6
+
+
+ 260      6564202D 
+ 260      2D2D0D0A 
+ 260      00
+ 261              		.section	.text.HardFault_Handler_C,"ax",%progbits
+ 262              		.align	1
+ 263              		.global	HardFault_Handler_C
+ 264              		.syntax unified
+ 265              		.code	16
+ 266              		.thumb_func
+ 268              	HardFault_Handler_C:
+ 269              		@ Volatile: function does not return.
+ 270              		@ args = 0, pretend = 0, frame = 0
+ 271              		@ frame_needed = 0, uses_anonymous_args = 0
+ 272 0000 10B5     		push	{r4, lr}
+ 273 0002 0400     		movs	r4, r0
+ 274 0004 0122     		movs	r2, #1
+ 275 0006 1349     		ldr	r1, .L28
+ 276 0008 1348     		ldr	r0, .L28+4
+ 277 000a FFF7FEFF 		bl	RCC_PeriphClockCmd
+ 278 000e 1348     		ldr	r0, .L28+8
+ 279 0010 FFF7FEFF 		bl	uart_puts
+ 280 0014 6268     		ldr	r2, [r4, #4]
+ 281 0016 2168     		ldr	r1, [r4]
+ 282 0018 1148     		ldr	r0, .L28+12
+ 283 001a FFF7FEFF 		bl	uart_printf
+ 284 001e E268     		ldr	r2, [r4, #12]
+ 285 0020 A168     		ldr	r1, [r4, #8]
+ 286 0022 1048     		ldr	r0, .L28+16
+ 287 0024 FFF7FEFF 		bl	uart_printf
+ 288 0028 6269     		ldr	r2, [r4, #20]
+ 289 002a 2169     		ldr	r1, [r4, #16]
+ 290 002c 0E48     		ldr	r0, .L28+20
+ 291 002e FFF7FEFF 		bl	uart_printf
+ 292 0032 E269     		ldr	r2, [r4, #28]
+ 293 0034 A169     		ldr	r1, [r4, #24]
+ 294 0036 0D48     		ldr	r0, .L28+24
+ 295 0038 FFF7FEFF 		bl	uart_printf
+ 296 003c 0C4B     		ldr	r3, .L28+28
+ 297 003e 1968     		ldr	r1, [r3]
+ 298 0040 0C4B     		ldr	r3, .L28+32
+ 299 0042 1A68     		ldr	r2, [r3]
+ 300 0044 0C48     		ldr	r0, .L28+36
+ 301 0046 FFF7FEFF 		bl	uart_printf
+ 302 004a 0C48     		ldr	r0, .L28+40
+ 303 004c FFF7FEFF 		bl	uart_puts
+ 304              	.L27:
+ 305 0050 FEE7     		b	.L27
+ 306              	.L29:
+ 307 0052 C046     		.align	2
+ 308              	.L28:
+ 309 0054 01000040 		.word	1073741825
+ 310 0058 01000008 		.word	134217729
+ 311 005c 00000000 		.word	.LC5
+ 312 0060 28000000 		.word	.LC7
+ 313 0064 44000000 		.word	.LC9
+ 314 0068 60000000 		.word	.LC11
+ 315 006c 7C000000 		.word	.LC13
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 7
+
+
+ 316 0070 2CED00E0 		.word	-536810196
+ 317 0074 28ED00E0 		.word	-536810200
+ 318 0078 98000000 		.word	.LC15
+ 319 007c B4000000 		.word	.LC17
+ 321              		.section	.text.HardFault_Handler,"ax",%progbits
+ 322              		.align	1
+ 323              		.global	HardFault_Handler
+ 324              		.syntax unified
+ 325              		.code	16
+ 326              		.thumb_func
+ 328              	HardFault_Handler:
+ 329              		@ Naked Function: prologue and epilogue provided by programmer.
+ 330              		@ args = 0, pretend = 0, frame = 0
+ 331              		@ frame_needed = 0, uses_anonymous_args = 0
+ 332              		.syntax divided
+ 333              	@ 179 "../src/retarget.c" 1
+ 334 0000 7046     		MOV  R0, LR          
+ 335 0002 0421     	MOV  R1, #4          
+ 336 0004 0842     	TST  R0, R1          
+ 337 0006 03D0     	BEQ  1f              
+ 338 0008 EFF30980 	MRS  R0, PSP         
+ 339 000c 0249     	LDR  R1, =HardFault_Handler_C 
+ 340 000e 0847     	BX   R1              
+ 341              	1:                   
+ 342 0010 EFF30880 	MRS  R0, MSP         
+ 343 0014 0049     	LDR  R1, =HardFault_Handler_C 
+ 344 0016 0847     	BX   R1              
+ 345              	
+ 346              	@ 0 "" 2
+ 347              		.thumb
+ 348              		.syntax unified
+ 350              		.section	.text._isatty,"ax",%progbits
+ 351              		.align	1
+ 352              		.global	_isatty
+ 353              		.syntax unified
+ 354              		.code	16
+ 355              		.thumb_func
+ 357              	_isatty:
+ 358              		@ args = 0, pretend = 0, frame = 0
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360              		@ link register save eliminated.
+ 361 0000 431E     		subs	r3, r0, #1
+ 362 0002 0020     		movs	r0, #0
+ 363 0004 0122     		movs	r2, #1
+ 364 0006 9A42     		cmp	r2, r3
+ 365 0008 4041     		adcs	r0, r0, r0
+ 366              		@ sp needed
+ 367 000a 7047     		bx	lr
+ 369              		.section	.text._write,"ax",%progbits
+ 370              		.align	1
+ 371              		.global	_write
+ 372              		.syntax unified
+ 373              		.code	16
+ 374              		.thumb_func
+ 376              	_write:
+ 377              		@ args = 0, pretend = 0, frame = 8
+ 378              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 8
+
+
+ 379 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 380 0002 83B0     		sub	sp, sp, #12
+ 381 0004 0E00     		movs	r6, r1
+ 382 0006 1400     		movs	r4, r2
+ 383 0008 0122     		movs	r2, #1
+ 384 000a 1849     		ldr	r1, .L44
+ 385 000c 1848     		ldr	r0, .L44+4
+ 386 000e FFF7FEFF 		bl	RCC_PeriphClockCmd
+ 387 0012 002C     		cmp	r4, #0
+ 388 0014 26DD     		ble	.L33
+ 389 0016 3200     		movs	r2, r6
+ 390 0018 3619     		adds	r6, r6, r4
+ 391 001a 164F     		ldr	r7, .L44+8
+ 392 001c 1649     		ldr	r1, .L44+12
+ 393 001e 2020     		movs	r0, #32
+ 394 0020 0D23     		movs	r3, #13
+ 395 0022 9C46     		mov	ip, r3
+ 396 0024 10E0     		b	.L39
+ 397              	.L43:
+ 398 0026 0097     		str	r7, [sp]
+ 399              	.L36:
+ 400 0028 4B69     		ldr	r3, [r1, #20]
+ 401 002a 1842     		tst	r0, r3
+ 402 002c 04D1     		bne	.L35
+ 403 002e 009B     		ldr	r3, [sp]
+ 404 0030 013B     		subs	r3, r3, #1
+ 405 0032 0093     		str	r3, [sp]
+ 406 0034 002B     		cmp	r3, #0
+ 407 0036 F7D1     		bne	.L36
+ 408              	.L35:
+ 409 0038 6346     		mov	r3, ip
+ 410 003a 4B62     		str	r3, [r1, #36]
+ 411 003c 08E0     		b	.L34
+ 412              	.L37:
+ 413 003e 2B78     		ldrb	r3, [r5]
+ 414 0040 4B62     		str	r3, [r1, #36]
+ 415 0042 0132     		adds	r2, r2, #1
+ 416 0044 B242     		cmp	r2, r6
+ 417 0046 0DD0     		beq	.L33
+ 418              	.L39:
+ 419 0048 1500     		movs	r5, r2
+ 420 004a 1378     		ldrb	r3, [r2]
+ 421 004c 0A2B     		cmp	r3, #10
+ 422 004e EAD0     		beq	.L43
+ 423              	.L34:
+ 424 0050 0197     		str	r7, [sp, #4]
+ 425              	.L38:
+ 426 0052 4B69     		ldr	r3, [r1, #20]
+ 427 0054 1842     		tst	r0, r3
+ 428 0056 F2D1     		bne	.L37
+ 429 0058 019B     		ldr	r3, [sp, #4]
+ 430 005a 013B     		subs	r3, r3, #1
+ 431 005c 0193     		str	r3, [sp, #4]
+ 432 005e 002B     		cmp	r3, #0
+ 433 0060 F7D1     		bne	.L38
+ 434 0062 ECE7     		b	.L37
+ 435              	.L33:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 9
+
+
+ 436 0064 2000     		movs	r0, r4
+ 437 0066 03B0     		add	sp, sp, #12
+ 438              		@ sp needed
+ 439 0068 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 440              	.L45:
+ 441 006a C046     		.align	2
+ 442              	.L44:
+ 443 006c 01000040 		.word	1073741825
+ 444 0070 01000008 		.word	134217729
+ 445 0074 10270000 		.word	10000
+ 446 0078 00200140 		.word	1073815552
+ 448              		.section	.bss.buf.0,"aw",%nobits
+ 449              		.align	2
+ 450              		.set	.LANCHOR0,. + 0
+ 453              	buf.0:
+ 454 0000 00000000 		.space	18
+ 454      00000000 
+ 454      00000000 
+ 454      00000000 
+ 454      0000
+ 455              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccVClmpP.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 retarget.c
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:16     .text.uart_print_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:22     .text.uart_print_init:00000000 uart_print_init
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:74     .text.uart_print_init:00000068 $d
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:79     .text.uart_puts:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:85     .text.uart_puts:00000000 uart_puts
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:147    .text.uart_puts:00000060 $d
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:153    .rodata.uart_bdaddr_str.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:160    .text.uart_bdaddr_str:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:166    .text.uart_bdaddr_str:00000000 uart_bdaddr_str
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:200    .text.uart_bdaddr_str:00000034 $d
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:205    .text.uart_printf:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:211    .text.uart_printf:00000000 uart_printf
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:240    .rodata.HardFault_Handler_C.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:262    .text.HardFault_Handler_C:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:268    .text.HardFault_Handler_C:00000000 HardFault_Handler_C
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:309    .text.HardFault_Handler_C:00000054 $d
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:322    .text.HardFault_Handler:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:328    .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:351    .text._isatty:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:357    .text._isatty:00000000 _isatty
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:370    .text._write:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:376    .text._write:00000000 _write
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:443    .text._write:0000006c $d
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:449    .bss.buf.0:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:453    .bss.buf.0:00000000 buf.0
+C:\Users\pc\AppData\Local\Temp\ccVClmpP.s:455    .text.HardFault_Handler:00000018 $d
+
+UNDEFINED SYMBOLS
+RCC_PeriphClockCmd
+Pad_Config
+Pinmux_Config
+UART_StructInit
+UART_Init
+snprintf
+vsnprintf

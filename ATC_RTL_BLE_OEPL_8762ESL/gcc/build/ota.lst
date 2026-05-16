@@ -1,0 +1,592 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"ota.c"
+  14              		.text
+  15              		.section	.rodata.ota_erase_ext.str1.4,"aMS",%progbits,1
+  16              		.align	2
+  17              	.LC0:
+  18 0000 4F54413A 		.ascii	"OTA: erase ext 0x%05lX len=0x%05lX\012\000"
+  18      20657261 
+  18      73652065 
+  18      78742030 
+  18      78253035 
+  19              		.section	.text.ota_erase_ext,"ax",%progbits
+  20              		.align	1
+  21              		.global	ota_erase_ext
+  22              		.syntax unified
+  23              		.code	16
+  24              		.thumb_func
+  26              	ota_erase_ext:
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29 0000 70B5     		push	{r4, r5, r6, lr}
+  30 0002 9425     		movs	r5, #148
+  31 0004 AD02     		lsls	r5, r5, #10
+  32 0006 8A24     		movs	r4, #138
+  33 0008 E402     		lsls	r4, r4, #11
+  34 000a 2A00     		movs	r2, r5
+  35 000c 2100     		movs	r1, r4
+  36 000e 0648     		ldr	r0, .L2
+  37 0010 FFF7FEFF 		bl	uart_printf
+  38 0014 FFF7FEFF 		bl	eepromPowerUp
+  39 0018 2900     		movs	r1, r5
+  40 001a 2000     		movs	r0, r4
+  41 001c FFF7FEFF 		bl	eepromErase
+  42 0020 FFF7FEFF 		bl	eepromPowerDown
+  43              		@ sp needed
+  44 0024 70BD     		pop	{r4, r5, r6, pc}
+  45              	.L3:
+  46 0026 C046     		.align	2
+  47              	.L2:
+  48 0028 00000000 		.word	.LC0
+  50              		.section	.rodata.ota_save_ext_block.str1.4,"aMS",%progbits,1
+  51              		.align	2
+  52              	.LC2:
+  53 0000 4F54413A 		.ascii	"OTA: ERR blk %u out of range\012\000"
+  53      20455252 
+  53      20626C6B 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 2
+
+
+  53      20257520 
+  53      6F757420 
+  54 001e 0000     		.align	2
+  55              	.LC4:
+  56 0020 4F54413A 		.ascii	"OTA: save blk %u \342\206\222 ext 0x%05lX len=%lu\012"
+  56      20736176 
+  56      6520626C 
+  56      6B202575 
+  56      20E28692 
+  57 0049 00       		.ascii	"\000"
+  58              		.section	.text.ota_save_ext_block,"ax",%progbits
+  59              		.align	1
+  60              		.global	ota_save_ext_block
+  61              		.syntax unified
+  62              		.code	16
+  63              		.thumb_func
+  65              	ota_save_ext_block:
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 70B5     		push	{r4, r5, r6, lr}
+  69 0002 0E00     		movs	r6, r1
+  70 0004 1500     		movs	r5, r2
+  71 0006 0400     		movs	r4, r0
+  72 0008 4534     		adds	r4, r4, #69
+  73 000a 2403     		lsls	r4, r4, #12
+  74 000c A218     		adds	r2, r4, r2
+  75 000e D423     		movs	r3, #212
+  76 0010 DB02     		lsls	r3, r3, #11
+  77 0012 9A42     		cmp	r2, r3
+  78 0014 0FD8     		bhi	.L7
+  79 0016 2B00     		movs	r3, r5
+  80 0018 2200     		movs	r2, r4
+  81 001a 0100     		movs	r1, r0
+  82 001c 0848     		ldr	r0, .L8
+  83 001e FFF7FEFF 		bl	uart_printf
+  84 0022 FFF7FEFF 		bl	eepromPowerUp
+  85 0026 2A00     		movs	r2, r5
+  86 0028 3100     		movs	r1, r6
+  87 002a 2000     		movs	r0, r4
+  88 002c FFF7FEFF 		bl	eepromWrite
+  89 0030 FFF7FEFF 		bl	eepromPowerDown
+  90              	.L4:
+  91              		@ sp needed
+  92 0034 70BD     		pop	{r4, r5, r6, pc}
+  93              	.L7:
+  94 0036 0100     		movs	r1, r0
+  95 0038 0248     		ldr	r0, .L8+4
+  96 003a FFF7FEFF 		bl	uart_printf
+  97 003e F9E7     		b	.L4
+  98              	.L9:
+  99              		.align	2
+ 100              	.L8:
+ 101 0040 20000000 		.word	.LC4
+ 102 0044 00000000 		.word	.LC2
+ 104              		.section	.rodata.ota_apply.str1.4,"aMS",%progbits,1
+ 105              		.align	2
+ 106              	.LC6:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 3
+
+
+ 107 0000 4F54413A 		.ascii	"OTA: ERR invalid fw_size=%lu (max=%lu)\012\000"
+ 107      20455252 
+ 107      20696E76 
+ 107      616C6964 
+ 107      2066775F 
+ 108              		.align	2
+ 109              	.LC8:
+ 110 0028 4F54413A 		.ascii	"OTA: ext\342\206\222OTA_TMP 0x%08lX  %lu bytes\012\000"
+ 110      20657874 
+ 110      E286924F 
+ 110      54415F54 
+ 110      4D502030 
+ 111 004f 00       		.align	2
+ 112              	.LC10:
+ 113 0050 4F54413A 		.ascii	"OTA: ext\342\206\222OTA_TMP done\012\000"
+ 113      20657874 
+ 113      E286924F 
+ 113      54415F54 
+ 113      4D502064 
+ 114 0069 000000   		.align	2
+ 115              	.LC12:
+ 116 006c 4F54413A 		.ascii	"OTA: validate id=0x%04X payload_len=%lu crc16=0x%04"
+ 116      2076616C 
+ 116      69646174 
+ 116      65206964 
+ 116      3D307825 
+ 117 009f 580A00   		.ascii	"X\012\000"
+ 118 00a2 0000     		.align	2
+ 119              	.LC14:
+ 120 00a4 4F54413A 		.ascii	"OTA: ERR wrong image_id 0x%04X (expected 0x%04X App"
+ 120      20455252 
+ 120      2077726F 
+ 120      6E672069 
+ 120      6D616765 
+ 121 00d7 50617463 		.ascii	"Patch) \342\200\224 abort\012\000"
+ 121      682920E2 
+ 121      80942061 
+ 121      626F7274 
+ 121      0A00
+ 122 00e9 000000   		.align	2
+ 123              	.LC17:
+ 124 00ec 4F54413A 		.ascii	"OTA: ERR image too large (%lu B) \342\200\224 abort"
+ 124      20455252 
+ 124      20696D61 
+ 124      67652074 
+ 124      6F6F206C 
+ 125 0116 0A00     		.ascii	"\012\000"
+ 126              		.align	2
+ 127              	.LC20:
+ 128 0118 4F54413A 		.ascii	"OTA: ERR checksum mismatch \342\200\224 abort, BANK"
+ 128      20455252 
+ 128      20636865 
+ 128      636B7375 
+ 128      6D206D69 
+ 129 0142 305F4150 		.ascii	"0_APP unchanged\012\000"
+ 129      5020756E 
+ 129      6368616E 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 4
+
+
+ 129      6765640A 
+ 129      00
+ 130 0153 00       		.align	2
+ 131              	.LC23:
+ 132 0154 4F54413A 		.ascii	"OTA: image OK \342\200\224 writing %lu sectors to B"
+ 132      20696D61 
+ 132      6765204F 
+ 132      4B20E280 
+ 132      94207772 
+ 133 017e 414E4B30 		.ascii	"ANK0_APP 0x%08lX\012\000"
+ 133      5F415050 
+ 133      20307825 
+ 133      30386C58 
+ 133      0A00
+ 134              		.section	.text.ota_apply,"ax",%progbits
+ 135              		.align	1
+ 136              		.global	ota_apply
+ 137              		.syntax unified
+ 138              		.code	16
+ 139              		.thumb_func
+ 141              	ota_apply:
+ 142              		@ args = 0, pretend = 0, frame = 256
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 145 0002 DE46     		mov	lr, fp
+ 146 0004 5746     		mov	r7, r10
+ 147 0006 4E46     		mov	r6, r9
+ 148 0008 4546     		mov	r5, r8
+ 149 000a E0B5     		push	{r5, r6, r7, lr}
+ 150 000c C1B0     		sub	sp, sp, #260
+ 151 000e 0600     		movs	r6, r0
+ 152 0010 451E     		subs	r5, r0, #1
+ 153 0012 9423     		movs	r3, #148
+ 154 0014 9B02     		lsls	r3, r3, #10
+ 155 0016 9D42     		cmp	r5, r3
+ 156 0018 27D2     		bcs	.L31
+ 157 001a 6D4C     		ldr	r4, .L36
+ 158 001c 0200     		movs	r2, r0
+ 159 001e 2100     		movs	r1, r4
+ 160 0020 6C48     		ldr	r0, .L36+4
+ 161 0022 FFF7FEFF 		bl	uart_printf
+ 162 0026 6C4B     		ldr	r3, .L36+8
+ 163 0028 F318     		adds	r3, r6, r3
+ 164 002a 1B0B     		lsrs	r3, r3, #12
+ 165 002c 9846     		mov	r8, r3
+ 166 002e 6B4F     		ldr	r7, .L36+12
+ 167 0030 4744     		add	r7, r7, r8
+ 168 0032 3B03     		lsls	r3, r7, #12
+ 169 0034 9B46     		mov	fp, r3
+ 170              	.L13:
+ 171 0036 2100     		movs	r1, r4
+ 172 0038 0220     		movs	r0, #2
+ 173 003a FFF7FEFF 		bl	flash_erase_locked
+ 174 003e 8023     		movs	r3, #128
+ 175 0040 5B01     		lsls	r3, r3, #5
+ 176 0042 9C46     		mov	ip, r3
+ 177 0044 6444     		add	r4, r4, ip
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 5
+
+
+ 178 0046 5C45     		cmp	r4, fp
+ 179 0048 F5D1     		bne	.L13
+ 180 004a FFF7FEFF 		bl	eepromPowerUp
+ 181 004e 731E     		subs	r3, r6, #1
+ 182 0050 FF3B     		subs	r3, r3, #255
+ 183 0052 FF22     		movs	r2, #255
+ 184 0054 9543     		bics	r5, r2
+ 185 0056 5B1B     		subs	r3, r3, r5
+ 186 0058 9946     		mov	r9, r3
+ 187 005a 3400     		movs	r4, r6
+ 188 005c 8025     		movs	r5, #128
+ 189 005e 6D00     		lsls	r5, r5, #1
+ 190 0060 8A23     		movs	r3, #138
+ 191 0062 DB02     		lsls	r3, r3, #11
+ 192 0064 9A46     		mov	r10, r3
+ 193 0066 B244     		add	r10, r10, r6
+ 194 0068 1FE0     		b	.L16
+ 195              	.L31:
+ 196 006a 9422     		movs	r2, #148
+ 197 006c 9202     		lsls	r2, r2, #10
+ 198 006e 0100     		movs	r1, r0
+ 199 0070 5B48     		ldr	r0, .L36+16
+ 200 0072 FFF7FEFF 		bl	uart_printf
+ 201              	.L10:
+ 202 0076 41B0     		add	sp, sp, #260
+ 203              		@ sp needed
+ 204 0078 F0BC     		pop	{r4, r5, r6, r7}
+ 205 007a BB46     		mov	fp, r7
+ 206 007c B246     		mov	r10, r6
+ 207 007e A946     		mov	r9, r5
+ 208 0080 A046     		mov	r8, r4
+ 209 0082 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 210              	.L14:
+ 211 0084 5346     		mov	r3, r10
+ 212 0086 181B     		subs	r0, r3, r4
+ 213 0088 3A00     		movs	r2, r7
+ 214 008a 6946     		mov	r1, sp
+ 215 008c FFF7FEFF 		bl	eepromRead
+ 216 0090 FF2C     		cmp	r4, #255
+ 217 0092 0FD9     		bls	.L32
+ 218              	.L15:
+ 219 0094 4E4B     		ldr	r3, .L36
+ 220 0096 F018     		adds	r0, r6, r3
+ 221 0098 001B     		subs	r0, r0, r4
+ 222 009a 6A46     		mov	r2, sp
+ 223 009c 2900     		movs	r1, r5
+ 224 009e FFF7FEFF 		bl	flash_write_locked
+ 225 00a2 013C     		subs	r4, r4, #1
+ 226 00a4 FF3C     		subs	r4, r4, #255
+ 227 00a6 4C45     		cmp	r4, r9
+ 228 00a8 0BD0     		beq	.L33
+ 229              	.L16:
+ 230 00aa 2700     		movs	r7, r4
+ 231 00ac AC42     		cmp	r4, r5
+ 232 00ae E9D9     		bls	.L14
+ 233 00b0 2F00     		movs	r7, r5
+ 234 00b2 E7E7     		b	.L14
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 6
+
+
+ 235              	.L32:
+ 236 00b4 EA1B     		subs	r2, r5, r7
+ 237 00b6 3800     		movs	r0, r7
+ 238 00b8 6844     		add	r0, r0, sp
+ 239 00ba FF21     		movs	r1, #255
+ 240 00bc FFF7FEFF 		bl	memset
+ 241 00c0 E8E7     		b	.L15
+ 242              	.L33:
+ 243 00c2 FFF7FEFF 		bl	eepromPowerDown
+ 244 00c6 4748     		ldr	r0, .L36+20
+ 245 00c8 FFF7FEFF 		bl	uart_printf
+ 246 00cc 404C     		ldr	r4, .L36
+ 247 00ce E388     		ldrh	r3, [r4, #6]
+ 248 00d0 A188     		ldrh	r1, [r4, #4]
+ 249 00d2 A268     		ldr	r2, [r4, #8]
+ 250 00d4 4448     		ldr	r0, .L36+24
+ 251 00d6 FFF7FEFF 		bl	uart_printf
+ 252 00da A188     		ldrh	r1, [r4, #4]
+ 253 00dc 434B     		ldr	r3, .L36+28
+ 254 00de 9942     		cmp	r1, r3
+ 255 00e0 16D1     		bne	.L34
+ 256 00e2 3B4B     		ldr	r3, .L36
+ 257 00e4 9968     		ldr	r1, [r3, #8]
+ 258 00e6 8023     		movs	r3, #128
+ 259 00e8 DB00     		lsls	r3, r3, #3
+ 260 00ea 9C46     		mov	ip, r3
+ 261 00ec 6144     		add	r1, r1, ip
+ 262 00ee 9423     		movs	r3, #148
+ 263 00f0 9B02     		lsls	r3, r3, #10
+ 264 00f2 9942     		cmp	r1, r3
+ 265 00f4 15D8     		bhi	.L35
+ 266 00f6 3648     		ldr	r0, .L36
+ 267 00f8 FFF7FEFF 		bl	check_image_chksum
+ 268 00fc 0028     		cmp	r0, #0
+ 269 00fe 18D1     		bne	.L19
+ 270 0100 3B48     		ldr	r0, .L36+32
+ 271 0102 FFF7FEFF 		bl	uart_printf
+ 272 0106 0421     		movs	r1, #4
+ 273 0108 3A48     		ldr	r0, .L36+36
+ 274 010a FFF7FEFF 		bl	boot_screen_show_error
+ 275 010e B2E7     		b	.L10
+ 276              	.L34:
+ 277 0110 1A00     		movs	r2, r3
+ 278 0112 3948     		ldr	r0, .L36+40
+ 279 0114 FFF7FEFF 		bl	uart_printf
+ 280 0118 0421     		movs	r1, #4
+ 281 011a 3848     		ldr	r0, .L36+44
+ 282 011c FFF7FEFF 		bl	boot_screen_show_error
+ 283 0120 A9E7     		b	.L10
+ 284              	.L35:
+ 285 0122 3748     		ldr	r0, .L36+48
+ 286 0124 FFF7FEFF 		bl	uart_printf
+ 287 0128 0321     		movs	r1, #3
+ 288 012a 3648     		ldr	r0, .L36+52
+ 289 012c FFF7FEFF 		bl	boot_screen_show_error
+ 290 0130 A1E7     		b	.L10
+ 291              	.L19:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 7
+
+
+ 292 0132 354A     		ldr	r2, .L36+56
+ 293 0134 4146     		mov	r1, r8
+ 294 0136 3548     		ldr	r0, .L36+60
+ 295 0138 FFF7FEFF 		bl	uart_printf
+ 296              		.syntax divided
+ 297              	@ 89 "../src/ota.c" 1
+ 298 013c 72B6     		cpsid i
+ 299              	@ 0 "" 2
+ 300              		.thumb
+ 301              		.syntax unified
+ 302 013e 344B     		ldr	r3, .L36+64
+ 303 0140 6B44     		add	r3, r3, sp
+ 304 0142 9846     		mov	r8, r3
+ 305 0144 334B     		ldr	r3, .L36+68
+ 306 0146 9C46     		mov	ip, r3
+ 307 0148 E344     		add	fp, fp, ip
+ 308 014a 0026     		movs	r6, #0
+ 309 014c 0223     		movs	r3, #2
+ 310 014e 9A46     		mov	r10, r3
+ 311 0150 8027     		movs	r7, #128
+ 312 0152 7F00     		lsls	r7, r7, #1
+ 313              	.L23:
+ 314 0154 1E4B     		ldr	r3, .L36
+ 315 0156 F318     		adds	r3, r6, r3
+ 316 0158 4246     		mov	r2, r8
+ 317 015a 501C     		adds	r0, r2, #1
+ 318 015c FF30     		adds	r0, r0, #255
+ 319 015e 2E4A     		ldr	r2, .L36+72
+ 320 0160 B118     		adds	r1, r6, r2
+ 321              	.L20:
+ 322 0162 1A78     		ldrb	r2, [r3]
+ 323 0164 C254     		strb	r2, [r0, r3]
+ 324 0166 0133     		adds	r3, r3, #1
+ 325 0168 8B42     		cmp	r3, r1
+ 326 016a FAD1     		bne	.L20
+ 327 016c 264B     		ldr	r3, .L36+56
+ 328 016e F418     		adds	r4, r6, r3
+ 329 0170 2100     		movs	r1, r4
+ 330 0172 5046     		mov	r0, r10
+ 331 0174 FFF7FEFF 		bl	flash_erase_locked
+ 332 0178 6A46     		mov	r2, sp
+ 333 017a 3900     		movs	r1, r7
+ 334 017c 2000     		movs	r0, r4
+ 335 017e FFF7FEFF 		bl	flash_write_locked
+ 336 0182 264B     		ldr	r3, .L36+76
+ 337 0184 F418     		adds	r4, r6, r3
+ 338 0186 4546     		mov	r5, r8
+ 339 0188 254B     		ldr	r3, .L36+80
+ 340 018a 9946     		mov	r9, r3
+ 341 018c B144     		add	r9, r9, r6
+ 342              	.L22:
+ 343 018e 631E     		subs	r3, r4, #1
+ 344 0190 FF3B     		subs	r3, r3, #255
+ 345              	.L21:
+ 346 0192 1A78     		ldrb	r2, [r3]
+ 347 0194 EA54     		strb	r2, [r5, r3]
+ 348 0196 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 8
+
+
+ 349 0198 A342     		cmp	r3, r4
+ 350 019a FAD1     		bne	.L21
+ 351 019c 214B     		ldr	r3, .L36+84
+ 352 019e E018     		adds	r0, r4, r3
+ 353 01a0 6A46     		mov	r2, sp
+ 354 01a2 3900     		movs	r1, r7
+ 355 01a4 FFF7FEFF 		bl	flash_write_locked
+ 356 01a8 013D     		subs	r5, r5, #1
+ 357 01aa FF3D     		subs	r5, r5, #255
+ 358 01ac 0134     		adds	r4, r4, #1
+ 359 01ae FF34     		adds	r4, r4, #255
+ 360 01b0 4C45     		cmp	r4, r9
+ 361 01b2 ECD1     		bne	.L22
+ 362 01b4 8023     		movs	r3, #128
+ 363 01b6 5B01     		lsls	r3, r3, #5
+ 364 01b8 9C46     		mov	ip, r3
+ 365 01ba 6644     		add	r6, r6, ip
+ 366 01bc 1A4B     		ldr	r3, .L36+88
+ 367 01be 9C46     		mov	ip, r3
+ 368 01c0 E044     		add	r8, r8, ip
+ 369 01c2 5E45     		cmp	r6, fp
+ 370 01c4 C6D1     		bne	.L23
+ 371 01c6 194B     		ldr	r3, .L36+92
+ 372 01c8 194A     		ldr	r2, .L36+96
+ 373 01ca 1A60     		str	r2, [r3]
+ 374              	.L24:
+ 375 01cc FEE7     		b	.L24
+ 376              	.L37:
+ 377 01ce C046     		.align	2
+ 378              	.L36:
+ 379 01d0 00B08500 		.word	8761344
+ 380 01d4 28000000 		.word	.LC8
+ 381 01d8 FF0F0000 		.word	4095
+ 382 01dc 5B080000 		.word	2139
+ 383 01e0 00000000 		.word	.LC6
+ 384 01e4 50000000 		.word	.LC10
+ 385 01e8 6C000000 		.word	.LC12
+ 386 01ec 93270000 		.word	10131
+ 387 01f0 18010000 		.word	.LC20
+ 388 01f4 00000000 		.word	.LANCHOR2
+ 389 01f8 A4000000 		.word	.LC14
+ 390 01fc 00000000 		.word	.LANCHOR0
+ 391 0200 EC000000 		.word	.LC17
+ 392 0204 00000000 		.word	.LANCHOR1
+ 393 0208 00208300 		.word	8593408
+ 394 020c 54010000 		.word	.LC23
+ 395 0210 004F7AFF 		.word	-8761600
+ 396 0214 00507AFF 		.word	-8761344
+ 397 0218 00B18500 		.word	8761600
+ 398 021c 00B28500 		.word	8761856
+ 399 0220 00C18500 		.word	8765696
+ 400 0224 006FFDFF 		.word	-168192
+ 401 0228 00F0FFFF 		.word	-4096
+ 402 022c 0CED00E0 		.word	-536810228
+ 403 0230 0400FA05 		.word	100270084
+ 405              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 406              		.align	2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 9
+
+
+ 407              	.LC25:
+ 408 0000 204F5441 		.ascii	" OTA FAILED\000"
+ 408      20464149 
+ 408      4C454400 
+ 409              		.align	2
+ 410              	.LC26:
+ 411 000c 20436865 		.ascii	" Checksum mismatch\000"
+ 411      636B7375 
+ 411      6D206D69 
+ 411      736D6174 
+ 411      636800
+ 412 001f 00       		.align	2
+ 413              	.LC27:
+ 414 0020 20506C65 		.ascii	" Please retry\000"
+ 414      61736520 
+ 414      72657472 
+ 414      7900
+ 415 002e 0000     		.align	2
+ 416              	.LC28:
+ 417 0030 20466C61 		.ascii	" Flash unchanged\000"
+ 417      73682075 
+ 417      6E636861 
+ 417      6E676564 
+ 417      00
+ 418 0041 000000   		.align	2
+ 419              	.LC29:
+ 420 0044 20496D61 		.ascii	" Image too large\000"
+ 420      67652074 
+ 420      6F6F206C 
+ 420      61726765 
+ 420      00
+ 421 0055 000000   		.align	2
+ 422              	.LC30:
+ 423 0058 2057726F 		.ascii	" Wrong image type\000"
+ 423      6E672069 
+ 423      6D616765 
+ 423      20747970 
+ 423      6500
+ 424 006a 0000     		.align	2
+ 425              	.LC31:
+ 426 006c 20457870 		.ascii	" Expected: AppPatch\000"
+ 426      65637465 
+ 426      643A2041 
+ 426      70705061 
+ 426      74636800 
+ 427              		.section	.rodata.e.0,"a"
+ 428              		.align	2
+ 429              		.set	.LANCHOR2,. + 0
+ 432              	e.0:
+ 433 0000 00000000 		.word	.LC25
+ 434 0004 0C000000 		.word	.LC26
+ 435 0008 20000000 		.word	.LC27
+ 436 000c 30000000 		.word	.LC28
+ 437              		.section	.rodata.e.1,"a"
+ 438              		.align	2
+ 439              		.set	.LANCHOR1,. + 0
+ 442              	e.1:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 10
+
+
+ 443 0000 00000000 		.word	.LC25
+ 444 0004 44000000 		.word	.LC29
+ 445 0008 30000000 		.word	.LC28
+ 446              		.section	.rodata.e.2,"a"
+ 447              		.align	2
+ 448              		.set	.LANCHOR0,. + 0
+ 451              	e.2:
+ 452 0000 00000000 		.word	.LC25
+ 453 0004 58000000 		.word	.LC30
+ 454 0008 6C000000 		.word	.LC31
+ 455 000c 30000000 		.word	.LC28
+ 456              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ota.c
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:16     .rodata.ota_erase_ext.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:20     .text.ota_erase_ext:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:26     .text.ota_erase_ext:00000000 ota_erase_ext
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:48     .text.ota_erase_ext:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:51     .rodata.ota_save_ext_block.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:59     .text.ota_save_ext_block:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:65     .text.ota_save_ext_block:00000000 ota_save_ext_block
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:101    .text.ota_save_ext_block:00000040 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:105    .rodata.ota_apply.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:135    .text.ota_apply:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:141    .text.ota_apply:00000000 ota_apply
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:379    .text.ota_apply:000001d0 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:406    .rodata.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:428    .rodata.e.0:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:432    .rodata.e.0:00000000 e.0
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:438    .rodata.e.1:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:442    .rodata.e.1:00000000 e.1
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:447    .rodata.e.2:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccG8XZSj.s:451    .rodata.e.2:00000000 e.2
+
+UNDEFINED SYMBOLS
+uart_printf
+eepromPowerUp
+eepromErase
+eepromPowerDown
+eepromWrite
+flash_erase_locked
+eepromRead
+flash_write_locked
+memset
+check_image_chksum
+boot_screen_show_error

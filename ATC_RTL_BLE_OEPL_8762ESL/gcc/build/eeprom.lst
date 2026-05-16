@@ -1,0 +1,1274 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"eeprom.c"
+  14              		.text
+  15              		.section	.text.SPI_Flash_CS_set,"ax",%progbits
+  16              		.align	1
+  17              		.global	SPI_Flash_CS_set
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	SPI_Flash_CS_set:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0028     		cmp	r0, #0
+  27 0004 07D0     		beq	.L2
+  28 0006 2320     		movs	r0, #35
+  29 0008 FFF7FEFF 		bl	GPIO_GetPin
+  30 000c 064B     		ldr	r3, .L4
+  31 000e 1A68     		ldr	r2, [r3]
+  32 0010 1043     		orrs	r0, r2
+  33 0012 1860     		str	r0, [r3]
+  34              	.L1:
+  35              		@ sp needed
+  36 0014 10BD     		pop	{r4, pc}
+  37              	.L2:
+  38 0016 2320     		movs	r0, #35
+  39 0018 FFF7FEFF 		bl	GPIO_GetPin
+  40 001c 024A     		ldr	r2, .L4
+  41 001e 1368     		ldr	r3, [r2]
+  42 0020 8343     		bics	r3, r0
+  43 0022 1360     		str	r3, [r2]
+  44 0024 F6E7     		b	.L1
+  45              	.L5:
+  46 0026 C046     		.align	2
+  47              	.L4:
+  48 0028 00100040 		.word	1073745920
+  50              		.section	.text.SPI_Flash_CLK_set,"ax",%progbits
+  51              		.align	1
+  52              		.global	SPI_Flash_CLK_set
+  53              		.syntax unified
+  54              		.code	16
+  55              		.thumb_func
+  57              	SPI_Flash_CLK_set:
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 2
+
+
+  61 0002 0028     		cmp	r0, #0
+  62 0004 07D0     		beq	.L7
+  63 0006 2020     		movs	r0, #32
+  64 0008 FFF7FEFF 		bl	GPIO_GetPin
+  65 000c 064B     		ldr	r3, .L9
+  66 000e 1A68     		ldr	r2, [r3]
+  67 0010 1043     		orrs	r0, r2
+  68 0012 1860     		str	r0, [r3]
+  69              	.L6:
+  70              		@ sp needed
+  71 0014 10BD     		pop	{r4, pc}
+  72              	.L7:
+  73 0016 2020     		movs	r0, #32
+  74 0018 FFF7FEFF 		bl	GPIO_GetPin
+  75 001c 024A     		ldr	r2, .L9
+  76 001e 1368     		ldr	r3, [r2]
+  77 0020 8343     		bics	r3, r0
+  78 0022 1360     		str	r3, [r2]
+  79 0024 F6E7     		b	.L6
+  80              	.L10:
+  81 0026 C046     		.align	2
+  82              	.L9:
+  83 0028 00100040 		.word	1073745920
+  85              		.section	.text.SPI_Flash_MOSI_set,"ax",%progbits
+  86              		.align	1
+  87              		.global	SPI_Flash_MOSI_set
+  88              		.syntax unified
+  89              		.code	16
+  90              		.thumb_func
+  92              	SPI_Flash_MOSI_set:
+  93              		@ args = 0, pretend = 0, frame = 0
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95 0000 10B5     		push	{r4, lr}
+  96 0002 0028     		cmp	r0, #0
+  97 0004 07D0     		beq	.L12
+  98 0006 2220     		movs	r0, #34
+  99 0008 FFF7FEFF 		bl	GPIO_GetPin
+ 100 000c 064B     		ldr	r3, .L14
+ 101 000e 1A68     		ldr	r2, [r3]
+ 102 0010 1043     		orrs	r0, r2
+ 103 0012 1860     		str	r0, [r3]
+ 104              	.L11:
+ 105              		@ sp needed
+ 106 0014 10BD     		pop	{r4, pc}
+ 107              	.L12:
+ 108 0016 2220     		movs	r0, #34
+ 109 0018 FFF7FEFF 		bl	GPIO_GetPin
+ 110 001c 024A     		ldr	r2, .L14
+ 111 001e 1368     		ldr	r3, [r2]
+ 112 0020 8343     		bics	r3, r0
+ 113 0022 1360     		str	r3, [r2]
+ 114 0024 F6E7     		b	.L11
+ 115              	.L15:
+ 116 0026 C046     		.align	2
+ 117              	.L14:
+ 118 0028 00100040 		.word	1073745920
+ 120              		.section	.text.SPI_Flash_MISO_get,"ax",%progbits
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 3
+
+
+ 121              		.align	1
+ 122              		.global	SPI_Flash_MISO_get
+ 123              		.syntax unified
+ 124              		.code	16
+ 125              		.thumb_func
+ 127              	SPI_Flash_MISO_get:
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130 0000 10B5     		push	{r4, lr}
+ 131 0002 2120     		movs	r0, #33
+ 132 0004 FFF7FEFF 		bl	GPIO_GetPin
+ 133 0008 034A     		ldr	r2, .L17
+ 134 000a 136D     		ldr	r3, [r2, #80]
+ 135 000c 136D     		ldr	r3, [r2, #80]
+ 136 000e 0340     		ands	r3, r0
+ 137 0010 5A1E     		subs	r2, r3, #1
+ 138 0012 9341     		sbcs	r3, r3, r2
+ 139 0014 D8B2     		uxtb	r0, r3
+ 140              		@ sp needed
+ 141 0016 10BD     		pop	{r4, pc}
+ 142              	.L18:
+ 143              		.align	2
+ 144              	.L17:
+ 145 0018 00100040 		.word	1073745920
+ 147              		.section	.text.SPI_Flash_enable_GPIO,"ax",%progbits
+ 148              		.align	1
+ 149              		.global	SPI_Flash_enable_GPIO
+ 150              		.syntax unified
+ 151              		.code	16
+ 152              		.thumb_func
+ 154              	SPI_Flash_enable_GPIO:
+ 155              		@ args = 0, pretend = 0, frame = 16
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157 0000 70B5     		push	{r4, r5, r6, lr}
+ 158 0002 86B0     		sub	sp, sp, #24
+ 159 0004 8421     		movs	r1, #132
+ 160 0006 0122     		movs	r2, #1
+ 161 0008 8905     		lsls	r1, r1, #22
+ 162 000a 2D48     		ldr	r0, .L20
+ 163 000c FFF7FEFF 		bl	RCC_PeriphClockCmd
+ 164 0010 0126     		movs	r6, #1
+ 165 0012 0196     		str	r6, [sp, #4]
+ 166 0014 0096     		str	r6, [sp]
+ 167 0016 0223     		movs	r3, #2
+ 168 0018 0122     		movs	r2, #1
+ 169 001a 0121     		movs	r1, #1
+ 170 001c 2320     		movs	r0, #35
+ 171 001e FFF7FEFF 		bl	Pad_Config
+ 172 0022 0025     		movs	r5, #0
+ 173 0024 0195     		str	r5, [sp, #4]
+ 174 0026 0096     		str	r6, [sp]
+ 175 0028 0223     		movs	r3, #2
+ 176 002a 0122     		movs	r2, #1
+ 177 002c 0121     		movs	r1, #1
+ 178 002e 2020     		movs	r0, #32
+ 179 0030 FFF7FEFF 		bl	Pad_Config
+ 180 0034 0195     		str	r5, [sp, #4]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 4
+
+
+ 181 0036 0096     		str	r6, [sp]
+ 182 0038 0223     		movs	r3, #2
+ 183 003a 0122     		movs	r2, #1
+ 184 003c 0121     		movs	r1, #1
+ 185 003e 2220     		movs	r0, #34
+ 186 0040 FFF7FEFF 		bl	Pad_Config
+ 187 0044 0195     		str	r5, [sp, #4]
+ 188 0046 0095     		str	r5, [sp]
+ 189 0048 0023     		movs	r3, #0
+ 190 004a 0122     		movs	r2, #1
+ 191 004c 0121     		movs	r1, #1
+ 192 004e 2120     		movs	r0, #33
+ 193 0050 FFF7FEFF 		bl	Pad_Config
+ 194 0054 5A21     		movs	r1, #90
+ 195 0056 2320     		movs	r0, #35
+ 196 0058 FFF7FEFF 		bl	Pinmux_Config
+ 197 005c 5A21     		movs	r1, #90
+ 198 005e 2020     		movs	r0, #32
+ 199 0060 FFF7FEFF 		bl	Pinmux_Config
+ 200 0064 5A21     		movs	r1, #90
+ 201 0066 2220     		movs	r0, #34
+ 202 0068 FFF7FEFF 		bl	Pinmux_Config
+ 203 006c 5A21     		movs	r1, #90
+ 204 006e 2120     		movs	r0, #33
+ 205 0070 FFF7FEFF 		bl	Pinmux_Config
+ 206 0074 02A8     		add	r0, sp, #8
+ 207 0076 FFF7FEFF 		bl	GPIO_StructInit
+ 208 007a 2320     		movs	r0, #35
+ 209 007c FFF7FEFF 		bl	GPIO_GetPin
+ 210 0080 0400     		movs	r4, r0
+ 211 0082 2020     		movs	r0, #32
+ 212 0084 FFF7FEFF 		bl	GPIO_GetPin
+ 213 0088 0443     		orrs	r4, r0
+ 214 008a 2220     		movs	r0, #34
+ 215 008c FFF7FEFF 		bl	GPIO_GetPin
+ 216 0090 0443     		orrs	r4, r0
+ 217 0092 0294     		str	r4, [sp, #8]
+ 218 0094 6B46     		mov	r3, sp
+ 219 0096 1E73     		strb	r6, [r3, #12]
+ 220 0098 02A8     		add	r0, sp, #8
+ 221 009a FFF7FEFF 		bl	GPIO_Init
+ 222 009e 2120     		movs	r0, #33
+ 223 00a0 FFF7FEFF 		bl	GPIO_GetPin
+ 224 00a4 0290     		str	r0, [sp, #8]
+ 225 00a6 6B46     		mov	r3, sp
+ 226 00a8 1D73     		strb	r5, [r3, #12]
+ 227 00aa 02A8     		add	r0, sp, #8
+ 228 00ac FFF7FEFF 		bl	GPIO_Init
+ 229 00b0 0120     		movs	r0, #1
+ 230 00b2 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 231 00b6 0020     		movs	r0, #0
+ 232 00b8 FFF7FEFF 		bl	SPI_Flash_CLK_set
+ 233 00bc 06B0     		add	sp, sp, #24
+ 234              		@ sp needed
+ 235 00be 70BD     		pop	{r4, r5, r6, pc}
+ 236              	.L21:
+ 237              		.align	2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 5
+
+
+ 238              	.L20:
+ 239 00c0 0001000C 		.word	201326848
+ 241              		.section	.text.SPI_Flash_transceive,"ax",%progbits
+ 242              		.align	1
+ 243              		.global	SPI_Flash_transceive
+ 244              		.syntax unified
+ 245              		.code	16
+ 246              		.thumb_func
+ 248              	SPI_Flash_transceive:
+ 249              		@ args = 0, pretend = 0, frame = 0
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 252 0002 C646     		mov	lr, r8
+ 253 0004 00B5     		push	{lr}
+ 254 0006 0600     		movs	r6, r0
+ 255 0008 0024     		movs	r4, #0
+ 256 000a 0023     		movs	r3, #0
+ 257 000c 9846     		mov	r8, r3
+ 258 000e 8027     		movs	r7, #128
+ 259 0010 05E0     		b	.L24
+ 260              	.L23:
+ 261 0012 0020     		movs	r0, #0
+ 262 0014 FFF7FEFF 		bl	SPI_Flash_CLK_set
+ 263 0018 0134     		adds	r4, r4, #1
+ 264 001a 082C     		cmp	r4, #8
+ 265 001c 13D0     		beq	.L26
+ 266              	.L24:
+ 267 001e 3D00     		movs	r5, r7
+ 268 0020 E540     		lsrs	r5, r5, r4
+ 269 0022 2800     		movs	r0, r5
+ 270 0024 3040     		ands	r0, r6
+ 271 0026 431E     		subs	r3, r0, #1
+ 272 0028 9841     		sbcs	r0, r0, r3
+ 273 002a FFF7FEFF 		bl	SPI_Flash_MOSI_set
+ 274 002e 0120     		movs	r0, #1
+ 275 0030 FFF7FEFF 		bl	SPI_Flash_CLK_set
+ 276 0034 FFF7FEFF 		bl	SPI_Flash_MISO_get
+ 277 0038 0128     		cmp	r0, #1
+ 278 003a EAD1     		bne	.L23
+ 279 003c 4346     		mov	r3, r8
+ 280 003e 2B43     		orrs	r3, r5
+ 281 0040 DBB2     		uxtb	r3, r3
+ 282 0042 9846     		mov	r8, r3
+ 283 0044 E5E7     		b	.L23
+ 284              	.L26:
+ 285 0046 4046     		mov	r0, r8
+ 286              		@ sp needed
+ 287 0048 80BC     		pop	{r7}
+ 288 004a B846     		mov	r8, r7
+ 289 004c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 291              		.section	.text.eepromPowerUp,"ax",%progbits
+ 292              		.align	1
+ 293              		.global	eepromPowerUp
+ 294              		.syntax unified
+ 295              		.code	16
+ 296              		.thumb_func
+ 298              	eepromPowerUp:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 6
+
+
+ 299              		@ args = 0, pretend = 0, frame = 0
+ 300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301 0000 10B5     		push	{r4, lr}
+ 302 0002 0B4B     		ldr	r3, .L30
+ 303 0004 1B78     		ldrb	r3, [r3]
+ 304 0006 002B     		cmp	r3, #0
+ 305 0008 00D0     		beq	.L29
+ 306              	.L27:
+ 307              		@ sp needed
+ 308 000a 10BD     		pop	{r4, pc}
+ 309              	.L29:
+ 310 000c 0020     		movs	r0, #0
+ 311 000e FFF7FEFF 		bl	SPI_Flash_CS_set
+ 312 0012 AB20     		movs	r0, #171
+ 313 0014 FFF7FEFF 		bl	SPI_Flash_transceive
+ 314 0018 0120     		movs	r0, #1
+ 315 001a FFF7FEFF 		bl	SPI_Flash_CS_set
+ 316 001e 054B     		ldr	r3, .L30+4
+ 317 0020 1B68     		ldr	r3, [r3]
+ 318 0022 0120     		movs	r0, #1
+ 319 0024 9847     		blx	r3
+ 320 0026 024B     		ldr	r3, .L30
+ 321 0028 0122     		movs	r2, #1
+ 322 002a 1A70     		strb	r2, [r3]
+ 323 002c EDE7     		b	.L27
+ 324              	.L31:
+ 325 002e C046     		.align	2
+ 326              	.L30:
+ 327 0030 00000000 		.word	.LANCHOR0
+ 328 0034 00000000 		.word	platform_delay_ms
+ 330              		.section	.text.eepromPowerDown,"ax",%progbits
+ 331              		.align	1
+ 332              		.global	eepromPowerDown
+ 333              		.syntax unified
+ 334              		.code	16
+ 335              		.thumb_func
+ 337              	eepromPowerDown:
+ 338              		@ args = 0, pretend = 0, frame = 0
+ 339              		@ frame_needed = 0, uses_anonymous_args = 0
+ 340 0000 10B5     		push	{r4, lr}
+ 341 0002 094B     		ldr	r3, .L35
+ 342 0004 1B78     		ldrb	r3, [r3]
+ 343 0006 002B     		cmp	r3, #0
+ 344 0008 00D1     		bne	.L34
+ 345              	.L32:
+ 346              		@ sp needed
+ 347 000a 10BD     		pop	{r4, pc}
+ 348              	.L34:
+ 349 000c 0020     		movs	r0, #0
+ 350 000e FFF7FEFF 		bl	SPI_Flash_CS_set
+ 351 0012 B920     		movs	r0, #185
+ 352 0014 FFF7FEFF 		bl	SPI_Flash_transceive
+ 353 0018 0120     		movs	r0, #1
+ 354 001a FFF7FEFF 		bl	SPI_Flash_CS_set
+ 355 001e 024B     		ldr	r3, .L35
+ 356 0020 0022     		movs	r2, #0
+ 357 0022 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 7
+
+
+ 358 0024 F1E7     		b	.L32
+ 359              	.L36:
+ 360 0026 C046     		.align	2
+ 361              	.L35:
+ 362 0028 00000000 		.word	.LANCHOR0
+ 364              		.section	.text.flash_read_sr,"ax",%progbits
+ 365              		.align	1
+ 366              		.syntax unified
+ 367              		.code	16
+ 368              		.thumb_func
+ 370              	flash_read_sr:
+ 371              		@ args = 0, pretend = 0, frame = 0
+ 372              		@ frame_needed = 0, uses_anonymous_args = 0
+ 373 0000 10B5     		push	{r4, lr}
+ 374 0002 0020     		movs	r0, #0
+ 375 0004 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 376 0008 0520     		movs	r0, #5
+ 377 000a FFF7FEFF 		bl	SPI_Flash_transceive
+ 378 000e FF20     		movs	r0, #255
+ 379 0010 FFF7FEFF 		bl	SPI_Flash_transceive
+ 380 0014 0400     		movs	r4, r0
+ 381 0016 0120     		movs	r0, #1
+ 382 0018 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 383 001c 2000     		movs	r0, r4
+ 384              		@ sp needed
+ 385 001e 10BD     		pop	{r4, pc}
+ 387              		.section	.text.Flash_wait_busy,"ax",%progbits
+ 388              		.align	1
+ 389              		.global	Flash_wait_busy
+ 390              		.syntax unified
+ 391              		.code	16
+ 392              		.thumb_func
+ 394              	Flash_wait_busy:
+ 395              		@ args = 0, pretend = 0, frame = 0
+ 396              		@ frame_needed = 0, uses_anonymous_args = 0
+ 397 0000 70B5     		push	{r4, r5, r6, lr}
+ 398 0002 0020     		movs	r0, #0
+ 399 0004 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 400 0008 0520     		movs	r0, #5
+ 401 000a FFF7FEFF 		bl	SPI_Flash_transceive
+ 402 000e 074C     		ldr	r4, .L42
+ 403 0010 0125     		movs	r5, #1
+ 404              	.L39:
+ 405 0012 FF20     		movs	r0, #255
+ 406 0014 FFF7FEFF 		bl	SPI_Flash_transceive
+ 407 0018 0542     		tst	r5, r0
+ 408 001a 02D0     		beq	.L40
+ 409 001c 013C     		subs	r4, r4, #1
+ 410 001e 002C     		cmp	r4, #0
+ 411 0020 F7D1     		bne	.L39
+ 412              	.L40:
+ 413 0022 0120     		movs	r0, #1
+ 414 0024 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 415              		@ sp needed
+ 416 0028 70BD     		pop	{r4, r5, r6, pc}
+ 417              	.L43:
+ 418 002a C046     		.align	2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 8
+
+
+ 419              	.L42:
+ 420 002c 40420F00 		.word	1000000
+ 422              		.section	.text.Flash_CMD_WriteEN,"ax",%progbits
+ 423              		.align	1
+ 424              		.global	Flash_CMD_WriteEN
+ 425              		.syntax unified
+ 426              		.code	16
+ 427              		.thumb_func
+ 429              	Flash_CMD_WriteEN:
+ 430              		@ args = 0, pretend = 0, frame = 0
+ 431              		@ frame_needed = 0, uses_anonymous_args = 0
+ 432 0000 10B5     		push	{r4, lr}
+ 433 0002 0020     		movs	r0, #0
+ 434 0004 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 435 0008 0620     		movs	r0, #6
+ 436 000a FFF7FEFF 		bl	SPI_Flash_transceive
+ 437 000e 0120     		movs	r0, #1
+ 438 0010 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 439              		@ sp needed
+ 440 0014 10BD     		pop	{r4, pc}
+ 442              		.section	.rodata.FLASH_Init.str1.4,"aMS",%progbits,1
+ 443              		.align	2
+ 444              	.LC4:
+ 445 0000 466C6173 		.ascii	"Flash JEDEC: %02X %02X %02X\012\000"
+ 445      68204A45 
+ 445      4445433A 
+ 445      20253032 
+ 445      58202530 
+ 446              		.section	.text.FLASH_Init,"ax",%progbits
+ 447              		.align	1
+ 448              		.global	FLASH_Init
+ 449              		.syntax unified
+ 450              		.code	16
+ 451              		.thumb_func
+ 453              	FLASH_Init:
+ 454              		@ args = 0, pretend = 0, frame = 0
+ 455              		@ frame_needed = 0, uses_anonymous_args = 0
+ 456 0000 70B5     		push	{r4, r5, r6, lr}
+ 457 0002 FFF7FEFF 		bl	SPI_Flash_enable_GPIO
+ 458 0006 184C     		ldr	r4, .L46
+ 459 0008 1420     		movs	r0, #20
+ 460 000a 2368     		ldr	r3, [r4]
+ 461 000c 9847     		blx	r3
+ 462 000e 0020     		movs	r0, #0
+ 463 0010 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 464 0014 AB20     		movs	r0, #171
+ 465 0016 FFF7FEFF 		bl	SPI_Flash_transceive
+ 466 001a 0120     		movs	r0, #1
+ 467 001c FFF7FEFF 		bl	SPI_Flash_CS_set
+ 468 0020 2368     		ldr	r3, [r4]
+ 469 0022 0120     		movs	r0, #1
+ 470 0024 9847     		blx	r3
+ 471 0026 0020     		movs	r0, #0
+ 472 0028 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 473 002c 9F20     		movs	r0, #159
+ 474 002e FFF7FEFF 		bl	SPI_Flash_transceive
+ 475 0032 FF20     		movs	r0, #255
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 9
+
+
+ 476 0034 FFF7FEFF 		bl	SPI_Flash_transceive
+ 477 0038 0400     		movs	r4, r0
+ 478 003a FF20     		movs	r0, #255
+ 479 003c FFF7FEFF 		bl	SPI_Flash_transceive
+ 480 0040 0500     		movs	r5, r0
+ 481 0042 FF20     		movs	r0, #255
+ 482 0044 FFF7FEFF 		bl	SPI_Flash_transceive
+ 483 0048 0600     		movs	r6, r0
+ 484 004a 0120     		movs	r0, #1
+ 485 004c FFF7FEFF 		bl	SPI_Flash_CS_set
+ 486 0050 3300     		movs	r3, r6
+ 487 0052 2A00     		movs	r2, r5
+ 488 0054 2100     		movs	r1, r4
+ 489 0056 0548     		ldr	r0, .L46+4
+ 490 0058 FFF7FEFF 		bl	uart_printf
+ 491 005c 044B     		ldr	r3, .L46+8
+ 492 005e 0122     		movs	r2, #1
+ 493 0060 1A70     		strb	r2, [r3]
+ 494 0062 FFF7FEFF 		bl	eepromPowerDown
+ 495              		@ sp needed
+ 496 0066 70BD     		pop	{r4, r5, r6, pc}
+ 497              	.L47:
+ 498              		.align	2
+ 499              	.L46:
+ 500 0068 00000000 		.word	platform_delay_ms
+ 501 006c 00000000 		.word	.LC4
+ 502 0070 00000000 		.word	.LANCHOR0
+ 504              		.section	.text.eepromRead,"ax",%progbits
+ 505              		.align	1
+ 506              		.global	eepromRead
+ 507              		.syntax unified
+ 508              		.code	16
+ 509              		.thumb_func
+ 511              	eepromRead:
+ 512              		@ args = 0, pretend = 0, frame = 0
+ 513              		@ frame_needed = 0, uses_anonymous_args = 0
+ 514 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 515 0002 0700     		movs	r7, r0
+ 516 0004 0E00     		movs	r6, r1
+ 517 0006 1500     		movs	r5, r2
+ 518 0008 0020     		movs	r0, #0
+ 519 000a FFF7FEFF 		bl	SPI_Flash_CS_set
+ 520 000e 0320     		movs	r0, #3
+ 521 0010 FFF7FEFF 		bl	SPI_Flash_transceive
+ 522 0014 380C     		lsrs	r0, r7, #16
+ 523 0016 FF24     		movs	r4, #255
+ 524 0018 2040     		ands	r0, r4
+ 525 001a FFF7FEFF 		bl	SPI_Flash_transceive
+ 526 001e 380A     		lsrs	r0, r7, #8
+ 527 0020 2040     		ands	r0, r4
+ 528 0022 FFF7FEFF 		bl	SPI_Flash_transceive
+ 529 0026 2000     		movs	r0, r4
+ 530 0028 3840     		ands	r0, r7
+ 531 002a FFF7FEFF 		bl	SPI_Flash_transceive
+ 532 002e 002D     		cmp	r5, #0
+ 533 0030 08D0     		beq	.L49
+ 534 0032 3400     		movs	r4, r6
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 10
+
+
+ 535 0034 7519     		adds	r5, r6, r5
+ 536              	.L50:
+ 537 0036 FF20     		movs	r0, #255
+ 538 0038 FFF7FEFF 		bl	SPI_Flash_transceive
+ 539 003c 2070     		strb	r0, [r4]
+ 540 003e 0134     		adds	r4, r4, #1
+ 541 0040 AC42     		cmp	r4, r5
+ 542 0042 F8D1     		bne	.L50
+ 543              	.L49:
+ 544 0044 0120     		movs	r0, #1
+ 545 0046 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 546              		@ sp needed
+ 547 004a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 549              		.section	.text.Flash_write_page,"ax",%progbits
+ 550              		.align	1
+ 551              		.global	Flash_write_page
+ 552              		.syntax unified
+ 553              		.code	16
+ 554              		.thumb_func
+ 556              	Flash_write_page:
+ 557              		@ args = 0, pretend = 0, frame = 0
+ 558              		@ frame_needed = 0, uses_anonymous_args = 0
+ 559 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 560 0002 0700     		movs	r7, r0
+ 561 0004 0E00     		movs	r6, r1
+ 562 0006 1500     		movs	r5, r2
+ 563 0008 FFF7FEFF 		bl	Flash_CMD_WriteEN
+ 564 000c 0020     		movs	r0, #0
+ 565 000e FFF7FEFF 		bl	SPI_Flash_CS_set
+ 566 0012 0220     		movs	r0, #2
+ 567 0014 FFF7FEFF 		bl	SPI_Flash_transceive
+ 568 0018 380C     		lsrs	r0, r7, #16
+ 569 001a FF24     		movs	r4, #255
+ 570 001c 2040     		ands	r0, r4
+ 571 001e FFF7FEFF 		bl	SPI_Flash_transceive
+ 572 0022 380A     		lsrs	r0, r7, #8
+ 573 0024 2040     		ands	r0, r4
+ 574 0026 FFF7FEFF 		bl	SPI_Flash_transceive
+ 575 002a 2000     		movs	r0, r4
+ 576 002c 3840     		ands	r0, r7
+ 577 002e FFF7FEFF 		bl	SPI_Flash_transceive
+ 578 0032 002D     		cmp	r5, #0
+ 579 0034 07D0     		beq	.L53
+ 580 0036 3400     		movs	r4, r6
+ 581 0038 7519     		adds	r5, r6, r5
+ 582              	.L54:
+ 583 003a 2078     		ldrb	r0, [r4]
+ 584 003c FFF7FEFF 		bl	SPI_Flash_transceive
+ 585 0040 0134     		adds	r4, r4, #1
+ 586 0042 AC42     		cmp	r4, r5
+ 587 0044 F9D1     		bne	.L54
+ 588              	.L53:
+ 589 0046 0120     		movs	r0, #1
+ 590 0048 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 591 004c FFF7FEFF 		bl	Flash_wait_busy
+ 592              		@ sp needed
+ 593 0050 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 11
+
+
+ 595              		.section	.text.eepromWrite,"ax",%progbits
+ 596              		.align	1
+ 597              		.global	eepromWrite
+ 598              		.syntax unified
+ 599              		.code	16
+ 600              		.thumb_func
+ 602              	eepromWrite:
+ 603              		@ args = 0, pretend = 0, frame = 0
+ 604              		@ frame_needed = 0, uses_anonymous_args = 0
+ 605 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 606 0002 CE46     		mov	lr, r9
+ 607 0004 4746     		mov	r7, r8
+ 608 0006 80B5     		push	{r7, lr}
+ 609 0008 0600     		movs	r6, r0
+ 610 000a 0F00     		movs	r7, r1
+ 611 000c 151E     		subs	r5, r2, #0
+ 612 000e 15D0     		beq	.L57
+ 613 0010 FF23     		movs	r3, #255
+ 614 0012 9946     		mov	r9, r3
+ 615 0014 0133     		adds	r3, r3, #1
+ 616 0016 9846     		mov	r8, r3
+ 617 0018 08E0     		b	.L59
+ 618              	.L58:
+ 619 001a 2200     		movs	r2, r4
+ 620 001c 3900     		movs	r1, r7
+ 621 001e 3000     		movs	r0, r6
+ 622 0020 FFF7FEFF 		bl	Flash_write_page
+ 623 0024 3619     		adds	r6, r6, r4
+ 624 0026 3F19     		adds	r7, r7, r4
+ 625 0028 2D1B     		subs	r5, r5, r4
+ 626 002a 07D0     		beq	.L57
+ 627              	.L59:
+ 628 002c 4C46     		mov	r4, r9
+ 629 002e 3440     		ands	r4, r6
+ 630 0030 4346     		mov	r3, r8
+ 631 0032 1C1B     		subs	r4, r3, r4
+ 632 0034 AC42     		cmp	r4, r5
+ 633 0036 F0D9     		bls	.L58
+ 634 0038 2C00     		movs	r4, r5
+ 635 003a EEE7     		b	.L58
+ 636              	.L57:
+ 637 003c 0120     		movs	r0, #1
+ 638              		@ sp needed
+ 639 003e C0BC     		pop	{r6, r7}
+ 640 0040 B946     		mov	r9, r7
+ 641 0042 B046     		mov	r8, r6
+ 642 0044 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 644              		.section	.text.Flash_BlkErase_4k,"ax",%progbits
+ 645              		.align	1
+ 646              		.global	Flash_BlkErase_4k
+ 647              		.syntax unified
+ 648              		.code	16
+ 649              		.thumb_func
+ 651              	Flash_BlkErase_4k:
+ 652              		@ args = 0, pretend = 0, frame = 0
+ 653              		@ frame_needed = 0, uses_anonymous_args = 0
+ 654 0000 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 12
+
+
+ 655 0002 0500     		movs	r5, r0
+ 656 0004 FFF7FEFF 		bl	Flash_CMD_WriteEN
+ 657 0008 0020     		movs	r0, #0
+ 658 000a FFF7FEFF 		bl	SPI_Flash_CS_set
+ 659 000e 2020     		movs	r0, #32
+ 660 0010 FFF7FEFF 		bl	SPI_Flash_transceive
+ 661 0014 280C     		lsrs	r0, r5, #16
+ 662 0016 FF24     		movs	r4, #255
+ 663 0018 2040     		ands	r0, r4
+ 664 001a FFF7FEFF 		bl	SPI_Flash_transceive
+ 665 001e 280A     		lsrs	r0, r5, #8
+ 666 0020 2040     		ands	r0, r4
+ 667 0022 FFF7FEFF 		bl	SPI_Flash_transceive
+ 668 0026 2000     		movs	r0, r4
+ 669 0028 2840     		ands	r0, r5
+ 670 002a FFF7FEFF 		bl	SPI_Flash_transceive
+ 671 002e 0120     		movs	r0, #1
+ 672 0030 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 673 0034 FFF7FEFF 		bl	Flash_wait_busy
+ 674              		@ sp needed
+ 675 0038 70BD     		pop	{r4, r5, r6, pc}
+ 677              		.section	.text.eepromErase,"ax",%progbits
+ 678              		.align	1
+ 679              		.global	eepromErase
+ 680              		.syntax unified
+ 681              		.code	16
+ 682              		.thumb_func
+ 684              	eepromErase:
+ 685              		@ args = 0, pretend = 0, frame = 0
+ 686              		@ frame_needed = 0, uses_anonymous_args = 0
+ 687 0000 70B5     		push	{r4, r5, r6, lr}
+ 688 0002 0500     		movs	r5, r0
+ 689 0004 0305     		lsls	r3, r0, #20
+ 690 0006 1A0D     		lsrs	r2, r3, #20
+ 691 0008 002B     		cmp	r3, #0
+ 692 000a 02D0     		beq	.L63
+ 693 000c 8918     		adds	r1, r1, r2
+ 694 000e 050B     		lsrs	r5, r0, #12
+ 695 0010 2D03     		lsls	r5, r5, #12
+ 696              	.L63:
+ 697 0012 0A4B     		ldr	r3, .L67
+ 698 0014 9C46     		mov	ip, r3
+ 699 0016 6144     		add	r1, r1, ip
+ 700 0018 090B     		lsrs	r1, r1, #12
+ 701 001a 0803     		lsls	r0, r1, #12
+ 702 001c 0029     		cmp	r1, #0
+ 703 001e 0AD0     		beq	.L64
+ 704 0020 2C00     		movs	r4, r5
+ 705 0022 2D18     		adds	r5, r5, r0
+ 706              	.L65:
+ 707 0024 2000     		movs	r0, r4
+ 708 0026 FFF7FEFF 		bl	Flash_BlkErase_4k
+ 709 002a 8023     		movs	r3, #128
+ 710 002c 5B01     		lsls	r3, r3, #5
+ 711 002e 9C46     		mov	ip, r3
+ 712 0030 6444     		add	r4, r4, ip
+ 713 0032 A542     		cmp	r5, r4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 13
+
+
+ 714 0034 F6D1     		bne	.L65
+ 715              	.L64:
+ 716 0036 0120     		movs	r0, #1
+ 717              		@ sp needed
+ 718 0038 70BD     		pop	{r4, r5, r6, pc}
+ 719              	.L68:
+ 720 003a C046     		.align	2
+ 721              	.L67:
+ 722 003c FF0F0000 		.word	4095
+ 724              		.section	.text.eepromGetSize,"ax",%progbits
+ 725              		.align	1
+ 726              		.global	eepromGetSize
+ 727              		.syntax unified
+ 728              		.code	16
+ 729              		.thumb_func
+ 731              	eepromGetSize:
+ 732              		@ args = 0, pretend = 0, frame = 0
+ 733              		@ frame_needed = 0, uses_anonymous_args = 0
+ 734              		@ link register save eliminated.
+ 735 0000 8020     		movs	r0, #128
+ 736 0002 0003     		lsls	r0, r0, #12
+ 737              		@ sp needed
+ 738 0004 7047     		bx	lr
+ 740              		.section	.rodata.flash_selftest.str1.4,"aMS",%progbits,1
+ 741              		.align	2
+ 742              	.LC7:
+ 743 0000 4641494C 		.ascii	"FAILED\000"
+ 743      454400
+ 744 0007 00       		.align	2
+ 745              	.LC9:
+ 746 0008 50415353 		.ascii	"PASSED\000"
+ 746      454400
+ 747 000f 00       		.align	2
+ 748              	.LC11:
+ 749 0010 464C4153 		.ascii	"FLASH selftest ---------------------------\012\000"
+ 749      48207365 
+ 749      6C667465 
+ 749      7374202D 
+ 749      2D2D2D2D 
+ 750              		.align	2
+ 751              	.LC13:
+ 752 003c 20204A45 		.ascii	"  JEDEC: %02X %02X %02X\000"
+ 752      4445433A 
+ 752      20253032 
+ 752      58202530 
+ 752      32582025 
+ 753              		.align	2
+ 754              	.LC15:
+ 755 0054 20204641 		.ascii	"  FAIL: no chip response (check SPI wiring)\012\000"
+ 755      494C3A20 
+ 755      6E6F2063 
+ 755      68697020 
+ 755      72657370 
+ 756 0081 000000   		.align	2
+ 757              	.LC17:
+ 758 0084 464C4153 		.ascii	"FLASH selftest FAILED\012\000"
+ 758      48207365 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 14
+
+
+ 758      6C667465 
+ 758      73742046 
+ 758      41494C45 
+ 759 009b 00       		.align	2
+ 760              	.LC19:
+ 761 009c 20204F4B 		.ascii	"  OK\012\000"
+ 761      0A00
+ 762 00a2 0000     		.align	2
+ 763              	.LC21:
+ 764 00a4 20205352 		.ascii	"  SR before WREN: 0x%02X  WIP=%d WEL=%d BP=%d\012\000"
+ 764      20626566 
+ 764      6F726520 
+ 764      5752454E 
+ 764      3A203078 
+ 765 00d3 00       		.align	2
+ 766              	.LC23:
+ 767 00d4 20205352 		.ascii	"  SR after WREN:  0x%02X  WEL=%d\000"
+ 767      20616674 
+ 767      65722057 
+ 767      52454E3A 
+ 767      20203078 
+ 768 00f5 000000   		.align	2
+ 769              	.LC25:
+ 770 00f8 20204641 		.ascii	"  FAIL: WEL not set \342\200\224 chip may be write-"
+ 770      494C3A20 
+ 770      57454C20 
+ 770      6E6F7420 
+ 770      73657420 
+ 771 0122 70726F74 		.ascii	"protected\012\000"
+ 771      65637465 
+ 771      640A00
+ 772 012d 000000   		.align	2
+ 773              	.LC27:
+ 774 0130 20204572 		.ascii	"  Erase 0x%05lX ...\000"
+ 774      61736520 
+ 774      30782530 
+ 774      356C5820 
+ 774      2E2E2E00 
+ 775              		.align	2
+ 776              	.LC29:
+ 777 0144 20646F6E 		.ascii	" done  SR=0x%02X WIP=%d\012\000"
+ 777      65202053 
+ 777      523D3078 
+ 777      25303258 
+ 777      20574950 
+ 778 015d 000000   		.align	2
+ 779              	.LC31:
+ 780 0160 20204641 		.ascii	"  FAIL: WIP still set after erase\012\000"
+ 780      494C3A20 
+ 780      57495020 
+ 780      7374696C 
+ 780      6C207365 
+ 781 0183 00       		.align	2
+ 782              	.LC33:
+ 783 0184 2020426C 		.ascii	"  Blank:\000"
+ 783      616E6B3A 
+ 783      00
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 15
+
+
+ 784 018d 000000   		.align	2
+ 785              	.LC35:
+ 786 0190 20253032 		.ascii	" %02X\000"
+ 786      5800
+ 787 0196 0000     		.align	2
+ 788              	.LC37:
+ 789 0198 0A202046 		.ascii	"\012  FAIL: not blank after erase \342\200\224 eras"
+ 789      41494C3A 
+ 789      206E6F74 
+ 789      20626C61 
+ 789      6E6B2061 
+ 790 01bf 6520636D 		.ascii	"e cmd not accepted?\012\000"
+ 790      64206E6F 
+ 790      74206163 
+ 790      63657074 
+ 790      65643F0A 
+ 791              		.align	2
+ 792              	.LC39:
+ 793 01d4 20205772 		.ascii	"  Write:\000"
+ 793      6974653A 
+ 793      00
+ 794 01dd 000000   		.align	2
+ 795              	.LC41:
+ 796 01e0 0A202052 		.ascii	"\012  Read: \000"
+ 796      6561643A 
+ 796      2000
+ 797 01ea 0000     		.align	2
+ 798              	.LC43:
+ 799 01ec 28212900 		.ascii	"(!)\000"
+ 800              		.align	2
+ 801              	.LC45:
+ 802 01f0 464C4153 		.ascii	"FLASH selftest %s\012\000"
+ 802      48207365 
+ 802      6C667465 
+ 802      73742025 
+ 802      730A00
+ 803 0203 00       		.align	2
+ 804              	.LC47:
+ 805 0204 2D2D2D2D 		.ascii	"------------------------------------------\012\000"
+ 805      2D2D2D2D 
+ 805      2D2D2D2D 
+ 805      2D2D2D2D 
+ 805      2D2D2D2D 
+ 806              		.align	2
+ 807              	.LC49:
+ 808 0230 4641494C 		.ascii	"FAIL\000"
+ 808      00
+ 809 0235 000000   		.align	2
+ 810              	.LC51:
+ 811 0238 0A202056 		.ascii	"\012  Verify: %s\012\000"
+ 811      65726966 
+ 811      793A2025 
+ 811      730A00
+ 812 0247 00       		.align	2
+ 813              	.LC53:
+ 814 0248 20205365 		.ascii	"  Sector erased (clean)\012\000"
+ 814      63746F72 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 16
+
+
+ 814      20657261 
+ 814      73656420 
+ 814      28636C65 
+ 815 0261 000000   		.align	2
+ 816              	.LC55:
+ 817 0264 4F4B00   		.ascii	"OK\000"
+ 818              		.section	.text.flash_selftest,"ax",%progbits
+ 819              		.align	1
+ 820              		.global	flash_selftest
+ 821              		.syntax unified
+ 822              		.code	16
+ 823              		.thumb_func
+ 825              	flash_selftest:
+ 826              		@ args = 0, pretend = 0, frame = 40
+ 827              		@ frame_needed = 0, uses_anonymous_args = 0
+ 828 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 829 0002 DE46     		mov	lr, fp
+ 830 0004 5746     		mov	r7, r10
+ 831 0006 4646     		mov	r6, r8
+ 832 0008 C0B5     		push	{r6, r7, lr}
+ 833 000a 8CB0     		sub	sp, sp, #48
+ 834 000c FFF7FEFF 		bl	eepromPowerUp
+ 835 0010 8248     		ldr	r0, .L97
+ 836 0012 FFF7FEFF 		bl	uart_printf
+ 837 0016 0020     		movs	r0, #0
+ 838 0018 FFF7FEFF 		bl	SPI_Flash_CS_set
+ 839 001c 9F20     		movs	r0, #159
+ 840 001e FFF7FEFF 		bl	SPI_Flash_transceive
+ 841 0022 FF20     		movs	r0, #255
+ 842 0024 FFF7FEFF 		bl	SPI_Flash_transceive
+ 843 0028 0400     		movs	r4, r0
+ 844 002a FF20     		movs	r0, #255
+ 845 002c FFF7FEFF 		bl	SPI_Flash_transceive
+ 846 0030 0500     		movs	r5, r0
+ 847 0032 FF20     		movs	r0, #255
+ 848 0034 FFF7FEFF 		bl	SPI_Flash_transceive
+ 849 0038 0600     		movs	r6, r0
+ 850 003a 0120     		movs	r0, #1
+ 851 003c FFF7FEFF 		bl	SPI_Flash_CS_set
+ 852 0040 3300     		movs	r3, r6
+ 853 0042 2A00     		movs	r2, r5
+ 854 0044 2100     		movs	r1, r4
+ 855 0046 7648     		ldr	r0, .L97+4
+ 856 0048 FFF7FEFF 		bl	uart_printf
+ 857 004c 013C     		subs	r4, r4, #1
+ 858 004e E4B2     		uxtb	r4, r4
+ 859 0050 FD2C     		cmp	r4, #253
+ 860 0052 44D8     		bhi	.L91
+ 861 0054 7348     		ldr	r0, .L97+8
+ 862 0056 FFF7FEFF 		bl	uart_printf
+ 863 005a FFF7FEFF 		bl	flash_read_sr
+ 864 005e 0100     		movs	r1, r0
+ 865 0060 4308     		lsrs	r3, r0, #1
+ 866 0062 0127     		movs	r7, #1
+ 867 0064 3B40     		ands	r3, r7
+ 868 0066 3A00     		movs	r2, r7
+ 869 0068 0240     		ands	r2, r0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 17
+
+
+ 870 006a C006     		lsls	r0, r0, #27
+ 871 006c 400F     		lsrs	r0, r0, #29
+ 872 006e 0090     		str	r0, [sp]
+ 873 0070 6D48     		ldr	r0, .L97+12
+ 874 0072 FFF7FEFF 		bl	uart_printf
+ 875 0076 FFF7FEFF 		bl	Flash_CMD_WriteEN
+ 876 007a FFF7FEFF 		bl	flash_read_sr
+ 877 007e 0100     		movs	r1, r0
+ 878 0080 4308     		lsrs	r3, r0, #1
+ 879 0082 1F40     		ands	r7, r3
+ 880 0084 3A00     		movs	r2, r7
+ 881 0086 6948     		ldr	r0, .L97+16
+ 882 0088 FFF7FEFF 		bl	uart_printf
+ 883 008c 002F     		cmp	r7, #0
+ 884 008e 34D0     		beq	.L92
+ 885 0090 6448     		ldr	r0, .L97+8
+ 886 0092 FFF7FEFF 		bl	uart_printf
+ 887 0096 FE24     		movs	r4, #254
+ 888 0098 E402     		lsls	r4, r4, #11
+ 889 009a 2100     		movs	r1, r4
+ 890 009c 6448     		ldr	r0, .L97+20
+ 891 009e FFF7FEFF 		bl	uart_printf
+ 892 00a2 2000     		movs	r0, r4
+ 893 00a4 FFF7FEFF 		bl	Flash_BlkErase_4k
+ 894 00a8 FFF7FEFF 		bl	flash_read_sr
+ 895 00ac 0100     		movs	r1, r0
+ 896 00ae 0125     		movs	r5, #1
+ 897 00b0 0540     		ands	r5, r0
+ 898 00b2 0395     		str	r5, [sp, #12]
+ 899 00b4 2A00     		movs	r2, r5
+ 900 00b6 5F48     		ldr	r0, .L97+24
+ 901 00b8 FFF7FEFF 		bl	uart_printf
+ 902 00bc 002D     		cmp	r5, #0
+ 903 00be 23D1     		bne	.L93
+ 904 00c0 FE20     		movs	r0, #254
+ 905 00c2 1022     		movs	r2, #16
+ 906 00c4 04A9     		add	r1, sp, #16
+ 907 00c6 C002     		lsls	r0, r0, #11
+ 908 00c8 FFF7FEFF 		bl	eepromRead
+ 909 00cc 5A48     		ldr	r0, .L97+28
+ 910 00ce FFF7FEFF 		bl	uart_printf
+ 911 00d2 04AE     		add	r6, sp, #16
+ 912 00d4 08AB     		add	r3, sp, #32
+ 913 00d6 9846     		mov	r8, r3
+ 914 00d8 3400     		movs	r4, r6
+ 915 00da 584D     		ldr	r5, .L97+32
+ 916 00dc 1FE0     		b	.L76
+ 917              	.L91:
+ 918 00de 5848     		ldr	r0, .L97+36
+ 919 00e0 FFF7FEFF 		bl	uart_printf
+ 920 00e4 5748     		ldr	r0, .L97+40
+ 921 00e6 FFF7FEFF 		bl	uart_printf
+ 922 00ea 0027     		movs	r7, #0
+ 923              	.L89:
+ 924 00ec 3800     		movs	r0, r7
+ 925 00ee 0CB0     		add	sp, sp, #48
+ 926              		@ sp needed
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 18
+
+
+ 927 00f0 E0BC     		pop	{r5, r6, r7}
+ 928 00f2 BB46     		mov	fp, r7
+ 929 00f4 B246     		mov	r10, r6
+ 930 00f6 A846     		mov	r8, r5
+ 931 00f8 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 932              	.L92:
+ 933 00fa 5348     		ldr	r0, .L97+44
+ 934 00fc FFF7FEFF 		bl	uart_printf
+ 935 0100 5048     		ldr	r0, .L97+40
+ 936 0102 FFF7FEFF 		bl	uart_printf
+ 937 0106 F1E7     		b	.L89
+ 938              	.L93:
+ 939 0108 5048     		ldr	r0, .L97+48
+ 940 010a FFF7FEFF 		bl	uart_printf
+ 941 010e 4D48     		ldr	r0, .L97+40
+ 942 0110 FFF7FEFF 		bl	uart_printf
+ 943 0114 0027     		movs	r7, #0
+ 944 0116 E9E7     		b	.L89
+ 945              	.L75:
+ 946 0118 0134     		adds	r4, r4, #1
+ 947 011a 4445     		cmp	r4, r8
+ 948 011c 08D0     		beq	.L94
+ 949              	.L76:
+ 950 011e 2178     		ldrb	r1, [r4]
+ 951 0120 2800     		movs	r0, r5
+ 952 0122 FFF7FEFF 		bl	uart_printf
+ 953 0126 2378     		ldrb	r3, [r4]
+ 954 0128 FF2B     		cmp	r3, #255
+ 955 012a F5D0     		beq	.L75
+ 956 012c 039F     		ldr	r7, [sp, #12]
+ 957 012e F3E7     		b	.L75
+ 958              	.L94:
+ 959 0130 002F     		cmp	r7, #0
+ 960 0132 32D0     		beq	.L95
+ 961 0134 3B48     		ldr	r0, .L97+8
+ 962 0136 FFF7FEFF 		bl	uart_printf
+ 963 013a 08AD     		add	r5, sp, #32
+ 964 013c 2A00     		movs	r2, r5
+ 965 013e 039B     		ldr	r3, [sp, #12]
+ 966 0140 5B20     		movs	r0, #91
+ 967 0142 4042     		rsbs	r0, r0, #0
+ 968              	.L78:
+ 969 0144 0100     		movs	r1, r0
+ 970 0146 5940     		eors	r1, r3
+ 971 0148 1170     		strb	r1, [r2]
+ 972 014a 0133     		adds	r3, r3, #1
+ 973 014c DBB2     		uxtb	r3, r3
+ 974 014e 0132     		adds	r2, r2, #1
+ 975 0150 102B     		cmp	r3, #16
+ 976 0152 F7D1     		bne	.L78
+ 977 0154 FE24     		movs	r4, #254
+ 978 0156 E402     		lsls	r4, r4, #11
+ 979 0158 1022     		movs	r2, #16
+ 980 015a 08A9     		add	r1, sp, #32
+ 981 015c 2000     		movs	r0, r4
+ 982 015e FFF7FEFF 		bl	eepromWrite
+ 983 0162 1022     		movs	r2, #16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 19
+
+
+ 984 0164 04A9     		add	r1, sp, #16
+ 985 0166 2000     		movs	r0, r4
+ 986 0168 FFF7FEFF 		bl	eepromRead
+ 987 016c 3848     		ldr	r0, .L97+52
+ 988 016e FFF7FEFF 		bl	uart_printf
+ 989 0172 1023     		movs	r3, #16
+ 990 0174 9B46     		mov	fp, r3
+ 991 0176 AB44     		add	fp, fp, r5
+ 992 0178 2C00     		movs	r4, r5
+ 993 017a 304B     		ldr	r3, .L97+32
+ 994 017c 9A46     		mov	r10, r3
+ 995              	.L79:
+ 996 017e 2178     		ldrb	r1, [r4]
+ 997 0180 5046     		mov	r0, r10
+ 998 0182 FFF7FEFF 		bl	uart_printf
+ 999 0186 0134     		adds	r4, r4, #1
+ 1000 0188 5C45     		cmp	r4, fp
+ 1001 018a F8D1     		bne	.L79
+ 1002 018c 3148     		ldr	r0, .L97+56
+ 1003 018e FFF7FEFF 		bl	uart_printf
+ 1004 0192 2A4C     		ldr	r4, .L97+32
+ 1005 0194 304B     		ldr	r3, .L97+60
+ 1006 0196 9A46     		mov	r10, r3
+ 1007 0198 0AE0     		b	.L81
+ 1008              	.L95:
+ 1009 019a 3048     		ldr	r0, .L97+64
+ 1010 019c FFF7FEFF 		bl	uart_printf
+ 1011 01a0 2848     		ldr	r0, .L97+40
+ 1012 01a2 FFF7FEFF 		bl	uart_printf
+ 1013 01a6 A1E7     		b	.L89
+ 1014              	.L80:
+ 1015 01a8 0136     		adds	r6, r6, #1
+ 1016 01aa 0135     		adds	r5, r5, #1
+ 1017 01ac 4645     		cmp	r6, r8
+ 1018 01ae 0CD0     		beq	.L96
+ 1019              	.L81:
+ 1020 01b0 3178     		ldrb	r1, [r6]
+ 1021 01b2 2000     		movs	r0, r4
+ 1022 01b4 FFF7FEFF 		bl	uart_printf
+ 1023 01b8 3278     		ldrb	r2, [r6]
+ 1024 01ba 2B78     		ldrb	r3, [r5]
+ 1025 01bc 9A42     		cmp	r2, r3
+ 1026 01be F3D0     		beq	.L80
+ 1027 01c0 5046     		mov	r0, r10
+ 1028 01c2 FFF7FEFF 		bl	uart_printf
+ 1029 01c6 039F     		ldr	r7, [sp, #12]
+ 1030 01c8 EEE7     		b	.L80
+ 1031              	.L96:
+ 1032 01ca 002F     		cmp	r7, #0
+ 1033 01cc 16D1     		bne	.L82
+ 1034 01ce 2449     		ldr	r1, .L97+68
+ 1035 01d0 2448     		ldr	r0, .L97+72
+ 1036 01d2 FFF7FEFF 		bl	uart_printf
+ 1037 01d6 8021     		movs	r1, #128
+ 1038 01d8 FE20     		movs	r0, #254
+ 1039 01da 4901     		lsls	r1, r1, #5
+ 1040 01dc C002     		lsls	r0, r0, #11
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 20
+
+
+ 1041 01de FFF7FEFF 		bl	eepromErase
+ 1042 01e2 2148     		ldr	r0, .L97+76
+ 1043 01e4 FFF7FEFF 		bl	uart_printf
+ 1044 01e8 2049     		ldr	r1, .L97+80
+ 1045              	.L84:
+ 1046 01ea 2148     		ldr	r0, .L97+84
+ 1047 01ec FFF7FEFF 		bl	uart_printf
+ 1048 01f0 2048     		ldr	r0, .L97+88
+ 1049 01f2 FFF7FEFF 		bl	uart_printf
+ 1050 01f6 FFF7FEFF 		bl	eepromPowerDown
+ 1051 01fa 77E7     		b	.L89
+ 1052              	.L82:
+ 1053 01fc 1E49     		ldr	r1, .L97+92
+ 1054 01fe 1948     		ldr	r0, .L97+72
+ 1055 0200 FFF7FEFF 		bl	uart_printf
+ 1056 0204 8021     		movs	r1, #128
+ 1057 0206 FE20     		movs	r0, #254
+ 1058 0208 4901     		lsls	r1, r1, #5
+ 1059 020a C002     		lsls	r0, r0, #11
+ 1060 020c FFF7FEFF 		bl	eepromErase
+ 1061 0210 1548     		ldr	r0, .L97+76
+ 1062 0212 FFF7FEFF 		bl	uart_printf
+ 1063 0216 1949     		ldr	r1, .L97+96
+ 1064 0218 E7E7     		b	.L84
+ 1065              	.L98:
+ 1066 021a C046     		.align	2
+ 1067              	.L97:
+ 1068 021c 10000000 		.word	.LC11
+ 1069 0220 3C000000 		.word	.LC13
+ 1070 0224 9C000000 		.word	.LC19
+ 1071 0228 A4000000 		.word	.LC21
+ 1072 022c D4000000 		.word	.LC23
+ 1073 0230 30010000 		.word	.LC27
+ 1074 0234 44010000 		.word	.LC29
+ 1075 0238 84010000 		.word	.LC33
+ 1076 023c 90010000 		.word	.LC35
+ 1077 0240 54000000 		.word	.LC15
+ 1078 0244 84000000 		.word	.LC17
+ 1079 0248 F8000000 		.word	.LC25
+ 1080 024c 60010000 		.word	.LC31
+ 1081 0250 D4010000 		.word	.LC39
+ 1082 0254 E0010000 		.word	.LC41
+ 1083 0258 EC010000 		.word	.LC43
+ 1084 025c 98010000 		.word	.LC37
+ 1085 0260 30020000 		.word	.LC49
+ 1086 0264 38020000 		.word	.LC51
+ 1087 0268 48020000 		.word	.LC53
+ 1088 026c 00000000 		.word	.LC7
+ 1089 0270 F0010000 		.word	.LC45
+ 1090 0274 04020000 		.word	.LC47
+ 1091 0278 64020000 		.word	.LC55
+ 1092 027c 08000000 		.word	.LC9
+ 1094              		.section	.bss.g_flash_awake,"aw",%nobits
+ 1095              		.set	.LANCHOR0,. + 0
+ 1098              	g_flash_awake:
+ 1099 0000 00       		.space	1
+ 1100              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 21
+
+
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 eeprom.c
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:16     .text.SPI_Flash_CS_set:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:22     .text.SPI_Flash_CS_set:00000000 SPI_Flash_CS_set
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:48     .text.SPI_Flash_CS_set:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:51     .text.SPI_Flash_CLK_set:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:57     .text.SPI_Flash_CLK_set:00000000 SPI_Flash_CLK_set
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:83     .text.SPI_Flash_CLK_set:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:86     .text.SPI_Flash_MOSI_set:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:92     .text.SPI_Flash_MOSI_set:00000000 SPI_Flash_MOSI_set
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:118    .text.SPI_Flash_MOSI_set:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:121    .text.SPI_Flash_MISO_get:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:127    .text.SPI_Flash_MISO_get:00000000 SPI_Flash_MISO_get
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:145    .text.SPI_Flash_MISO_get:00000018 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:148    .text.SPI_Flash_enable_GPIO:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:154    .text.SPI_Flash_enable_GPIO:00000000 SPI_Flash_enable_GPIO
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:239    .text.SPI_Flash_enable_GPIO:000000c0 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:242    .text.SPI_Flash_transceive:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:248    .text.SPI_Flash_transceive:00000000 SPI_Flash_transceive
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:292    .text.eepromPowerUp:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:298    .text.eepromPowerUp:00000000 eepromPowerUp
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:327    .text.eepromPowerUp:00000030 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:331    .text.eepromPowerDown:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:337    .text.eepromPowerDown:00000000 eepromPowerDown
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:362    .text.eepromPowerDown:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:365    .text.flash_read_sr:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:370    .text.flash_read_sr:00000000 flash_read_sr
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:388    .text.Flash_wait_busy:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:394    .text.Flash_wait_busy:00000000 Flash_wait_busy
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:420    .text.Flash_wait_busy:0000002c $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:423    .text.Flash_CMD_WriteEN:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:429    .text.Flash_CMD_WriteEN:00000000 Flash_CMD_WriteEN
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:443    .rodata.FLASH_Init.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:447    .text.FLASH_Init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:453    .text.FLASH_Init:00000000 FLASH_Init
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:500    .text.FLASH_Init:00000068 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:505    .text.eepromRead:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:511    .text.eepromRead:00000000 eepromRead
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:550    .text.Flash_write_page:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:556    .text.Flash_write_page:00000000 Flash_write_page
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:596    .text.eepromWrite:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:602    .text.eepromWrite:00000000 eepromWrite
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:645    .text.Flash_BlkErase_4k:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:651    .text.Flash_BlkErase_4k:00000000 Flash_BlkErase_4k
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:678    .text.eepromErase:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:684    .text.eepromErase:00000000 eepromErase
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:722    .text.eepromErase:0000003c $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:725    .text.eepromGetSize:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:731    .text.eepromGetSize:00000000 eepromGetSize
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:741    .rodata.flash_selftest.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:819    .text.flash_selftest:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:825    .text.flash_selftest:00000000 flash_selftest
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:1068   .text.flash_selftest:0000021c $d
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:1098   .bss.g_flash_awake:00000000 g_flash_awake
+C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s:1099   .bss.g_flash_awake:00000000 $d
+
+UNDEFINED SYMBOLS
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccRwMBh2.s 			page 23
+
+
+GPIO_GetPin
+RCC_PeriphClockCmd
+Pad_Config
+Pinmux_Config
+GPIO_StructInit
+GPIO_Init
+platform_delay_ms
+uart_printf

@@ -1,0 +1,506 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"rtl876x_aon_wdg.c"
+  14              		.text
+  15              		.section	.text.AON_WDG_WriteReg,"ax",%progbits
+  16              		.align	1
+  17              		.syntax unified
+  18              		.code	16
+  19              		.thumb_func
+  21              	AON_WDG_WriteReg:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 10B5     		push	{r4, lr}
+  25 0002 0C4B     		ldr	r3, .L3
+  26 0004 1B78     		ldrb	r3, [r3]
+  27 0006 002B     		cmp	r3, #0
+  28 0008 08D1     		bne	.L2
+  29 000a 0B4A     		ldr	r2, .L3+4
+  30 000c 1468     		ldr	r4, [r2]
+  31 000e 8023     		movs	r3, #128
+  32 0010 9B00     		lsls	r3, r3, #2
+  33 0012 2343     		orrs	r3, r4
+  34 0014 1360     		str	r3, [r2]
+  35 0016 074B     		ldr	r3, .L3
+  36 0018 0122     		movs	r2, #1
+  37 001a 1A70     		strb	r2, [r3]
+  38              	.L2:
+  39 001c 074B     		ldr	r3, .L3+8
+  40 001e 1960     		str	r1, [r3]
+  41 0020 074B     		ldr	r3, .L3+12
+  42 0022 9C46     		mov	ip, r3
+  43 0024 6044     		add	r0, r0, ip
+  44 0026 074B     		ldr	r3, .L3+16
+  45 0028 1860     		str	r0, [r3]
+  46 002a 074B     		ldr	r3, .L3+20
+  47 002c 0122     		movs	r2, #1
+  48 002e 1A60     		str	r2, [r3]
+  49              		@ sp needed
+  50 0030 10BD     		pop	{r4, pc}
+  51              	.L4:
+  52 0032 C046     		.align	2
+  53              	.L3:
+  54 0034 00000000 		.word	.LANCHOR0
+  55 0038 14000040 		.word	1073741844
+  56 003c F0010040 		.word	1073742320
+  57 0040 00FFFFBF 		.word	-1073742080
+  58 0044 F4010040 		.word	1073742324
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 2
+
+
+  59 0048 F8010040 		.word	1073742328
+  61              		.section	.text.AON_WDG_Config,"ax",%progbits
+  62              		.align	1
+  63              		.global	AON_WDG_Config
+  64              		.syntax unified
+  65              		.code	16
+  66              		.thumb_func
+  68              	AON_WDG_Config:
+  69              		@ args = 0, pretend = 0, frame = 16
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  72 0002 CE46     		mov	lr, r9
+  73 0004 4746     		mov	r7, r8
+  74 0006 80B5     		push	{r7, lr}
+  75 0008 85B0     		sub	sp, sp, #20
+  76 000a 9946     		mov	r9, r3
+  77 000c 1B4C     		ldr	r4, .L6
+  78 000e 2668     		ldr	r6, [r4]
+  79 0010 01AD     		add	r5, sp, #4
+  80 0012 0196     		str	r6, [sp, #4]
+  81 0014 0126     		movs	r6, #1
+  82 0016 0127     		movs	r7, #1
+  83 0018 3840     		ands	r0, r7
+  84 001a C000     		lsls	r0, r0, #3
+  85 001c 8446     		mov	ip, r0
+  86 001e 2878     		ldrb	r0, [r5]
+  87 0020 0823     		movs	r3, #8
+  88 0022 9843     		bics	r0, r3
+  89 0024 6346     		mov	r3, ip
+  90 0026 1843     		orrs	r0, r3
+  91 0028 2870     		strb	r0, [r5]
+  92 002a 8903     		lsls	r1, r1, #14
+  93 002c 8809     		lsrs	r0, r1, #6
+  94 002e 1449     		ldr	r1, .L6+4
+  95 0030 019B     		ldr	r3, [sp, #4]
+  96 0032 1940     		ands	r1, r3
+  97 0034 0143     		orrs	r1, r0
+  98 0036 0191     		str	r1, [sp, #4]
+  99 0038 3A40     		ands	r2, r7
+ 100 003a FB20     		movs	r0, #251
+ 101 003c 0140     		ands	r1, r0
+ 102 003e 9200     		lsls	r2, r2, #2
+ 103 0040 4B46     		mov	r3, r9
+ 104 0042 1F40     		ands	r7, r3
+ 105 0044 3F01     		lsls	r7, r7, #4
+ 106 0046 0A43     		orrs	r2, r1
+ 107 0048 1021     		movs	r1, #16
+ 108 004a 8A43     		bics	r2, r1
+ 109 004c 3A43     		orrs	r2, r7
+ 110 004e 2A70     		strb	r2, [r5]
+ 111 0050 A168     		ldr	r1, [r4, #8]
+ 112 0052 3143     		orrs	r1, r6
+ 113 0054 CC25     		movs	r5, #204
+ 114 0056 6D00     		lsls	r5, r5, #1
+ 115 0058 2800     		movs	r0, r5
+ 116 005a FFF7FEFF 		bl	AON_WDG_WriteReg
+ 117 005e 0199     		ldr	r1, [sp, #4]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 3
+
+
+ 118 0060 C820     		movs	r0, #200
+ 119 0062 4000     		lsls	r0, r0, #1
+ 120 0064 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 121 0068 A168     		ldr	r1, [r4, #8]
+ 122 006a B143     		bics	r1, r6
+ 123 006c 2800     		movs	r0, r5
+ 124 006e FFF7FEFF 		bl	AON_WDG_WriteReg
+ 125 0072 05B0     		add	sp, sp, #20
+ 126              		@ sp needed
+ 127 0074 C0BC     		pop	{r6, r7}
+ 128 0076 B946     		mov	r9, r7
+ 129 0078 B046     		mov	r8, r6
+ 130 007a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 131              	.L7:
+ 132              		.align	2
+ 133              	.L6:
+ 134 007c 90010040 		.word	1073742224
+ 135 0080 FF0000FC 		.word	-67108609
+ 137              		.section	.text.AON_WDG_ConfigResetLevel,"ax",%progbits
+ 138              		.align	1
+ 139              		.global	AON_WDG_ConfigResetLevel
+ 140              		.syntax unified
+ 141              		.code	16
+ 142              		.thumb_func
+ 144              	AON_WDG_ConfigResetLevel:
+ 145              		@ args = 0, pretend = 0, frame = 16
+ 146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 147 0000 70B5     		push	{r4, r5, r6, lr}
+ 148 0002 84B0     		sub	sp, sp, #16
+ 149 0004 0F4C     		ldr	r4, .L9
+ 150 0006 2368     		ldr	r3, [r4]
+ 151 0008 01AA     		add	r2, sp, #4
+ 152 000a 0193     		str	r3, [sp, #4]
+ 153 000c 0125     		movs	r5, #1
+ 154 000e 0123     		movs	r3, #1
+ 155 0010 0340     		ands	r3, r0
+ 156 0012 DB00     		lsls	r3, r3, #3
+ 157 0014 1078     		ldrb	r0, [r2]
+ 158 0016 0821     		movs	r1, #8
+ 159 0018 8843     		bics	r0, r1
+ 160 001a 1843     		orrs	r0, r3
+ 161 001c 1070     		strb	r0, [r2]
+ 162 001e A168     		ldr	r1, [r4, #8]
+ 163 0020 2943     		orrs	r1, r5
+ 164 0022 CC26     		movs	r6, #204
+ 165 0024 7600     		lsls	r6, r6, #1
+ 166 0026 3000     		movs	r0, r6
+ 167 0028 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 168 002c 0199     		ldr	r1, [sp, #4]
+ 169 002e C820     		movs	r0, #200
+ 170 0030 4000     		lsls	r0, r0, #1
+ 171 0032 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 172 0036 A168     		ldr	r1, [r4, #8]
+ 173 0038 A943     		bics	r1, r5
+ 174 003a 3000     		movs	r0, r6
+ 175 003c FFF7FEFF 		bl	AON_WDG_WriteReg
+ 176 0040 04B0     		add	sp, sp, #16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 4
+
+
+ 177              		@ sp needed
+ 178 0042 70BD     		pop	{r4, r5, r6, pc}
+ 179              	.L10:
+ 180              		.align	2
+ 181              	.L9:
+ 182 0044 90010040 		.word	1073742224
+ 184              		.section	.text.AON_WDG_ConfigComp,"ax",%progbits
+ 185              		.align	1
+ 186              		.global	AON_WDG_ConfigComp
+ 187              		.syntax unified
+ 188              		.code	16
+ 189              		.thumb_func
+ 191              	AON_WDG_ConfigComp:
+ 192              		@ args = 0, pretend = 0, frame = 16
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194 0000 70B5     		push	{r4, r5, r6, lr}
+ 195 0002 84B0     		sub	sp, sp, #16
+ 196 0004 0E4C     		ldr	r4, .L12
+ 197 0006 2368     		ldr	r3, [r4]
+ 198 0008 0193     		str	r3, [sp, #4]
+ 199 000a 8003     		lsls	r0, r0, #14
+ 200 000c 8309     		lsrs	r3, r0, #6
+ 201 000e 0D48     		ldr	r0, .L12+4
+ 202 0010 019A     		ldr	r2, [sp, #4]
+ 203 0012 1040     		ands	r0, r2
+ 204 0014 1843     		orrs	r0, r3
+ 205 0016 0190     		str	r0, [sp, #4]
+ 206 0018 A168     		ldr	r1, [r4, #8]
+ 207 001a 0126     		movs	r6, #1
+ 208 001c 3143     		orrs	r1, r6
+ 209 001e CC25     		movs	r5, #204
+ 210 0020 6D00     		lsls	r5, r5, #1
+ 211 0022 2800     		movs	r0, r5
+ 212 0024 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 213 0028 0199     		ldr	r1, [sp, #4]
+ 214 002a C820     		movs	r0, #200
+ 215 002c 4000     		lsls	r0, r0, #1
+ 216 002e FFF7FEFF 		bl	AON_WDG_WriteReg
+ 217 0032 A168     		ldr	r1, [r4, #8]
+ 218 0034 B143     		bics	r1, r6
+ 219 0036 2800     		movs	r0, r5
+ 220 0038 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 221 003c 04B0     		add	sp, sp, #16
+ 222              		@ sp needed
+ 223 003e 70BD     		pop	{r4, r5, r6, pc}
+ 224              	.L13:
+ 225              		.align	2
+ 226              	.L12:
+ 227 0040 90010040 		.word	1073742224
+ 228 0044 FF0000FC 		.word	-67108609
+ 230              		.section	.text.AON_WDG_ConfigCntCtl,"ax",%progbits
+ 231              		.align	1
+ 232              		.global	AON_WDG_ConfigCntCtl
+ 233              		.syntax unified
+ 234              		.code	16
+ 235              		.thumb_func
+ 237              	AON_WDG_ConfigCntCtl:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 5
+
+
+ 238              		@ args = 0, pretend = 0, frame = 16
+ 239              		@ frame_needed = 0, uses_anonymous_args = 0
+ 240 0000 70B5     		push	{r4, r5, r6, lr}
+ 241 0002 84B0     		sub	sp, sp, #16
+ 242 0004 0F4C     		ldr	r4, .L15
+ 243 0006 2368     		ldr	r3, [r4]
+ 244 0008 01AA     		add	r2, sp, #4
+ 245 000a 0193     		str	r3, [sp, #4]
+ 246 000c 0125     		movs	r5, #1
+ 247 000e 0123     		movs	r3, #1
+ 248 0010 0340     		ands	r3, r0
+ 249 0012 9B00     		lsls	r3, r3, #2
+ 250 0014 1078     		ldrb	r0, [r2]
+ 251 0016 0421     		movs	r1, #4
+ 252 0018 8843     		bics	r0, r1
+ 253 001a 1843     		orrs	r0, r3
+ 254 001c 1070     		strb	r0, [r2]
+ 255 001e A168     		ldr	r1, [r4, #8]
+ 256 0020 2943     		orrs	r1, r5
+ 257 0022 CC26     		movs	r6, #204
+ 258 0024 7600     		lsls	r6, r6, #1
+ 259 0026 3000     		movs	r0, r6
+ 260 0028 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 261 002c 0199     		ldr	r1, [sp, #4]
+ 262 002e C820     		movs	r0, #200
+ 263 0030 4000     		lsls	r0, r0, #1
+ 264 0032 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 265 0036 A168     		ldr	r1, [r4, #8]
+ 266 0038 A943     		bics	r1, r5
+ 267 003a 3000     		movs	r0, r6
+ 268 003c FFF7FEFF 		bl	AON_WDG_WriteReg
+ 269 0040 04B0     		add	sp, sp, #16
+ 270              		@ sp needed
+ 271 0042 70BD     		pop	{r4, r5, r6, pc}
+ 272              	.L16:
+ 273              		.align	2
+ 274              	.L15:
+ 275 0044 90010040 		.word	1073742224
+ 277              		.section	.text.AON_WDG_ConfigCntReload,"ax",%progbits
+ 278              		.align	1
+ 279              		.global	AON_WDG_ConfigCntReload
+ 280              		.syntax unified
+ 281              		.code	16
+ 282              		.thumb_func
+ 284              	AON_WDG_ConfigCntReload:
+ 285              		@ args = 0, pretend = 0, frame = 16
+ 286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287 0000 70B5     		push	{r4, r5, r6, lr}
+ 288 0002 84B0     		sub	sp, sp, #16
+ 289 0004 0F4C     		ldr	r4, .L18
+ 290 0006 2368     		ldr	r3, [r4]
+ 291 0008 01AA     		add	r2, sp, #4
+ 292 000a 0193     		str	r3, [sp, #4]
+ 293 000c 0125     		movs	r5, #1
+ 294 000e 0123     		movs	r3, #1
+ 295 0010 0340     		ands	r3, r0
+ 296 0012 1B01     		lsls	r3, r3, #4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 6
+
+
+ 297 0014 1078     		ldrb	r0, [r2]
+ 298 0016 1021     		movs	r1, #16
+ 299 0018 8843     		bics	r0, r1
+ 300 001a 1843     		orrs	r0, r3
+ 301 001c 1070     		strb	r0, [r2]
+ 302 001e A168     		ldr	r1, [r4, #8]
+ 303 0020 2943     		orrs	r1, r5
+ 304 0022 CC26     		movs	r6, #204
+ 305 0024 7600     		lsls	r6, r6, #1
+ 306 0026 3000     		movs	r0, r6
+ 307 0028 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 308 002c 0199     		ldr	r1, [sp, #4]
+ 309 002e C820     		movs	r0, #200
+ 310 0030 4000     		lsls	r0, r0, #1
+ 311 0032 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 312 0036 A168     		ldr	r1, [r4, #8]
+ 313 0038 A943     		bics	r1, r5
+ 314 003a 3000     		movs	r0, r6
+ 315 003c FFF7FEFF 		bl	AON_WDG_WriteReg
+ 316 0040 04B0     		add	sp, sp, #16
+ 317              		@ sp needed
+ 318 0042 70BD     		pop	{r4, r5, r6, pc}
+ 319              	.L19:
+ 320              		.align	2
+ 321              	.L18:
+ 322 0044 90010040 		.word	1073742224
+ 324              		.section	.text.AON_WDG_Enable,"ax",%progbits
+ 325              		.align	1
+ 326              		.global	AON_WDG_Enable
+ 327              		.syntax unified
+ 328              		.code	16
+ 329              		.thumb_func
+ 331              	AON_WDG_Enable:
+ 332              		@ args = 0, pretend = 0, frame = 16
+ 333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334 0000 70B5     		push	{r4, r5, r6, lr}
+ 335 0002 84B0     		sub	sp, sp, #16
+ 336 0004 0E4C     		ldr	r4, .L21
+ 337 0006 2368     		ldr	r3, [r4]
+ 338 0008 01AA     		add	r2, sp, #4
+ 339 000a 0193     		str	r3, [sp, #4]
+ 340 000c 1378     		ldrb	r3, [r2]
+ 341 000e 0321     		movs	r1, #3
+ 342 0010 8B43     		bics	r3, r1
+ 343 0012 0126     		movs	r6, #1
+ 344 0014 0121     		movs	r1, #1
+ 345 0016 0B43     		orrs	r3, r1
+ 346 0018 1370     		strb	r3, [r2]
+ 347 001a A168     		ldr	r1, [r4, #8]
+ 348 001c 3143     		orrs	r1, r6
+ 349 001e CC25     		movs	r5, #204
+ 350 0020 6D00     		lsls	r5, r5, #1
+ 351 0022 2800     		movs	r0, r5
+ 352 0024 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 353 0028 0199     		ldr	r1, [sp, #4]
+ 354 002a C820     		movs	r0, #200
+ 355 002c 4000     		lsls	r0, r0, #1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 7
+
+
+ 356 002e FFF7FEFF 		bl	AON_WDG_WriteReg
+ 357 0032 A168     		ldr	r1, [r4, #8]
+ 358 0034 B143     		bics	r1, r6
+ 359 0036 2800     		movs	r0, r5
+ 360 0038 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 361 003c 04B0     		add	sp, sp, #16
+ 362              		@ sp needed
+ 363 003e 70BD     		pop	{r4, r5, r6, pc}
+ 364              	.L22:
+ 365              		.align	2
+ 366              	.L21:
+ 367 0040 90010040 		.word	1073742224
+ 369              		.section	.text.AON_WDG_Disable,"ax",%progbits
+ 370              		.align	1
+ 371              		.global	AON_WDG_Disable
+ 372              		.syntax unified
+ 373              		.code	16
+ 374              		.thumb_func
+ 376              	AON_WDG_Disable:
+ 377              		@ args = 0, pretend = 0, frame = 16
+ 378              		@ frame_needed = 0, uses_anonymous_args = 0
+ 379 0000 70B5     		push	{r4, r5, r6, lr}
+ 380 0002 84B0     		sub	sp, sp, #16
+ 381 0004 0E4C     		ldr	r4, .L24
+ 382 0006 2368     		ldr	r3, [r4]
+ 383 0008 01AA     		add	r2, sp, #4
+ 384 000a 0193     		str	r3, [sp, #4]
+ 385 000c 1378     		ldrb	r3, [r2]
+ 386 000e 0321     		movs	r1, #3
+ 387 0010 8B43     		bics	r3, r1
+ 388 0012 0221     		movs	r1, #2
+ 389 0014 0B43     		orrs	r3, r1
+ 390 0016 1370     		strb	r3, [r2]
+ 391 0018 A168     		ldr	r1, [r4, #8]
+ 392 001a 0126     		movs	r6, #1
+ 393 001c 3143     		orrs	r1, r6
+ 394 001e CC25     		movs	r5, #204
+ 395 0020 6D00     		lsls	r5, r5, #1
+ 396 0022 2800     		movs	r0, r5
+ 397 0024 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 398 0028 0199     		ldr	r1, [sp, #4]
+ 399 002a C820     		movs	r0, #200
+ 400 002c 4000     		lsls	r0, r0, #1
+ 401 002e FFF7FEFF 		bl	AON_WDG_WriteReg
+ 402 0032 A168     		ldr	r1, [r4, #8]
+ 403 0034 B143     		bics	r1, r6
+ 404 0036 2800     		movs	r0, r5
+ 405 0038 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 406 003c 04B0     		add	sp, sp, #16
+ 407              		@ sp needed
+ 408 003e 70BD     		pop	{r4, r5, r6, pc}
+ 409              	.L25:
+ 410              		.align	2
+ 411              	.L24:
+ 412 0040 90010040 		.word	1073742224
+ 414              		.section	.text.AON_WDG_Restart,"ax",%progbits
+ 415              		.align	1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 8
+
+
+ 416              		.global	AON_WDG_Restart
+ 417              		.syntax unified
+ 418              		.code	16
+ 419              		.thumb_func
+ 421              	AON_WDG_Restart:
+ 422              		@ args = 0, pretend = 0, frame = 0
+ 423              		@ frame_needed = 0, uses_anonymous_args = 0
+ 424 0000 10B5     		push	{r4, lr}
+ 425 0002 054C     		ldr	r4, .L27
+ 426 0004 0121     		movs	r1, #1
+ 427 0006 2000     		movs	r0, r4
+ 428 0008 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 429 000c 0021     		movs	r1, #0
+ 430 000e 2000     		movs	r0, r4
+ 431 0010 FFF7FEFF 		bl	AON_WDG_WriteReg
+ 432              		@ sp needed
+ 433 0014 10BD     		pop	{r4, pc}
+ 434              	.L28:
+ 435 0016 C046     		.align	2
+ 436              	.L27:
+ 437 0018 94010040 		.word	1073742228
+ 439              		.section	.text.AON_WDG_SystemReset,"ax",%progbits
+ 440              		.align	1
+ 441              		.global	AON_WDG_SystemReset
+ 442              		.syntax unified
+ 443              		.code	16
+ 444              		.thumb_func
+ 446              	AON_WDG_SystemReset:
+ 447              		@ Volatile: function does not return.
+ 448              		@ args = 0, pretend = 0, frame = 0
+ 449              		@ frame_needed = 0, uses_anonymous_args = 0
+ 450 0000 10B5     		push	{r4, lr}
+ 451 0002 0023     		movs	r3, #0
+ 452 0004 0122     		movs	r2, #1
+ 453 0006 0121     		movs	r1, #1
+ 454 0008 0120     		movs	r0, #1
+ 455 000a FFF7FEFF 		bl	AON_WDG_Config
+ 456 000e FFF7FEFF 		bl	AON_WDG_Enable
+ 457              	.L30:
+ 458 0012 FEE7     		b	.L30
+ 460              		.section	.bss.is_called.0,"aw",%nobits
+ 461              		.set	.LANCHOR0,. + 0
+ 464              	is_called.0:
+ 465 0000 00       		.space	1
+ 466              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccr06gSn.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtl876x_aon_wdg.c
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:16     .text.AON_WDG_WriteReg:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:21     .text.AON_WDG_WriteReg:00000000 AON_WDG_WriteReg
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:54     .text.AON_WDG_WriteReg:00000034 $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:62     .text.AON_WDG_Config:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:68     .text.AON_WDG_Config:00000000 AON_WDG_Config
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:134    .text.AON_WDG_Config:0000007c $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:138    .text.AON_WDG_ConfigResetLevel:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:144    .text.AON_WDG_ConfigResetLevel:00000000 AON_WDG_ConfigResetLevel
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:182    .text.AON_WDG_ConfigResetLevel:00000044 $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:185    .text.AON_WDG_ConfigComp:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:191    .text.AON_WDG_ConfigComp:00000000 AON_WDG_ConfigComp
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:227    .text.AON_WDG_ConfigComp:00000040 $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:231    .text.AON_WDG_ConfigCntCtl:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:237    .text.AON_WDG_ConfigCntCtl:00000000 AON_WDG_ConfigCntCtl
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:275    .text.AON_WDG_ConfigCntCtl:00000044 $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:278    .text.AON_WDG_ConfigCntReload:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:284    .text.AON_WDG_ConfigCntReload:00000000 AON_WDG_ConfigCntReload
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:322    .text.AON_WDG_ConfigCntReload:00000044 $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:325    .text.AON_WDG_Enable:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:331    .text.AON_WDG_Enable:00000000 AON_WDG_Enable
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:367    .text.AON_WDG_Enable:00000040 $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:370    .text.AON_WDG_Disable:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:376    .text.AON_WDG_Disable:00000000 AON_WDG_Disable
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:412    .text.AON_WDG_Disable:00000040 $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:415    .text.AON_WDG_Restart:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:421    .text.AON_WDG_Restart:00000000 AON_WDG_Restart
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:437    .text.AON_WDG_Restart:00000018 $d
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:440    .text.AON_WDG_SystemReset:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:446    .text.AON_WDG_SystemReset:00000000 AON_WDG_SystemReset
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:464    .bss.is_called.0:00000000 is_called.0
+C:\Users\pc\AppData\Local\Temp\ccr06gSn.s:465    .bss.is_called.0:00000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,1051 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"rtl876x_pinmux.c"
+  14              		.text
+  15              		.section	.text.Pinmux_Reset,"ax",%progbits
+  16              		.align	1
+  17              		.global	Pinmux_Reset
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	Pinmux_Reset:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 0023     		movs	r3, #0
+  27 0002 0448     		ldr	r0, .L4
+  28 0004 0021     		movs	r1, #0
+  29              	.L2:
+  30 0006 9A00     		lsls	r2, r3, #2
+  31 0008 1150     		str	r1, [r2, r0]
+  32 000a 0133     		adds	r3, r3, #1
+  33 000c 0A2B     		cmp	r3, #10
+  34 000e FAD1     		bne	.L2
+  35              		@ sp needed
+  36 0010 7047     		bx	lr
+  37              	.L5:
+  38 0012 C046     		.align	2
+  39              	.L4:
+  40 0014 80020040 		.word	1073742464
+  42              		.section	.text.Pinmux_Deinit,"ax",%progbits
+  43              		.align	1
+  44              		.global	Pinmux_Deinit
+  45              		.syntax unified
+  46              		.code	16
+  47              		.thumb_func
+  49              	Pinmux_Deinit:
+  50              		@ args = 0, pretend = 0, frame = 0
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52              		@ link register save eliminated.
+  53 0000 8308     		lsrs	r3, r0, #2
+  54 0002 9B00     		lsls	r3, r3, #2
+  55 0004 054A     		ldr	r2, .L7
+  56 0006 9446     		mov	ip, r2
+  57 0008 6344     		add	r3, r3, ip
+  58 000a 1A68     		ldr	r2, [r3]
+  59 000c C000     		lsls	r0, r0, #3
+  60 000e 1821     		movs	r1, #24
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 2
+
+
+  61 0010 0840     		ands	r0, r1
+  62 0012 E731     		adds	r1, r1, #231
+  63 0014 8140     		lsls	r1, r1, r0
+  64 0016 8A43     		bics	r2, r1
+  65 0018 1A60     		str	r2, [r3]
+  66              		@ sp needed
+  67 001a 7047     		bx	lr
+  68              	.L8:
+  69              		.align	2
+  70              	.L7:
+  71 001c 80020040 		.word	1073742464
+  73              		.section	.text.Pinmux_Config,"ax",%progbits
+  74              		.align	1
+  75              		.global	Pinmux_Config
+  76              		.syntax unified
+  77              		.code	16
+  78              		.thumb_func
+  80              	Pinmux_Config:
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83 0000 10B5     		push	{r4, lr}
+  84 0002 8308     		lsrs	r3, r0, #2
+  85 0004 9B00     		lsls	r3, r3, #2
+  86 0006 074A     		ldr	r2, .L10
+  87 0008 9446     		mov	ip, r2
+  88 000a 6344     		add	r3, r3, ip
+  89 000c 1A68     		ldr	r2, [r3]
+  90 000e C000     		lsls	r0, r0, #3
+  91 0010 1824     		movs	r4, #24
+  92 0012 2040     		ands	r0, r4
+  93 0014 E734     		adds	r4, r4, #231
+  94 0016 8440     		lsls	r4, r4, r0
+  95 0018 A243     		bics	r2, r4
+  96 001a 8140     		lsls	r1, r1, r0
+  97 001c 0A43     		orrs	r2, r1
+  98 001e 1A60     		str	r2, [r3]
+  99              		@ sp needed
+ 100 0020 10BD     		pop	{r4, pc}
+ 101              	.L11:
+ 102 0022 C046     		.align	2
+ 103              	.L10:
+ 104 0024 80020040 		.word	1073742464
+ 106              		.section	.text.Pad_Config,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	Pad_Config
+ 109              		.syntax unified
+ 110              		.code	16
+ 111              		.thumb_func
+ 113              	Pad_Config:
+ 114              		@ args = 8, pretend = 0, frame = 0
+ 115              		@ frame_needed = 0, uses_anonymous_args = 0
+ 116 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 117 0002 CE46     		mov	lr, r9
+ 118 0004 4746     		mov	r7, r8
+ 119 0006 80B5     		push	{r7, lr}
+ 120 0008 8846     		mov	r8, r1
+ 121 000a 1700     		movs	r7, r2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 3
+
+
+ 122 000c 1C00     		movs	r4, r3
+ 123 000e 08AB     		add	r3, sp, #32
+ 124 0010 1D78     		ldrb	r5, [r3]
+ 125 0012 09AB     		add	r3, sp, #36
+ 126 0014 1B78     		ldrb	r3, [r3]
+ 127 0016 9946     		mov	r9, r3
+ 128 0018 4000     		lsls	r0, r0, #1
+ 129 001a 184B     		ldr	r3, .L19
+ 130 001c 1E5C     		ldrb	r6, [r3, r0]
+ 131 001e 3000     		movs	r0, r6
+ 132 0020 FFF7FEFF 		bl	btaon_fast_read_safe
+ 133 0024 1649     		ldr	r1, .L19+4
+ 134 0026 0840     		ands	r0, r1
+ 135 0028 002C     		cmp	r4, #0
+ 136 002a 18D1     		bne	.L13
+ 137 002c 0423     		movs	r3, #4
+ 138 002e 1843     		orrs	r0, r3
+ 139              	.L14:
+ 140 0030 6C00     		lsls	r4, r5, #1
+ 141 0032 4B46     		mov	r3, r9
+ 142 0034 1C43     		orrs	r4, r3
+ 143 0036 0443     		orrs	r4, r0
+ 144 0038 4346     		mov	r3, r8
+ 145 003a 002B     		cmp	r3, #0
+ 146 003c 14D0     		beq	.L15
+ 147 003e 8021     		movs	r1, #128
+ 148 0040 8900     		lsls	r1, r1, #2
+ 149 0042 0C43     		orrs	r4, r1
+ 150 0044 A4B2     		uxth	r4, r4
+ 151              	.L16:
+ 152 0046 8021     		movs	r1, #128
+ 153 0048 4900     		lsls	r1, r1, #1
+ 154 004a 2143     		orrs	r1, r4
+ 155 004c 3000     		movs	r0, r6
+ 156 004e FFF7FEFF 		bl	btaon_fast_write_safe
+ 157 0052 002F     		cmp	r7, #0
+ 158 0054 0BD0     		beq	.L18
+ 159              	.L12:
+ 160              		@ sp needed
+ 161 0056 C0BC     		pop	{r6, r7}
+ 162 0058 B946     		mov	r9, r7
+ 163 005a B046     		mov	r8, r6
+ 164 005c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 165              	.L13:
+ 166 005e 012C     		cmp	r4, #1
+ 167 0060 E6D1     		bne	.L14
+ 168 0062 0C23     		movs	r3, #12
+ 169 0064 1843     		orrs	r0, r3
+ 170 0066 E3E7     		b	.L14
+ 171              	.L15:
+ 172 0068 0649     		ldr	r1, .L19+8
+ 173 006a 0C40     		ands	r4, r1
+ 174 006c EBE7     		b	.L16
+ 175              	.L18:
+ 176 006e 0649     		ldr	r1, .L19+12
+ 177 0070 2140     		ands	r1, r4
+ 178 0072 3000     		movs	r0, r6
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 4
+
+
+ 179 0074 FFF7FEFF 		bl	btaon_fast_write_safe
+ 180 0078 EDE7     		b	.L12
+ 181              	.L20:
+ 182 007a C046     		.align	2
+ 183              	.L19:
+ 184 007c 00000000 		.word	.LANCHOR0
+ 185 0080 F0FF0000 		.word	65520
+ 186 0084 FFFD0000 		.word	65023
+ 187 0088 FFFEFFFF 		.word	-257
+ 189              		.section	.text.Pad_OutputControlValue,"ax",%progbits
+ 190              		.align	1
+ 191              		.global	Pad_OutputControlValue
+ 192              		.syntax unified
+ 193              		.code	16
+ 194              		.thumb_func
+ 196              	Pad_OutputControlValue:
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199 0000 70B5     		push	{r4, r5, r6, lr}
+ 200 0002 0C00     		movs	r4, r1
+ 201 0004 4000     		lsls	r0, r0, #1
+ 202 0006 084B     		ldr	r3, .L24
+ 203 0008 1D5C     		ldrb	r5, [r3, r0]
+ 204 000a 2800     		movs	r0, r5
+ 205 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 206 0010 002C     		cmp	r4, #0
+ 207 0012 06D0     		beq	.L22
+ 208 0014 0121     		movs	r1, #1
+ 209 0016 0143     		orrs	r1, r0
+ 210 0018 89B2     		uxth	r1, r1
+ 211              	.L23:
+ 212 001a 2800     		movs	r0, r5
+ 213 001c FFF7FEFF 		bl	btaon_fast_write_safe
+ 214              		@ sp needed
+ 215 0020 70BD     		pop	{r4, r5, r6, pc}
+ 216              	.L22:
+ 217 0022 0249     		ldr	r1, .L24+4
+ 218 0024 0140     		ands	r1, r0
+ 219 0026 F8E7     		b	.L23
+ 220              	.L25:
+ 221              		.align	2
+ 222              	.L24:
+ 223 0028 00000000 		.word	.LANCHOR0
+ 224 002c FEFF0000 		.word	65534
+ 226              		.section	.text.Pad_OutputEnableValue,"ax",%progbits
+ 227              		.align	1
+ 228              		.global	Pad_OutputEnableValue
+ 229              		.syntax unified
+ 230              		.code	16
+ 231              		.thumb_func
+ 233              	Pad_OutputEnableValue:
+ 234              		@ args = 0, pretend = 0, frame = 0
+ 235              		@ frame_needed = 0, uses_anonymous_args = 0
+ 236 0000 70B5     		push	{r4, r5, r6, lr}
+ 237 0002 0C00     		movs	r4, r1
+ 238 0004 4000     		lsls	r0, r0, #1
+ 239 0006 084B     		ldr	r3, .L29
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 5
+
+
+ 240 0008 1D5C     		ldrb	r5, [r3, r0]
+ 241 000a 2800     		movs	r0, r5
+ 242 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 243 0010 002C     		cmp	r4, #0
+ 244 0012 06D0     		beq	.L27
+ 245 0014 0221     		movs	r1, #2
+ 246 0016 0143     		orrs	r1, r0
+ 247 0018 89B2     		uxth	r1, r1
+ 248              	.L28:
+ 249 001a 2800     		movs	r0, r5
+ 250 001c FFF7FEFF 		bl	btaon_fast_write_safe
+ 251              		@ sp needed
+ 252 0020 70BD     		pop	{r4, r5, r6, pc}
+ 253              	.L27:
+ 254 0022 0249     		ldr	r1, .L29+4
+ 255 0024 0140     		ands	r1, r0
+ 256 0026 F8E7     		b	.L28
+ 257              	.L30:
+ 258              		.align	2
+ 259              	.L29:
+ 260 0028 00000000 		.word	.LANCHOR0
+ 261 002c FDFF0000 		.word	65533
+ 263              		.section	.text.Pad_PullEnableValue,"ax",%progbits
+ 264              		.align	1
+ 265              		.global	Pad_PullEnableValue
+ 266              		.syntax unified
+ 267              		.code	16
+ 268              		.thumb_func
+ 270              	Pad_PullEnableValue:
+ 271              		@ args = 0, pretend = 0, frame = 0
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273 0000 70B5     		push	{r4, r5, r6, lr}
+ 274 0002 0C00     		movs	r4, r1
+ 275 0004 4000     		lsls	r0, r0, #1
+ 276 0006 084B     		ldr	r3, .L34
+ 277 0008 1D5C     		ldrb	r5, [r3, r0]
+ 278 000a 2800     		movs	r0, r5
+ 279 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 280 0010 002C     		cmp	r4, #0
+ 281 0012 06D0     		beq	.L32
+ 282 0014 0421     		movs	r1, #4
+ 283 0016 0143     		orrs	r1, r0
+ 284 0018 89B2     		uxth	r1, r1
+ 285              	.L33:
+ 286 001a 2800     		movs	r0, r5
+ 287 001c FFF7FEFF 		bl	btaon_fast_write_safe
+ 288              		@ sp needed
+ 289 0020 70BD     		pop	{r4, r5, r6, pc}
+ 290              	.L32:
+ 291 0022 0249     		ldr	r1, .L34+4
+ 292 0024 0140     		ands	r1, r0
+ 293 0026 F8E7     		b	.L33
+ 294              	.L35:
+ 295              		.align	2
+ 296              	.L34:
+ 297 0028 00000000 		.word	.LANCHOR0
+ 298 002c FBFF0000 		.word	65531
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 6
+
+
+ 300              		.section	.text.Pad_PullUpOrDownValue,"ax",%progbits
+ 301              		.align	1
+ 302              		.global	Pad_PullUpOrDownValue
+ 303              		.syntax unified
+ 304              		.code	16
+ 305              		.thumb_func
+ 307              	Pad_PullUpOrDownValue:
+ 308              		@ args = 0, pretend = 0, frame = 0
+ 309              		@ frame_needed = 0, uses_anonymous_args = 0
+ 310 0000 70B5     		push	{r4, r5, r6, lr}
+ 311 0002 0C00     		movs	r4, r1
+ 312 0004 4000     		lsls	r0, r0, #1
+ 313 0006 084B     		ldr	r3, .L39
+ 314 0008 1D5C     		ldrb	r5, [r3, r0]
+ 315 000a 2800     		movs	r0, r5
+ 316 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 317 0010 002C     		cmp	r4, #0
+ 318 0012 06D0     		beq	.L37
+ 319 0014 0821     		movs	r1, #8
+ 320 0016 0143     		orrs	r1, r0
+ 321 0018 89B2     		uxth	r1, r1
+ 322              	.L38:
+ 323 001a 2800     		movs	r0, r5
+ 324 001c FFF7FEFF 		bl	btaon_fast_write_safe
+ 325              		@ sp needed
+ 326 0020 70BD     		pop	{r4, r5, r6, pc}
+ 327              	.L37:
+ 328 0022 0249     		ldr	r1, .L39+4
+ 329 0024 0140     		ands	r1, r0
+ 330 0026 F8E7     		b	.L38
+ 331              	.L40:
+ 332              		.align	2
+ 333              	.L39:
+ 334 0028 00000000 		.word	.LANCHOR0
+ 335 002c F7FF0000 		.word	65527
+ 337              		.section	.text.Pad_PullConfigValue,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	Pad_PullConfigValue
+ 340              		.syntax unified
+ 341              		.code	16
+ 342              		.thumb_func
+ 344              	Pad_PullConfigValue:
+ 345              		@ args = 0, pretend = 0, frame = 0
+ 346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 347 0000 70B5     		push	{r4, r5, r6, lr}
+ 348 0002 0C00     		movs	r4, r1
+ 349 0004 4000     		lsls	r0, r0, #1
+ 350 0006 084B     		ldr	r3, .L44
+ 351 0008 1D5C     		ldrb	r5, [r3, r0]
+ 352 000a 2800     		movs	r0, r5
+ 353 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 354 0010 002C     		cmp	r4, #0
+ 355 0012 06D0     		beq	.L42
+ 356 0014 1021     		movs	r1, #16
+ 357 0016 0143     		orrs	r1, r0
+ 358 0018 89B2     		uxth	r1, r1
+ 359              	.L43:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 7
+
+
+ 360 001a 2800     		movs	r0, r5
+ 361 001c FFF7FEFF 		bl	btaon_fast_write_safe
+ 362              		@ sp needed
+ 363 0020 70BD     		pop	{r4, r5, r6, pc}
+ 364              	.L42:
+ 365 0022 0249     		ldr	r1, .L44+4
+ 366 0024 0140     		ands	r1, r0
+ 367 0026 F8E7     		b	.L43
+ 368              	.L45:
+ 369              		.align	2
+ 370              	.L44:
+ 371 0028 00000000 		.word	.LANCHOR0
+ 372 002c EFFF0000 		.word	65519
+ 374              		.section	.text.Pad_PowerOrShutDownValue,"ax",%progbits
+ 375              		.align	1
+ 376              		.global	Pad_PowerOrShutDownValue
+ 377              		.syntax unified
+ 378              		.code	16
+ 379              		.thumb_func
+ 381              	Pad_PowerOrShutDownValue:
+ 382              		@ args = 0, pretend = 0, frame = 0
+ 383              		@ frame_needed = 0, uses_anonymous_args = 0
+ 384 0000 70B5     		push	{r4, r5, r6, lr}
+ 385 0002 0C00     		movs	r4, r1
+ 386 0004 4000     		lsls	r0, r0, #1
+ 387 0006 094B     		ldr	r3, .L49
+ 388 0008 1D5C     		ldrb	r5, [r3, r0]
+ 389 000a 2800     		movs	r0, r5
+ 390 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 391 0010 002C     		cmp	r4, #0
+ 392 0012 07D0     		beq	.L47
+ 393 0014 8021     		movs	r1, #128
+ 394 0016 4900     		lsls	r1, r1, #1
+ 395 0018 0143     		orrs	r1, r0
+ 396 001a 89B2     		uxth	r1, r1
+ 397              	.L48:
+ 398 001c 2800     		movs	r0, r5
+ 399 001e FFF7FEFF 		bl	btaon_fast_write_safe
+ 400              		@ sp needed
+ 401 0022 70BD     		pop	{r4, r5, r6, pc}
+ 402              	.L47:
+ 403 0024 0249     		ldr	r1, .L49+4
+ 404 0026 0140     		ands	r1, r0
+ 405 0028 F8E7     		b	.L48
+ 406              	.L50:
+ 407 002a C046     		.align	2
+ 408              	.L49:
+ 409 002c 00000000 		.word	.LANCHOR0
+ 410 0030 FFFE0000 		.word	65279
+ 412              		.section	.text.Pad_ControlSelectValue,"ax",%progbits
+ 413              		.align	1
+ 414              		.global	Pad_ControlSelectValue
+ 415              		.syntax unified
+ 416              		.code	16
+ 417              		.thumb_func
+ 419              	Pad_ControlSelectValue:
+ 420              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 8
+
+
+ 421              		@ frame_needed = 0, uses_anonymous_args = 0
+ 422 0000 70B5     		push	{r4, r5, r6, lr}
+ 423 0002 0C00     		movs	r4, r1
+ 424 0004 4000     		lsls	r0, r0, #1
+ 425 0006 094B     		ldr	r3, .L54
+ 426 0008 1D5C     		ldrb	r5, [r3, r0]
+ 427 000a 2800     		movs	r0, r5
+ 428 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 429 0010 002C     		cmp	r4, #0
+ 430 0012 07D0     		beq	.L52
+ 431 0014 8021     		movs	r1, #128
+ 432 0016 8900     		lsls	r1, r1, #2
+ 433 0018 0143     		orrs	r1, r0
+ 434 001a 89B2     		uxth	r1, r1
+ 435              	.L53:
+ 436 001c 2800     		movs	r0, r5
+ 437 001e FFF7FEFF 		bl	btaon_fast_write_safe
+ 438              		@ sp needed
+ 439 0022 70BD     		pop	{r4, r5, r6, pc}
+ 440              	.L52:
+ 441 0024 0249     		ldr	r1, .L54+4
+ 442 0026 0140     		ands	r1, r0
+ 443 0028 F8E7     		b	.L53
+ 444              	.L55:
+ 445 002a C046     		.align	2
+ 446              	.L54:
+ 447 002c 00000000 		.word	.LANCHOR0
+ 448 0030 FFFD0000 		.word	65023
+ 450              		.section	.text.Pad_WakeupEnableValue,"ax",%progbits
+ 451              		.align	1
+ 452              		.global	Pad_WakeupEnableValue
+ 453              		.syntax unified
+ 454              		.code	16
+ 455              		.thumb_func
+ 457              	Pad_WakeupEnableValue:
+ 458              		@ args = 0, pretend = 0, frame = 0
+ 459              		@ frame_needed = 0, uses_anonymous_args = 0
+ 460 0000 70B5     		push	{r4, r5, r6, lr}
+ 461 0002 0C00     		movs	r4, r1
+ 462 0004 4000     		lsls	r0, r0, #1
+ 463 0006 084B     		ldr	r3, .L59
+ 464 0008 1D5C     		ldrb	r5, [r3, r0]
+ 465 000a 2800     		movs	r0, r5
+ 466 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 467 0010 002C     		cmp	r4, #0
+ 468 0012 06D0     		beq	.L57
+ 469 0014 2021     		movs	r1, #32
+ 470 0016 0143     		orrs	r1, r0
+ 471 0018 89B2     		uxth	r1, r1
+ 472              	.L58:
+ 473 001a 2800     		movs	r0, r5
+ 474 001c FFF7FEFF 		bl	btaon_fast_write_safe
+ 475              		@ sp needed
+ 476 0020 70BD     		pop	{r4, r5, r6, pc}
+ 477              	.L57:
+ 478 0022 0249     		ldr	r1, .L59+4
+ 479 0024 0140     		ands	r1, r0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 9
+
+
+ 480 0026 F8E7     		b	.L58
+ 481              	.L60:
+ 482              		.align	2
+ 483              	.L59:
+ 484 0028 00000000 		.word	.LANCHOR0
+ 485 002c DFFF0000 		.word	65503
+ 487              		.section	.text.System_WakeUpPinDisable,"ax",%progbits
+ 488              		.align	1
+ 489              		.global	System_WakeUpPinDisable
+ 490              		.syntax unified
+ 491              		.code	16
+ 492              		.thumb_func
+ 494              	System_WakeUpPinDisable:
+ 495              		@ args = 0, pretend = 0, frame = 0
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497 0000 10B5     		push	{r4, lr}
+ 498 0002 0021     		movs	r1, #0
+ 499 0004 FFF7FEFF 		bl	Pad_WakeupEnableValue
+ 500              		@ sp needed
+ 501 0008 10BD     		pop	{r4, pc}
+ 503              		.section	.text.Pad_WakeupPolarityValue,"ax",%progbits
+ 504              		.align	1
+ 505              		.global	Pad_WakeupPolarityValue
+ 506              		.syntax unified
+ 507              		.code	16
+ 508              		.thumb_func
+ 510              	Pad_WakeupPolarityValue:
+ 511              		@ args = 0, pretend = 0, frame = 0
+ 512              		@ frame_needed = 0, uses_anonymous_args = 0
+ 513 0000 70B5     		push	{r4, r5, r6, lr}
+ 514 0002 0C00     		movs	r4, r1
+ 515 0004 4000     		lsls	r0, r0, #1
+ 516 0006 084B     		ldr	r3, .L65
+ 517 0008 1D5C     		ldrb	r5, [r3, r0]
+ 518 000a 2800     		movs	r0, r5
+ 519 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 520 0010 002C     		cmp	r4, #0
+ 521 0012 06D0     		beq	.L63
+ 522 0014 4021     		movs	r1, #64
+ 523 0016 0143     		orrs	r1, r0
+ 524 0018 89B2     		uxth	r1, r1
+ 525              	.L64:
+ 526 001a 2800     		movs	r0, r5
+ 527 001c FFF7FEFF 		bl	btaon_fast_write_safe
+ 528              		@ sp needed
+ 529 0020 70BD     		pop	{r4, r5, r6, pc}
+ 530              	.L63:
+ 531 0022 0249     		ldr	r1, .L65+4
+ 532 0024 0140     		ands	r1, r0
+ 533 0026 F8E7     		b	.L64
+ 534              	.L66:
+ 535              		.align	2
+ 536              	.L65:
+ 537 0028 00000000 		.word	.LANCHOR0
+ 538 002c BFFF0000 		.word	65471
+ 540              		.section	.text.Pad_WKDebounceConfig,"ax",%progbits
+ 541              		.align	1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 10
+
+
+ 542              		.global	Pad_WKDebounceConfig
+ 543              		.syntax unified
+ 544              		.code	16
+ 545              		.thumb_func
+ 547              	Pad_WKDebounceConfig:
+ 548              		@ args = 0, pretend = 0, frame = 0
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ 550 0000 70B5     		push	{r4, r5, r6, lr}
+ 551 0002 0C00     		movs	r4, r1
+ 552 0004 4000     		lsls	r0, r0, #1
+ 553 0006 094B     		ldr	r3, .L70
+ 554 0008 1D5C     		ldrb	r5, [r3, r0]
+ 555 000a 2800     		movs	r0, r5
+ 556 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 557 0010 002C     		cmp	r4, #0
+ 558 0012 07D0     		beq	.L68
+ 559 0014 8021     		movs	r1, #128
+ 560 0016 C900     		lsls	r1, r1, #3
+ 561 0018 0143     		orrs	r1, r0
+ 562 001a 89B2     		uxth	r1, r1
+ 563              	.L69:
+ 564 001c 2800     		movs	r0, r5
+ 565 001e FFF7FEFF 		bl	btaon_fast_write_safe
+ 566              		@ sp needed
+ 567 0022 70BD     		pop	{r4, r5, r6, pc}
+ 568              	.L68:
+ 569 0024 0249     		ldr	r1, .L70+4
+ 570 0026 0140     		ands	r1, r0
+ 571 0028 F8E7     		b	.L69
+ 572              	.L71:
+ 573 002a C046     		.align	2
+ 574              	.L70:
+ 575 002c 00000000 		.word	.LANCHOR0
+ 576 0030 FFFB0000 		.word	64511
+ 578              		.section	.text.Pad_WakeupInterruptValue,"ax",%progbits
+ 579              		.align	1
+ 580              		.global	Pad_WakeupInterruptValue
+ 581              		.syntax unified
+ 582              		.code	16
+ 583              		.thumb_func
+ 585              	Pad_WakeupInterruptValue:
+ 586              		@ args = 0, pretend = 0, frame = 0
+ 587              		@ frame_needed = 0, uses_anonymous_args = 0
+ 588 0000 10B5     		push	{r4, lr}
+ 589 0002 4000     		lsls	r0, r0, #1
+ 590 0004 074B     		ldr	r3, .L73
+ 591 0006 C45A     		ldrh	r4, [r0, r3]
+ 592 0008 2005     		lsls	r0, r4, #20
+ 593 000a 000D     		lsrs	r0, r0, #20
+ 594 000c FFF7FEFF 		bl	btaon_fast_read_safe
+ 595 0010 240B     		lsrs	r4, r4, #12
+ 596 0012 0123     		movs	r3, #1
+ 597 0014 A340     		lsls	r3, r3, r4
+ 598 0016 1840     		ands	r0, r3
+ 599 0018 80B2     		uxth	r0, r0
+ 600 001a 431E     		subs	r3, r0, #1
+ 601 001c 9841     		sbcs	r0, r0, r3
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 11
+
+
+ 602 001e C0B2     		uxtb	r0, r0
+ 603              		@ sp needed
+ 604 0020 10BD     		pop	{r4, pc}
+ 605              	.L74:
+ 606 0022 C046     		.align	2
+ 607              	.L73:
+ 608 0024 00000000 		.word	.LANCHOR1
+ 610              		.section	.text.System_WakeUpInterruptValue,"ax",%progbits
+ 611              		.align	1
+ 612              		.global	System_WakeUpInterruptValue
+ 613              		.syntax unified
+ 614              		.code	16
+ 615              		.thumb_func
+ 617              	System_WakeUpInterruptValue:
+ 618              		@ args = 0, pretend = 0, frame = 0
+ 619              		@ frame_needed = 0, uses_anonymous_args = 0
+ 620 0000 10B5     		push	{r4, lr}
+ 621 0002 FFF7FEFF 		bl	Pad_WakeupInterruptValue
+ 622              		@ sp needed
+ 623 0006 10BD     		pop	{r4, pc}
+ 625              		.section	.text.Pad_DebounceWakeupStatus,"ax",%progbits
+ 626              		.align	1
+ 627              		.global	Pad_DebounceWakeupStatus
+ 628              		.syntax unified
+ 629              		.code	16
+ 630              		.thumb_func
+ 632              	Pad_DebounceWakeupStatus:
+ 633              		@ args = 0, pretend = 0, frame = 0
+ 634              		@ frame_needed = 0, uses_anonymous_args = 0
+ 635 0000 10B5     		push	{r4, lr}
+ 636 0002 2A20     		movs	r0, #42
+ 637 0004 FFF7FEFF 		bl	btaon_fast_read_safe
+ 638 0008 0400     		movs	r4, r0
+ 639 000a 0449     		ldr	r1, .L77
+ 640 000c 0143     		orrs	r1, r0
+ 641 000e 89B2     		uxth	r1, r1
+ 642 0010 2A20     		movs	r0, #42
+ 643 0012 FFF7FEFF 		bl	btaon_fast_write_safe
+ 644 0016 A0B2     		uxth	r0, r4
+ 645 0018 C00B     		lsrs	r0, r0, #15
+ 646              		@ sp needed
+ 647 001a 10BD     		pop	{r4, pc}
+ 648              	.L78:
+ 649              		.align	2
+ 650              	.L77:
+ 651 001c 0080FFFF 		.word	-32768
+ 653              		.section	.text.System_DebounceWakeupStatus,"ax",%progbits
+ 654              		.align	1
+ 655              		.global	System_DebounceWakeupStatus
+ 656              		.syntax unified
+ 657              		.code	16
+ 658              		.thumb_func
+ 660              	System_DebounceWakeupStatus:
+ 661              		@ args = 0, pretend = 0, frame = 0
+ 662              		@ frame_needed = 0, uses_anonymous_args = 0
+ 663 0000 10B5     		push	{r4, lr}
+ 664 0002 FFF7FEFF 		bl	Pad_DebounceWakeupStatus
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 12
+
+
+ 665              		@ sp needed
+ 666 0006 10BD     		pop	{r4, pc}
+ 668              		.section	.text.System_WakeUpPinEnable,"ax",%progbits
+ 669              		.align	1
+ 670              		.global	System_WakeUpPinEnable
+ 671              		.syntax unified
+ 672              		.code	16
+ 673              		.thumb_func
+ 675              	System_WakeUpPinEnable:
+ 676              		@ args = 0, pretend = 0, frame = 0
+ 677              		@ frame_needed = 0, uses_anonymous_args = 0
+ 678 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 679 0002 0400     		movs	r4, r0
+ 680 0004 0F00     		movs	r7, r1
+ 681 0006 1500     		movs	r5, r2
+ 682 0008 1E00     		movs	r6, r3
+ 683 000a 012A     		cmp	r2, #1
+ 684 000c 0ED0     		beq	.L84
+ 685 000e FFF7FEFF 		bl	System_DebounceWakeupStatus
+ 686              	.L83:
+ 687 0012 3900     		movs	r1, r7
+ 688 0014 2000     		movs	r0, r4
+ 689 0016 FFF7FEFF 		bl	Pad_WakeupPolarityValue
+ 690 001a 2900     		movs	r1, r5
+ 691 001c 2000     		movs	r0, r4
+ 692 001e FFF7FEFF 		bl	Pad_WKDebounceConfig
+ 693 0022 0121     		movs	r1, #1
+ 694 0024 2000     		movs	r0, r4
+ 695 0026 FFF7FEFF 		bl	Pad_WakeupEnableValue
+ 696              		@ sp needed
+ 697 002a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 698              	.L84:
+ 699 002c FFF7FEFF 		bl	System_WakeUpPinDisable
+ 700 0030 2A20     		movs	r0, #42
+ 701 0032 FFF7FEFF 		bl	btaon_fast_read_safe
+ 702 0036 0100     		movs	r1, r0
+ 703 0038 321C     		adds	r2, r6, #0
+ 704 003a 3F2E     		cmp	r6, #63
+ 705 003c 00D9     		bls	.L82
+ 706 003e 3F22     		movs	r2, #63
+ 707              	.L82:
+ 708 0040 D2B2     		uxtb	r2, r2
+ 709 0042 1202     		lsls	r2, r2, #8
+ 710 0044 0448     		ldr	r0, .L85
+ 711 0046 0140     		ands	r1, r0
+ 712 0048 0A43     		orrs	r2, r1
+ 713 004a 0449     		ldr	r1, .L85+4
+ 714 004c 1143     		orrs	r1, r2
+ 715 004e 89B2     		uxth	r1, r1
+ 716 0050 2A20     		movs	r0, #42
+ 717 0052 FFF7FEFF 		bl	btaon_fast_write_safe
+ 718 0056 DCE7     		b	.L83
+ 719              	.L86:
+ 720              		.align	2
+ 721              	.L85:
+ 722 0058 FFC0FFFF 		.word	-16129
+ 723 005c 00C0FFFF 		.word	-16384
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 13
+
+
+ 725              		.section	.text.Pad_ClearWakeupINTPendingBit,"ax",%progbits
+ 726              		.align	1
+ 727              		.global	Pad_ClearWakeupINTPendingBit
+ 728              		.syntax unified
+ 729              		.code	16
+ 730              		.thumb_func
+ 732              	Pad_ClearWakeupINTPendingBit:
+ 733              		@ args = 0, pretend = 0, frame = 0
+ 734              		@ frame_needed = 0, uses_anonymous_args = 0
+ 735 0000 70B5     		push	{r4, r5, r6, lr}
+ 736 0002 4000     		lsls	r0, r0, #1
+ 737 0004 074B     		ldr	r3, .L88
+ 738 0006 C55A     		ldrh	r5, [r0, r3]
+ 739 0008 2C05     		lsls	r4, r5, #20
+ 740 000a 240D     		lsrs	r4, r4, #20
+ 741 000c 2000     		movs	r0, r4
+ 742 000e FFF7FEFF 		bl	btaon_fast_read_safe
+ 743 0012 2D0B     		lsrs	r5, r5, #12
+ 744 0014 0121     		movs	r1, #1
+ 745 0016 A940     		lsls	r1, r1, r5
+ 746 0018 0143     		orrs	r1, r0
+ 747 001a 89B2     		uxth	r1, r1
+ 748 001c 2000     		movs	r0, r4
+ 749 001e FFF7FEFF 		bl	btaon_fast_write_safe
+ 750              		@ sp needed
+ 751 0022 70BD     		pop	{r4, r5, r6, pc}
+ 752              	.L89:
+ 753              		.align	2
+ 754              	.L88:
+ 755 0024 00000000 		.word	.LANCHOR1
+ 757              		.section	.text.Pad_ClearAllWakeupINT,"ax",%progbits
+ 758              		.align	1
+ 759              		.global	Pad_ClearAllWakeupINT
+ 760              		.syntax unified
+ 761              		.code	16
+ 762              		.thumb_func
+ 764              	Pad_ClearAllWakeupINT:
+ 765              		@ args = 0, pretend = 0, frame = 0
+ 766              		@ frame_needed = 0, uses_anonymous_args = 0
+ 767 0000 10B5     		push	{r4, lr}
+ 768 0002 9A20     		movs	r0, #154
+ 769 0004 FFF7FEFF 		bl	btaon_fast_read_safe
+ 770 0008 1049     		ldr	r1, .L91
+ 771 000a 0143     		orrs	r1, r0
+ 772 000c 89B2     		uxth	r1, r1
+ 773 000e 9A20     		movs	r0, #154
+ 774 0010 FFF7FEFF 		bl	btaon_fast_write_safe
+ 775 0014 AE20     		movs	r0, #174
+ 776 0016 FFF7FEFF 		bl	btaon_fast_read_safe
+ 777 001a 7F21     		movs	r1, #127
+ 778 001c 0143     		orrs	r1, r0
+ 779 001e 89B2     		uxth	r1, r1
+ 780 0020 AE20     		movs	r0, #174
+ 781 0022 FFF7FEFF 		bl	btaon_fast_write_safe
+ 782 0026 D220     		movs	r0, #210
+ 783 0028 FFF7FEFF 		bl	btaon_fast_read_safe
+ 784 002c 0849     		ldr	r1, .L91+4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 14
+
+
+ 785 002e 0143     		orrs	r1, r0
+ 786 0030 89B2     		uxth	r1, r1
+ 787 0032 D220     		movs	r0, #210
+ 788 0034 FFF7FEFF 		bl	btaon_fast_write_safe
+ 789 0038 F420     		movs	r0, #244
+ 790 003a FFF7FEFF 		bl	btaon_fast_read_safe
+ 791 003e 0549     		ldr	r1, .L91+8
+ 792 0040 0143     		orrs	r1, r0
+ 793 0042 89B2     		uxth	r1, r1
+ 794 0044 F420     		movs	r0, #244
+ 795 0046 FFF7FEFF 		bl	btaon_fast_write_safe
+ 796              		@ sp needed
+ 797 004a 10BD     		pop	{r4, pc}
+ 798              	.L92:
+ 799              		.align	2
+ 800              	.L91:
+ 801 004c FF1B0000 		.word	7167
+ 802 0050 FF010000 		.word	511
+ 803 0054 FF030000 		.word	1023
+ 805              		.section	.text.Spic0_control,"ax",%progbits
+ 806              		.align	1
+ 807              		.global	Spic0_control
+ 808              		.syntax unified
+ 809              		.code	16
+ 810              		.thumb_func
+ 812              	Spic0_control:
+ 813              		@ args = 0, pretend = 0, frame = 0
+ 814              		@ frame_needed = 0, uses_anonymous_args = 0
+ 815              		@ link register save eliminated.
+ 816 0000 0028     		cmp	r0, #0
+ 817 0002 06D0     		beq	.L94
+ 818 0004 064A     		ldr	r2, .L96
+ 819 0006 1168     		ldr	r1, [r2]
+ 820 0008 8023     		movs	r3, #128
+ 821 000a 5B04     		lsls	r3, r3, #17
+ 822 000c 0B43     		orrs	r3, r1
+ 823 000e 1360     		str	r3, [r2]
+ 824              	.L93:
+ 825              		@ sp needed
+ 826 0010 7047     		bx	lr
+ 827              	.L94:
+ 828 0012 034A     		ldr	r2, .L96
+ 829 0014 1368     		ldr	r3, [r2]
+ 830 0016 0349     		ldr	r1, .L96+4
+ 831 0018 0B40     		ands	r3, r1
+ 832 001a 1360     		str	r3, [r2]
+ 833 001c F8E7     		b	.L93
+ 834              	.L97:
+ 835 001e C046     		.align	2
+ 836              	.L96:
+ 837 0020 A8020040 		.word	1073742504
+ 838 0024 FFFFFFFE 		.word	-16777217
+ 840              		.section	.text.Spic1_control,"ax",%progbits
+ 841              		.align	1
+ 842              		.global	Spic1_control
+ 843              		.syntax unified
+ 844              		.code	16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 15
+
+
+ 845              		.thumb_func
+ 847              	Spic1_control:
+ 848              		@ args = 0, pretend = 0, frame = 0
+ 849              		@ frame_needed = 0, uses_anonymous_args = 0
+ 850              		@ link register save eliminated.
+ 851 0000 0028     		cmp	r0, #0
+ 852 0002 06D0     		beq	.L99
+ 853 0004 064A     		ldr	r2, .L101
+ 854 0006 1168     		ldr	r1, [r2]
+ 855 0008 8023     		movs	r3, #128
+ 856 000a 5B00     		lsls	r3, r3, #1
+ 857 000c 0B43     		orrs	r3, r1
+ 858 000e 1360     		str	r3, [r2]
+ 859              	.L98:
+ 860              		@ sp needed
+ 861 0010 7047     		bx	lr
+ 862              	.L99:
+ 863 0012 034A     		ldr	r2, .L101
+ 864 0014 1368     		ldr	r3, [r2]
+ 865 0016 0349     		ldr	r1, .L101+4
+ 866 0018 0B40     		ands	r3, r1
+ 867 001a 1360     		str	r3, [r2]
+ 868 001c F8E7     		b	.L98
+ 869              	.L102:
+ 870 001e C046     		.align	2
+ 871              	.L101:
+ 872 0020 A8020040 		.word	1073742504
+ 873 0024 FFFEFFFF 		.word	-257
+ 875              		.global	WKSTATUS_TABLE
+ 876              		.global	PINADDR_TABLE
+ 877              		.section	.rodata.PINADDR_TABLE,"a"
+ 878              		.align	2
+ 879              		.set	.LANCHOR0,. + 0
+ 882              	PINADDR_TABLE:
+ 883 0000 E000     		.short	224
+ 884 0002 E200     		.short	226
+ 885 0004 E400     		.short	228
+ 886 0006 E600     		.short	230
+ 887 0008 E800     		.short	232
+ 888 000a A000     		.short	160
+ 889 000c A200     		.short	162
+ 890 000e A400     		.short	164
+ 891 0010 EA00     		.short	234
+ 892 0012 EC00     		.short	236
+ 893 0014 EE00     		.short	238
+ 894 0016 F000     		.short	240
+ 895 0018 F200     		.short	242
+ 896 001a 8000     		.short	128
+ 897 001c 8200     		.short	130
+ 898 001e 8400     		.short	132
+ 899 0020 C000     		.short	192
+ 900 0022 C200     		.short	194
+ 901 0024 C400     		.short	196
+ 902 0026 C600     		.short	198
+ 903 0028 C800     		.short	200
+ 904 002a CA00     		.short	202
+ 905 002c CC00     		.short	204
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 16
+
+
+ 906 002e CE00     		.short	206
+ 907 0030 8600     		.short	134
+ 908 0032 8800     		.short	136
+ 909 0034 8A00     		.short	138
+ 910 0036 8C00     		.short	140
+ 911 0038 8E00     		.short	142
+ 912 003a 9000     		.short	144
+ 913 003c 9200     		.short	146
+ 914 003e 0000     		.short	0
+ 915 0040 A600     		.short	166
+ 916 0042 A800     		.short	168
+ 917 0044 AA00     		.short	170
+ 918 0046 AC00     		.short	172
+ 919 0048 D000     		.short	208
+ 920 004a 9600     		.short	150
+ 921 004c 9800     		.short	152
+ 922              		.section	.rodata.WKSTATUS_TABLE,"a"
+ 923              		.align	2
+ 924              		.set	.LANCHOR1,. + 0
+ 927              	WKSTATUS_TABLE:
+ 928 0000 F400     		.short	244
+ 929 0002 F410     		.short	4340
+ 930 0004 F420     		.short	8436
+ 931 0006 F430     		.short	12532
+ 932 0008 F440     		.short	16628
+ 933 000a AE00     		.short	174
+ 934 000c AE10     		.short	4270
+ 935 000e AE20     		.short	8366
+ 936 0010 F450     		.short	20724
+ 937 0012 F460     		.short	24820
+ 938 0014 F470     		.short	28916
+ 939 0016 F480     		.short	-32524
+ 940 0018 F490     		.short	-28428
+ 941 001a 9A00     		.short	154
+ 942 001c 9A10     		.short	4250
+ 943 001e 9A20     		.short	8346
+ 944 0020 D200     		.short	210
+ 945 0022 D210     		.short	4306
+ 946 0024 D220     		.short	8402
+ 947 0026 D230     		.short	12498
+ 948 0028 D240     		.short	16594
+ 949 002a D250     		.short	20690
+ 950 002c D260     		.short	24786
+ 951 002e D270     		.short	28882
+ 952 0030 9A30     		.short	12442
+ 953 0032 9A40     		.short	16538
+ 954 0034 9A50     		.short	20634
+ 955 0036 9A60     		.short	24730
+ 956 0038 9A70     		.short	28826
+ 957 003a 9A80     		.short	-32614
+ 958 003c 9A90     		.short	-28518
+ 959 003e 0000     		.short	0
+ 960 0040 AE30     		.short	12462
+ 961 0042 AE40     		.short	16558
+ 962 0044 AE50     		.short	20654
+ 963 0046 AE60     		.short	24750
+ 964 0048 D280     		.short	-32558
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 17
+
+
+ 965 004a 9AB0     		.short	-20326
+ 966 004c 9AC0     		.short	-16230
+ 967              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtl876x_pinmux.c
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:16     .text.Pinmux_Reset:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:22     .text.Pinmux_Reset:00000000 Pinmux_Reset
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:40     .text.Pinmux_Reset:00000014 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:43     .text.Pinmux_Deinit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:49     .text.Pinmux_Deinit:00000000 Pinmux_Deinit
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:71     .text.Pinmux_Deinit:0000001c $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:74     .text.Pinmux_Config:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:80     .text.Pinmux_Config:00000000 Pinmux_Config
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:104    .text.Pinmux_Config:00000024 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:107    .text.Pad_Config:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:113    .text.Pad_Config:00000000 Pad_Config
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:184    .text.Pad_Config:0000007c $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:190    .text.Pad_OutputControlValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:196    .text.Pad_OutputControlValue:00000000 Pad_OutputControlValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:223    .text.Pad_OutputControlValue:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:227    .text.Pad_OutputEnableValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:233    .text.Pad_OutputEnableValue:00000000 Pad_OutputEnableValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:260    .text.Pad_OutputEnableValue:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:264    .text.Pad_PullEnableValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:270    .text.Pad_PullEnableValue:00000000 Pad_PullEnableValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:297    .text.Pad_PullEnableValue:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:301    .text.Pad_PullUpOrDownValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:307    .text.Pad_PullUpOrDownValue:00000000 Pad_PullUpOrDownValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:334    .text.Pad_PullUpOrDownValue:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:338    .text.Pad_PullConfigValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:344    .text.Pad_PullConfigValue:00000000 Pad_PullConfigValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:371    .text.Pad_PullConfigValue:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:375    .text.Pad_PowerOrShutDownValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:381    .text.Pad_PowerOrShutDownValue:00000000 Pad_PowerOrShutDownValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:409    .text.Pad_PowerOrShutDownValue:0000002c $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:413    .text.Pad_ControlSelectValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:419    .text.Pad_ControlSelectValue:00000000 Pad_ControlSelectValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:447    .text.Pad_ControlSelectValue:0000002c $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:451    .text.Pad_WakeupEnableValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:457    .text.Pad_WakeupEnableValue:00000000 Pad_WakeupEnableValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:484    .text.Pad_WakeupEnableValue:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:488    .text.System_WakeUpPinDisable:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:494    .text.System_WakeUpPinDisable:00000000 System_WakeUpPinDisable
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:504    .text.Pad_WakeupPolarityValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:510    .text.Pad_WakeupPolarityValue:00000000 Pad_WakeupPolarityValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:537    .text.Pad_WakeupPolarityValue:00000028 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:541    .text.Pad_WKDebounceConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:547    .text.Pad_WKDebounceConfig:00000000 Pad_WKDebounceConfig
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:575    .text.Pad_WKDebounceConfig:0000002c $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:579    .text.Pad_WakeupInterruptValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:585    .text.Pad_WakeupInterruptValue:00000000 Pad_WakeupInterruptValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:608    .text.Pad_WakeupInterruptValue:00000024 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:611    .text.System_WakeUpInterruptValue:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:617    .text.System_WakeUpInterruptValue:00000000 System_WakeUpInterruptValue
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:626    .text.Pad_DebounceWakeupStatus:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:632    .text.Pad_DebounceWakeupStatus:00000000 Pad_DebounceWakeupStatus
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:651    .text.Pad_DebounceWakeupStatus:0000001c $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:654    .text.System_DebounceWakeupStatus:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:660    .text.System_DebounceWakeupStatus:00000000 System_DebounceWakeupStatus
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:669    .text.System_WakeUpPinEnable:00000000 $t
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s 			page 19
+
+
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:675    .text.System_WakeUpPinEnable:00000000 System_WakeUpPinEnable
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:722    .text.System_WakeUpPinEnable:00000058 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:726    .text.Pad_ClearWakeupINTPendingBit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:732    .text.Pad_ClearWakeupINTPendingBit:00000000 Pad_ClearWakeupINTPendingBit
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:755    .text.Pad_ClearWakeupINTPendingBit:00000024 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:758    .text.Pad_ClearAllWakeupINT:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:764    .text.Pad_ClearAllWakeupINT:00000000 Pad_ClearAllWakeupINT
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:801    .text.Pad_ClearAllWakeupINT:0000004c $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:806    .text.Spic0_control:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:812    .text.Spic0_control:00000000 Spic0_control
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:837    .text.Spic0_control:00000020 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:841    .text.Spic1_control:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:847    .text.Spic1_control:00000000 Spic1_control
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:872    .text.Spic1_control:00000020 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:927    .rodata.WKSTATUS_TABLE:00000000 WKSTATUS_TABLE
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:882    .rodata.PINADDR_TABLE:00000000 PINADDR_TABLE
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:878    .rodata.PINADDR_TABLE:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccUwUCsK.s:923    .rodata.WKSTATUS_TABLE:00000000 $d
+
+UNDEFINED SYMBOLS
+btaon_fast_read_safe
+btaon_fast_write_safe

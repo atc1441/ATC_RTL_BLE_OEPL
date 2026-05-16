@@ -1,0 +1,460 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"bas.c"
+  14              		.text
+  15              		.section	.text.bas_attr_read_cb,"ax",%progbits
+  16              		.align	1
+  17              		.global	bas_attr_read_cb
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	bas_attr_read_cb:
+  23              		@ args = 8, pretend = 0, frame = 8
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 70B5     		push	{r4, r5, r6, lr}
+  26 0002 84B0     		sub	sp, sp, #16
+  27 0004 0600     		movs	r6, r0
+  28 0006 0D00     		movs	r5, r1
+  29 0008 1400     		movs	r4, r2
+  30 000a 0022     		movs	r2, #0
+  31 000c 0899     		ldr	r1, [sp, #32]
+  32 000e 0A80     		strh	r2, [r1]
+  33 0010 0093     		str	r3, [sp]
+  34 0012 2300     		movs	r3, r4
+  35 0014 0232     		adds	r2, r2, #2
+  36 0016 1349     		ldr	r1, .L7
+  37 0018 1348     		ldr	r0, .L7+4
+  38 001a FFF7FEFF 		bl	log_buffer
+  39 001e 022C     		cmp	r4, #2
+  40 0020 14D1     		bne	.L5
+  41 0022 03A9     		add	r1, sp, #12
+  42 0024 0223     		movs	r3, #2
+  43 0026 4B70     		strb	r3, [r1, #1]
+  44 0028 0E70     		strb	r6, [r1]
+  45 002a 013B     		subs	r3, r3, #1
+  46 002c 8B70     		strb	r3, [r1, #2]
+  47 002e 0F4B     		ldr	r3, .L7+8
+  48 0030 1B68     		ldr	r3, [r3]
+  49 0032 2800     		movs	r0, r5
+  50 0034 9847     		blx	r3
+  51 0036 0E4B     		ldr	r3, .L7+12
+  52 0038 9842     		cmp	r0, r3
+  53 003a 0FD0     		beq	.L6
+  54              	.L4:
+  55 003c 099B     		ldr	r3, [sp, #36]
+  56 003e 0D4A     		ldr	r2, .L7+16
+  57 0040 1A60     		str	r2, [r3]
+  58 0042 0123     		movs	r3, #1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s 			page 2
+
+
+  59 0044 089A     		ldr	r2, [sp, #32]
+  60 0046 1380     		strh	r3, [r2]
+  61              	.L3:
+  62 0048 04B0     		add	sp, sp, #16
+  63              		@ sp needed
+  64 004a 70BD     		pop	{r4, r5, r6, pc}
+  65              	.L5:
+  66 004c 0549     		ldr	r1, .L7
+  67 004e 0022     		movs	r2, #0
+  68 0050 3031     		adds	r1, r1, #48
+  69 0052 0948     		ldr	r0, .L7+20
+  70 0054 FFF7FEFF 		bl	log_buffer
+  71 0058 0848     		ldr	r0, .L7+24
+  72 005a F5E7     		b	.L3
+  73              	.L6:
+  74 005c 084B     		ldr	r3, .L7+28
+  75 005e 0122     		movs	r2, #1
+  76 0060 1A70     		strb	r2, [r3]
+  77 0062 EBE7     		b	.L4
+  78              	.L8:
+  79              		.align	2
+  80              	.L7:
+  81 0064 00000000 		.word	.LANCHOR0
+  82 0068 02331023 		.word	588264194
+  83 006c 00000000 		.word	.LANCHOR1
+  84 0070 010D0000 		.word	3329
+  85 0074 00000000 		.word	.LANCHOR3
+  86 0078 00331023 		.word	588264192
+  87 007c 0A040000 		.word	1034
+  88 0080 00000000 		.word	.LANCHOR2
+  90              		.section	.text.bas_cccd_update_cb,"ax",%progbits
+  91              		.align	1
+  92              		.global	bas_cccd_update_cb
+  93              		.syntax unified
+  94              		.code	16
+  95              		.thumb_func
+  97              	bas_cccd_update_cb:
+  98              		@ args = 0, pretend = 0, frame = 8
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100 0000 70B5     		push	{r4, r5, r6, lr}
+ 101 0002 84B0     		sub	sp, sp, #16
+ 102 0004 0E00     		movs	r6, r1
+ 103 0006 1400     		movs	r4, r2
+ 104 0008 1D00     		movs	r5, r3
+ 105 000a 03AB     		add	r3, sp, #12
+ 106 000c 0122     		movs	r2, #1
+ 107 000e 5A70     		strb	r2, [r3, #1]
+ 108 0010 1870     		strb	r0, [r3]
+ 109 0012 0E49     		ldr	r1, .L15
+ 110 0014 0095     		str	r5, [sp]
+ 111 0016 2300     		movs	r3, r4
+ 112 0018 0132     		adds	r2, r2, #1
+ 113 001a 5C31     		adds	r1, r1, #92
+ 114 001c 0C48     		ldr	r0, .L15+4
+ 115 001e FFF7FEFF 		bl	log_buffer
+ 116 0022 032C     		cmp	r4, #3
+ 117 0024 01D0     		beq	.L14
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s 			page 3
+
+
+ 118              	.L9:
+ 119 0026 04B0     		add	sp, sp, #16
+ 120              		@ sp needed
+ 121 0028 70BD     		pop	{r4, r5, r6, pc}
+ 122              	.L14:
+ 123 002a EB07     		lsls	r3, r5, #31
+ 124 002c 0AD5     		bpl	.L11
+ 125 002e 03AB     		add	r3, sp, #12
+ 126 0030 0122     		movs	r2, #1
+ 127 0032 9A70     		strb	r2, [r3, #2]
+ 128              	.L12:
+ 129 0034 074B     		ldr	r3, .L15+8
+ 130 0036 1B68     		ldr	r3, [r3]
+ 131 0038 002B     		cmp	r3, #0
+ 132 003a F4D0     		beq	.L9
+ 133 003c 03A9     		add	r1, sp, #12
+ 134 003e 3000     		movs	r0, r6
+ 135 0040 9847     		blx	r3
+ 136 0042 F0E7     		b	.L9
+ 137              	.L11:
+ 138 0044 03AB     		add	r3, sp, #12
+ 139 0046 0222     		movs	r2, #2
+ 140 0048 9A70     		strb	r2, [r3, #2]
+ 141 004a F3E7     		b	.L12
+ 142              	.L16:
+ 143              		.align	2
+ 144              	.L15:
+ 145 004c 00000000 		.word	.LANCHOR0
+ 146 0050 02331023 		.word	588264194
+ 147 0054 00000000 		.word	.LANCHOR1
+ 149              		.section	.text.bas_set_parameter,"ax",%progbits
+ 150              		.align	1
+ 151              		.global	bas_set_parameter
+ 152              		.syntax unified
+ 153              		.code	16
+ 154              		.thumb_func
+ 156              	bas_set_parameter:
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159 0000 10B5     		push	{r4, lr}
+ 160 0002 0300     		movs	r3, r0
+ 161 0004 0128     		cmp	r0, #1
+ 162 0006 07D1     		bne	.L21
+ 163 0008 0020     		movs	r0, #0
+ 164 000a 0129     		cmp	r1, #1
+ 165 000c 0BD1     		bne	.L19
+ 166 000e 1278     		ldrb	r2, [r2]
+ 167 0010 054B     		ldr	r3, .L22
+ 168 0012 1A70     		strb	r2, [r3]
+ 169 0014 0130     		adds	r0, r0, #1
+ 170 0016 06E0     		b	.L19
+ 171              	.L21:
+ 172 0018 0449     		ldr	r1, .L22+4
+ 173 001a 0122     		movs	r2, #1
+ 174 001c 0C31     		adds	r1, r1, #12
+ 175 001e 0448     		ldr	r0, .L22+8
+ 176 0020 FFF7FEFF 		bl	log_buffer
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s 			page 4
+
+
+ 177 0024 0020     		movs	r0, #0
+ 178              	.L19:
+ 179              		@ sp needed
+ 180 0026 10BD     		pop	{r4, pc}
+ 181              	.L23:
+ 182              		.align	2
+ 183              	.L22:
+ 184 0028 00000000 		.word	.LANCHOR3
+ 185 002c 80000000 		.word	.LANCHOR4
+ 186 0030 00331023 		.word	588264192
+ 188              		.section	.text.bas_battery_level_value_notify,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	bas_battery_level_value_notify
+ 191              		.syntax unified
+ 192              		.code	16
+ 193              		.thumb_func
+ 195              	bas_battery_level_value_notify:
+ 196              		@ args = 0, pretend = 0, frame = 8
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198 0000 00B5     		push	{lr}
+ 199 0002 85B0     		sub	sp, sp, #20
+ 200 0004 0F23     		movs	r3, #15
+ 201 0006 6B44     		add	r3, r3, sp
+ 202 0008 1A70     		strb	r2, [r3]
+ 203 000a 0022     		movs	r2, #0
+ 204 000c 0192     		str	r2, [sp, #4]
+ 205 000e 0132     		adds	r2, r2, #1
+ 206 0010 0092     		str	r2, [sp]
+ 207 0012 0132     		adds	r2, r2, #1
+ 208 0014 FFF7FEFF 		bl	server_send_data
+ 209 0018 05B0     		add	sp, sp, #20
+ 210              		@ sp needed
+ 211 001a 00BD     		pop	{pc}
+ 213              		.section	.text.bas_battery_level_value_read_confirm,"ax",%progbits
+ 214              		.align	1
+ 215              		.global	bas_battery_level_value_read_confirm
+ 216              		.syntax unified
+ 217              		.code	16
+ 218              		.thumb_func
+ 220              	bas_battery_level_value_read_confirm:
+ 221              		@ args = 0, pretend = 0, frame = 8
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223 0000 10B5     		push	{r4, lr}
+ 224 0002 84B0     		sub	sp, sp, #16
+ 225 0004 0400     		movs	r4, r0
+ 226 0006 0F23     		movs	r3, #15
+ 227 0008 6B44     		add	r3, r3, sp
+ 228 000a 1A70     		strb	r2, [r3]
+ 229 000c 094B     		ldr	r3, .L28
+ 230 000e 1878     		ldrb	r0, [r3]
+ 231 0010 0028     		cmp	r0, #0
+ 232 0012 01D1     		bne	.L27
+ 233              	.L26:
+ 234 0014 04B0     		add	sp, sp, #16
+ 235              		@ sp needed
+ 236 0016 10BD     		pop	{r4, pc}
+ 237              	.L27:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s 			page 5
+
+
+ 238 0018 0023     		movs	r3, #0
+ 239 001a 064A     		ldr	r2, .L28
+ 240 001c 1370     		strb	r3, [r2]
+ 241 001e 0193     		str	r3, [sp, #4]
+ 242 0020 0133     		adds	r3, r3, #1
+ 243 0022 0093     		str	r3, [sp]
+ 244 0024 0E33     		adds	r3, r3, #14
+ 245 0026 6B44     		add	r3, r3, sp
+ 246 0028 0222     		movs	r2, #2
+ 247 002a 2000     		movs	r0, r4
+ 248 002c FFF7FEFF 		bl	server_attr_read_confirm
+ 249 0030 F0E7     		b	.L26
+ 250              	.L29:
+ 251 0032 C046     		.align	2
+ 252              	.L28:
+ 253 0034 00000000 		.word	.LANCHOR2
+ 255              		.section	.text.bas_add_service,"ax",%progbits
+ 256              		.align	1
+ 257              		.global	bas_add_service
+ 258              		.syntax unified
+ 259              		.code	16
+ 260              		.thumb_func
+ 262              	bas_add_service:
+ 263              		@ args = 0, pretend = 0, frame = 8
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0000 30B5     		push	{r4, r5, lr}
+ 266 0002 85B0     		sub	sp, sp, #20
+ 267 0004 0400     		movs	r4, r0
+ 268 0006 104A     		ldr	r2, .L33
+ 269 0008 131D     		adds	r3, r2, #4
+ 270 000a 6946     		mov	r1, sp
+ 271 000c 21CB     		ldmia	r3!, {r0, r5}
+ 272 000e 21C1     		stmia	r1!, {r0, r5}
+ 273 0010 1368     		ldr	r3, [r2]
+ 274 0012 7022     		movs	r2, #112
+ 275 0014 0D49     		ldr	r1, .L33+4
+ 276 0016 0F20     		movs	r0, #15
+ 277 0018 6844     		add	r0, r0, sp
+ 278 001a FFF7FEFF 		bl	server_add_service
+ 279 001e 0028     		cmp	r0, #0
+ 280 0020 06D0     		beq	.L32
+ 281              	.L31:
+ 282 0022 0B4B     		ldr	r3, .L33+8
+ 283 0024 1C60     		str	r4, [r3]
+ 284 0026 0F23     		movs	r3, #15
+ 285 0028 6B44     		add	r3, r3, sp
+ 286 002a 1878     		ldrb	r0, [r3]
+ 287 002c 05B0     		add	sp, sp, #20
+ 288              		@ sp needed
+ 289 002e 30BD     		pop	{r4, r5, pc}
+ 290              	.L32:
+ 291 0030 0F25     		movs	r5, #15
+ 292 0032 6D44     		add	r5, r5, sp
+ 293 0034 2B78     		ldrb	r3, [r5]
+ 294 0036 0749     		ldr	r1, .L33+12
+ 295 0038 0122     		movs	r2, #1
+ 296 003a 3C31     		adds	r1, r1, #60
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s 			page 6
+
+
+ 297 003c 0648     		ldr	r0, .L33+16
+ 298 003e FFF7FEFF 		bl	log_buffer
+ 299 0042 FF23     		movs	r3, #255
+ 300 0044 2B70     		strb	r3, [r5]
+ 301 0046 ECE7     		b	.L31
+ 302              	.L34:
+ 303              		.align	2
+ 304              	.L33:
+ 305 0048 00000000 		.word	.LANCHOR5
+ 306 004c 00000000 		.word	.LANCHOR6
+ 307 0050 00000000 		.word	.LANCHOR1
+ 308 0054 80000000 		.word	.LANCHOR4
+ 309 0058 00331023 		.word	588264192
+ 311              		.global	bas_cbs
+ 312              		.section	.TRACE,"a"
+ 313              		.align	2
+ 314              		.set	.LANCHOR0,. + 0
+ 315              		.set	.LANCHOR4,. + 128
+ 318              	format.3:
+ 319 0000 212A2A62 		.ascii	"!**bas_attr_read_cb: attrib_index %d offset %d\000"
+ 319      61735F61 
+ 319      7474725F 
+ 319      72656164 
+ 319      5F63623A 
+ 320 002f 00       		.space	1
+ 323              	format.2:
+ 324 0030 21212162 		.ascii	"!!!bas_attr_read_cb: unknown attrib_index\000"
+ 324      61735F61 
+ 324      7474725F 
+ 324      72656164 
+ 324      5F63623A 
+ 325 005a 0000     		.space	2
+ 328              	format.1:
+ 329 005c 212A2A62 		.ascii	"!**bas_cccd_update_cb: index %d ccc_bits 0x%04x\000"
+ 329      61735F63 
+ 329      6363645F 
+ 329      75706461 
+ 329      74655F63 
+ 332              	format.4:
+ 333 008c 21212162 		.ascii	"!!!bas_set_parameter: unknown param_type 0x%02x\000"
+ 333      61735F73 
+ 333      65745F70 
+ 333      6172616D 
+ 333      65746572 
+ 336              	format.0:
+ 337 00bc 21212162 		.ascii	"!!!bas_add_service: service_id %d\000"
+ 337      61735F61 
+ 337      64645F73 
+ 337      65727669 
+ 337      63653A20 
+ 338              		.section	.bss.bas_read_battery_level_pending,"aw",%nobits
+ 339              		.set	.LANCHOR2,. + 0
+ 342              	bas_read_battery_level_pending:
+ 343 0000 00       		.space	1
+ 344              		.section	.bss.battery_level,"aw",%nobits
+ 345              		.set	.LANCHOR3,. + 0
+ 348              	battery_level:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s 			page 7
+
+
+ 349 0000 00       		.space	1
+ 350              		.section	.bss.pfn_bas_cb,"aw",%nobits
+ 351              		.align	2
+ 352              		.set	.LANCHOR1,. + 0
+ 355              	pfn_bas_cb:
+ 356 0000 00000000 		.space	4
+ 357              		.section	.rodata.bas_attr_tbl,"a"
+ 358              		.align	2
+ 359              		.set	.LANCHOR6,. + 0
+ 362              	bas_attr_tbl:
+ 363 0000 0208     		.short	2050
+ 364 0002 00280F18 		.ascii	"\000(\017\030\000"
+ 364      00
+ 365 0007 00000000 		.space	11
+ 365      00000000 
+ 365      000000
+ 366 0012 0200     		.short	2
+ 367 0014 00000000 		.word	0
+ 368 0018 01000000 		.word	1
+ 369 001c 0200     		.short	2
+ 370 001e 03281200 		.ascii	"\003(\022\000"
+ 371 0022 00000000 		.space	12
+ 371      00000000 
+ 371      00000000 
+ 372 002e 0100     		.short	1
+ 373 0030 00000000 		.word	0
+ 374 0034 01000000 		.word	1
+ 375 0038 0400     		.short	4
+ 376 003a 192A00   		.ascii	"\031*\000"
+ 377 003d 00000000 		.space	13
+ 377      00000000 
+ 377      00000000 
+ 377      00
+ 378 004a 0000     		.short	0
+ 379 004c 00000000 		.word	0
+ 380 0050 01000000 		.word	1
+ 381 0054 1200     		.short	18
+ 382 0056 02290000 		.ascii	"\002)\000\000\000"
+ 382      00
+ 383 005b 00000000 		.space	11
+ 383      00000000 
+ 383      000000
+ 384 0066 0200     		.short	2
+ 385 0068 00000000 		.word	0
+ 386 006c 11000000 		.word	17
+ 387              		.section	.rodata.bas_cbs,"a"
+ 388              		.align	2
+ 389              		.set	.LANCHOR5,. + 0
+ 392              	bas_cbs:
+ 393 0000 00000000 		.word	bas_attr_read_cb
+ 394 0004 00000000 		.word	0
+ 395 0008 00000000 		.word	bas_cccd_update_cb
+ 396              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 bas.c
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:16     .text.bas_attr_read_cb:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:22     .text.bas_attr_read_cb:00000000 bas_attr_read_cb
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:81     .text.bas_attr_read_cb:00000064 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:91     .text.bas_cccd_update_cb:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:97     .text.bas_cccd_update_cb:00000000 bas_cccd_update_cb
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:145    .text.bas_cccd_update_cb:0000004c $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:150    .text.bas_set_parameter:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:156    .text.bas_set_parameter:00000000 bas_set_parameter
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:184    .text.bas_set_parameter:00000028 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:189    .text.bas_battery_level_value_notify:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:195    .text.bas_battery_level_value_notify:00000000 bas_battery_level_value_notify
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:214    .text.bas_battery_level_value_read_confirm:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:220    .text.bas_battery_level_value_read_confirm:00000000 bas_battery_level_value_read_confirm
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:253    .text.bas_battery_level_value_read_confirm:00000034 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:256    .text.bas_add_service:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:262    .text.bas_add_service:00000000 bas_add_service
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:305    .text.bas_add_service:00000048 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:392    .rodata.bas_cbs:00000000 bas_cbs
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:313    .TRACE:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:318    .TRACE:00000000 format.3
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:323    .TRACE:00000030 format.2
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:328    .TRACE:0000005c format.1
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:332    .TRACE:0000008c format.4
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:336    .TRACE:000000bc format.0
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:342    .bss.bas_read_battery_level_pending:00000000 bas_read_battery_level_pending
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:343    .bss.bas_read_battery_level_pending:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:348    .bss.battery_level:00000000 battery_level
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:349    .bss.battery_level:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:351    .bss.pfn_bas_cb:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:355    .bss.pfn_bas_cb:00000000 pfn_bas_cb
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:358    .rodata.bas_attr_tbl:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:362    .rodata.bas_attr_tbl:00000000 bas_attr_tbl
+C:\Users\pc\AppData\Local\Temp\cc0XbVzf.s:388    .rodata.bas_cbs:00000000 $d
+
+UNDEFINED SYMBOLS
+log_buffer
+server_send_data
+server_attr_read_confirm
+server_add_service

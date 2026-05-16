@@ -1,0 +1,1026 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"epd.c"
+  14              		.text
+  15              		.section	.text.spi_write_byte,"ax",%progbits
+  16              		.align	1
+  17              		.global	spi_write_byte
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	spi_write_byte:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  26 0002 0600     		movs	r6, r0
+  27 0004 0725     		movs	r5, #7
+  28 0006 154C     		ldr	r4, .L7
+  29 0008 0127     		movs	r7, #1
+  30 000a 0DE0     		b	.L4
+  31              	.L2:
+  32 000c 0620     		movs	r0, #6
+  33 000e FFF7FEFF 		bl	GPIO_GetPin
+  34 0012 2368     		ldr	r3, [r4]
+  35 0014 8343     		bics	r3, r0
+  36 0016 2360     		str	r3, [r4]
+  37              	.L3:
+  38 0018 0420     		movs	r0, #4
+  39 001a FFF7FEFF 		bl	GPIO_GetPin
+  40 001e 2368     		ldr	r3, [r4]
+  41 0020 1843     		orrs	r0, r3
+  42 0022 2060     		str	r0, [r4]
+  43 0024 013D     		subs	r5, r5, #1
+  44 0026 10D3     		bcc	.L6
+  45              	.L4:
+  46 0028 0420     		movs	r0, #4
+  47 002a FFF7FEFF 		bl	GPIO_GetPin
+  48 002e 2368     		ldr	r3, [r4]
+  49 0030 8343     		bics	r3, r0
+  50 0032 2360     		str	r3, [r4]
+  51 0034 3300     		movs	r3, r6
+  52 0036 EB40     		lsrs	r3, r3, r5
+  53 0038 1F42     		tst	r7, r3
+  54 003a E7D0     		beq	.L2
+  55 003c 0620     		movs	r0, #6
+  56 003e FFF7FEFF 		bl	GPIO_GetPin
+  57 0042 2368     		ldr	r3, [r4]
+  58 0044 1843     		orrs	r0, r3
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 2
+
+
+  59 0046 2060     		str	r0, [r4]
+  60 0048 E6E7     		b	.L3
+  61              	.L6:
+  62 004a 0420     		movs	r0, #4
+  63 004c FFF7FEFF 		bl	GPIO_GetPin
+  64 0050 024A     		ldr	r2, .L7
+  65 0052 1368     		ldr	r3, [r2]
+  66 0054 8343     		bics	r3, r0
+  67 0056 1360     		str	r3, [r2]
+  68              		@ sp needed
+  69 0058 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  70              	.L8:
+  71 005a C046     		.align	2
+  72              	.L7:
+  73 005c 00100040 		.word	1073745920
+  75              		.section	.text.epd_cmd,"ax",%progbits
+  76              		.align	1
+  77              		.global	epd_cmd
+  78              		.syntax unified
+  79              		.code	16
+  80              		.thumb_func
+  82              	epd_cmd:
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85 0000 70B5     		push	{r4, r5, r6, lr}
+  86 0002 0500     		movs	r5, r0
+  87 0004 0120     		movs	r0, #1
+  88 0006 FFF7FEFF 		bl	GPIO_GetPin
+  89 000a 0A4C     		ldr	r4, .L10
+  90 000c 2368     		ldr	r3, [r4]
+  91 000e 8343     		bics	r3, r0
+  92 0010 2360     		str	r3, [r4]
+  93 0012 0220     		movs	r0, #2
+  94 0014 FFF7FEFF 		bl	GPIO_GetPin
+  95 0018 2368     		ldr	r3, [r4]
+  96 001a 8343     		bics	r3, r0
+  97 001c 2360     		str	r3, [r4]
+  98 001e 2800     		movs	r0, r5
+  99 0020 FFF7FEFF 		bl	spi_write_byte
+ 100 0024 0220     		movs	r0, #2
+ 101 0026 FFF7FEFF 		bl	GPIO_GetPin
+ 102 002a 2368     		ldr	r3, [r4]
+ 103 002c 1843     		orrs	r0, r3
+ 104 002e 2060     		str	r0, [r4]
+ 105              		@ sp needed
+ 106 0030 70BD     		pop	{r4, r5, r6, pc}
+ 107              	.L11:
+ 108 0032 C046     		.align	2
+ 109              	.L10:
+ 110 0034 00100040 		.word	1073745920
+ 112              		.section	.text.epd_data,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	epd_data
+ 115              		.syntax unified
+ 116              		.code	16
+ 117              		.thumb_func
+ 119              	epd_data:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 3
+
+
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122 0000 70B5     		push	{r4, r5, r6, lr}
+ 123 0002 0500     		movs	r5, r0
+ 124 0004 0120     		movs	r0, #1
+ 125 0006 FFF7FEFF 		bl	GPIO_GetPin
+ 126 000a 0A4C     		ldr	r4, .L13
+ 127 000c 2368     		ldr	r3, [r4]
+ 128 000e 1843     		orrs	r0, r3
+ 129 0010 2060     		str	r0, [r4]
+ 130 0012 0220     		movs	r0, #2
+ 131 0014 FFF7FEFF 		bl	GPIO_GetPin
+ 132 0018 2368     		ldr	r3, [r4]
+ 133 001a 8343     		bics	r3, r0
+ 134 001c 2360     		str	r3, [r4]
+ 135 001e 2800     		movs	r0, r5
+ 136 0020 FFF7FEFF 		bl	spi_write_byte
+ 137 0024 0220     		movs	r0, #2
+ 138 0026 FFF7FEFF 		bl	GPIO_GetPin
+ 139 002a 2368     		ldr	r3, [r4]
+ 140 002c 1843     		orrs	r0, r3
+ 141 002e 2060     		str	r0, [r4]
+ 142              		@ sp needed
+ 143 0030 70BD     		pop	{r4, r5, r6, pc}
+ 144              	.L14:
+ 145 0032 C046     		.align	2
+ 146              	.L13:
+ 147 0034 00100040 		.word	1073745920
+ 149              		.section	.text.epd_write,"ax",%progbits
+ 150              		.align	1
+ 151              		.global	epd_write
+ 152              		.syntax unified
+ 153              		.code	16
+ 154              		.thumb_func
+ 156              	epd_write:
+ 157              		@ args = 4, pretend = 12, frame = 8
+ 158              		@ frame_needed = 0, uses_anonymous_args = 1
+ 159 0000 0EB4     		push	{r1, r2, r3}
+ 160 0002 70B5     		push	{r4, r5, r6, lr}
+ 161 0004 83B0     		sub	sp, sp, #12
+ 162 0006 0600     		movs	r6, r0
+ 163 0008 079D     		ldr	r5, [sp, #28]
+ 164 000a 0120     		movs	r0, #1
+ 165 000c FFF7FEFF 		bl	GPIO_GetPin
+ 166 0010 164C     		ldr	r4, .L20
+ 167 0012 2368     		ldr	r3, [r4]
+ 168 0014 8343     		bics	r3, r0
+ 169 0016 2360     		str	r3, [r4]
+ 170 0018 0220     		movs	r0, #2
+ 171 001a FFF7FEFF 		bl	GPIO_GetPin
+ 172 001e 2368     		ldr	r3, [r4]
+ 173 0020 8343     		bics	r3, r0
+ 174 0022 2360     		str	r3, [r4]
+ 175 0024 3000     		movs	r0, r6
+ 176 0026 FFF7FEFF 		bl	spi_write_byte
+ 177 002a 002D     		cmp	r5, #0
+ 178 002c 0BDC     		bgt	.L19
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 4
+
+
+ 179              	.L16:
+ 180 002e 0220     		movs	r0, #2
+ 181 0030 FFF7FEFF 		bl	GPIO_GetPin
+ 182 0034 0D4B     		ldr	r3, .L20
+ 183 0036 1A68     		ldr	r2, [r3]
+ 184 0038 1043     		orrs	r0, r2
+ 185 003a 1860     		str	r0, [r3]
+ 186 003c 03B0     		add	sp, sp, #12
+ 187              		@ sp needed
+ 188 003e 70BC     		pop	{r4, r5, r6}
+ 189 0040 08BC     		pop	{r3}
+ 190 0042 03B0     		add	sp, sp, #12
+ 191 0044 1847     		bx	r3
+ 192              	.L19:
+ 193 0046 0120     		movs	r0, #1
+ 194 0048 FFF7FEFF 		bl	GPIO_GetPin
+ 195 004c 2268     		ldr	r2, [r4]
+ 196 004e 1043     		orrs	r0, r2
+ 197 0050 2060     		str	r0, [r4]
+ 198 0052 08AB     		add	r3, sp, #32
+ 199 0054 0193     		str	r3, [sp, #4]
+ 200 0056 0024     		movs	r4, #0
+ 201              	.L17:
+ 202 0058 019B     		ldr	r3, [sp, #4]
+ 203 005a 1A1D     		adds	r2, r3, #4
+ 204 005c 0192     		str	r2, [sp, #4]
+ 205 005e 1878     		ldrb	r0, [r3]
+ 206 0060 FFF7FEFF 		bl	spi_write_byte
+ 207 0064 0134     		adds	r4, r4, #1
+ 208 0066 A542     		cmp	r5, r4
+ 209 0068 F6D1     		bne	.L17
+ 210 006a E0E7     		b	.L16
+ 211              	.L21:
+ 212              		.align	2
+ 213              	.L20:
+ 214 006c 00100040 		.word	1073745920
+ 216              		.section	.text.epd_stream_data,"ax",%progbits
+ 217              		.align	1
+ 218              		.global	epd_stream_data
+ 219              		.syntax unified
+ 220              		.code	16
+ 221              		.thumb_func
+ 223              	epd_stream_data:
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226 0000 70B5     		push	{r4, r5, r6, lr}
+ 227 0002 0600     		movs	r6, r0
+ 228 0004 0D00     		movs	r5, r1
+ 229 0006 0120     		movs	r0, #1
+ 230 0008 FFF7FEFF 		bl	GPIO_GetPin
+ 231 000c 0D4C     		ldr	r4, .L26
+ 232 000e 2368     		ldr	r3, [r4]
+ 233 0010 1843     		orrs	r0, r3
+ 234 0012 2060     		str	r0, [r4]
+ 235 0014 0220     		movs	r0, #2
+ 236 0016 FFF7FEFF 		bl	GPIO_GetPin
+ 237 001a 2368     		ldr	r3, [r4]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 5
+
+
+ 238 001c 8343     		bics	r3, r0
+ 239 001e 2360     		str	r3, [r4]
+ 240 0020 002D     		cmp	r5, #0
+ 241 0022 07D0     		beq	.L23
+ 242 0024 3400     		movs	r4, r6
+ 243 0026 7519     		adds	r5, r6, r5
+ 244              	.L24:
+ 245 0028 2078     		ldrb	r0, [r4]
+ 246 002a FFF7FEFF 		bl	spi_write_byte
+ 247 002e 0134     		adds	r4, r4, #1
+ 248 0030 AC42     		cmp	r4, r5
+ 249 0032 F9D1     		bne	.L24
+ 250              	.L23:
+ 251 0034 0220     		movs	r0, #2
+ 252 0036 FFF7FEFF 		bl	GPIO_GetPin
+ 253 003a 024B     		ldr	r3, .L26
+ 254 003c 1A68     		ldr	r2, [r3]
+ 255 003e 1043     		orrs	r0, r2
+ 256 0040 1860     		str	r0, [r3]
+ 257              		@ sp needed
+ 258 0042 70BD     		pop	{r4, r5, r6, pc}
+ 259              	.L27:
+ 260              		.align	2
+ 261              	.L26:
+ 262 0044 00100040 		.word	1073745920
+ 264              		.section	.text.epd_stream_const,"ax",%progbits
+ 265              		.align	1
+ 266              		.global	epd_stream_const
+ 267              		.syntax unified
+ 268              		.code	16
+ 269              		.thumb_func
+ 271              	epd_stream_const:
+ 272              		@ args = 0, pretend = 0, frame = 0
+ 273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 274 0000 70B5     		push	{r4, r5, r6, lr}
+ 275 0002 0600     		movs	r6, r0
+ 276 0004 0D00     		movs	r5, r1
+ 277 0006 0120     		movs	r0, #1
+ 278 0008 FFF7FEFF 		bl	GPIO_GetPin
+ 279 000c 0D4C     		ldr	r4, .L32
+ 280 000e 2368     		ldr	r3, [r4]
+ 281 0010 1843     		orrs	r0, r3
+ 282 0012 2060     		str	r0, [r4]
+ 283 0014 0220     		movs	r0, #2
+ 284 0016 FFF7FEFF 		bl	GPIO_GetPin
+ 285 001a 2368     		ldr	r3, [r4]
+ 286 001c 8343     		bics	r3, r0
+ 287 001e 2360     		str	r3, [r4]
+ 288 0020 002D     		cmp	r5, #0
+ 289 0022 06D0     		beq	.L29
+ 290 0024 0024     		movs	r4, #0
+ 291              	.L30:
+ 292 0026 3000     		movs	r0, r6
+ 293 0028 FFF7FEFF 		bl	spi_write_byte
+ 294 002c 0134     		adds	r4, r4, #1
+ 295 002e A542     		cmp	r5, r4
+ 296 0030 F9D1     		bne	.L30
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 6
+
+
+ 297              	.L29:
+ 298 0032 0220     		movs	r0, #2
+ 299 0034 FFF7FEFF 		bl	GPIO_GetPin
+ 300 0038 024B     		ldr	r3, .L32
+ 301 003a 1A68     		ldr	r2, [r3]
+ 302 003c 1043     		orrs	r0, r2
+ 303 003e 1860     		str	r0, [r3]
+ 304              		@ sp needed
+ 305 0040 70BD     		pop	{r4, r5, r6, pc}
+ 306              	.L33:
+ 307 0042 C046     		.align	2
+ 308              	.L32:
+ 309 0044 00100040 		.word	1073745920
+ 311              		.section	.rodata.epd_wait_busy.str1.4,"aMS",%progbits,1
+ 312              		.align	2
+ 313              	.LC0:
+ 314 0000 6570645F 		.ascii	"epd_wait_busy\012\000"
+ 314      77616974 
+ 314      5F627573 
+ 314      790A00
+ 315              		.section	.text.epd_wait_busy,"ax",%progbits
+ 316              		.align	1
+ 317              		.global	epd_wait_busy
+ 318              		.syntax unified
+ 319              		.code	16
+ 320              		.thumb_func
+ 322              	epd_wait_busy:
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325 0000 70B5     		push	{r4, r5, r6, lr}
+ 326 0002 0848     		ldr	r0, .L37
+ 327 0004 FFF7FEFF 		bl	uart_printf
+ 328 0008 074C     		ldr	r4, .L37+4
+ 329 000a 084D     		ldr	r5, .L37+8
+ 330              	.L36:
+ 331 000c 1B20     		movs	r0, #27
+ 332 000e FFF7FEFF 		bl	GPIO_GetPin
+ 333 0012 236D     		ldr	r3, [r4, #80]
+ 334 0014 236D     		ldr	r3, [r4, #80]
+ 335 0016 0342     		tst	r3, r0
+ 336 0018 03D1     		bne	.L34
+ 337 001a 0120     		movs	r0, #1
+ 338 001c 2B68     		ldr	r3, [r5]
+ 339 001e 9847     		blx	r3
+ 340 0020 F4E7     		b	.L36
+ 341              	.L34:
+ 342              		@ sp needed
+ 343 0022 70BD     		pop	{r4, r5, r6, pc}
+ 344              	.L38:
+ 345              		.align	2
+ 346              	.L37:
+ 347 0024 00000000 		.word	.LC0
+ 348 0028 00100040 		.word	1073745920
+ 349 002c 00000000 		.word	platform_delay_ms
+ 351              		.section	.text.epd_hw_reset,"ax",%progbits
+ 352              		.align	1
+ 353              		.global	epd_hw_reset
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 7
+
+
+ 354              		.syntax unified
+ 355              		.code	16
+ 356              		.thumb_func
+ 358              	epd_hw_reset:
+ 359              		@ args = 0, pretend = 0, frame = 0
+ 360              		@ frame_needed = 0, uses_anonymous_args = 0
+ 361 0000 70B5     		push	{r4, r5, r6, lr}
+ 362 0002 104D     		ldr	r5, .L40
+ 363 0004 1E20     		movs	r0, #30
+ 364 0006 2B68     		ldr	r3, [r5]
+ 365 0008 9847     		blx	r3
+ 366 000a 0020     		movs	r0, #0
+ 367 000c FFF7FEFF 		bl	GPIO_GetPin
+ 368 0010 0D4C     		ldr	r4, .L40+4
+ 369 0012 2368     		ldr	r3, [r4]
+ 370 0014 1843     		orrs	r0, r3
+ 371 0016 2060     		str	r0, [r4]
+ 372 0018 1620     		movs	r0, #22
+ 373 001a 2B68     		ldr	r3, [r5]
+ 374 001c 9847     		blx	r3
+ 375 001e 0020     		movs	r0, #0
+ 376 0020 FFF7FEFF 		bl	GPIO_GetPin
+ 377 0024 2368     		ldr	r3, [r4]
+ 378 0026 8343     		bics	r3, r0
+ 379 0028 2360     		str	r3, [r4]
+ 380 002a 0A20     		movs	r0, #10
+ 381 002c 2B68     		ldr	r3, [r5]
+ 382 002e 9847     		blx	r3
+ 383 0030 0020     		movs	r0, #0
+ 384 0032 FFF7FEFF 		bl	GPIO_GetPin
+ 385 0036 2368     		ldr	r3, [r4]
+ 386 0038 1843     		orrs	r0, r3
+ 387 003a 2060     		str	r0, [r4]
+ 388 003c 2B68     		ldr	r3, [r5]
+ 389 003e 0F20     		movs	r0, #15
+ 390 0040 9847     		blx	r3
+ 391              		@ sp needed
+ 392 0042 70BD     		pop	{r4, r5, r6, pc}
+ 393              	.L41:
+ 394              		.align	2
+ 395              	.L40:
+ 396 0044 00000000 		.word	platform_delay_ms
+ 397 0048 00100040 		.word	1073745920
+ 399              		.section	.text.epd_init,"ax",%progbits
+ 400              		.align	1
+ 401              		.global	epd_init
+ 402              		.syntax unified
+ 403              		.code	16
+ 404              		.thumb_func
+ 406              	epd_init:
+ 407              		@ args = 0, pretend = 0, frame = 16
+ 408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 409 0000 70B5     		push	{r4, r5, r6, lr}
+ 410 0002 88B0     		sub	sp, sp, #32
+ 411 0004 04A8     		add	r0, sp, #16
+ 412 0006 FFF7FEFF 		bl	GPIO_StructInit
+ 413 000a 0520     		movs	r0, #5
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 8
+
+
+ 414 000c FFF7FEFF 		bl	GPIO_GetPin
+ 415 0010 0400     		movs	r4, r0
+ 416 0012 1A20     		movs	r0, #26
+ 417 0014 FFF7FEFF 		bl	GPIO_GetPin
+ 418 0018 0443     		orrs	r4, r0
+ 419 001a 0220     		movs	r0, #2
+ 420 001c FFF7FEFF 		bl	GPIO_GetPin
+ 421 0020 0443     		orrs	r4, r0
+ 422 0022 0020     		movs	r0, #0
+ 423 0024 FFF7FEFF 		bl	GPIO_GetPin
+ 424 0028 0443     		orrs	r4, r0
+ 425 002a 0120     		movs	r0, #1
+ 426 002c FFF7FEFF 		bl	GPIO_GetPin
+ 427 0030 0443     		orrs	r4, r0
+ 428 0032 0420     		movs	r0, #4
+ 429 0034 FFF7FEFF 		bl	GPIO_GetPin
+ 430 0038 0443     		orrs	r4, r0
+ 431 003a 0620     		movs	r0, #6
+ 432 003c FFF7FEFF 		bl	GPIO_GetPin
+ 433 0040 0443     		orrs	r4, r0
+ 434 0042 0494     		str	r4, [sp, #16]
+ 435 0044 0126     		movs	r6, #1
+ 436 0046 6B46     		mov	r3, sp
+ 437 0048 1E75     		strb	r6, [r3, #20]
+ 438 004a 04A8     		add	r0, sp, #16
+ 439 004c FFF7FEFF 		bl	GPIO_Init
+ 440 0050 1B20     		movs	r0, #27
+ 441 0052 FFF7FEFF 		bl	GPIO_GetPin
+ 442 0056 0490     		str	r0, [sp, #16]
+ 443 0058 0025     		movs	r5, #0
+ 444 005a 6B46     		mov	r3, sp
+ 445 005c 1D75     		strb	r5, [r3, #20]
+ 446 005e 04A8     		add	r0, sp, #16
+ 447 0060 FFF7FEFF 		bl	GPIO_Init
+ 448 0064 0520     		movs	r0, #5
+ 449 0066 FFF7FEFF 		bl	GPIO_GetPin
+ 450 006a 484C     		ldr	r4, .L43
+ 451 006c 2368     		ldr	r3, [r4]
+ 452 006e 8343     		bics	r3, r0
+ 453 0070 2360     		str	r3, [r4]
+ 454 0072 1A20     		movs	r0, #26
+ 455 0074 FFF7FEFF 		bl	GPIO_GetPin
+ 456 0078 2368     		ldr	r3, [r4]
+ 457 007a 8343     		bics	r3, r0
+ 458 007c 2360     		str	r3, [r4]
+ 459 007e 0220     		movs	r0, #2
+ 460 0080 FFF7FEFF 		bl	GPIO_GetPin
+ 461 0084 2368     		ldr	r3, [r4]
+ 462 0086 1843     		orrs	r0, r3
+ 463 0088 2060     		str	r0, [r4]
+ 464 008a 0020     		movs	r0, #0
+ 465 008c FFF7FEFF 		bl	GPIO_GetPin
+ 466 0090 2368     		ldr	r3, [r4]
+ 467 0092 1843     		orrs	r0, r3
+ 468 0094 2060     		str	r0, [r4]
+ 469 0096 0120     		movs	r0, #1
+ 470 0098 FFF7FEFF 		bl	GPIO_GetPin
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 9
+
+
+ 471 009c 2368     		ldr	r3, [r4]
+ 472 009e 8343     		bics	r3, r0
+ 473 00a0 2360     		str	r3, [r4]
+ 474 00a2 0420     		movs	r0, #4
+ 475 00a4 FFF7FEFF 		bl	GPIO_GetPin
+ 476 00a8 2368     		ldr	r3, [r4]
+ 477 00aa 8343     		bics	r3, r0
+ 478 00ac 2360     		str	r3, [r4]
+ 479 00ae 0620     		movs	r0, #6
+ 480 00b0 FFF7FEFF 		bl	GPIO_GetPin
+ 481 00b4 2368     		ldr	r3, [r4]
+ 482 00b6 8343     		bics	r3, r0
+ 483 00b8 2360     		str	r3, [r4]
+ 484 00ba 0520     		movs	r0, #5
+ 485 00bc FFF7FEFF 		bl	GPIO_GetPin
+ 486 00c0 2368     		ldr	r3, [r4]
+ 487 00c2 1843     		orrs	r0, r3
+ 488 00c4 2060     		str	r0, [r4]
+ 489 00c6 324B     		ldr	r3, .L43+4
+ 490 00c8 1B68     		ldr	r3, [r3]
+ 491 00ca 1420     		movs	r0, #20
+ 492 00cc 9847     		blx	r3
+ 493 00ce FFF7FEFF 		bl	epd_hw_reset
+ 494 00d2 FFF7FEFF 		bl	epd_wait_busy
+ 495 00d6 2923     		movs	r3, #41
+ 496 00d8 0322     		movs	r2, #3
+ 497 00da 0221     		movs	r1, #2
+ 498 00dc 0020     		movs	r0, #0
+ 499 00de FFF7FEFF 		bl	epd_write
+ 500 00e2 2223     		movs	r3, #34
+ 501 00e4 0393     		str	r3, [sp, #12]
+ 502 00e6 0A22     		movs	r2, #10
+ 503 00e8 0292     		str	r2, [sp, #8]
+ 504 00ea 6E32     		adds	r2, r2, #110
+ 505 00ec 0192     		str	r2, [sp, #4]
+ 506 00ee 0093     		str	r3, [sp]
+ 507 00f0 0023     		movs	r3, #0
+ 508 00f2 713A     		subs	r2, r2, #113
+ 509 00f4 0621     		movs	r1, #6
+ 510 00f6 0120     		movs	r0, #1
+ 511 00f8 FFF7FEFF 		bl	epd_write
+ 512 00fc 4423     		movs	r3, #68
+ 513 00fe 0093     		str	r3, [sp]
+ 514 0100 1033     		adds	r3, r3, #16
+ 515 0102 1022     		movs	r2, #16
+ 516 0104 0321     		movs	r1, #3
+ 517 0106 0320     		movs	r0, #3
+ 518 0108 FFF7FEFF 		bl	epd_write
+ 519 010c 1C22     		movs	r2, #28
+ 520 010e 0121     		movs	r1, #1
+ 521 0110 E720     		movs	r0, #231
+ 522 0112 FFF7FEFF 		bl	epd_write
+ 523 0116 1E23     		movs	r3, #30
+ 524 0118 0193     		str	r3, [sp, #4]
+ 525 011a 013B     		subs	r3, r3, #1
+ 526 011c 0093     		str	r3, [sp]
+ 527 011e BA33     		adds	r3, r3, #186
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 10
+
+
+ 528 0120 C722     		movs	r2, #199
+ 529 0122 0421     		movs	r1, #4
+ 530 0124 0620     		movs	r0, #6
+ 531 0126 FFF7FEFF 		bl	epd_write
+ 532 012a 0022     		movs	r2, #0
+ 533 012c 0121     		movs	r1, #1
+ 534 012e 4120     		movs	r0, #65
+ 535 0130 FFF7FEFF 		bl	epd_write
+ 536 0134 3722     		movs	r2, #55
+ 537 0136 0121     		movs	r1, #1
+ 538 0138 5020     		movs	r0, #80
+ 539 013a FFF7FEFF 		bl	epd_write
+ 540 013e 0223     		movs	r3, #2
+ 541 0140 0222     		movs	r2, #2
+ 542 0142 0221     		movs	r1, #2
+ 543 0144 6020     		movs	r0, #96
+ 544 0146 FFF7FEFF 		bl	epd_write
+ 545 014a E023     		movs	r3, #224
+ 546 014c 0193     		str	r3, [sp, #4]
+ 547 014e 0096     		str	r6, [sp]
+ 548 0150 0022     		movs	r2, #0
+ 549 0152 0421     		movs	r1, #4
+ 550 0154 6120     		movs	r0, #97
+ 551 0156 FFF7FEFF 		bl	epd_write
+ 552 015a 0195     		str	r5, [sp, #4]
+ 553 015c 0095     		str	r5, [sp]
+ 554 015e 0823     		movs	r3, #8
+ 555 0160 0022     		movs	r2, #0
+ 556 0162 0421     		movs	r1, #4
+ 557 0164 6520     		movs	r0, #101
+ 558 0166 FFF7FEFF 		bl	epd_write
+ 559 016a 2222     		movs	r2, #34
+ 560 016c 0121     		movs	r1, #1
+ 561 016e E320     		movs	r0, #227
+ 562 0170 FFF7FEFF 		bl	epd_write
+ 563 0174 0122     		movs	r2, #1
+ 564 0176 0121     		movs	r1, #1
+ 565 0178 E920     		movs	r0, #233
+ 566 017a FFF7FEFF 		bl	epd_write
+ 567 017e 0822     		movs	r2, #8
+ 568 0180 0121     		movs	r1, #1
+ 569 0182 3020     		movs	r0, #48
+ 570 0184 FFF7FEFF 		bl	epd_write
+ 571 0188 08B0     		add	sp, sp, #32
+ 572              		@ sp needed
+ 573 018a 70BD     		pop	{r4, r5, r6, pc}
+ 574              	.L44:
+ 575              		.align	2
+ 576              	.L43:
+ 577 018c 00100040 		.word	1073745920
+ 578 0190 00000000 		.word	platform_delay_ms
+ 580              		.section	.text.epd_display_white,"ax",%progbits
+ 581              		.align	1
+ 582              		.global	epd_display_white
+ 583              		.syntax unified
+ 584              		.code	16
+ 585              		.thumb_func
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 11
+
+
+ 587              	epd_display_white:
+ 588              		@ args = 0, pretend = 0, frame = 0
+ 589              		@ frame_needed = 0, uses_anonymous_args = 0
+ 590 0000 70B5     		push	{r4, r5, r6, lr}
+ 591 0002 1020     		movs	r0, #16
+ 592 0004 FFF7FEFF 		bl	epd_cmd
+ 593 0008 D221     		movs	r1, #210
+ 594 000a C901     		lsls	r1, r1, #7
+ 595 000c 5520     		movs	r0, #85
+ 596 000e FFF7FEFF 		bl	epd_stream_const
+ 597 0012 0420     		movs	r0, #4
+ 598 0014 FFF7FEFF 		bl	epd_cmd
+ 599 0018 FFF7FEFF 		bl	epd_wait_busy
+ 600 001c 0022     		movs	r2, #0
+ 601 001e 0121     		movs	r1, #1
+ 602 0020 1220     		movs	r0, #18
+ 603 0022 FFF7FEFF 		bl	epd_write
+ 604 0026 9625     		movs	r5, #150
+ 605 0028 6D00     		lsls	r5, r5, #1
+ 606 002a 0B4E     		ldr	r6, .L49
+ 607 002c 0B4C     		ldr	r4, .L49+4
+ 608              	.L47:
+ 609 002e 6420     		movs	r0, #100
+ 610 0030 3368     		ldr	r3, [r6]
+ 611 0032 9847     		blx	r3
+ 612 0034 1B20     		movs	r0, #27
+ 613 0036 FFF7FEFF 		bl	GPIO_GetPin
+ 614 003a 236D     		ldr	r3, [r4, #80]
+ 615 003c 236D     		ldr	r3, [r4, #80]
+ 616 003e 0342     		tst	r3, r0
+ 617 0040 02D1     		bne	.L46
+ 618 0042 013D     		subs	r5, r5, #1
+ 619 0044 002D     		cmp	r5, #0
+ 620 0046 F2D1     		bne	.L47
+ 621              	.L46:
+ 622 0048 0022     		movs	r2, #0
+ 623 004a 0121     		movs	r1, #1
+ 624 004c 0220     		movs	r0, #2
+ 625 004e FFF7FEFF 		bl	epd_write
+ 626 0052 FFF7FEFF 		bl	epd_wait_busy
+ 627              		@ sp needed
+ 628 0056 70BD     		pop	{r4, r5, r6, pc}
+ 629              	.L50:
+ 630              		.align	2
+ 631              	.L49:
+ 632 0058 00000000 		.word	platform_delay_ms
+ 633 005c 00100040 		.word	1073745920
+ 635              		.section	.text.epd_sleep,"ax",%progbits
+ 636              		.align	1
+ 637              		.global	epd_sleep
+ 638              		.syntax unified
+ 639              		.code	16
+ 640              		.thumb_func
+ 642              	epd_sleep:
+ 643              		@ args = 0, pretend = 0, frame = 0
+ 644              		@ frame_needed = 0, uses_anonymous_args = 0
+ 645 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 12
+
+
+ 646 0002 A522     		movs	r2, #165
+ 647 0004 0121     		movs	r1, #1
+ 648 0006 0720     		movs	r0, #7
+ 649 0008 FFF7FEFF 		bl	epd_write
+ 650 000c 054B     		ldr	r3, .L52
+ 651 000e 1B68     		ldr	r3, [r3]
+ 652 0010 6420     		movs	r0, #100
+ 653 0012 9847     		blx	r3
+ 654 0014 0520     		movs	r0, #5
+ 655 0016 FFF7FEFF 		bl	GPIO_GetPin
+ 656 001a 034A     		ldr	r2, .L52+4
+ 657 001c 1368     		ldr	r3, [r2]
+ 658 001e 8343     		bics	r3, r0
+ 659 0020 1360     		str	r3, [r2]
+ 660              		@ sp needed
+ 661 0022 10BD     		pop	{r4, pc}
+ 662              	.L53:
+ 663              		.align	2
+ 664              	.L52:
+ 665 0024 00000000 		.word	platform_delay_ms
+ 666 0028 00100040 		.word	1073745920
+ 668              		.section	.text.epd_board_init,"ax",%progbits
+ 669              		.align	1
+ 670              		.global	epd_board_init
+ 671              		.syntax unified
+ 672              		.code	16
+ 673              		.thumb_func
+ 675              	epd_board_init:
+ 676              		@ args = 0, pretend = 0, frame = 0
+ 677              		@ frame_needed = 0, uses_anonymous_args = 0
+ 678 0000 30B5     		push	{r4, r5, lr}
+ 679 0002 83B0     		sub	sp, sp, #12
+ 680 0004 8421     		movs	r1, #132
+ 681 0006 0122     		movs	r2, #1
+ 682 0008 8905     		lsls	r1, r1, #22
+ 683 000a 3548     		ldr	r0, .L55
+ 684 000c FFF7FEFF 		bl	RCC_PeriphClockCmd
+ 685 0010 0025     		movs	r5, #0
+ 686 0012 0195     		str	r5, [sp, #4]
+ 687 0014 0124     		movs	r4, #1
+ 688 0016 0094     		str	r4, [sp]
+ 689 0018 0223     		movs	r3, #2
+ 690 001a 0122     		movs	r2, #1
+ 691 001c 0121     		movs	r1, #1
+ 692 001e 0520     		movs	r0, #5
+ 693 0020 FFF7FEFF 		bl	Pad_Config
+ 694 0024 2F4B     		ldr	r3, .L55+4
+ 695 0026 1B68     		ldr	r3, [r3]
+ 696 0028 0A20     		movs	r0, #10
+ 697 002a 9847     		blx	r3
+ 698 002c 0195     		str	r5, [sp, #4]
+ 699 002e 0094     		str	r4, [sp]
+ 700 0030 0223     		movs	r3, #2
+ 701 0032 0122     		movs	r2, #1
+ 702 0034 0121     		movs	r1, #1
+ 703 0036 1A20     		movs	r0, #26
+ 704 0038 FFF7FEFF 		bl	Pad_Config
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 13
+
+
+ 705 003c 0194     		str	r4, [sp, #4]
+ 706 003e 0094     		str	r4, [sp]
+ 707 0040 0223     		movs	r3, #2
+ 708 0042 0122     		movs	r2, #1
+ 709 0044 0121     		movs	r1, #1
+ 710 0046 0220     		movs	r0, #2
+ 711 0048 FFF7FEFF 		bl	Pad_Config
+ 712 004c 0194     		str	r4, [sp, #4]
+ 713 004e 0094     		str	r4, [sp]
+ 714 0050 0223     		movs	r3, #2
+ 715 0052 0122     		movs	r2, #1
+ 716 0054 0121     		movs	r1, #1
+ 717 0056 0020     		movs	r0, #0
+ 718 0058 FFF7FEFF 		bl	Pad_Config
+ 719 005c 0195     		str	r5, [sp, #4]
+ 720 005e 0094     		str	r4, [sp]
+ 721 0060 0223     		movs	r3, #2
+ 722 0062 0122     		movs	r2, #1
+ 723 0064 0121     		movs	r1, #1
+ 724 0066 0120     		movs	r0, #1
+ 725 0068 FFF7FEFF 		bl	Pad_Config
+ 726 006c 0195     		str	r5, [sp, #4]
+ 727 006e 0094     		str	r4, [sp]
+ 728 0070 0223     		movs	r3, #2
+ 729 0072 0122     		movs	r2, #1
+ 730 0074 0121     		movs	r1, #1
+ 731 0076 0420     		movs	r0, #4
+ 732 0078 FFF7FEFF 		bl	Pad_Config
+ 733 007c 0195     		str	r5, [sp, #4]
+ 734 007e 0094     		str	r4, [sp]
+ 735 0080 0223     		movs	r3, #2
+ 736 0082 0122     		movs	r2, #1
+ 737 0084 0121     		movs	r1, #1
+ 738 0086 0620     		movs	r0, #6
+ 739 0088 FFF7FEFF 		bl	Pad_Config
+ 740 008c 0195     		str	r5, [sp, #4]
+ 741 008e 0095     		str	r5, [sp]
+ 742 0090 0223     		movs	r3, #2
+ 743 0092 0122     		movs	r2, #1
+ 744 0094 0121     		movs	r1, #1
+ 745 0096 1B20     		movs	r0, #27
+ 746 0098 FFF7FEFF 		bl	Pad_Config
+ 747 009c 5A21     		movs	r1, #90
+ 748 009e 0520     		movs	r0, #5
+ 749 00a0 FFF7FEFF 		bl	Pinmux_Config
+ 750 00a4 5A21     		movs	r1, #90
+ 751 00a6 1A20     		movs	r0, #26
+ 752 00a8 FFF7FEFF 		bl	Pinmux_Config
+ 753 00ac 5A21     		movs	r1, #90
+ 754 00ae 0220     		movs	r0, #2
+ 755 00b0 FFF7FEFF 		bl	Pinmux_Config
+ 756 00b4 5A21     		movs	r1, #90
+ 757 00b6 0020     		movs	r0, #0
+ 758 00b8 FFF7FEFF 		bl	Pinmux_Config
+ 759 00bc 5A21     		movs	r1, #90
+ 760 00be 0120     		movs	r0, #1
+ 761 00c0 FFF7FEFF 		bl	Pinmux_Config
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 14
+
+
+ 762 00c4 5A21     		movs	r1, #90
+ 763 00c6 0420     		movs	r0, #4
+ 764 00c8 FFF7FEFF 		bl	Pinmux_Config
+ 765 00cc 5A21     		movs	r1, #90
+ 766 00ce 0620     		movs	r0, #6
+ 767 00d0 FFF7FEFF 		bl	Pinmux_Config
+ 768 00d4 5A21     		movs	r1, #90
+ 769 00d6 1B20     		movs	r0, #27
+ 770 00d8 FFF7FEFF 		bl	Pinmux_Config
+ 771 00dc 03B0     		add	sp, sp, #12
+ 772              		@ sp needed
+ 773 00de 30BD     		pop	{r4, r5, pc}
+ 774              	.L56:
+ 775              		.align	2
+ 776              	.L55:
+ 777 00e0 0001000C 		.word	201326848
+ 778 00e4 00000000 		.word	platform_delay_ms
+ 780              		.section	.text.epd_board_sleep,"ax",%progbits
+ 781              		.align	1
+ 782              		.global	epd_board_sleep
+ 783              		.syntax unified
+ 784              		.code	16
+ 785              		.thumb_func
+ 787              	epd_board_sleep:
+ 788              		@ args = 0, pretend = 0, frame = 0
+ 789              		@ frame_needed = 0, uses_anonymous_args = 0
+ 790 0000 10B5     		push	{r4, lr}
+ 791 0002 0021     		movs	r1, #0
+ 792 0004 0520     		movs	r0, #5
+ 793 0006 FFF7FEFF 		bl	Pinmux_Config
+ 794 000a 0021     		movs	r1, #0
+ 795 000c 1A20     		movs	r0, #26
+ 796 000e FFF7FEFF 		bl	Pinmux_Config
+ 797 0012 0021     		movs	r1, #0
+ 798 0014 0220     		movs	r0, #2
+ 799 0016 FFF7FEFF 		bl	Pinmux_Config
+ 800 001a 0021     		movs	r1, #0
+ 801 001c 0020     		movs	r0, #0
+ 802 001e FFF7FEFF 		bl	Pinmux_Config
+ 803 0022 0021     		movs	r1, #0
+ 804 0024 0120     		movs	r0, #1
+ 805 0026 FFF7FEFF 		bl	Pinmux_Config
+ 806 002a 0021     		movs	r1, #0
+ 807 002c 0420     		movs	r0, #4
+ 808 002e FFF7FEFF 		bl	Pinmux_Config
+ 809 0032 0021     		movs	r1, #0
+ 810 0034 0620     		movs	r0, #6
+ 811 0036 FFF7FEFF 		bl	Pinmux_Config
+ 812 003a 0021     		movs	r1, #0
+ 813 003c 1B20     		movs	r0, #27
+ 814 003e FFF7FEFF 		bl	Pinmux_Config
+ 815 0042 0520     		movs	r0, #5
+ 816 0044 FFF7FEFF 		bl	Pinmux_Deinit
+ 817 0048 1A20     		movs	r0, #26
+ 818 004a FFF7FEFF 		bl	Pinmux_Deinit
+ 819 004e 0220     		movs	r0, #2
+ 820 0050 FFF7FEFF 		bl	Pinmux_Deinit
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 15
+
+
+ 821 0054 0020     		movs	r0, #0
+ 822 0056 FFF7FEFF 		bl	Pinmux_Deinit
+ 823 005a 0120     		movs	r0, #1
+ 824 005c FFF7FEFF 		bl	Pinmux_Deinit
+ 825 0060 0420     		movs	r0, #4
+ 826 0062 FFF7FEFF 		bl	Pinmux_Deinit
+ 827 0066 0620     		movs	r0, #6
+ 828 0068 FFF7FEFF 		bl	Pinmux_Deinit
+ 829 006c 1B20     		movs	r0, #27
+ 830 006e FFF7FEFF 		bl	Pinmux_Deinit
+ 831              		@ sp needed
+ 832 0072 10BD     		pop	{r4, pc}
+ 834              		.section	.rodata.epd_draw_full.str1.4,"aMS",%progbits,1
+ 835              		.align	2
+ 836              	.LC8:
+ 837 0000 45504420 		.ascii	"EPD board init done\012\000"
+ 837      626F6172 
+ 837      6420696E 
+ 837      69742064 
+ 837      6F6E650A 
+ 838 0015 000000   		.align	2
+ 839              	.LC10:
+ 840 0018 45504420 		.ascii	"EPD init done\012\000"
+ 840      696E6974 
+ 840      20646F6E 
+ 840      650A00
+ 841 0027 00       		.align	2
+ 842              	.LC12:
+ 843 0028 45504420 		.ascii	"EPD white refresh done\012\000"
+ 843      77686974 
+ 843      65207265 
+ 843      66726573 
+ 843      6820646F 
+ 844              		.align	2
+ 845              	.LC14:
+ 846 0040 45504420 		.ascii	"EPD sleep\012\000"
+ 846      736C6565 
+ 846      700A00
+ 847              		.section	.text.epd_draw_full,"ax",%progbits
+ 848              		.align	1
+ 849              		.global	epd_draw_full
+ 850              		.syntax unified
+ 851              		.code	16
+ 852              		.thumb_func
+ 854              	epd_draw_full:
+ 855              		@ args = 0, pretend = 0, frame = 0
+ 856              		@ frame_needed = 0, uses_anonymous_args = 0
+ 857 0000 10B5     		push	{r4, lr}
+ 858 0002 FFF7FEFF 		bl	epd_board_init
+ 859 0006 0A48     		ldr	r0, .L59
+ 860 0008 FFF7FEFF 		bl	uart_printf
+ 861 000c FFF7FEFF 		bl	epd_init
+ 862 0010 0848     		ldr	r0, .L59+4
+ 863 0012 FFF7FEFF 		bl	uart_printf
+ 864 0016 FFF7FEFF 		bl	epd_display_white
+ 865 001a 0748     		ldr	r0, .L59+8
+ 866 001c FFF7FEFF 		bl	uart_printf
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 16
+
+
+ 867 0020 FFF7FEFF 		bl	epd_sleep
+ 868 0024 FFF7FEFF 		bl	epd_board_sleep
+ 869 0028 0448     		ldr	r0, .L59+12
+ 870 002a FFF7FEFF 		bl	uart_printf
+ 871              		@ sp needed
+ 872 002e 10BD     		pop	{r4, pc}
+ 873              	.L60:
+ 874              		.align	2
+ 875              	.L59:
+ 876 0030 00000000 		.word	.LC8
+ 877 0034 18000000 		.word	.LC10
+ 878 0038 28000000 		.word	.LC12
+ 879 003c 40000000 		.word	.LC14
+ 881              		.section	.text.EPD_Display_start,"ax",%progbits
+ 882              		.align	1
+ 883              		.global	EPD_Display_start
+ 884              		.syntax unified
+ 885              		.code	16
+ 886              		.thumb_func
+ 888              	EPD_Display_start:
+ 889              		@ args = 0, pretend = 0, frame = 0
+ 890              		@ frame_needed = 0, uses_anonymous_args = 0
+ 891 0000 10B5     		push	{r4, lr}
+ 892 0002 FFF7FEFF 		bl	epd_board_init
+ 893 0006 FFF7FEFF 		bl	epd_init
+ 894 000a 1020     		movs	r0, #16
+ 895 000c FFF7FEFF 		bl	epd_cmd
+ 896              		@ sp needed
+ 897 0010 10BD     		pop	{r4, pc}
+ 899              		.section	.text.EPD_Display_byte,"ax",%progbits
+ 900              		.align	1
+ 901              		.global	EPD_Display_byte
+ 902              		.syntax unified
+ 903              		.code	16
+ 904              		.thumb_func
+ 906              	EPD_Display_byte:
+ 907              		@ args = 0, pretend = 0, frame = 0
+ 908              		@ frame_needed = 0, uses_anonymous_args = 0
+ 909 0000 10B5     		push	{r4, lr}
+ 910 0002 FFF7FEFF 		bl	epd_data
+ 911              		@ sp needed
+ 912 0006 10BD     		pop	{r4, pc}
+ 914              		.section	.text.EPD_Display_color_change,"ax",%progbits
+ 915              		.align	1
+ 916              		.global	EPD_Display_color_change
+ 917              		.syntax unified
+ 918              		.code	16
+ 919              		.thumb_func
+ 921              	EPD_Display_color_change:
+ 922              		@ args = 0, pretend = 0, frame = 0
+ 923              		@ frame_needed = 0, uses_anonymous_args = 0
+ 924              		@ link register save eliminated.
+ 925              		@ sp needed
+ 926 0000 7047     		bx	lr
+ 928              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 epd.c
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:16     .text.spi_write_byte:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:22     .text.spi_write_byte:00000000 spi_write_byte
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:73     .text.spi_write_byte:0000005c $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:76     .text.epd_cmd:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:82     .text.epd_cmd:00000000 epd_cmd
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:110    .text.epd_cmd:00000034 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:113    .text.epd_data:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:119    .text.epd_data:00000000 epd_data
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:147    .text.epd_data:00000034 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:150    .text.epd_write:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:156    .text.epd_write:00000000 epd_write
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:214    .text.epd_write:0000006c $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:217    .text.epd_stream_data:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:223    .text.epd_stream_data:00000000 epd_stream_data
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:262    .text.epd_stream_data:00000044 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:265    .text.epd_stream_const:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:271    .text.epd_stream_const:00000000 epd_stream_const
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:309    .text.epd_stream_const:00000044 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:312    .rodata.epd_wait_busy.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:316    .text.epd_wait_busy:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:322    .text.epd_wait_busy:00000000 epd_wait_busy
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:347    .text.epd_wait_busy:00000024 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:352    .text.epd_hw_reset:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:358    .text.epd_hw_reset:00000000 epd_hw_reset
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:396    .text.epd_hw_reset:00000044 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:400    .text.epd_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:406    .text.epd_init:00000000 epd_init
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:577    .text.epd_init:0000018c $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:581    .text.epd_display_white:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:587    .text.epd_display_white:00000000 epd_display_white
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:632    .text.epd_display_white:00000058 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:636    .text.epd_sleep:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:642    .text.epd_sleep:00000000 epd_sleep
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:665    .text.epd_sleep:00000024 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:669    .text.epd_board_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:675    .text.epd_board_init:00000000 epd_board_init
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:777    .text.epd_board_init:000000e0 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:781    .text.epd_board_sleep:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:787    .text.epd_board_sleep:00000000 epd_board_sleep
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:835    .rodata.epd_draw_full.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:848    .text.epd_draw_full:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:854    .text.epd_draw_full:00000000 epd_draw_full
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:876    .text.epd_draw_full:00000030 $d
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:882    .text.EPD_Display_start:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:888    .text.EPD_Display_start:00000000 EPD_Display_start
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:900    .text.EPD_Display_byte:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:906    .text.EPD_Display_byte:00000000 EPD_Display_byte
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:915    .text.EPD_Display_color_change:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s:921    .text.EPD_Display_color_change:00000000 EPD_Display_color_change
+
+UNDEFINED SYMBOLS
+GPIO_GetPin
+uart_printf
+platform_delay_ms
+GPIO_StructInit
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cczRO8Ab.s 			page 18
+
+
+GPIO_Init
+RCC_PeriphClockCmd
+Pad_Config
+Pinmux_Config
+Pinmux_Deinit

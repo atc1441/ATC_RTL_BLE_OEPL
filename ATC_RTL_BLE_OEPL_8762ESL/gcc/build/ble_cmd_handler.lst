@@ -1,0 +1,2471 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"ble_cmd_handler.c"
+  14              		.text
+  15              		.global	__aeabi_uidiv
+  16              		.section	.text.recalcParts,"ax",%progbits
+  17              		.align	1
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	recalcParts:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0A4B     		ldr	r3, .L3
+  27 0004 9A68     		ldr	r2, [r3, #8]
+  28 0006 120A     		lsrs	r2, r2, #8
+  29 0008 187B     		ldrb	r0, [r3, #12]
+  30 000a 0006     		lsls	r0, r0, #24
+  31 000c 1043     		orrs	r0, r2
+  32 000e 8023     		movs	r3, #128
+  33 0010 5B01     		lsls	r3, r3, #5
+  34 0012 9842     		cmp	r0, r3
+  35 0014 00D9     		bls	.L2
+  36 0016 1800     		movs	r0, r3
+  37              	.L2:
+  38 0018 054B     		ldr	r3, .L3+4
+  39 001a 1880     		strh	r0, [r3]
+  40 001c E930     		adds	r0, r0, #233
+  41 001e E621     		movs	r1, #230
+  42 0020 FFF7FEFF 		bl	__aeabi_uidiv
+  43 0024 034B     		ldr	r3, .L3+8
+  44 0026 1870     		strb	r0, [r3]
+  45              		@ sp needed
+  46 0028 10BD     		pop	{r4, pc}
+  47              	.L4:
+  48 002a C046     		.align	2
+  49              	.L3:
+  50 002c 00000000 		.word	.LANCHOR0
+  51 0030 00000000 		.word	.LANCHOR1
+  52 0034 00000000 		.word	.LANCHOR2
+  54              		.section	.text.getAddressForSlot,"ax",%progbits
+  55              		.align	1
+  56              		.global	getAddressForSlot
+  57              		.syntax unified
+  58              		.code	16
+  59              		.thumb_func
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 2
+
+
+  61              	getAddressForSlot:
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64 0000 10B5     		push	{r4, lr}
+  65 0002 0400     		movs	r4, r0
+  66 0004 0A49     		ldr	r1, .L9
+  67 0006 6523     		movs	r3, #101
+  68 0008 C85C     		ldrb	r0, [r1, r3]
+  69 000a 0133     		adds	r3, r3, #1
+  70 000c CB5C     		ldrb	r3, [r1, r3]
+  71 000e 1B02     		lsls	r3, r3, #8
+  72 0010 1843     		orrs	r0, r3
+  73 0012 6723     		movs	r3, #103
+  74 0014 CA5C     		ldrb	r2, [r1, r3]
+  75 0016 1204     		lsls	r2, r2, #16
+  76 0018 0243     		orrs	r2, r0
+  77 001a 0133     		adds	r3, r3, #1
+  78 001c C85C     		ldrb	r0, [r1, r3]
+  79 001e 0006     		lsls	r0, r0, #24
+  80 0020 1043     		orrs	r0, r2
+  81 0022 01D0     		beq	.L8
+  82              	.L6:
+  83 0024 6043     		muls	r0, r4
+  84              		@ sp needed
+  85 0026 10BD     		pop	{r4, pc}
+  86              	.L8:
+  87 0028 B820     		movs	r0, #184
+  88 002a 4002     		lsls	r0, r0, #9
+  89 002c FAE7     		b	.L6
+  90              	.L10:
+  91 002e C046     		.align	2
+  92              	.L9:
+  93 0030 00000000 		.word	settings
+  95              		.section	.rodata.drawImageFromEeprom.str1.4,"aMS",%progbits,1
+  96              		.align	2
+  97              	.LC5:
+  98 0000 4552523A 		.ascii	"ERR: draw msg failed slot %u\012\000"
+  98      20647261 
+  98      77206D73 
+  98      67206661 
+  98      696C6564 
+  99              		.section	.text.drawImageFromEeprom,"ax",%progbits
+ 100              		.align	1
+ 101              		.global	drawImageFromEeprom
+ 102              		.syntax unified
+ 103              		.code	16
+ 104              		.thumb_func
+ 106              	drawImageFromEeprom:
+ 107              		@ args = 0, pretend = 0, frame = 8
+ 108              		@ frame_needed = 0, uses_anonymous_args = 0
+ 109 0000 10B5     		push	{r4, lr}
+ 110 0002 82B0     		sub	sp, sp, #8
+ 111 0004 0400     		movs	r4, r0
+ 112 0006 2023     		movs	r3, #32
+ 113 0008 6A46     		mov	r2, sp
+ 114 000a 1380     		strh	r3, [r2]
+ 115 000c 0A4B     		ldr	r3, .L14
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 3
+
+
+ 116 000e 1B78     		ldrb	r3, [r3]
+ 117 0010 5380     		strh	r3, [r2, #2]
+ 118 0012 FFF7FEFF 		bl	getAddressForSlot
+ 119 0016 0190     		str	r0, [sp, #4]
+ 120 0018 6846     		mov	r0, sp
+ 121 001a FFF7FEFF 		bl	app_send_msg_to_apptask
+ 122 001e 0028     		cmp	r0, #0
+ 123 0020 04D0     		beq	.L13
+ 124              	.L12:
+ 125 0022 054B     		ldr	r3, .L14
+ 126 0024 0022     		movs	r2, #0
+ 127 0026 1A70     		strb	r2, [r3]
+ 128 0028 02B0     		add	sp, sp, #8
+ 129              		@ sp needed
+ 130 002a 10BD     		pop	{r4, pc}
+ 131              	.L13:
+ 132 002c 2100     		movs	r1, r4
+ 133 002e 0348     		ldr	r0, .L14+4
+ 134 0030 FFF7FEFF 		bl	uart_printf
+ 135 0034 F5E7     		b	.L12
+ 136              	.L15:
+ 137 0036 C046     		.align	2
+ 138              	.L14:
+ 139 0038 00000000 		.word	.LANCHOR3
+ 140 003c 00000000 		.word	.LC5
+ 142              		.section	.rodata.ble_send_notify.str1.4,"aMS",%progbits,1
+ 143              		.align	2
+ 144              	.LC9:
+ 145 0000 4E4F5449 		.ascii	"NOTIFY cmd=0x%04X len=%u\012\000"
+ 145      46592063 
+ 145      6D643D30 
+ 145      78253034 
+ 145      58206C65 
+ 146              		.section	.text.ble_send_notify,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	ble_send_notify
+ 149              		.syntax unified
+ 150              		.code	16
+ 151              		.thumb_func
+ 153              	ble_send_notify:
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156 0000 70B5     		push	{r4, r5, r6, lr}
+ 157 0002 0500     		movs	r5, r0
+ 158 0004 1400     		movs	r4, r2
+ 159 0006 0C4B     		ldr	r3, .L19
+ 160 0008 020A     		lsrs	r2, r0, #8
+ 161 000a 1A70     		strb	r2, [r3]
+ 162 000c 5870     		strb	r0, [r3, #1]
+ 163 000e 0029     		cmp	r1, #0
+ 164 0010 01D0     		beq	.L17
+ 165 0012 002C     		cmp	r4, #0
+ 166 0014 0AD1     		bne	.L18
+ 167              	.L17:
+ 168 0016 2200     		movs	r2, r4
+ 169 0018 2900     		movs	r1, r5
+ 170 001a 0848     		ldr	r0, .L19+4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 4
+
+
+ 171 001c FFF7FEFF 		bl	uart_printf
+ 172 0020 A21C     		adds	r2, r4, #2
+ 173 0022 0549     		ldr	r1, .L19
+ 174 0024 0020     		movs	r0, #0
+ 175 0026 FFF7FEFF 		bl	app_send_custom_notification
+ 176              		@ sp needed
+ 177 002a 70BD     		pop	{r4, r5, r6, pc}
+ 178              	.L18:
+ 179 002c 2200     		movs	r2, r4
+ 180 002e 0448     		ldr	r0, .L19+8
+ 181 0030 FFF7FEFF 		bl	memcpy
+ 182 0034 EFE7     		b	.L17
+ 183              	.L20:
+ 184 0036 C046     		.align	2
+ 185              	.L19:
+ 186 0038 00000000 		.word	bleNotifyBuff
+ 187 003c 00000000 		.word	.LC9
+ 188 0040 02000000 		.word	bleNotifyBuff+2
+ 190              		.section	.rodata.processAvailDataInfoBLE.str1.4,"aMS",%progbits,1
+ 191              		.align	2
+ 192              	.LC13:
+ 193 0000 41564149 		.ascii	"AVAIL dataType=0x%02X size=%lu  slots=%u each=0x%lX"
+ 193      4C206461 
+ 193      74615479 
+ 193      70653D30 
+ 193      78253032 
+ 194 0033 0A00     		.ascii	"\012\000"
+ 195 0035 000000   		.align	2
+ 196              	.LC16:
+ 197 0038 4F54413A 		.ascii	"OTA: size %lu rejected (max %lu)\012\000"
+ 197      2073697A 
+ 197      6520256C 
+ 197      75207265 
+ 197      6A656374 
+ 198 005a 0000     		.align	2
+ 199              	.LC20:
+ 200 005c 4F54413A 		.ascii	"OTA: resume at blk %u remaining=%lu\012\000"
+ 200      20726573 
+ 200      756D6520 
+ 200      61742062 
+ 200      6C6B2025 
+ 201 0081 000000   		.align	2
+ 202              	.LC24:
+ 203 0084 4F54413A 		.ascii	"OTA: req blk %u  parts=%u size=%lu\012\000"
+ 203      20726571 
+ 203      20626C6B 
+ 203      20257520 
+ 203      20706172 
+ 204              		.align	2
+ 205              	.LC26:
+ 206 00a8 41564149 		.ascii	"AVAIL: CMD data arg=0x%02X\012\000"
+ 206      4C3A2043 
+ 206      4D442064 
+ 206      61746120 
+ 206      6172673D 
+ 207              		.align	2
+ 208              	.LC28:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 5
+
+
+ 209 00c4 41564149 		.ascii	"AVAIL: unknown dataType 0x%02X\012\000"
+ 209      4C3A2075 
+ 209      6E6B6E6F 
+ 209      776E2064 
+ 209      61746154 
+ 210              		.align	2
+ 211              	.LC30:
+ 212 00e4 41564149 		.ascii	"AVAIL: image too big! %lu > %lu\012\000"
+ 212      4C3A2069 
+ 212      6D616765 
+ 212      20746F6F 
+ 212      20626967 
+ 213 0105 000000   		.align	2
+ 214              	.LC32:
+ 215 0108 41564149 		.ascii	"AVAIL: already shown\012\000"
+ 215      4C3A2061 
+ 215      6C726561 
+ 215      64792073 
+ 215      686F776E 
+ 216 011e 0000     		.align	2
+ 217              	.LC37:
+ 218 0120 41564149 		.ascii	"AVAIL: cached in slot %u, drawing\012\000"
+ 218      4C3A2063 
+ 218      61636865 
+ 218      6420696E 
+ 218      20736C6F 
+ 219 0143 00       		.align	2
+ 220              	.LC41:
+ 221 0144 41564149 		.ascii	"AVAIL: new image \342\206\222 slot %u addr=0x%lX si"
+ 221      4C3A206E 
+ 221      65772069 
+ 221      6D616765 
+ 221      20E28692 
+ 222 016e 7A653D30 		.ascii	"ze=0x%lX\012\000"
+ 222      78256C58 
+ 222      0A00
+ 223              		.align	2
+ 224              	.LC43:
+ 225 0178 41564149 		.ascii	"AVAIL: erase done, starting block 0\012\000"
+ 225      4C3A2065 
+ 225      72617365 
+ 225      20646F6E 
+ 225      652C2073 
+ 226 019d 000000   		.align	2
+ 227              	.LC46:
+ 228 01a0 41564149 		.ascii	"AVAIL: req blk 0  parts=%u reqSize=%u\012\000"
+ 228      4C3A2072 
+ 228      65712062 
+ 228      6C6B2030 
+ 228      20207061 
+ 229 01c7 00       		.align	2
+ 230              	.LC48:
+ 231 01c8 4552523A 		.ascii	"ERR: EEPROM erase failed for slot %u\012\000"
+ 231      20454550 
+ 231      524F4D20 
+ 231      65726173 
+ 231      65206661 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 6
+
+
+ 232              		.section	.text.processAvailDataInfoBLE,"ax",%progbits
+ 233              		.align	1
+ 234              		.global	processAvailDataInfoBLE
+ 235              		.syntax unified
+ 236              		.code	16
+ 237              		.thumb_func
+ 239              	processAvailDataInfoBLE:
+ 240              		@ args = 0, pretend = 0, frame = 8
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 243 0002 D646     		mov	lr, r10
+ 244 0004 4F46     		mov	r7, r9
+ 245 0006 4646     		mov	r6, r8
+ 246 0008 C0B5     		push	{r6, r7, lr}
+ 247 000a 84B0     		sub	sp, sp, #16
+ 248 000c 0400     		movs	r4, r0
+ 249 000e D749     		ldr	r1, .L62
+ 250 0010 6523     		movs	r3, #101
+ 251 0012 CA5C     		ldrb	r2, [r1, r3]
+ 252 0014 0133     		adds	r3, r3, #1
+ 253 0016 CB5C     		ldrb	r3, [r1, r3]
+ 254 0018 1B02     		lsls	r3, r3, #8
+ 255 001a 1A43     		orrs	r2, r3
+ 256 001c 6723     		movs	r3, #103
+ 257 001e CD5C     		ldrb	r5, [r1, r3]
+ 258 0020 2D04     		lsls	r5, r5, #16
+ 259 0022 1543     		orrs	r5, r2
+ 260 0024 0133     		adds	r3, r3, #1
+ 261 0026 CB5C     		ldrb	r3, [r1, r3]
+ 262 0028 1B06     		lsls	r3, r3, #24
+ 263 002a 1D43     		orrs	r5, r3
+ 264 002c 00D1     		bne	.LCB207
+ 265 002e 02E2     		b	.L22	@long jump
+ 266              	.LCB207:
+ 267 0030 2900     		movs	r1, r5
+ 268 0032 8A20     		movs	r0, #138
+ 269 0034 C002     		lsls	r0, r0, #11
+ 270 0036 FFF7FEFF 		bl	__aeabi_uidiv
+ 271 003a C0B2     		uxtb	r0, r0
+ 272 003c 0328     		cmp	r0, #3
+ 273 003e 20D9     		bls	.L23
+ 274 0040 CB4B     		ldr	r3, .L62+4
+ 275 0042 0322     		movs	r2, #3
+ 276 0044 1A70     		strb	r2, [r3]
+ 277              	.L24:
+ 278 0046 CA4B     		ldr	r3, .L62+4
+ 279 0048 1B78     		ldrb	r3, [r3]
+ 280 004a 627A     		ldrb	r2, [r4, #9]
+ 281 004c A17A     		ldrb	r1, [r4, #10]
+ 282 004e 0902     		lsls	r1, r1, #8
+ 283 0050 1143     		orrs	r1, r2
+ 284 0052 E07A     		ldrb	r0, [r4, #11]
+ 285 0054 0004     		lsls	r0, r0, #16
+ 286 0056 0143     		orrs	r1, r0
+ 287 0058 227B     		ldrb	r2, [r4, #12]
+ 288 005a 1206     		lsls	r2, r2, #24
+ 289 005c 0A43     		orrs	r2, r1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 7
+
+
+ 290 005e 617B     		ldrb	r1, [r4, #13]
+ 291 0060 0095     		str	r5, [sp]
+ 292 0062 C448     		ldr	r0, .L62+8
+ 293 0064 FFF7FEFF 		bl	uart_printf
+ 294 0068 617B     		ldrb	r1, [r4, #13]
+ 295 006a 3029     		cmp	r1, #48
+ 296 006c 10D8     		bhi	.L25
+ 297 006e 0129     		cmp	r1, #1
+ 298 0070 00D8     		bhi	.LCB241
+ 299 0072 83E0     		b	.L26	@long jump
+ 300              	.LCB241:
+ 301 0074 3029     		cmp	r1, #48
+ 302 0076 00D9     		bls	.LCB243
+ 303 0078 80E0     		b	.L26	@long jump
+ 304              	.LCB243:
+ 305 007a 8B00     		lsls	r3, r1, #2
+ 306 007c BE4A     		ldr	r2, .L62+12
+ 307 007e D358     		ldr	r3, [r2, r3]
+ 308 0080 9F46     		mov	pc, r3
+ 309              		.section	.rodata.processAvailDataInfoBLE,"a",%progbits
+ 310              		.align	2
+ 311              	.L28:
+ 312 0000 7C010000 		.word	.L26
+ 313 0004 7C010000 		.word	.L26
+ 314 0008 8E010000 		.word	.L27
+ 315 000c AC000000 		.word	.L29
+ 316 0010 7C010000 		.word	.L26
+ 317 0014 7C010000 		.word	.L26
+ 318 0018 7C010000 		.word	.L26
+ 319 001c 7C010000 		.word	.L26
+ 320 0020 7C010000 		.word	.L26
+ 321 0024 7C010000 		.word	.L26
+ 322 0028 7C010000 		.word	.L26
+ 323 002c 7C010000 		.word	.L26
+ 324 0030 7C010000 		.word	.L26
+ 325 0034 7C010000 		.word	.L26
+ 326 0038 7C010000 		.word	.L26
+ 327 003c 7C010000 		.word	.L26
+ 328 0040 8E010000 		.word	.L27
+ 329 0044 7C010000 		.word	.L26
+ 330 0048 7C010000 		.word	.L26
+ 331 004c 7C010000 		.word	.L26
+ 332 0050 7C010000 		.word	.L26
+ 333 0054 7C010000 		.word	.L26
+ 334 0058 7C010000 		.word	.L26
+ 335 005c 7C010000 		.word	.L26
+ 336 0060 7C010000 		.word	.L26
+ 337 0064 7C010000 		.word	.L26
+ 338 0068 7C010000 		.word	.L26
+ 339 006c 7C010000 		.word	.L26
+ 340 0070 7C010000 		.word	.L26
+ 341 0074 7C010000 		.word	.L26
+ 342 0078 7C010000 		.word	.L26
+ 343 007c 7C010000 		.word	.L26
+ 344 0080 8E010000 		.word	.L27
+ 345 0084 8E010000 		.word	.L27
+ 346 0088 7C010000 		.word	.L26
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 8
+
+
+ 347 008c 7C010000 		.word	.L26
+ 348 0090 7C010000 		.word	.L26
+ 349 0094 7C010000 		.word	.L26
+ 350 0098 7C010000 		.word	.L26
+ 351 009c 7C010000 		.word	.L26
+ 352 00a0 7C010000 		.word	.L26
+ 353 00a4 7C010000 		.word	.L26
+ 354 00a8 7C010000 		.word	.L26
+ 355 00ac 7C010000 		.word	.L26
+ 356 00b0 7C010000 		.word	.L26
+ 357 00b4 7C010000 		.word	.L26
+ 358 00b8 7C010000 		.word	.L26
+ 359 00bc 7C010000 		.word	.L26
+ 360 00c0 8E010000 		.word	.L27
+ 361              		.section	.text.processAvailDataInfoBLE
+ 362              	.L23:
+ 363 0082 BB4B     		ldr	r3, .L62+4
+ 364 0084 1870     		strb	r0, [r3]
+ 365 0086 0028     		cmp	r0, #0
+ 366 0088 DDD1     		bne	.L24
+ 367 008a 0122     		movs	r2, #1
+ 368 008c 1A70     		strb	r2, [r3]
+ 369 008e DAE7     		b	.L24
+ 370              	.L25:
+ 371 0090 AF29     		cmp	r1, #175
+ 372 0092 00D0     		beq	.LCB268
+ 373 0094 72E0     		b	.L26	@long jump
+ 374              	.LCB268:
+ 375 0096 A17B     		ldrb	r1, [r4, #14]
+ 376 0098 B848     		ldr	r0, .L62+16
+ 377 009a FFF7FEFF 		bl	uart_printf
+ 378              	.L53:
+ 379 009e 0120     		movs	r0, #1
+ 380 00a0 04B0     		add	sp, sp, #16
+ 381              		@ sp needed
+ 382 00a2 E0BC     		pop	{r5, r6, r7}
+ 383 00a4 BA46     		mov	r10, r7
+ 384 00a6 B146     		mov	r9, r6
+ 385 00a8 A846     		mov	r8, r5
+ 386 00aa F0BD     		pop	{r4, r5, r6, r7, pc}
+ 387              	.L29:
+ 388 00ac 617A     		ldrb	r1, [r4, #9]
+ 389 00ae A37A     		ldrb	r3, [r4, #10]
+ 390 00b0 1B02     		lsls	r3, r3, #8
+ 391 00b2 0B43     		orrs	r3, r1
+ 392 00b4 E27A     		ldrb	r2, [r4, #11]
+ 393 00b6 1204     		lsls	r2, r2, #16
+ 394 00b8 1343     		orrs	r3, r2
+ 395 00ba 217B     		ldrb	r1, [r4, #12]
+ 396 00bc 0906     		lsls	r1, r1, #24
+ 397 00be 1943     		orrs	r1, r3
+ 398 00c0 4A1E     		subs	r2, r1, #1
+ 399 00c2 9423     		movs	r3, #148
+ 400 00c4 9B02     		lsls	r3, r3, #10
+ 401 00c6 9A42     		cmp	r2, r3
+ 402 00c8 46D2     		bcs	.L54
+ 403 00ca AD4A     		ldr	r2, .L62+20
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 9
+
+
+ 404 00cc 9368     		ldr	r3, [r2, #8]
+ 405 00ce 1B0A     		lsrs	r3, r3, #8
+ 406 00d0 157B     		ldrb	r5, [r2, #12]
+ 407 00d2 2D06     		lsls	r5, r5, #24
+ 408 00d4 1D43     		orrs	r5, r3
+ 409 00d6 07D0     		beq	.L33
+ 410 00d8 1100     		movs	r1, r2
+ 411 00da 601C     		adds	r0, r4, #1
+ 412 00dc 0822     		movs	r2, #8
+ 413 00de 0131     		adds	r1, r1, #1
+ 414 00e0 FFF7FEFF 		bl	memcmp
+ 415 00e4 0028     		cmp	r0, #0
+ 416 00e6 42D0     		beq	.L55
+ 417              	.L33:
+ 418 00e8 FFF7FEFF 		bl	ota_erase_ext
+ 419 00ec A54D     		ldr	r5, .L62+24
+ 420 00ee 0023     		movs	r3, #0
+ 421 00f0 6B72     		strb	r3, [r5, #9]
+ 422 00f2 681C     		adds	r0, r5, #1
+ 423 00f4 611C     		adds	r1, r4, #1
+ 424 00f6 0822     		movs	r2, #8
+ 425 00f8 FFF7FEFF 		bl	memcpy
+ 426 00fc 637B     		ldrb	r3, [r4, #13]
+ 427 00fe AB72     		strb	r3, [r5, #10]
+ 428 0100 1122     		movs	r2, #17
+ 429 0102 2100     		movs	r1, r4
+ 430 0104 9E48     		ldr	r0, .L62+20
+ 431 0106 FFF7FEFF 		bl	memcpy
+ 432 010a 637A     		ldrb	r3, [r4, #9]
+ 433 010c A17A     		ldrb	r1, [r4, #10]
+ 434 010e 0902     		lsls	r1, r1, #8
+ 435 0110 1943     		orrs	r1, r3
+ 436 0112 E27A     		ldrb	r2, [r4, #11]
+ 437 0114 1204     		lsls	r2, r2, #16
+ 438 0116 1143     		orrs	r1, r2
+ 439 0118 237B     		ldrb	r3, [r4, #12]
+ 440 011a 1B06     		lsls	r3, r3, #24
+ 441 011c 0B43     		orrs	r3, r1
+ 442 011e 9A4A     		ldr	r2, .L62+28
+ 443 0120 1360     		str	r3, [r2]
+ 444              	.L34:
+ 445 0122 984C     		ldr	r4, .L62+24
+ 446 0124 2000     		movs	r0, r4
+ 447 0126 0B30     		adds	r0, r0, #11
+ 448 0128 0622     		movs	r2, #6
+ 449 012a FF21     		movs	r1, #255
+ 450 012c FFF7FEFF 		bl	memset
+ 451 0130 FFF7FEFF 		bl	recalcParts
+ 452 0134 924B     		ldr	r3, .L62+20
+ 453 0136 9A68     		ldr	r2, [r3, #8]
+ 454 0138 120A     		lsrs	r2, r2, #8
+ 455 013a 1B7B     		ldrb	r3, [r3, #12]
+ 456 013c 1B06     		lsls	r3, r3, #24
+ 457 013e 1343     		orrs	r3, r2
+ 458 0140 924A     		ldr	r2, .L62+32
+ 459 0142 1278     		ldrb	r2, [r2]
+ 460 0144 617A     		ldrb	r1, [r4, #9]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 10
+
+
+ 461 0146 9248     		ldr	r0, .L62+36
+ 462 0148 FFF7FEFF 		bl	uart_printf
+ 463 014c 1122     		movs	r2, #17
+ 464 014e 2100     		movs	r1, r4
+ 465 0150 C620     		movs	r0, #198
+ 466 0152 FFF7FEFF 		bl	ble_send_notify
+ 467 0156 A2E7     		b	.L53
+ 468              	.L54:
+ 469 0158 9422     		movs	r2, #148
+ 470 015a 9202     		lsls	r2, r2, #10
+ 471 015c 8D48     		ldr	r0, .L62+40
+ 472 015e FFF7FEFF 		bl	uart_printf
+ 473 0162 0022     		movs	r2, #0
+ 474 0164 0021     		movs	r1, #0
+ 475 0166 8C48     		ldr	r0, .L62+44
+ 476 0168 FFF7FEFF 		bl	ble_send_notify
+ 477 016c 97E7     		b	.L53
+ 478              	.L55:
+ 479 016e 854B     		ldr	r3, .L62+24
+ 480 0170 597A     		ldrb	r1, [r3, #9]
+ 481 0172 2A00     		movs	r2, r5
+ 482 0174 8948     		ldr	r0, .L62+48
+ 483 0176 FFF7FEFF 		bl	uart_printf
+ 484 017a D2E7     		b	.L34
+ 485              	.L26:
+ 486 017c 8848     		ldr	r0, .L62+52
+ 487 017e FFF7FEFF 		bl	uart_printf
+ 488 0182 0022     		movs	r2, #0
+ 489 0184 0021     		movs	r1, #0
+ 490 0186 8448     		ldr	r0, .L62+44
+ 491 0188 FFF7FEFF 		bl	ble_send_notify
+ 492 018c 87E7     		b	.L53
+ 493              	.L27:
+ 494 018e 617A     		ldrb	r1, [r4, #9]
+ 495 0190 A27A     		ldrb	r2, [r4, #10]
+ 496 0192 1202     		lsls	r2, r2, #8
+ 497 0194 0A43     		orrs	r2, r1
+ 498 0196 E37A     		ldrb	r3, [r4, #11]
+ 499 0198 1B04     		lsls	r3, r3, #16
+ 500 019a 1A43     		orrs	r2, r3
+ 501 019c 217B     		ldrb	r1, [r4, #12]
+ 502 019e 0906     		lsls	r1, r1, #24
+ 503 01a0 1143     		orrs	r1, r2
+ 504 01a2 1531     		adds	r1, r1, #21
+ 505 01a4 7148     		ldr	r0, .L62
+ 506 01a6 6523     		movs	r3, #101
+ 507 01a8 C25C     		ldrb	r2, [r0, r3]
+ 508 01aa 0133     		adds	r3, r3, #1
+ 509 01ac C35C     		ldrb	r3, [r0, r3]
+ 510 01ae 1B02     		lsls	r3, r3, #8
+ 511 01b0 1A43     		orrs	r2, r3
+ 512 01b2 6723     		movs	r3, #103
+ 513 01b4 C55C     		ldrb	r5, [r0, r3]
+ 514 01b6 2D04     		lsls	r5, r5, #16
+ 515 01b8 1543     		orrs	r5, r2
+ 516 01ba 0133     		adds	r3, r3, #1
+ 517 01bc C35C     		ldrb	r3, [r0, r3]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 11
+
+
+ 518 01be 1B06     		lsls	r3, r3, #24
+ 519 01c0 1D43     		orrs	r5, r3
+ 520 01c2 22D0     		beq	.L56
+ 521              	.L35:
+ 522 01c4 A942     		cmp	r1, r5
+ 523 01c6 23D2     		bcs	.L57
+ 524 01c8 6D4B     		ldr	r3, .L62+20
+ 525 01ca 9A68     		ldr	r2, [r3, #8]
+ 526 01cc 120A     		lsrs	r2, r2, #8
+ 527 01ce 1B7B     		ldrb	r3, [r3, #12]
+ 528 01d0 1B06     		lsls	r3, r3, #24
+ 529 01d2 1343     		orrs	r3, r2
+ 530 01d4 07D1     		bne	.L37
+ 531 01d6 6A49     		ldr	r1, .L62+20
+ 532 01d8 601C     		adds	r0, r4, #1
+ 533 01da 0822     		movs	r2, #8
+ 534 01dc 0131     		adds	r1, r1, #1
+ 535 01de FFF7FEFF 		bl	memcmp
+ 536 01e2 0028     		cmp	r0, #0
+ 537 01e4 1ED0     		beq	.L58
+ 538              	.L37:
+ 539 01e6 631C     		adds	r3, r4, #1
+ 540 01e8 9846     		mov	r8, r3
+ 541 01ea 6E4B     		ldr	r3, .L62+56
+ 542 01ec 9C46     		mov	ip, r3
+ 543 01ee 6544     		add	r5, r5, ip
+ 544 01f0 0395     		str	r5, [sp, #12]
+ 545 01f2 FFF7FEFF 		bl	eepromPowerUp
+ 546 01f6 5E4B     		ldr	r3, .L62+4
+ 547 01f8 1B78     		ldrb	r3, [r3]
+ 548 01fa 002B     		cmp	r3, #0
+ 549 01fc 58D0     		beq	.L38
+ 550 01fe 0025     		movs	r5, #0
+ 551 0200 694E     		ldr	r6, .L62+60
+ 552 0202 3700     		movs	r7, r6
+ 553 0204 0837     		adds	r7, r7, #8
+ 554 0206 B146     		mov	r9, r6
+ 555 0208 1BE0     		b	.L42
+ 556              	.L56:
+ 557 020a B825     		movs	r5, #184
+ 558 020c 6D02     		lsls	r5, r5, #9
+ 559 020e D9E7     		b	.L35
+ 560              	.L57:
+ 561 0210 2A00     		movs	r2, r5
+ 562 0212 6648     		ldr	r0, .L62+64
+ 563 0214 FFF7FEFF 		bl	uart_printf
+ 564 0218 0022     		movs	r2, #0
+ 565 021a 0021     		movs	r1, #0
+ 566 021c 5E48     		ldr	r0, .L62+44
+ 567 021e FFF7FEFF 		bl	ble_send_notify
+ 568 0222 3CE7     		b	.L53
+ 569              	.L58:
+ 570 0224 6248     		ldr	r0, .L62+68
+ 571 0226 FFF7FEFF 		bl	uart_printf
+ 572 022a 0022     		movs	r2, #0
+ 573 022c 0021     		movs	r1, #0
+ 574 022e C820     		movs	r0, #200
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 12
+
+
+ 575 0230 FFF7FEFF 		bl	ble_send_notify
+ 576 0234 33E7     		b	.L53
+ 577              	.L39:
+ 578 0236 0135     		adds	r5, r5, #1
+ 579 0238 EDB2     		uxtb	r5, r5
+ 580 023a 4D4B     		ldr	r3, .L62+4
+ 581 023c 1B78     		ldrb	r3, [r3]
+ 582 023e AB42     		cmp	r3, r5
+ 583 0240 36D9     		bls	.L38
+ 584              	.L42:
+ 585 0242 2800     		movs	r0, r5
+ 586 0244 FFF7FEFF 		bl	getAddressForSlot
+ 587 0248 1522     		movs	r2, #21
+ 588 024a 3100     		movs	r1, r6
+ 589 024c FFF7FEFF 		bl	eepromRead
+ 590 0250 0422     		movs	r2, #4
+ 591 0252 03A9     		add	r1, sp, #12
+ 592 0254 3800     		movs	r0, r7
+ 593 0256 FFF7FEFF 		bl	memcmp
+ 594 025a 0028     		cmp	r0, #0
+ 595 025c EBD1     		bne	.L39
+ 596 025e 0822     		movs	r2, #8
+ 597 0260 4146     		mov	r1, r8
+ 598 0262 4846     		mov	r0, r9
+ 599 0264 FFF7FEFF 		bl	memcmp
+ 600 0268 0028     		cmp	r0, #0
+ 601 026a E4D1     		bne	.L39
+ 602 026c FFF7FEFF 		bl	eepromPowerDown
+ 603 0270 504B     		ldr	r3, .L62+72
+ 604 0272 1D70     		strb	r5, [r3]
+ 605 0274 FF2D     		cmp	r5, #255
+ 606 0276 1DD0     		beq	.L41
+ 607 0278 2900     		movs	r1, r5
+ 608 027a 4F48     		ldr	r0, .L62+76
+ 609 027c FFF7FEFF 		bl	uart_printf
+ 610 0280 0022     		movs	r2, #0
+ 611 0282 0021     		movs	r1, #0
+ 612 0284 C720     		movs	r0, #199
+ 613 0286 FFF7FEFF 		bl	ble_send_notify
+ 614 028a 3D4D     		ldr	r5, .L62+20
+ 615 028c 1122     		movs	r2, #17
+ 616 028e 2100     		movs	r1, r4
+ 617 0290 2800     		movs	r0, r5
+ 618 0292 FFF7FEFF 		bl	memcpy
+ 619 0296 0022     		movs	r2, #0
+ 620 0298 6A72     		strb	r2, [r5, #9]
+ 621 029a AA72     		strb	r2, [r5, #10]
+ 622 029c EA72     		strb	r2, [r5, #11]
+ 623 029e 2A73     		strb	r2, [r5, #12]
+ 624 02a0 A27B     		ldrb	r2, [r4, #14]
+ 625 02a2 464B     		ldr	r3, .L62+80
+ 626 02a4 1A70     		strb	r2, [r3]
+ 627 02a6 434B     		ldr	r3, .L62+72
+ 628 02a8 1878     		ldrb	r0, [r3]
+ 629 02aa FFF7FEFF 		bl	drawImageFromEeprom
+ 630 02ae F6E6     		b	.L53
+ 631              	.L38:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 13
+
+
+ 632 02b0 FFF7FEFF 		bl	eepromPowerDown
+ 633              	.L41:
+ 634 02b4 424A     		ldr	r2, .L62+84
+ 635 02b6 1378     		ldrb	r3, [r2]
+ 636 02b8 0133     		adds	r3, r3, #1
+ 637 02ba DBB2     		uxtb	r3, r3
+ 638 02bc 1370     		strb	r3, [r2]
+ 639 02be 2C4A     		ldr	r2, .L62+4
+ 640 02c0 1278     		ldrb	r2, [r2]
+ 641 02c2 9A42     		cmp	r2, r3
+ 642 02c4 02D8     		bhi	.L43
+ 643 02c6 3E4B     		ldr	r3, .L62+84
+ 644 02c8 0022     		movs	r2, #0
+ 645 02ca 1A70     		strb	r2, [r3]
+ 646              	.L43:
+ 647 02cc 3C4B     		ldr	r3, .L62+84
+ 648 02ce 1E78     		ldrb	r6, [r3]
+ 649 02d0 384B     		ldr	r3, .L62+72
+ 650 02d2 1E70     		strb	r6, [r3]
+ 651 02d4 3000     		movs	r0, r6
+ 652 02d6 FFF7FEFF 		bl	getAddressForSlot
+ 653 02da 0200     		movs	r2, r0
+ 654 02dc 2348     		ldr	r0, .L62
+ 655 02de 6523     		movs	r3, #101
+ 656 02e0 C35C     		ldrb	r3, [r0, r3]
+ 657 02e2 6621     		movs	r1, #102
+ 658 02e4 455C     		ldrb	r5, [r0, r1]
+ 659 02e6 2D02     		lsls	r5, r5, #8
+ 660 02e8 1D43     		orrs	r5, r3
+ 661 02ea 6723     		movs	r3, #103
+ 662 02ec C15C     		ldrb	r1, [r0, r3]
+ 663 02ee 0904     		lsls	r1, r1, #16
+ 664 02f0 0D43     		orrs	r5, r1
+ 665 02f2 0133     		adds	r3, r3, #1
+ 666 02f4 C35C     		ldrb	r3, [r0, r3]
+ 667 02f6 1B06     		lsls	r3, r3, #24
+ 668 02f8 2B43     		orrs	r3, r5
+ 669 02fa 67D0     		beq	.L59
+ 670              	.L44:
+ 671 02fc 3100     		movs	r1, r6
+ 672 02fe 3148     		ldr	r0, .L62+88
+ 673 0300 FFF7FEFF 		bl	uart_printf
+ 674 0304 A27B     		ldrb	r2, [r4, #14]
+ 675 0306 2D4B     		ldr	r3, .L62+80
+ 676 0308 1A70     		strb	r2, [r3]
+ 677 030a 0325     		movs	r5, #3
+ 678 030c 294B     		ldr	r3, .L62+72
+ 679 030e 9946     		mov	r9, r3
+ 680 0310 164E     		ldr	r6, .L62
+ 681 0312 6527     		movs	r7, #101
+ 682              	.L47:
+ 683 0314 FFF7FEFF 		bl	eepromPowerUp
+ 684 0318 4B46     		mov	r3, r9
+ 685 031a 1878     		ldrb	r0, [r3]
+ 686 031c FFF7FEFF 		bl	getAddressForSlot
+ 687 0320 F15D     		ldrb	r1, [r6, r7]
+ 688 0322 6623     		movs	r3, #102
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 14
+
+
+ 689 0324 F35C     		ldrb	r3, [r6, r3]
+ 690 0326 1B02     		lsls	r3, r3, #8
+ 691 0328 0B43     		orrs	r3, r1
+ 692 032a 6722     		movs	r2, #103
+ 693 032c B25C     		ldrb	r2, [r6, r2]
+ 694 032e 1204     		lsls	r2, r2, #16
+ 695 0330 1343     		orrs	r3, r2
+ 696 0332 6822     		movs	r2, #104
+ 697 0334 B15C     		ldrb	r1, [r6, r2]
+ 698 0336 0906     		lsls	r1, r1, #24
+ 699 0338 1943     		orrs	r1, r3
+ 700 033a 4AD0     		beq	.L60
+ 701              	.L45:
+ 702 033c FFF7FEFF 		bl	eepromErase
+ 703 0340 8246     		mov	r10, r0
+ 704 0342 FFF7FEFF 		bl	eepromPowerDown
+ 705 0346 5346     		mov	r3, r10
+ 706 0348 002B     		cmp	r3, #0
+ 707 034a 45D1     		bne	.L61
+ 708 034c 013D     		subs	r5, r5, #1
+ 709 034e EDB2     		uxtb	r5, r5
+ 710 0350 002D     		cmp	r5, #0
+ 711 0352 DFD1     		bne	.L47
+ 712 0354 174B     		ldr	r3, .L62+72
+ 713 0356 1978     		ldrb	r1, [r3]
+ 714 0358 1B48     		ldr	r0, .L62+92
+ 715 035a FFF7FEFF 		bl	uart_printf
+ 716 035e 0022     		movs	r2, #0
+ 717 0360 0021     		movs	r1, #0
+ 718 0362 0D48     		ldr	r0, .L62+44
+ 719 0364 FFF7FEFF 		bl	ble_send_notify
+ 720 0368 99E6     		b	.L53
+ 721              	.L63:
+ 722 036a C046     		.align	2
+ 723              	.L62:
+ 724 036c 00000000 		.word	settings
+ 725 0370 00000000 		.word	.LANCHOR4
+ 726 0374 00000000 		.word	.LC13
+ 727 0378 00000000 		.word	.L28
+ 728 037c A8000000 		.word	.LC26
+ 729 0380 00000000 		.word	.LANCHOR0
+ 730 0384 00000000 		.word	.LANCHOR5
+ 731 0388 00000000 		.word	.LANCHOR6
+ 732 038c 00000000 		.word	.LANCHOR2
+ 733 0390 84000000 		.word	.LC24
+ 734 0394 38000000 		.word	.LC16
+ 735 0398 FFFF0000 		.word	65535
+ 736 039c 5C000000 		.word	.LC20
+ 737 03a0 C4000000 		.word	.LC28
+ 738 03a4 21474D49 		.word	1229801249
+ 739 03a8 00000000 		.word	blockXferBuffer
+ 740 03ac E4000000 		.word	.LC30
+ 741 03b0 08010000 		.word	.LC32
+ 742 03b4 00000000 		.word	.LANCHOR7
+ 743 03b8 20010000 		.word	.LC37
+ 744 03bc 00000000 		.word	.LANCHOR3
+ 745 03c0 00000000 		.word	.LANCHOR8
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 15
+
+
+ 746 03c4 44010000 		.word	.LC41
+ 747 03c8 C8010000 		.word	.LC48
+ 748              	.L59:
+ 749 03cc B823     		movs	r3, #184
+ 750 03ce 5B02     		lsls	r3, r3, #9
+ 751 03d0 94E7     		b	.L44
+ 752              	.L60:
+ 753 03d2 B821     		movs	r1, #184
+ 754 03d4 4902     		lsls	r1, r1, #9
+ 755 03d6 B1E7     		b	.L45
+ 756              	.L61:
+ 757 03d8 1A48     		ldr	r0, .L64
+ 758 03da FFF7FEFF 		bl	uart_printf
+ 759 03de 1A4D     		ldr	r5, .L64+4
+ 760 03e0 0023     		movs	r3, #0
+ 761 03e2 6B72     		strb	r3, [r5, #9]
+ 762 03e4 681C     		adds	r0, r5, #1
+ 763 03e6 0822     		movs	r2, #8
+ 764 03e8 4146     		mov	r1, r8
+ 765 03ea FFF7FEFF 		bl	memcpy
+ 766 03ee 637B     		ldrb	r3, [r4, #13]
+ 767 03f0 AB72     		strb	r3, [r5, #10]
+ 768 03f2 164E     		ldr	r6, .L64+8
+ 769 03f4 1122     		movs	r2, #17
+ 770 03f6 2100     		movs	r1, r4
+ 771 03f8 3000     		movs	r0, r6
+ 772 03fa FFF7FEFF 		bl	memcpy
+ 773 03fe B368     		ldr	r3, [r6, #8]
+ 774 0400 1A0A     		lsrs	r2, r3, #8
+ 775 0402 337B     		ldrb	r3, [r6, #12]
+ 776 0404 1B06     		lsls	r3, r3, #24
+ 777 0406 1343     		orrs	r3, r2
+ 778 0408 114A     		ldr	r2, .L64+12
+ 779 040a 1360     		str	r3, [r2]
+ 780 040c 2800     		movs	r0, r5
+ 781 040e 0B30     		adds	r0, r0, #11
+ 782 0410 0622     		movs	r2, #6
+ 783 0412 FF21     		movs	r1, #255
+ 784 0414 FFF7FEFF 		bl	memset
+ 785 0418 FFF7FEFF 		bl	recalcParts
+ 786 041c 0D4B     		ldr	r3, .L64+16
+ 787 041e 1A88     		ldrh	r2, [r3]
+ 788 0420 0D4B     		ldr	r3, .L64+20
+ 789 0422 1978     		ldrb	r1, [r3]
+ 790 0424 0D48     		ldr	r0, .L64+24
+ 791 0426 FFF7FEFF 		bl	uart_printf
+ 792 042a 1122     		movs	r2, #17
+ 793 042c 2900     		movs	r1, r5
+ 794 042e C620     		movs	r0, #198
+ 795 0430 FFF7FEFF 		bl	ble_send_notify
+ 796 0434 33E6     		b	.L53
+ 797              	.L22:
+ 798 0436 0A4B     		ldr	r3, .L64+28
+ 799 0438 0322     		movs	r2, #3
+ 800 043a 1A70     		strb	r2, [r3]
+ 801 043c B825     		movs	r5, #184
+ 802 043e 6D02     		lsls	r5, r5, #9
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 16
+
+
+ 803 0440 01E6     		b	.L24
+ 804              	.L65:
+ 805 0442 C046     		.align	2
+ 806              	.L64:
+ 807 0444 78010000 		.word	.LC43
+ 808 0448 00000000 		.word	.LANCHOR5
+ 809 044c 00000000 		.word	.LANCHOR0
+ 810 0450 00000000 		.word	.LANCHOR6
+ 811 0454 00000000 		.word	.LANCHOR1
+ 812 0458 00000000 		.word	.LANCHOR2
+ 813 045c A0010000 		.word	.LC46
+ 814 0460 00000000 		.word	.LANCHOR4
+ 816              		.section	.rodata.zb_ble_hci_cmd_handler.str1.4,"aMS",%progbits,1
+ 817              		.align	2
+ 818              	.LC53:
+ 819 0000 202E2E2E 		.ascii	" ...\000"
+ 819      00
+ 820 0005 000000   		.align	2
+ 821              	.LC55:
+ 822 0008 00       		.ascii	"\000"
+ 823 0009 000000   		.align	2
+ 824              	.LC57:
+ 825 000c 4F4B00   		.ascii	"OK\000"
+ 826 000f 00       		.align	2
+ 827              	.LC59:
+ 828 0010 4641494C 		.ascii	"FAIL\000"
+ 828      00
+ 829 0015 000000   		.align	2
+ 830              	.LC61:
+ 831 0018 434D4420 		.ascii	"CMD 0x%04X len=%u\012\000"
+ 831      30782530 
+ 831      3458206C 
+ 831      656E3D25 
+ 831      750A00
+ 832 002b 00       		.align	2
+ 833              	.LC63:
+ 834 002c 20253032 		.ascii	" %02X\000"
+ 834      5800
+ 835 0032 0000     		.align	2
+ 836              	.LC65:
+ 837 0034 25730A00 		.ascii	"%s\012\000"
+ 838              		.align	2
+ 839              	.LC68:
+ 840 0038 434D4420 		.ascii	"CMD unknown 0x%04X\012\000"
+ 840      756E6B6E 
+ 840      6F776E20 
+ 840      30782530 
+ 840      34580A00 
+ 841              		.align	2
+ 842              	.LC70:
+ 843 004c 434D4420 		.ascii	"CMD FAST\012\000"
+ 843      46415354 
+ 843      0A00
+ 844 0056 0000     		.align	2
+ 845              	.LC72:
+ 846 0058 434D4420 		.ascii	"CMD SLOW\012\000"
+ 846      534C4F57 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 17
+
+
+ 846      0A00
+ 847 0062 0000     		.align	2
+ 848              	.LC74:
+ 849 0064 434D4420 		.ascii	"CMD LED arg=0x%02X\012\000"
+ 849      4C454420 
+ 849      6172673D 
+ 849      30782530 
+ 849      32580A00 
+ 850              		.align	2
+ 851              	.LC76:
+ 852 0078 434D4420 		.ascii	"CMD GET_INFOS\012\000"
+ 852      4745545F 
+ 852      494E464F 
+ 852      530A00
+ 853 0087 00       		.align	2
+ 854              	.LC79:
+ 855 0088 434D4420 		.ascii	"CMD EDIT_OEM_MAC to %02X:%02X:%02X:%02X:%02X:%02X\012"
+ 855      45444954 
+ 855      5F4F454D 
+ 855      5F4D4143 
+ 855      20746F20 
+ 856 00ba 00       		.ascii	"\000"
+ 857 00bb 00       		.align	2
+ 858              	.LC82:
+ 859 00bc 434D4420 		.ascii	"CMD RESET_TO_DEFAULT\012\000"
+ 859      52455345 
+ 859      545F544F 
+ 859      5F444546 
+ 859      41554C54 
+ 860 00d2 0000     		.align	2
+ 861              	.LC84:
+ 862 00d4 434D4420 		.ascii	"CMD OEPL_ENABLE\012\000"
+ 862      4F45504C 
+ 862      5F454E41 
+ 862      424C450A 
+ 862      00
+ 863 00e5 000000   		.align	2
+ 864              	.LC86:
+ 865 00e8 434D4420 		.ascii	"CMD OEPL_DISABLE\012\000"
+ 865      4F45504C 
+ 865      5F444953 
+ 865      41424C45 
+ 865      0A00
+ 866 00fa 0000     		.align	2
+ 867              	.LC88:
+ 868 00fc 434D4420 		.ascii	"CMD AVAILDATA too short (%u < %u)\012\000"
+ 868      41564149 
+ 868      4C444154 
+ 868      4120746F 
+ 868      6F207368 
+ 869 011f 00       		.align	2
+ 870              	.LC90:
+ 871 0120 434D4420 		.ascii	"CMD BLK_DATA too short (%u < %u)\012\000"
+ 871      424C4B5F 
+ 871      44415441 
+ 871      20746F6F 
+ 871      2073686F 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 18
+
+
+ 872 0142 0000     		.align	2
+ 873              	.LC93:
+ 874 0144 50415254 		.ascii	"PART wrong blkId rx=%u exp=%u\012\000"
+ 874      2077726F 
+ 874      6E672062 
+ 874      6C6B4964 
+ 874      2072783D 
+ 875 0163 00       		.align	2
+ 876              	.LC95:
+ 877 0164 50415254 		.ascii	"PART start out of range: %u\012\000"
+ 877      20737461 
+ 877      7274206F 
+ 877      7574206F 
+ 877      66207261 
+ 878 0181 000000   		.align	2
+ 879              	.LC97:
+ 880 0184 50415254 		.ascii	"PART index too high: %u\012\000"
+ 880      20696E64 
+ 880      65782074 
+ 880      6F6F2068 
+ 880      6967683A 
+ 881 019d 000000   		.align	2
+ 882              	.LC99:
+ 883 01a0 50415254 		.ascii	"PART CRC fail (blk=%u part=%u)\012\000"
+ 883      20435243 
+ 883      20666169 
+ 883      6C202862 
+ 883      6C6B3D25 
+ 884              		.align	2
+ 885              	.LC102:
+ 886 01c0 52582020 		.ascii	"RX  blk=%u [\000"
+ 886      626C6B3D 
+ 886      2575205B 
+ 886      00
+ 887 01cd 000000   		.align	2
+ 888              	.LC105:
+ 889 01d0 0A00     		.ascii	"\012\000"
+ 890 01d2 0000     		.align	2
+ 891              	.LC107:
+ 892 01d4 5D5B00   		.ascii	"][\000"
+ 893 01d7 00       		.align	2
+ 894              	.LC109:
+ 895 01d8 256300   		.ascii	"%c\000"
+ 896 01db 00       		.align	2
+ 897              	.LC111:
+ 898 01dc 5D0A00   		.ascii	"]\012\000"
+ 899 01df 00       		.align	2
+ 900              	.LC113:
+ 901 01e0 4552523A 		.ascii	"ERR: impossible block size %u\012\000"
+ 901      20696D70 
+ 901      6F737369 
+ 901      626C6520 
+ 901      626C6F63 
+ 902 01ff 00       		.align	2
+ 903              	.LC116:
+ 904 0200 424C4B20 		.ascii	"BLK calc chk=0x%04X %s\012\000"
+ 904      63616C63 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 19
+
+
+ 904      2063686B 
+ 904      3D307825 
+ 904      30345820 
+ 905              		.align	2
+ 906              	.LC118:
+ 907 0218 424C4B20 		.ascii	"BLK %u validation FAILED, re-requesting\012\000"
+ 907      25752076 
+ 907      616C6964 
+ 907      6174696F 
+ 907      6E204641 
+ 908 0241 000000   		.align	2
+ 909              	.LC120:
+ 910 0244 4F544120 		.ascii	"OTA blk %u validated, saving to ext flash\012\000"
+ 910      626C6B20 
+ 910      25752076 
+ 910      616C6964 
+ 910      61746564 
+ 911 026f 00       		.align	2
+ 912              	.LC123:
+ 913 0270 424C4B20 		.ascii	"BLK %u validated, saving to img slot %u\012\000"
+ 913      25752076 
+ 913      616C6964 
+ 913      61746564 
+ 913      2C207361 
+ 914 0299 000000   		.align	2
+ 915              	.LC125:
+ 916 029c 53415645 		.ascii	"SAVE blk %d slot %d addr=0x%lX len=%lu\012\000"
+ 916      20626C6B 
+ 916      20256420 
+ 916      736C6F74 
+ 916      20256420 
+ 917              		.align	2
+ 918              	.LC127:
+ 919 02c4 4552523A 		.ascii	"ERR: EEPROM write failed\012\000"
+ 919      20454550 
+ 919      524F4D20 
+ 919      77726974 
+ 919      65206661 
+ 920 02de 0000     		.align	2
+ 921              	.LC132:
+ 922 02e0 4F54413A 		.ascii	"OTA: download done (%lu bytes), posting apply\012\000"
+ 922      20646F77 
+ 922      6E6C6F61 
+ 922      6420646F 
+ 922      6E652028 
+ 923 030f 00       		.align	2
+ 924              	.LC135:
+ 925 0310 48445220 		.ascii	"HDR write slot=%u type=0x%02X size=%lu\012\000"
+ 925      77726974 
+ 925      6520736C 
+ 925      6F743D25 
+ 925      75207479 
+ 926              		.align	2
+ 927              	.LC137:
+ 928 0338 58464552 		.ascii	"XFER complete! drawing from slot %u\012\000"
+ 928      20636F6D 
+ 928      706C6574 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 20
+
+
+ 928      65212064 
+ 928      72617769 
+ 929 035d 000000   		.align	2
+ 930              	.LC139:
+ 931 0360 52455120 		.ascii	"REQ blk %u  parts=%u remaining=%lu\012\000"
+ 931      626C6B20 
+ 931      25752020 
+ 931      70617274 
+ 931      733D2575 
+ 932              		.align	2
+ 933              	.LC141:
+ 934 0384 434D4420 		.ascii	"CMD REBOOT\012\000"
+ 934      5245424F 
+ 934      4F540A00 
+ 935              		.align	2
+ 936              	.LC143:
+ 937 0390 434D4420 		.ascii	"CMD SET_DYNAMIC_TYPE_READ (stub)\012\000"
+ 937      5345545F 
+ 937      44594E41 
+ 937      4D49435F 
+ 937      54595045 
+ 938 03b2 0000     		.align	2
+ 939              	.LC145:
+ 940 03b4 434D4420 		.ascii	"CMD SET_DYNAMIC_TYPE_TEST (stub)\012\000"
+ 940      5345545F 
+ 940      44594E41 
+ 940      4D49435F 
+ 940      54595045 
+ 941 03d6 0000     		.align	2
+ 942              	.LC147:
+ 943 03d8 434D4420 		.ascii	"CMD SET_DYNAMIC_TYPE_SAVE (stub)\012\000"
+ 943      5345545F 
+ 943      44594E41 
+ 943      4D49435F 
+ 943      54595045 
+ 944 03fa 0000     		.align	2
+ 945              	.LC149:
+ 946 03fc 434D4420 		.ascii	"CMD READ_DEBUG\012\000"
+ 946      52454144 
+ 946      5F444542 
+ 946      55470A00 
+ 947              		.align	2
+ 948              	.LC151:
+ 949 040c 434D4420 		.ascii	"CMD DEEPSLEEP\012\000"
+ 949      44454550 
+ 949      534C4545 
+ 949      500A00
+ 950 041b 00       		.align	2
+ 951              	.LC153:
+ 952 041c 424C4B20 		.ascii	"BLK %u complete\012\000"
+ 952      25752063 
+ 952      6F6D706C 
+ 952      6574650A 
+ 952      00
+ 953 042d 000000   		.align	2
+ 954              	.LC155:
+ 955 0430 424C4B20 		.ascii	"BLK validate: size=%u chk=0x%04X\012\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 21
+
+
+ 955      76616C69 
+ 955      64617465 
+ 955      3A207369 
+ 955      7A653D25 
+ 956 0452 0000     		.align	2
+ 957              	.LC157:
+ 958 0454 50415254 		.ascii	"PART_ERR blk=%u part=%u  bytes:\000"
+ 958      5F455252 
+ 958      20626C6B 
+ 958      3D257520 
+ 958      70617274 
+ 959              		.align	2
+ 960              	.LC160:
+ 961 0474 20207061 		.ascii	"  payload[0..%u]:\000"
+ 961      796C6F61 
+ 961      645B302E 
+ 961      2E25755D 
+ 961      3A00
+ 962              		.section	.text.zb_ble_hci_cmd_handler,"ax",%progbits
+ 963              		.align	1
+ 964              		.global	zb_ble_hci_cmd_handler
+ 965              		.syntax unified
+ 966              		.code	16
+ 967              		.thumb_func
+ 969              	zb_ble_hci_cmd_handler:
+ 970              		@ args = 0, pretend = 0, frame = 16
+ 971              		@ frame_needed = 0, uses_anonymous_args = 0
+ 972 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 973 0002 CE46     		mov	lr, r9
+ 974 0004 4746     		mov	r7, r8
+ 975 0006 80B5     		push	{r7, lr}
+ 976 0008 89B0     		sub	sp, sp, #36
+ 977 000a 8046     		mov	r8, r0
+ 978 000c 0E00     		movs	r6, r1
+ 979 000e 1500     		movs	r5, r2
+ 980 0010 0A00     		movs	r2, r1
+ 981 0012 0100     		movs	r1, r0
+ 982 0014 CA48     		ldr	r0, .L156
+ 983 0016 FFF7FEFF 		bl	uart_printf
+ 984 001a 002E     		cmp	r6, #0
+ 985 001c 00D1     		bne	.LCB784
+ 986 001e 2CE3     		b	.L67	@long jump
+ 987              	.LCB784:
+ 988 0020 1027     		movs	r7, #16
+ 989 0022 0F2E     		cmp	r6, #15
+ 990 0024 00D8     		bhi	.L68
+ 991 0026 3700     		movs	r7, r6
+ 992              	.L68:
+ 993 0028 FFB2     		uxtb	r7, r7
+ 994 002a 791E     		subs	r1, r7, #1
+ 995 002c C548     		ldr	r0, .L156+4
+ 996 002e FFF7FEFF 		bl	uart_printf
+ 997 0032 0024     		movs	r4, #0
+ 998 0034 C44B     		ldr	r3, .L156+8
+ 999 0036 9946     		mov	r9, r3
+ 1000              	.L69:
+ 1001 0038 295D     		ldrb	r1, [r5, r4]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 22
+
+
+ 1002 003a 4846     		mov	r0, r9
+ 1003 003c FFF7FEFF 		bl	uart_printf
+ 1004 0040 0134     		adds	r4, r4, #1
+ 1005 0042 E3B2     		uxtb	r3, r4
+ 1006 0044 BB42     		cmp	r3, r7
+ 1007 0046 F7D3     		bcc	.L69
+ 1008 0048 102E     		cmp	r6, #16
+ 1009 004a 0AD8     		bhi	.L128
+ 1010 004c BF49     		ldr	r1, .L156+12
+ 1011              	.L70:
+ 1012 004e C048     		ldr	r0, .L156+16
+ 1013 0050 FFF7FEFF 		bl	uart_printf
+ 1014 0054 4346     		mov	r3, r8
+ 1015 0056 652B     		cmp	r3, #101
+ 1016 0058 05D8     		bhi	.L71
+ 1017 005a 9B00     		lsls	r3, r3, #2
+ 1018 005c BD4A     		ldr	r2, .L156+20
+ 1019 005e D358     		ldr	r3, [r2, r3]
+ 1020 0060 9F46     		mov	pc, r3
+ 1021              		.section	.rodata.zb_ble_hci_cmd_handler,"a",%progbits
+ 1022              		.align	2
+ 1023              	.L73:
+ 1024 0000 66000000 		.word	.L71
+ 1025 0004 A8000000 		.word	.L88
+ 1026 0008 84000000 		.word	.L87
+ 1027 000c 96000000 		.word	.L86
+ 1028 0010 66000000 		.word	.L71
+ 1029 0014 C0000000 		.word	.L85
+ 1030 0018 26010000 		.word	.L84
+ 1031 001c 38010000 		.word	.L83
+ 1032 0020 66000000 		.word	.L71
+ 1033 0024 D2000000 		.word	.L82
+ 1034 0028 14010000 		.word	.L81
+ 1035 002c 66000000 		.word	.L71
+ 1036 0030 66000000 		.word	.L71
+ 1037 0034 66000000 		.word	.L71
+ 1038 0038 66000000 		.word	.L71
+ 1039 003c 80040000 		.word	.L80
+ 1040 0040 92040000 		.word	.L79
+ 1041 0044 6E040000 		.word	.L78
+ 1042 0048 66000000 		.word	.L71
+ 1043 004c 66000000 		.word	.L71
+ 1044 0050 B6040000 		.word	.L77
+ 1045 0054 66000000 		.word	.L71
+ 1046 0058 A4040000 		.word	.L76
+ 1047 005c 4C040000 		.word	.L75
+ 1048 0060 66000000 		.word	.L71
+ 1049 0064 66000000 		.word	.L71
+ 1050 0068 66000000 		.word	.L71
+ 1051 006c 66000000 		.word	.L71
+ 1052 0070 66000000 		.word	.L71
+ 1053 0074 66000000 		.word	.L71
+ 1054 0078 66000000 		.word	.L71
+ 1055 007c 66000000 		.word	.L71
+ 1056 0080 66000000 		.word	.L71
+ 1057 0084 66000000 		.word	.L71
+ 1058 0088 66000000 		.word	.L71
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 23
+
+
+ 1059 008c 66000000 		.word	.L71
+ 1060 0090 66000000 		.word	.L71
+ 1061 0094 66000000 		.word	.L71
+ 1062 0098 66000000 		.word	.L71
+ 1063 009c 66000000 		.word	.L71
+ 1064 00a0 66000000 		.word	.L71
+ 1065 00a4 66000000 		.word	.L71
+ 1066 00a8 66000000 		.word	.L71
+ 1067 00ac 66000000 		.word	.L71
+ 1068 00b0 66000000 		.word	.L71
+ 1069 00b4 66000000 		.word	.L71
+ 1070 00b8 66000000 		.word	.L71
+ 1071 00bc 66000000 		.word	.L71
+ 1072 00c0 66000000 		.word	.L71
+ 1073 00c4 66000000 		.word	.L71
+ 1074 00c8 66000000 		.word	.L71
+ 1075 00cc 66000000 		.word	.L71
+ 1076 00d0 66000000 		.word	.L71
+ 1077 00d4 66000000 		.word	.L71
+ 1078 00d8 66000000 		.word	.L71
+ 1079 00dc 66000000 		.word	.L71
+ 1080 00e0 66000000 		.word	.L71
+ 1081 00e4 66000000 		.word	.L71
+ 1082 00e8 66000000 		.word	.L71
+ 1083 00ec 66000000 		.word	.L71
+ 1084 00f0 66000000 		.word	.L71
+ 1085 00f4 66000000 		.word	.L71
+ 1086 00f8 66000000 		.word	.L71
+ 1087 00fc 66000000 		.word	.L71
+ 1088 0100 66000000 		.word	.L71
+ 1089 0104 66000000 		.word	.L71
+ 1090 0108 66000000 		.word	.L71
+ 1091 010c 66000000 		.word	.L71
+ 1092 0110 66000000 		.word	.L71
+ 1093 0114 66000000 		.word	.L71
+ 1094 0118 66000000 		.word	.L71
+ 1095 011c 66000000 		.word	.L71
+ 1096 0120 66000000 		.word	.L71
+ 1097 0124 66000000 		.word	.L71
+ 1098 0128 66000000 		.word	.L71
+ 1099 012c 66000000 		.word	.L71
+ 1100 0130 66000000 		.word	.L71
+ 1101 0134 66000000 		.word	.L71
+ 1102 0138 66000000 		.word	.L71
+ 1103 013c 66000000 		.word	.L71
+ 1104 0140 66000000 		.word	.L71
+ 1105 0144 66000000 		.word	.L71
+ 1106 0148 66000000 		.word	.L71
+ 1107 014c 66000000 		.word	.L71
+ 1108 0150 66000000 		.word	.L71
+ 1109 0154 66000000 		.word	.L71
+ 1110 0158 66000000 		.word	.L71
+ 1111 015c 66000000 		.word	.L71
+ 1112 0160 66000000 		.word	.L71
+ 1113 0164 66000000 		.word	.L71
+ 1114 0168 66000000 		.word	.L71
+ 1115 016c 66000000 		.word	.L71
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 24
+
+
+ 1116 0170 66000000 		.word	.L71
+ 1117 0174 66000000 		.word	.L71
+ 1118 0178 66000000 		.word	.L71
+ 1119 017c 66000000 		.word	.L71
+ 1120 0180 66000000 		.word	.L71
+ 1121 0184 66000000 		.word	.L71
+ 1122 0188 66000000 		.word	.L71
+ 1123 018c 66000000 		.word	.L71
+ 1124 0190 4A010000 		.word	.L74
+ 1125 0194 6C010000 		.word	.L72
+ 1126              		.section	.text.zb_ble_hci_cmd_handler
+ 1127              	.L128:
+ 1128 0062 BD49     		ldr	r1, .L156+24
+ 1129 0064 F3E7     		b	.L70
+ 1130              	.L71:
+ 1131 0066 4146     		mov	r1, r8
+ 1132 0068 BC48     		ldr	r0, .L156+28
+ 1133 006a FFF7FEFF 		bl	uart_printf
+ 1134 006e 0022     		movs	r2, #0
+ 1135 0070 0021     		movs	r1, #0
+ 1136 0072 BB48     		ldr	r0, .L156+32
+ 1137 0074 FFF7FEFF 		bl	ble_send_notify
+ 1138              	.L143:
+ 1139 0078 0020     		movs	r0, #0
+ 1140 007a 09B0     		add	sp, sp, #36
+ 1141              		@ sp needed
+ 1142 007c C0BC     		pop	{r6, r7}
+ 1143 007e B946     		mov	r9, r7
+ 1144 0080 B046     		mov	r8, r6
+ 1145 0082 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1146              	.L87:
+ 1147 0084 B748     		ldr	r0, .L156+36
+ 1148 0086 FFF7FEFF 		bl	uart_printf
+ 1149 008a 0022     		movs	r2, #0
+ 1150 008c 0021     		movs	r1, #0
+ 1151 008e 6320     		movs	r0, #99
+ 1152 0090 FFF7FEFF 		bl	ble_send_notify
+ 1153 0094 F0E7     		b	.L143
+ 1154              	.L86:
+ 1155 0096 B448     		ldr	r0, .L156+40
+ 1156 0098 FFF7FEFF 		bl	uart_printf
+ 1157 009c 0022     		movs	r2, #0
+ 1158 009e 0021     		movs	r1, #0
+ 1159 00a0 6320     		movs	r0, #99
+ 1160 00a2 FFF7FEFF 		bl	ble_send_notify
+ 1161 00a6 E7E7     		b	.L143
+ 1162              	.L88:
+ 1163 00a8 2978     		ldrb	r1, [r5]
+ 1164              	.L90:
+ 1165 00aa B048     		ldr	r0, .L156+44
+ 1166 00ac FFF7FEFF 		bl	uart_printf
+ 1167 00b0 0022     		movs	r2, #0
+ 1168 00b2 0021     		movs	r1, #0
+ 1169 00b4 6320     		movs	r0, #99
+ 1170 00b6 FFF7FEFF 		bl	ble_send_notify
+ 1171 00ba DDE7     		b	.L143
+ 1172              	.L136:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 25
+
+
+ 1173 00bc 0021     		movs	r1, #0
+ 1174 00be F4E7     		b	.L90
+ 1175              	.L85:
+ 1176 00c0 AB48     		ldr	r0, .L156+48
+ 1177 00c2 FFF7FEFF 		bl	uart_printf
+ 1178 00c6 B222     		movs	r2, #178
+ 1179 00c8 AA49     		ldr	r1, .L156+52
+ 1180 00ca 0520     		movs	r0, #5
+ 1181 00cc FFF7FEFF 		bl	ble_send_notify
+ 1182 00d0 D2E7     		b	.L143
+ 1183              	.L82:
+ 1184 00d2 052E     		cmp	r6, #5
+ 1185 00d4 18D9     		bls	.L91
+ 1186 00d6 EB78     		ldrb	r3, [r5, #3]
+ 1187 00d8 2A79     		ldrb	r2, [r5, #4]
+ 1188 00da 6979     		ldrb	r1, [r5, #5]
+ 1189 00dc 2878     		ldrb	r0, [r5]
+ 1190 00de 0290     		str	r0, [sp, #8]
+ 1191 00e0 6878     		ldrb	r0, [r5, #1]
+ 1192 00e2 0190     		str	r0, [sp, #4]
+ 1193 00e4 A878     		ldrb	r0, [r5, #2]
+ 1194 00e6 0090     		str	r0, [sp]
+ 1195 00e8 A348     		ldr	r0, .L156+56
+ 1196 00ea FFF7FEFF 		bl	uart_printf
+ 1197 00ee 0022     		movs	r2, #0
+ 1198 00f0 0021     		movs	r1, #0
+ 1199 00f2 6320     		movs	r0, #99
+ 1200 00f4 FFF7FEFF 		bl	ble_send_notify
+ 1201 00f8 A04B     		ldr	r3, .L156+60
+ 1202 00fa 1B68     		ldr	r3, [r3]
+ 1203 00fc 6420     		movs	r0, #100
+ 1204 00fe 9847     		blx	r3
+ 1205 0100 2800     		movs	r0, r5
+ 1206 0102 FFF7FEFF 		bl	mac_edit_update
+ 1207 0106 B7E7     		b	.L143
+ 1208              	.L91:
+ 1209 0108 0022     		movs	r2, #0
+ 1210 010a 0021     		movs	r1, #0
+ 1211 010c 9448     		ldr	r0, .L156+32
+ 1212 010e FFF7FEFF 		bl	ble_send_notify
+ 1213 0112 B1E7     		b	.L143
+ 1214              	.L81:
+ 1215 0114 9A48     		ldr	r0, .L156+64
+ 1216 0116 FFF7FEFF 		bl	uart_printf
+ 1217 011a 0022     		movs	r2, #0
+ 1218 011c 0021     		movs	r1, #0
+ 1219 011e 6320     		movs	r0, #99
+ 1220 0120 FFF7FEFF 		bl	ble_send_notify
+ 1221 0124 A8E7     		b	.L143
+ 1222              	.L84:
+ 1223 0126 9748     		ldr	r0, .L156+68
+ 1224 0128 FFF7FEFF 		bl	uart_printf
+ 1225 012c 0022     		movs	r2, #0
+ 1226 012e 0021     		movs	r1, #0
+ 1227 0130 6320     		movs	r0, #99
+ 1228 0132 FFF7FEFF 		bl	ble_send_notify
+ 1229 0136 9FE7     		b	.L143
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 26
+
+
+ 1230              	.L83:
+ 1231 0138 9348     		ldr	r0, .L156+72
+ 1232 013a FFF7FEFF 		bl	uart_printf
+ 1233 013e 0022     		movs	r2, #0
+ 1234 0140 0021     		movs	r1, #0
+ 1235 0142 6320     		movs	r0, #99
+ 1236 0144 FFF7FEFF 		bl	ble_send_notify
+ 1237 0148 96E7     		b	.L143
+ 1238              	.L74:
+ 1239 014a 102E     		cmp	r6, #16
+ 1240 014c 0AD8     		bhi	.L92
+ 1241 014e 1122     		movs	r2, #17
+ 1242 0150 3100     		movs	r1, r6
+ 1243 0152 8E48     		ldr	r0, .L156+76
+ 1244 0154 FFF7FEFF 		bl	uart_printf
+ 1245 0158 0022     		movs	r2, #0
+ 1246 015a 0021     		movs	r1, #0
+ 1247 015c 8048     		ldr	r0, .L156+32
+ 1248 015e FFF7FEFF 		bl	ble_send_notify
+ 1249 0162 89E7     		b	.L143
+ 1250              	.L92:
+ 1251 0164 2800     		movs	r0, r5
+ 1252 0166 FFF7FEFF 		bl	processAvailDataInfoBLE
+ 1253 016a 85E7     		b	.L143
+ 1254              	.L72:
+ 1255 016c E82E     		cmp	r6, #232
+ 1256 016e 0AD8     		bhi	.L93
+ 1257 0170 E922     		movs	r2, #233
+ 1258 0172 3100     		movs	r1, r6
+ 1259 0174 8648     		ldr	r0, .L156+80
+ 1260 0176 FFF7FEFF 		bl	uart_printf
+ 1261 017a 0022     		movs	r2, #0
+ 1262 017c 0021     		movs	r1, #0
+ 1263 017e C420     		movs	r0, #196
+ 1264 0180 FFF7FEFF 		bl	ble_send_notify
+ 1265 0184 78E7     		b	.L143
+ 1266              	.L93:
+ 1267 0186 6B78     		ldrb	r3, [r5, #1]
+ 1268 0188 9C46     		mov	ip, r3
+ 1269 018a 824B     		ldr	r3, .L156+84
+ 1270 018c 5F7A     		ldrb	r7, [r3, #9]
+ 1271 018e BC45     		cmp	ip, r7
+ 1272 0190 57D1     		bne	.L146
+ 1273 0192 AA78     		ldrb	r2, [r5, #2]
+ 1274 0194 E620     		movs	r0, #230
+ 1275 0196 5043     		muls	r0, r2
+ 1276 0198 7F4B     		ldr	r3, .L156+88
+ 1277 019a 9842     		cmp	r0, r3
+ 1278 019c 6ED8     		bhi	.L147
+ 1279 019e 292A     		cmp	r2, #41
+ 1280 01a0 71D8     		bhi	.L148
+ 1281 01a2 7E49     		ldr	r1, .L156+92
+ 1282 01a4 0300     		movs	r3, r0
+ 1283 01a6 E633     		adds	r3, r3, #230
+ 1284 01a8 9BB2     		uxth	r3, r3
+ 1285 01aa E624     		movs	r4, #230
+ 1286 01ac A046     		mov	r8, r4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 27
+
+
+ 1287 01ae 8B42     		cmp	r3, r1
+ 1288 01b0 02D9     		bls	.L98
+ 1289 01b2 0B1A     		subs	r3, r1, r0
+ 1290 01b4 9BB2     		uxth	r3, r3
+ 1291 01b6 9846     		mov	r8, r3
+ 1292              	.L98:
+ 1293 01b8 6C1C     		adds	r4, r5, #1
+ 1294 01ba 2900     		movs	r1, r5
+ 1295 01bc E931     		adds	r1, r1, #233
+ 1296 01be 0023     		movs	r3, #0
+ 1297              	.L99:
+ 1298 01c0 2678     		ldrb	r6, [r4]
+ 1299 01c2 9B19     		adds	r3, r3, r6
+ 1300 01c4 DBB2     		uxtb	r3, r3
+ 1301 01c6 0134     		adds	r4, r4, #1
+ 1302 01c8 A142     		cmp	r1, r4
+ 1303 01ca F9D1     		bne	.L99
+ 1304 01cc 2978     		ldrb	r1, [r5]
+ 1305 01ce 9942     		cmp	r1, r3
+ 1306 01d0 5ED1     		bne	.L149
+ 1307 01d2 7349     		ldr	r1, .L156+96
+ 1308 01d4 4018     		adds	r0, r0, r1
+ 1309 01d6 E91C     		adds	r1, r5, #3
+ 1310 01d8 4246     		mov	r2, r8
+ 1311 01da FFF7FEFF 		bl	memcpy
+ 1312 01de A978     		ldrb	r1, [r5, #2]
+ 1313 01e0 CA08     		lsrs	r2, r1, #3
+ 1314 01e2 6C4B     		ldr	r3, .L156+84
+ 1315 01e4 9B18     		adds	r3, r3, r2
+ 1316 01e6 0722     		movs	r2, #7
+ 1317 01e8 0A40     		ands	r2, r1
+ 1318 01ea 0121     		movs	r1, #1
+ 1319 01ec 9140     		lsls	r1, r1, r2
+ 1320 01ee DA7A     		ldrb	r2, [r3, #11]
+ 1321 01f0 8A43     		bics	r2, r1
+ 1322 01f2 DA72     		strb	r2, [r3, #11]
+ 1323 01f4 3900     		movs	r1, r7
+ 1324 01f6 6B48     		ldr	r0, .L156+100
+ 1325 01f8 FFF7FEFF 		bl	uart_printf
+ 1326 01fc 6A4B     		ldr	r3, .L156+104
+ 1327 01fe 1B78     		ldrb	r3, [r3]
+ 1328 0200 0024     		movs	r4, #0
+ 1329 0202 002B     		cmp	r3, #0
+ 1330 0204 49D0     		beq	.L102
+ 1331 0206 634F     		ldr	r7, .L156+84
+ 1332 0208 684E     		ldr	r6, .L156+108
+ 1333 020a 674D     		ldr	r5, .L156+104
+ 1334              	.L101:
+ 1335 020c E308     		lsrs	r3, r4, #3
+ 1336 020e FB18     		adds	r3, r7, r3
+ 1337 0210 D97A     		ldrb	r1, [r3, #11]
+ 1338 0212 0723     		movs	r3, #7
+ 1339 0214 2340     		ands	r3, r4
+ 1340 0216 D940     		lsrs	r1, r1, r3
+ 1341 0218 C907     		lsls	r1, r1, #31
+ 1342 021a C917     		asrs	r1, r1, #31
+ 1343 021c 2323     		movs	r3, #35
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 28
+
+
+ 1344 021e 9943     		bics	r1, r3
+ 1345 0220 5231     		adds	r1, r1, #82
+ 1346 0222 3000     		movs	r0, r6
+ 1347 0224 FFF7FEFF 		bl	uart_printf
+ 1348 0228 0134     		adds	r4, r4, #1
+ 1349 022a E4B2     		uxtb	r4, r4
+ 1350 022c 2B78     		ldrb	r3, [r5]
+ 1351 022e A342     		cmp	r3, r4
+ 1352 0230 33D9     		bls	.L102
+ 1353 0232 002C     		cmp	r4, #0
+ 1354 0234 EAD0     		beq	.L101
+ 1355 0236 6307     		lsls	r3, r4, #29
+ 1356 0238 E8D1     		bne	.L101
+ 1357 023a 5D48     		ldr	r0, .L156+112
+ 1358 023c FFF7FEFF 		bl	uart_printf
+ 1359 0240 E4E7     		b	.L101
+ 1360              	.L146:
+ 1361 0242 3A00     		movs	r2, r7
+ 1362 0244 6146     		mov	r1, ip
+ 1363 0246 5B48     		ldr	r0, .L156+116
+ 1364 0248 FFF7FEFF 		bl	uart_printf
+ 1365              	.L95:
+ 1366 024c 0022     		movs	r2, #0
+ 1367 024e 0021     		movs	r1, #0
+ 1368 0250 C420     		movs	r0, #196
+ 1369 0252 FFF7FEFF 		bl	ble_send_notify
+ 1370 0256 AA78     		ldrb	r2, [r5, #2]
+ 1371 0258 6978     		ldrb	r1, [r5, #1]
+ 1372 025a 5748     		ldr	r0, .L156+120
+ 1373 025c FFF7FEFF 		bl	uart_printf
+ 1374 0260 2C00     		movs	r4, r5
+ 1375 0262 0835     		adds	r5, r5, #8
+ 1376 0264 384E     		ldr	r6, .L156+8
+ 1377              	.L103:
+ 1378 0266 2178     		ldrb	r1, [r4]
+ 1379 0268 3000     		movs	r0, r6
+ 1380 026a FFF7FEFF 		bl	uart_printf
+ 1381 026e 0134     		adds	r4, r4, #1
+ 1382 0270 AC42     		cmp	r4, r5
+ 1383 0272 F8D1     		bne	.L103
+ 1384 0274 5148     		ldr	r0, .L156+124
+ 1385 0276 FFF7FEFF 		bl	uart_printf
+ 1386 027a FDE6     		b	.L143
+ 1387              	.L147:
+ 1388 027c 0100     		movs	r1, r0
+ 1389 027e 5048     		ldr	r0, .L156+128
+ 1390 0280 FFF7FEFF 		bl	uart_printf
+ 1391 0284 E2E7     		b	.L95
+ 1392              	.L148:
+ 1393 0286 1100     		movs	r1, r2
+ 1394 0288 4E48     		ldr	r0, .L156+132
+ 1395 028a FFF7FEFF 		bl	uart_printf
+ 1396 028e DDE7     		b	.L95
+ 1397              	.L149:
+ 1398 0290 6146     		mov	r1, ip
+ 1399 0292 4D48     		ldr	r0, .L156+136
+ 1400 0294 FFF7FEFF 		bl	uart_printf
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 29
+
+
+ 1401 0298 D8E7     		b	.L95
+ 1402              	.L102:
+ 1403 029a 4C48     		ldr	r0, .L156+140
+ 1404 029c FFF7FEFF 		bl	uart_printf
+ 1405 02a0 414B     		ldr	r3, .L156+104
+ 1406 02a2 1878     		ldrb	r0, [r3]
+ 1407 02a4 0028     		cmp	r0, #0
+ 1408 02a6 00D1     		bne	.LCB1172
+ 1409 02a8 0EE1     		b	.L107	@long jump
+ 1410              	.LCB1172:
+ 1411 02aa 3A4B     		ldr	r3, .L156+84
+ 1412 02ac DA7A     		ldrb	r2, [r3, #11]
+ 1413 02ae 0121     		movs	r1, #1
+ 1414 02b0 0B00     		movs	r3, r1
+ 1415 02b2 1340     		ands	r3, r2
+ 1416 02b4 1142     		tst	r1, r2
+ 1417 02b6 0FD1     		bne	.L108
+ 1418 02b8 364E     		ldr	r6, .L156+84
+ 1419 02ba 0725     		movs	r5, #7
+ 1420 02bc 0124     		movs	r4, #1
+ 1421              	.L109:
+ 1422 02be 0133     		adds	r3, r3, #1
+ 1423 02c0 DBB2     		uxtb	r3, r3
+ 1424 02c2 8342     		cmp	r3, r0
+ 1425 02c4 00D1     		bne	.LCB1189
+ 1426 02c6 FFE0     		b	.L107	@long jump
+ 1427              	.LCB1189:
+ 1428 02c8 DA08     		lsrs	r2, r3, #3
+ 1429 02ca B218     		adds	r2, r6, r2
+ 1430 02cc D27A     		ldrb	r2, [r2, #11]
+ 1431 02ce 2900     		movs	r1, r5
+ 1432 02d0 1940     		ands	r1, r3
+ 1433 02d2 CA40     		lsrs	r2, r2, r1
+ 1434 02d4 1442     		tst	r4, r2
+ 1435 02d6 F2D0     		beq	.L109
+ 1436              	.L108:
+ 1437 02d8 0022     		movs	r2, #0
+ 1438 02da 0021     		movs	r1, #0
+ 1439 02dc C520     		movs	r0, #197
+ 1440 02de FFF7FEFF 		bl	ble_send_notify
+ 1441 02e2 C9E6     		b	.L143
+ 1442              	.L144:
+ 1443 02e4 0C00     		movs	r4, r1
+ 1444 02e6 0DE1     		b	.L112
+ 1445              	.L150:
+ 1446 02e8 3948     		ldr	r0, .L156+144
+ 1447 02ea FFF7FEFF 		bl	uart_printf
+ 1448              	.L113:
+ 1449 02ee 294C     		ldr	r4, .L156+84
+ 1450 02f0 617A     		ldrb	r1, [r4, #9]
+ 1451 02f2 3848     		ldr	r0, .L156+148
+ 1452 02f4 FFF7FEFF 		bl	uart_printf
+ 1453 02f8 2000     		movs	r0, r4
+ 1454 02fa 0B30     		adds	r0, r0, #11
+ 1455 02fc 0622     		movs	r2, #6
+ 1456 02fe FF21     		movs	r1, #255
+ 1457 0300 FFF7FEFF 		bl	memset
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 30
+
+
+ 1458 0304 FFF7FEFF 		bl	recalcParts
+ 1459 0308 1122     		movs	r2, #17
+ 1460 030a 2100     		movs	r1, r4
+ 1461 030c C620     		movs	r0, #198
+ 1462 030e FFF7FEFF 		bl	ble_send_notify
+ 1463 0312 B1E6     		b	.L143
+ 1464              	.L133:
+ 1465 0314 304A     		ldr	r2, .L156+152
+ 1466 0316 FCE0     		b	.L114
+ 1467              	.L151:
+ 1468 0318 1E4C     		ldr	r4, .L156+84
+ 1469 031a 617A     		ldrb	r1, [r4, #9]
+ 1470 031c 2F48     		ldr	r0, .L156+156
+ 1471 031e FFF7FEFF 		bl	uart_printf
+ 1472 0322 1F49     		ldr	r1, .L156+96
+ 1473 0324 0A88     		ldrh	r2, [r1]
+ 1474 0326 0431     		adds	r1, r1, #4
+ 1475 0328 607A     		ldrb	r0, [r4, #9]
+ 1476 032a FFF7FEFF 		bl	ota_save_ext_block
+ 1477 032e 36E1     		b	.L117
+ 1478              	.L152:
+ 1479 0330 B824     		movs	r4, #184
+ 1480 0332 6402     		lsls	r4, r4, #9
+ 1481 0334 19E1     		b	.L118
+ 1482              	.L153:
+ 1483 0336 2A48     		ldr	r0, .L156+160
+ 1484 0338 FFF7FEFF 		bl	uart_printf
+ 1485 033c 2DE1     		b	.L120
+ 1486              	.L157:
+ 1487 033e C046     		.align	2
+ 1488              	.L156:
+ 1489 0340 18000000 		.word	.LC61
+ 1490 0344 74040000 		.word	.LC160
+ 1491 0348 2C000000 		.word	.LC63
+ 1492 034c 08000000 		.word	.LC55
+ 1493 0350 34000000 		.word	.LC65
+ 1494 0354 00000000 		.word	.L73
+ 1495 0358 00000000 		.word	.LC53
+ 1496 035c 38000000 		.word	.LC68
+ 1497 0360 FFFF0000 		.word	65535
+ 1498 0364 4C000000 		.word	.LC70
+ 1499 0368 58000000 		.word	.LC72
+ 1500 036c 64000000 		.word	.LC74
+ 1501 0370 78000000 		.word	.LC76
+ 1502 0374 00000000 		.word	settings
+ 1503 0378 88000000 		.word	.LC79
+ 1504 037c 00000000 		.word	platform_delay_ms
+ 1505 0380 BC000000 		.word	.LC82
+ 1506 0384 D4000000 		.word	.LC84
+ 1507 0388 E8000000 		.word	.LC86
+ 1508 038c FC000000 		.word	.LC88
+ 1509 0390 20010000 		.word	.LC90
+ 1510 0394 00000000 		.word	.LANCHOR5
+ 1511 0398 02100000 		.word	4098
+ 1512 039c 04100000 		.word	4100
+ 1513 03a0 00000000 		.word	blockXferBuffer
+ 1514 03a4 C0010000 		.word	.LC102
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 31
+
+
+ 1515 03a8 00000000 		.word	.LANCHOR2
+ 1516 03ac D8010000 		.word	.LC109
+ 1517 03b0 D4010000 		.word	.LC107
+ 1518 03b4 44010000 		.word	.LC93
+ 1519 03b8 54040000 		.word	.LC157
+ 1520 03bc D0010000 		.word	.LC105
+ 1521 03c0 64010000 		.word	.LC95
+ 1522 03c4 84010000 		.word	.LC97
+ 1523 03c8 A0010000 		.word	.LC99
+ 1524 03cc DC010000 		.word	.LC111
+ 1525 03d0 E0010000 		.word	.LC113
+ 1526 03d4 18020000 		.word	.LC118
+ 1527 03d8 0C000000 		.word	.LC57
+ 1528 03dc 44020000 		.word	.LC120
+ 1529 03e0 C4020000 		.word	.LC127
+ 1530              	.L154:
+ 1531 03e4 A94C     		ldr	r4, .L158
+ 1532 03e6 2168     		ldr	r1, [r4]
+ 1533 03e8 A948     		ldr	r0, .L158+4
+ 1534 03ea FFF7FEFF 		bl	uart_printf
+ 1535 03ee 0022     		movs	r2, #0
+ 1536 03f0 0021     		movs	r1, #0
+ 1537 03f2 C920     		movs	r0, #201
+ 1538 03f4 FFF7FEFF 		bl	ble_send_notify
+ 1539 03f8 2223     		movs	r3, #34
+ 1540 03fa 02AA     		add	r2, sp, #8
+ 1541 03fc 1382     		strh	r3, [r2, #16]
+ 1542 03fe 0023     		movs	r3, #0
+ 1543 0400 5382     		strh	r3, [r2, #18]
+ 1544 0402 2368     		ldr	r3, [r4]
+ 1545 0404 0593     		str	r3, [sp, #20]
+ 1546 0406 0793     		str	r3, [sp, #28]
+ 1547 0408 06A8     		add	r0, sp, #24
+ 1548 040a FFF7FEFF 		bl	app_send_msg_to_apptask
+ 1549 040e 33E6     		b	.L143
+ 1550              	.L155:
+ 1551 0410 B823     		movs	r3, #184
+ 1552 0412 5B02     		lsls	r3, r3, #9
+ 1553 0414 F8E0     		b	.L123
+ 1554              	.L121:
+ 1555 0416 9F4C     		ldr	r4, .L158+8
+ 1556 0418 2000     		movs	r0, r4
+ 1557 041a 0B30     		adds	r0, r0, #11
+ 1558 041c 0622     		movs	r2, #6
+ 1559 041e FF21     		movs	r1, #255
+ 1560 0420 FFF7FEFF 		bl	memset
+ 1561 0424 FFF7FEFF 		bl	recalcParts
+ 1562 0428 9B4B     		ldr	r3, .L158+12
+ 1563 042a 9A68     		ldr	r2, [r3, #8]
+ 1564 042c 120A     		lsrs	r2, r2, #8
+ 1565 042e 1B7B     		ldrb	r3, [r3, #12]
+ 1566 0430 1B06     		lsls	r3, r3, #24
+ 1567 0432 1343     		orrs	r3, r2
+ 1568 0434 994A     		ldr	r2, .L158+16
+ 1569 0436 1278     		ldrb	r2, [r2]
+ 1570 0438 617A     		ldrb	r1, [r4, #9]
+ 1571 043a 9948     		ldr	r0, .L158+20
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 32
+
+
+ 1572 043c FFF7FEFF 		bl	uart_printf
+ 1573 0440 1122     		movs	r2, #17
+ 1574 0442 2100     		movs	r1, r4
+ 1575 0444 C620     		movs	r0, #198
+ 1576 0446 FFF7FEFF 		bl	ble_send_notify
+ 1577 044a 15E6     		b	.L143
+ 1578              	.L75:
+ 1579 044c 9548     		ldr	r0, .L158+24
+ 1580 044e FFF7FEFF 		bl	uart_printf
+ 1581 0452 0022     		movs	r2, #0
+ 1582 0454 0021     		movs	r1, #0
+ 1583 0456 6320     		movs	r0, #99
+ 1584 0458 FFF7FEFF 		bl	ble_send_notify
+ 1585 045c 924B     		ldr	r3, .L158+28
+ 1586 045e 1B68     		ldr	r3, [r3]
+ 1587 0460 3220     		movs	r0, #50
+ 1588 0462 9847     		blx	r3
+ 1589 0464 D621     		movs	r1, #214
+ 1590 0466 0320     		movs	r0, #3
+ 1591 0468 FFF7FEFF 		bl	WDG_SystemReset
+ 1592 046c 04E6     		b	.L143
+ 1593              	.L78:
+ 1594 046e 8F48     		ldr	r0, .L158+32
+ 1595 0470 FFF7FEFF 		bl	uart_printf
+ 1596 0474 B222     		movs	r2, #178
+ 1597 0476 8E49     		ldr	r1, .L158+36
+ 1598 0478 0520     		movs	r0, #5
+ 1599 047a FFF7FEFF 		bl	ble_send_notify
+ 1600 047e FBE5     		b	.L143
+ 1601              	.L80:
+ 1602 0480 8C48     		ldr	r0, .L158+40
+ 1603 0482 FFF7FEFF 		bl	uart_printf
+ 1604 0486 0022     		movs	r2, #0
+ 1605 0488 0021     		movs	r1, #0
+ 1606 048a 6320     		movs	r0, #99
+ 1607 048c FFF7FEFF 		bl	ble_send_notify
+ 1608 0490 F2E5     		b	.L143
+ 1609              	.L79:
+ 1610 0492 8948     		ldr	r0, .L158+44
+ 1611 0494 FFF7FEFF 		bl	uart_printf
+ 1612 0498 0022     		movs	r2, #0
+ 1613 049a 0021     		movs	r1, #0
+ 1614 049c 6320     		movs	r0, #99
+ 1615 049e FFF7FEFF 		bl	ble_send_notify
+ 1616 04a2 E9E5     		b	.L143
+ 1617              	.L76:
+ 1618 04a4 8548     		ldr	r0, .L158+48
+ 1619 04a6 FFF7FEFF 		bl	uart_printf
+ 1620 04aa 0022     		movs	r2, #0
+ 1621 04ac 0021     		movs	r1, #0
+ 1622 04ae D120     		movs	r0, #209
+ 1623 04b0 FFF7FEFF 		bl	ble_send_notify
+ 1624 04b4 E0E5     		b	.L143
+ 1625              	.L77:
+ 1626 04b6 8248     		ldr	r0, .L158+52
+ 1627 04b8 FFF7FEFF 		bl	uart_printf
+ 1628 04bc 0022     		movs	r2, #0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 33
+
+
+ 1629 04be 0021     		movs	r1, #0
+ 1630 04c0 6320     		movs	r0, #99
+ 1631 04c2 FFF7FEFF 		bl	ble_send_notify
+ 1632 04c6 D7E5     		b	.L143
+ 1633              	.L107:
+ 1634 04c8 724B     		ldr	r3, .L158+8
+ 1635 04ca 597A     		ldrb	r1, [r3, #9]
+ 1636 04cc 7D48     		ldr	r0, .L158+56
+ 1637 04ce FFF7FEFF 		bl	uart_printf
+ 1638 04d2 7D4C     		ldr	r4, .L158+60
+ 1639 04d4 6288     		ldrh	r2, [r4, #2]
+ 1640 04d6 2188     		ldrh	r1, [r4]
+ 1641 04d8 7C48     		ldr	r0, .L158+64
+ 1642 04da FFF7FEFF 		bl	uart_printf
+ 1643 04de 2188     		ldrh	r1, [r4]
+ 1644 04e0 8023     		movs	r3, #128
+ 1645 04e2 5B01     		lsls	r3, r3, #5
+ 1646 04e4 9942     		cmp	r1, r3
+ 1647 04e6 00D9     		bls	.LCB1450
+ 1648 04e8 FEE6     		b	.L150	@long jump
+ 1649              	.LCB1450:
+ 1650 04ea 0023     		movs	r3, #0
+ 1651 04ec 0024     		movs	r4, #0
+ 1652 04ee 0029     		cmp	r1, #0
+ 1653 04f0 00D1     		bne	.LCB1454
+ 1654 04f2 F7E6     		b	.L144	@long jump
+ 1655              	.LCB1454:
+ 1656 04f4 7648     		ldr	r0, .L158+68
+ 1657              	.L111:
+ 1658 04f6 C25C     		ldrb	r2, [r0, r3]
+ 1659 04f8 A418     		adds	r4, r4, r2
+ 1660 04fa A4B2     		uxth	r4, r4
+ 1661 04fc 0133     		adds	r3, r3, #1
+ 1662 04fe 9AB2     		uxth	r2, r3
+ 1663 0500 9142     		cmp	r1, r2
+ 1664 0502 F8D8     		bhi	.L111
+ 1665              	.L112:
+ 1666 0504 2100     		movs	r1, r4
+ 1667 0506 704B     		ldr	r3, .L158+60
+ 1668 0508 5B88     		ldrh	r3, [r3, #2]
+ 1669 050a A342     		cmp	r3, r4
+ 1670 050c 00D1     		bne	.LCB1471
+ 1671 050e 01E7     		b	.L133	@long jump
+ 1672              	.LCB1471:
+ 1673 0510 704A     		ldr	r2, .L158+72
+ 1674              	.L114:
+ 1675 0512 7148     		ldr	r0, .L158+76
+ 1676 0514 FFF7FEFF 		bl	uart_printf
+ 1677 0518 6B4B     		ldr	r3, .L158+60
+ 1678 051a 5B88     		ldrh	r3, [r3, #2]
+ 1679 051c A342     		cmp	r3, r4
+ 1680 051e 00D0     		beq	.LCB1480
+ 1681 0520 E5E6     		b	.L113	@long jump
+ 1682              	.LCB1480:
+ 1683 0522 5C4B     		ldr	r3, .L158+8
+ 1684 0524 9B7A     		ldrb	r3, [r3, #10]
+ 1685 0526 032B     		cmp	r3, #3
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 34
+
+
+ 1686 0528 00D1     		bne	.LCB1484
+ 1687 052a F5E6     		b	.L151	@long jump
+ 1688              	.LCB1484:
+ 1689 052c 6B4D     		ldr	r5, .L158+80
+ 1690 052e 2A78     		ldrb	r2, [r5]
+ 1691 0530 584C     		ldr	r4, .L158+8
+ 1692 0532 617A     		ldrb	r1, [r4, #9]
+ 1693 0534 6A48     		ldr	r0, .L158+84
+ 1694 0536 FFF7FEFF 		bl	uart_printf
+ 1695 053a 2E78     		ldrb	r6, [r5]
+ 1696 053c 657A     		ldrb	r5, [r4, #9]
+ 1697 053e 3000     		movs	r0, r6
+ 1698 0540 FFF7FEFF 		bl	getAddressForSlot
+ 1699 0544 2A03     		lsls	r2, r5, #12
+ 1700 0546 1532     		adds	r2, r2, #21
+ 1701 0548 5949     		ldr	r1, .L158+36
+ 1702 054a 6523     		movs	r3, #101
+ 1703 054c CC5C     		ldrb	r4, [r1, r3]
+ 1704 054e 0133     		adds	r3, r3, #1
+ 1705 0550 CB5C     		ldrb	r3, [r1, r3]
+ 1706 0552 1B02     		lsls	r3, r3, #8
+ 1707 0554 2343     		orrs	r3, r4
+ 1708 0556 6724     		movs	r4, #103
+ 1709 0558 0C5D     		ldrb	r4, [r1, r4]
+ 1710 055a 2404     		lsls	r4, r4, #16
+ 1711 055c 2343     		orrs	r3, r4
+ 1712 055e 6824     		movs	r4, #104
+ 1713 0560 0C5D     		ldrb	r4, [r1, r4]
+ 1714 0562 2406     		lsls	r4, r4, #24
+ 1715 0564 1C43     		orrs	r4, r3
+ 1716 0566 00D1     		bne	.LCB1513
+ 1717 0568 E2E6     		b	.L152	@long jump
+ 1718              	.LCB1513:
+ 1719              	.L118:
+ 1720 056a A41A     		subs	r4, r4, r2
+ 1721 056c 8023     		movs	r3, #128
+ 1722 056e 5B01     		lsls	r3, r3, #5
+ 1723 0570 9C42     		cmp	r4, r3
+ 1724 0572 00D9     		bls	.L119
+ 1725 0574 1C00     		movs	r4, r3
+ 1726              	.L119:
+ 1727 0576 8718     		adds	r7, r0, r2
+ 1728 0578 0094     		str	r4, [sp]
+ 1729 057a 3B00     		movs	r3, r7
+ 1730 057c 3200     		movs	r2, r6
+ 1731 057e 2900     		movs	r1, r5
+ 1732 0580 5848     		ldr	r0, .L158+88
+ 1733 0582 FFF7FEFF 		bl	uart_printf
+ 1734 0586 FFF7FEFF 		bl	eepromPowerUp
+ 1735 058a 2200     		movs	r2, r4
+ 1736 058c 5049     		ldr	r1, .L158+68
+ 1737 058e 3800     		movs	r0, r7
+ 1738 0590 FFF7FEFF 		bl	eepromWrite
+ 1739 0594 0028     		cmp	r0, #0
+ 1740 0596 00D1     		bne	.LCB1537
+ 1741 0598 CDE6     		b	.L153	@long jump
+ 1742              	.LCB1537:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 35
+
+
+ 1743              	.L120:
+ 1744 059a FFF7FEFF 		bl	eepromPowerDown
+ 1745              	.L117:
+ 1746 059e 3D4A     		ldr	r2, .L158+8
+ 1747 05a0 537A     		ldrb	r3, [r2, #9]
+ 1748 05a2 0133     		adds	r3, r3, #1
+ 1749 05a4 5372     		strb	r3, [r2, #9]
+ 1750 05a6 3C4A     		ldr	r2, .L158+12
+ 1751 05a8 9368     		ldr	r3, [r2, #8]
+ 1752 05aa 190A     		lsrs	r1, r3, #8
+ 1753 05ac 137B     		ldrb	r3, [r2, #12]
+ 1754 05ae 1B06     		lsls	r3, r3, #24
+ 1755 05b0 0B43     		orrs	r3, r1
+ 1756 05b2 4D49     		ldr	r1, .L158+92
+ 1757 05b4 0988     		ldrh	r1, [r1]
+ 1758 05b6 5B1A     		subs	r3, r3, r1
+ 1759 05b8 1100     		movs	r1, r2
+ 1760 05ba 5372     		strb	r3, [r2, #9]
+ 1761 05bc 1A0A     		lsrs	r2, r3, #8
+ 1762 05be 8A72     		strb	r2, [r1, #10]
+ 1763 05c0 1A02     		lsls	r2, r3, #8
+ 1764 05c2 120E     		lsrs	r2, r2, #24
+ 1765 05c4 CA72     		strb	r2, [r1, #11]
+ 1766 05c6 1A0E     		lsrs	r2, r3, #24
+ 1767 05c8 0A73     		strb	r2, [r1, #12]
+ 1768 05ca 002B     		cmp	r3, #0
+ 1769 05cc 00D0     		beq	.LCB1569
+ 1770 05ce 22E7     		b	.L121	@long jump
+ 1771              	.LCB1569:
+ 1772 05d0 304B     		ldr	r3, .L158+8
+ 1773 05d2 9B7A     		ldrb	r3, [r3, #10]
+ 1774 05d4 032B     		cmp	r3, #3
+ 1775 05d6 00D1     		bne	.LCB1573
+ 1776 05d8 04E7     		b	.L154	@long jump
+ 1777              	.LCB1573:
+ 1778 05da 2F49     		ldr	r1, .L158+12
+ 1779 05dc 0822     		movs	r2, #8
+ 1780 05de 0131     		adds	r1, r1, #1
+ 1781 05e0 3948     		ldr	r0, .L158+60
+ 1782 05e2 FFF7FEFF 		bl	memcpy
+ 1783 05e6 3249     		ldr	r1, .L158+36
+ 1784 05e8 6523     		movs	r3, #101
+ 1785 05ea CB5C     		ldrb	r3, [r1, r3]
+ 1786 05ec 6622     		movs	r2, #102
+ 1787 05ee 8A5C     		ldrb	r2, [r1, r2]
+ 1788 05f0 1202     		lsls	r2, r2, #8
+ 1789 05f2 1A43     		orrs	r2, r3
+ 1790 05f4 6723     		movs	r3, #103
+ 1791 05f6 CB5C     		ldrb	r3, [r1, r3]
+ 1792 05f8 1B04     		lsls	r3, r3, #16
+ 1793 05fa 1A43     		orrs	r2, r3
+ 1794 05fc 6823     		movs	r3, #104
+ 1795 05fe CB5C     		ldrb	r3, [r1, r3]
+ 1796 0600 1B06     		lsls	r3, r3, #24
+ 1797 0602 1343     		orrs	r3, r2
+ 1798 0604 00D1     		bne	.LCB1595
+ 1799 0606 03E7     		b	.L155	@long jump
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 36
+
+
+ 1800              	.LCB1595:
+ 1801              	.L123:
+ 1802 0608 2F4C     		ldr	r4, .L158+60
+ 1803 060a 384A     		ldr	r2, .L158+96
+ 1804 060c 9446     		mov	ip, r2
+ 1805 060e 6344     		add	r3, r3, ip
+ 1806 0610 A360     		str	r3, [r4, #8]
+ 1807 0612 374A     		ldr	r2, .L158+100
+ 1808 0614 1368     		ldr	r3, [r2]
+ 1809 0616 0133     		adds	r3, r3, #1
+ 1810 0618 1360     		str	r3, [r2]
+ 1811 061a 6374     		strb	r3, [r4, #17]
+ 1812 061c 190A     		lsrs	r1, r3, #8
+ 1813 061e A174     		strb	r1, [r4, #18]
+ 1814 0620 1902     		lsls	r1, r3, #8
+ 1815 0622 090E     		lsrs	r1, r1, #24
+ 1816 0624 E174     		strb	r1, [r4, #19]
+ 1817 0626 1B0E     		lsrs	r3, r3, #24
+ 1818 0628 2375     		strb	r3, [r4, #20]
+ 1819 062a 184B     		ldr	r3, .L158
+ 1820 062c 1B68     		ldr	r3, [r3]
+ 1821 062e E360     		str	r3, [r4, #12]
+ 1822 0630 194E     		ldr	r6, .L158+12
+ 1823 0632 727B     		ldrb	r2, [r6, #13]
+ 1824 0634 2274     		strb	r2, [r4, #16]
+ 1825 0636 294D     		ldr	r5, .L158+80
+ 1826 0638 2978     		ldrb	r1, [r5]
+ 1827 063a 2E48     		ldr	r0, .L158+104
+ 1828 063c FFF7FEFF 		bl	uart_printf
+ 1829 0640 FFF7FEFF 		bl	eepromPowerUp
+ 1830 0644 2878     		ldrb	r0, [r5]
+ 1831 0646 FFF7FEFF 		bl	getAddressForSlot
+ 1832 064a 1522     		movs	r2, #21
+ 1833 064c 2100     		movs	r1, r4
+ 1834 064e FFF7FEFF 		bl	eepromWrite
+ 1835 0652 FFF7FEFF 		bl	eepromPowerDown
+ 1836 0656 0022     		movs	r2, #0
+ 1837 0658 7272     		strb	r2, [r6, #9]
+ 1838 065a B272     		strb	r2, [r6, #10]
+ 1839 065c F272     		strb	r2, [r6, #11]
+ 1840 065e 3273     		strb	r2, [r6, #12]
+ 1841 0660 2978     		ldrb	r1, [r5]
+ 1842 0662 2548     		ldr	r0, .L158+108
+ 1843 0664 FFF7FEFF 		bl	uart_printf
+ 1844 0668 0022     		movs	r2, #0
+ 1845 066a 0021     		movs	r1, #0
+ 1846 066c C720     		movs	r0, #199
+ 1847 066e FFF7FEFF 		bl	ble_send_notify
+ 1848 0672 2878     		ldrb	r0, [r5]
+ 1849 0674 FFF7FEFF 		bl	drawImageFromEeprom
+ 1850 0678 FEE4     		b	.L143
+ 1851              	.L67:
+ 1852 067a 4346     		mov	r3, r8
+ 1853 067c 652B     		cmp	r3, #101
+ 1854 067e 00D9     		bls	.LCB1655
+ 1855 0680 F1E4     		b	.L71	@long jump
+ 1856              	.LCB1655:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 37
+
+
+ 1857 0682 9B00     		lsls	r3, r3, #2
+ 1858 0684 1D4A     		ldr	r2, .L158+112
+ 1859 0686 D358     		ldr	r3, [r2, r3]
+ 1860 0688 9F46     		mov	pc, r3
+ 1861              		.section	.rodata.zb_ble_hci_cmd_handler
+ 1862              		.align	2
+ 1863              	.L126:
+ 1864 0198 66000000 		.word	.L71
+ 1865 019c BC000000 		.word	.L136
+ 1866 01a0 84000000 		.word	.L87
+ 1867 01a4 96000000 		.word	.L86
+ 1868 01a8 66000000 		.word	.L71
+ 1869 01ac C0000000 		.word	.L85
+ 1870 01b0 26010000 		.word	.L84
+ 1871 01b4 38010000 		.word	.L83
+ 1872 01b8 66000000 		.word	.L71
+ 1873 01bc 08010000 		.word	.L91
+ 1874 01c0 14010000 		.word	.L81
+ 1875 01c4 66000000 		.word	.L71
+ 1876 01c8 66000000 		.word	.L71
+ 1877 01cc 66000000 		.word	.L71
+ 1878 01d0 66000000 		.word	.L71
+ 1879 01d4 80040000 		.word	.L80
+ 1880 01d8 92040000 		.word	.L79
+ 1881 01dc 6E040000 		.word	.L78
+ 1882 01e0 66000000 		.word	.L71
+ 1883 01e4 66000000 		.word	.L71
+ 1884 01e8 B6040000 		.word	.L77
+ 1885 01ec 66000000 		.word	.L71
+ 1886 01f0 A4040000 		.word	.L76
+ 1887 01f4 4C040000 		.word	.L75
+ 1888 01f8 66000000 		.word	.L71
+ 1889 01fc 66000000 		.word	.L71
+ 1890 0200 66000000 		.word	.L71
+ 1891 0204 66000000 		.word	.L71
+ 1892 0208 66000000 		.word	.L71
+ 1893 020c 66000000 		.word	.L71
+ 1894 0210 66000000 		.word	.L71
+ 1895 0214 66000000 		.word	.L71
+ 1896 0218 66000000 		.word	.L71
+ 1897 021c 66000000 		.word	.L71
+ 1898 0220 66000000 		.word	.L71
+ 1899 0224 66000000 		.word	.L71
+ 1900 0228 66000000 		.word	.L71
+ 1901 022c 66000000 		.word	.L71
+ 1902 0230 66000000 		.word	.L71
+ 1903 0234 66000000 		.word	.L71
+ 1904 0238 66000000 		.word	.L71
+ 1905 023c 66000000 		.word	.L71
+ 1906 0240 66000000 		.word	.L71
+ 1907 0244 66000000 		.word	.L71
+ 1908 0248 66000000 		.word	.L71
+ 1909 024c 66000000 		.word	.L71
+ 1910 0250 66000000 		.word	.L71
+ 1911 0254 66000000 		.word	.L71
+ 1912 0258 66000000 		.word	.L71
+ 1913 025c 66000000 		.word	.L71
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 38
+
+
+ 1914 0260 66000000 		.word	.L71
+ 1915 0264 66000000 		.word	.L71
+ 1916 0268 66000000 		.word	.L71
+ 1917 026c 66000000 		.word	.L71
+ 1918 0270 66000000 		.word	.L71
+ 1919 0274 66000000 		.word	.L71
+ 1920 0278 66000000 		.word	.L71
+ 1921 027c 66000000 		.word	.L71
+ 1922 0280 66000000 		.word	.L71
+ 1923 0284 66000000 		.word	.L71
+ 1924 0288 66000000 		.word	.L71
+ 1925 028c 66000000 		.word	.L71
+ 1926 0290 66000000 		.word	.L71
+ 1927 0294 66000000 		.word	.L71
+ 1928 0298 66000000 		.word	.L71
+ 1929 029c 66000000 		.word	.L71
+ 1930 02a0 66000000 		.word	.L71
+ 1931 02a4 66000000 		.word	.L71
+ 1932 02a8 66000000 		.word	.L71
+ 1933 02ac 66000000 		.word	.L71
+ 1934 02b0 66000000 		.word	.L71
+ 1935 02b4 66000000 		.word	.L71
+ 1936 02b8 66000000 		.word	.L71
+ 1937 02bc 66000000 		.word	.L71
+ 1938 02c0 66000000 		.word	.L71
+ 1939 02c4 66000000 		.word	.L71
+ 1940 02c8 66000000 		.word	.L71
+ 1941 02cc 66000000 		.word	.L71
+ 1942 02d0 66000000 		.word	.L71
+ 1943 02d4 66000000 		.word	.L71
+ 1944 02d8 66000000 		.word	.L71
+ 1945 02dc 66000000 		.word	.L71
+ 1946 02e0 66000000 		.word	.L71
+ 1947 02e4 66000000 		.word	.L71
+ 1948 02e8 66000000 		.word	.L71
+ 1949 02ec 66000000 		.word	.L71
+ 1950 02f0 66000000 		.word	.L71
+ 1951 02f4 66000000 		.word	.L71
+ 1952 02f8 66000000 		.word	.L71
+ 1953 02fc 66000000 		.word	.L71
+ 1954 0300 66000000 		.word	.L71
+ 1955 0304 66000000 		.word	.L71
+ 1956 0308 66000000 		.word	.L71
+ 1957 030c 66000000 		.word	.L71
+ 1958 0310 66000000 		.word	.L71
+ 1959 0314 66000000 		.word	.L71
+ 1960 0318 66000000 		.word	.L71
+ 1961 031c 66000000 		.word	.L71
+ 1962 0320 66000000 		.word	.L71
+ 1963 0324 66000000 		.word	.L71
+ 1964 0328 4A010000 		.word	.L74
+ 1965 032c 6C010000 		.word	.L72
+ 1966              		.section	.text.zb_ble_hci_cmd_handler
+ 1967              	.L159:
+ 1968 068a C046     		.align	2
+ 1969              	.L158:
+ 1970 068c 00000000 		.word	.LANCHOR6
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 39
+
+
+ 1971 0690 E0020000 		.word	.LC132
+ 1972 0694 00000000 		.word	.LANCHOR5
+ 1973 0698 00000000 		.word	.LANCHOR0
+ 1974 069c 00000000 		.word	.LANCHOR2
+ 1975 06a0 60030000 		.word	.LC139
+ 1976 06a4 84030000 		.word	.LC141
+ 1977 06a8 00000000 		.word	platform_delay_ms
+ 1978 06ac 90030000 		.word	.LC143
+ 1979 06b0 00000000 		.word	settings
+ 1980 06b4 B4030000 		.word	.LC145
+ 1981 06b8 D8030000 		.word	.LC147
+ 1982 06bc FC030000 		.word	.LC149
+ 1983 06c0 0C040000 		.word	.LC151
+ 1984 06c4 1C040000 		.word	.LC153
+ 1985 06c8 00000000 		.word	blockXferBuffer
+ 1986 06cc 30040000 		.word	.LC155
+ 1987 06d0 04000000 		.word	blockXferBuffer+4
+ 1988 06d4 10000000 		.word	.LC59
+ 1989 06d8 00020000 		.word	.LC116
+ 1990 06dc 00000000 		.word	.LANCHOR7
+ 1991 06e0 70020000 		.word	.LC123
+ 1992 06e4 9C020000 		.word	.LC125
+ 1993 06e8 00000000 		.word	.LANCHOR1
+ 1994 06ec 21474D49 		.word	1229801249
+ 1995 06f0 00000000 		.word	.LANCHOR9
+ 1996 06f4 10030000 		.word	.LC135
+ 1997 06f8 38030000 		.word	.LC137
+ 1998 06fc 98010000 		.word	.L126
+ 2000              		.global	imageSize
+ 2001              		.global	drawWithLut
+ 2002              		.global	imgSlots
+ 2003              		.global	nextImgSlot
+ 2004              		.global	curHighSlotId
+ 2005              		.global	curImgSlot
+ 2006              		.global	curDataInfo
+ 2007              		.global	curBlock
+ 2008              		.section	.bss.bleNotifyBuff,"aw",%nobits
+ 2009              		.align	2
+ 2012              	bleNotifyBuff:
+ 2013 0000 00000000 		.space	512
+ 2013      00000000 
+ 2013      00000000 
+ 2013      00000000 
+ 2013      00000000 
+ 2014              		.section	.bss.blockXferBuffer,"aw",%nobits
+ 2015              		.align	2
+ 2018              	blockXferBuffer:
+ 2019 0000 00000000 		.space	4100
+ 2019      00000000 
+ 2019      00000000 
+ 2019      00000000 
+ 2019      00000000 
+ 2020              		.section	.bss.curBlock,"aw",%nobits
+ 2021              		.align	2
+ 2022              		.set	.LANCHOR5,. + 0
+ 2025              	curBlock:
+ 2026 0000 00000000 		.space	17
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 40
+
+
+ 2026      00000000 
+ 2026      00000000 
+ 2026      00000000 
+ 2026      00
+ 2027              		.section	.bss.curDataInfo,"aw",%nobits
+ 2028              		.align	2
+ 2029              		.set	.LANCHOR0,. + 0
+ 2032              	curDataInfo:
+ 2033 0000 00000000 		.space	17
+ 2033      00000000 
+ 2033      00000000 
+ 2033      00000000 
+ 2033      00
+ 2034              		.section	.bss.curHighSlotId,"aw",%nobits
+ 2035              		.align	2
+ 2036              		.set	.LANCHOR9,. + 0
+ 2039              	curHighSlotId:
+ 2040 0000 00000000 		.space	4
+ 2041              		.section	.bss.dataRequestSizeBLE,"aw",%nobits
+ 2042              		.align	1
+ 2043              		.set	.LANCHOR1,. + 0
+ 2046              	dataRequestSizeBLE:
+ 2047 0000 0000     		.space	2
+ 2048              		.section	.bss.drawWithLut,"aw",%nobits
+ 2049              		.set	.LANCHOR3,. + 0
+ 2052              	drawWithLut:
+ 2053 0000 00       		.space	1
+ 2054              		.section	.bss.imageSize,"aw",%nobits
+ 2055              		.align	2
+ 2056              		.set	.LANCHOR6,. + 0
+ 2059              	imageSize:
+ 2060 0000 00000000 		.space	4
+ 2061              		.section	.bss.imgSlots,"aw",%nobits
+ 2062              		.set	.LANCHOR4,. + 0
+ 2065              	imgSlots:
+ 2066 0000 00       		.space	1
+ 2067              		.section	.bss.nextImgSlot,"aw",%nobits
+ 2068              		.set	.LANCHOR8,. + 0
+ 2071              	nextImgSlot:
+ 2072 0000 00       		.space	1
+ 2073              		.section	.bss.partsThisBlockBLE,"aw",%nobits
+ 2074              		.set	.LANCHOR2,. + 0
+ 2077              	partsThisBlockBLE:
+ 2078 0000 00       		.space	1
+ 2079              		.section	.data.curImgSlot,"aw"
+ 2080              		.set	.LANCHOR7,. + 0
+ 2083              	curImgSlot:
+ 2084 0000 FF       		.byte	-1
+ 2085              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 41
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ble_cmd_handler.c
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:17     .text.recalcParts:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:22     .text.recalcParts:00000000 recalcParts
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:50     .text.recalcParts:0000002c $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:55     .text.getAddressForSlot:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:61     .text.getAddressForSlot:00000000 getAddressForSlot
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:93     .text.getAddressForSlot:00000030 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:96     .rodata.drawImageFromEeprom.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:100    .text.drawImageFromEeprom:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:106    .text.drawImageFromEeprom:00000000 drawImageFromEeprom
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:139    .text.drawImageFromEeprom:00000038 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:143    .rodata.ble_send_notify.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:147    .text.ble_send_notify:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:153    .text.ble_send_notify:00000000 ble_send_notify
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:186    .text.ble_send_notify:00000038 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2012   .bss.bleNotifyBuff:00000000 bleNotifyBuff
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:191    .rodata.processAvailDataInfoBLE.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:233    .text.processAvailDataInfoBLE:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:239    .text.processAvailDataInfoBLE:00000000 processAvailDataInfoBLE
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:310    .rodata.processAvailDataInfoBLE:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:724    .text.processAvailDataInfoBLE:0000036c $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2018   .bss.blockXferBuffer:00000000 blockXferBuffer
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:749    .text.processAvailDataInfoBLE:000003cc $t
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:807    .text.processAvailDataInfoBLE:00000444 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:817    .rodata.zb_ble_hci_cmd_handler.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:963    .text.zb_ble_hci_cmd_handler:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:969    .text.zb_ble_hci_cmd_handler:00000000 zb_ble_hci_cmd_handler
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:1022   .rodata.zb_ble_hci_cmd_handler:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:1489   .text.zb_ble_hci_cmd_handler:00000340 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:1531   .text.zb_ble_hci_cmd_handler:000003e4 $t
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:1970   .text.zb_ble_hci_cmd_handler:0000068c $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2059   .bss.imageSize:00000000 imageSize
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2052   .bss.drawWithLut:00000000 drawWithLut
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2065   .bss.imgSlots:00000000 imgSlots
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2071   .bss.nextImgSlot:00000000 nextImgSlot
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2039   .bss.curHighSlotId:00000000 curHighSlotId
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2083   .data.curImgSlot:00000000 curImgSlot
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2032   .bss.curDataInfo:00000000 curDataInfo
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2025   .bss.curBlock:00000000 curBlock
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2009   .bss.bleNotifyBuff:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2015   .bss.blockXferBuffer:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2021   .bss.curBlock:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2028   .bss.curDataInfo:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2035   .bss.curHighSlotId:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2042   .bss.dataRequestSizeBLE:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2046   .bss.dataRequestSizeBLE:00000000 dataRequestSizeBLE
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2053   .bss.drawWithLut:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2055   .bss.imageSize:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2066   .bss.imgSlots:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2072   .bss.nextImgSlot:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2077   .bss.partsThisBlockBLE:00000000 partsThisBlockBLE
+C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s:2078   .bss.partsThisBlockBLE:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_uidiv
+settings
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJEPeJS.s 			page 42
+
+
+app_send_msg_to_apptask
+uart_printf
+app_send_custom_notification
+memcpy
+memcmp
+ota_erase_ext
+memset
+eepromPowerUp
+eepromRead
+eepromPowerDown
+eepromErase
+mac_edit_update
+ota_save_ext_block
+platform_delay_ms
+WDG_SystemReset
+eepromWrite

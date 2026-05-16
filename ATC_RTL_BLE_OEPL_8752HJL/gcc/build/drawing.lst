@@ -1,0 +1,1014 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"drawing.c"
+  14              		.text
+  15              		.section	.text.zlib_read_cb1,"ax",%progbits
+  16              		.align	1
+  17              		.syntax unified
+  18              		.code	16
+  19              		.thumb_func
+  21              	zlib_read_cb1:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 70B5     		push	{r4, r5, r6, lr}
+  25 0002 0500     		movs	r5, r0
+  26 0004 114B     		ldr	r3, .L5
+  27 0006 1B68     		ldr	r3, [r3]
+  28 0008 114A     		ldr	r2, .L5+4
+  29 000a 1268     		ldr	r2, [r2]
+  30 000c D41A     		subs	r4, r2, r3
+  31 000e 9A42     		cmp	r2, r3
+  32 0010 18D0     		beq	.L4
+  33 0012 8022     		movs	r2, #128
+  34 0014 9200     		lsls	r2, r2, #2
+  35 0016 9442     		cmp	r4, r2
+  36 0018 00D9     		bls	.L3
+  37 001a 1400     		movs	r4, r2
+  38              	.L3:
+  39 001c 0D4E     		ldr	r6, .L5+8
+  40 001e 0E4A     		ldr	r2, .L5+12
+  41 0020 1068     		ldr	r0, [r2]
+  42 0022 1818     		adds	r0, r3, r0
+  43 0024 0430     		adds	r0, r0, #4
+  44 0026 2200     		movs	r2, r4
+  45 0028 3100     		movs	r1, r6
+  46 002a FFF7FEFF 		bl	eepromRead
+  47 002e 731C     		adds	r3, r6, #1
+  48 0030 2B60     		str	r3, [r5]
+  49 0032 A319     		adds	r3, r4, r6
+  50 0034 6B60     		str	r3, [r5, #4]
+  51 0036 054B     		ldr	r3, .L5
+  52 0038 1A68     		ldr	r2, [r3]
+  53 003a 9446     		mov	ip, r2
+  54 003c 6444     		add	r4, r4, ip
+  55 003e 1C60     		str	r4, [r3]
+  56 0040 3078     		ldrb	r0, [r6]
+  57              	.L1:
+  58              		@ sp needed
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 2
+
+
+  59 0042 70BD     		pop	{r4, r5, r6, pc}
+  60              	.L4:
+  61 0044 0120     		movs	r0, #1
+  62 0046 4042     		rsbs	r0, r0, #0
+  63 0048 FBE7     		b	.L1
+  64              	.L6:
+  65 004a C046     		.align	2
+  66              	.L5:
+  67 004c 00000000 		.word	.LANCHOR0
+  68 0050 00000000 		.word	.LANCHOR1
+  69 0054 00000000 		.word	z_comp_buf1
+  70 0058 00000000 		.word	.LANCHOR2
+  72              		.section	.text.zlib_read_cb0,"ax",%progbits
+  73              		.align	1
+  74              		.syntax unified
+  75              		.code	16
+  76              		.thumb_func
+  78              	zlib_read_cb0:
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81 0000 70B5     		push	{r4, r5, r6, lr}
+  82 0002 0500     		movs	r5, r0
+  83 0004 114B     		ldr	r3, .L11
+  84 0006 1B68     		ldr	r3, [r3]
+  85 0008 114A     		ldr	r2, .L11+4
+  86 000a 1268     		ldr	r2, [r2]
+  87 000c D41A     		subs	r4, r2, r3
+  88 000e 9A42     		cmp	r2, r3
+  89 0010 18D0     		beq	.L10
+  90 0012 8022     		movs	r2, #128
+  91 0014 9200     		lsls	r2, r2, #2
+  92 0016 9442     		cmp	r4, r2
+  93 0018 00D9     		bls	.L9
+  94 001a 1400     		movs	r4, r2
+  95              	.L9:
+  96 001c 0D4E     		ldr	r6, .L11+8
+  97 001e 0E4A     		ldr	r2, .L11+12
+  98 0020 1068     		ldr	r0, [r2]
+  99 0022 1818     		adds	r0, r3, r0
+ 100 0024 0430     		adds	r0, r0, #4
+ 101 0026 2200     		movs	r2, r4
+ 102 0028 3100     		movs	r1, r6
+ 103 002a FFF7FEFF 		bl	eepromRead
+ 104 002e 731C     		adds	r3, r6, #1
+ 105 0030 2B60     		str	r3, [r5]
+ 106 0032 A319     		adds	r3, r4, r6
+ 107 0034 6B60     		str	r3, [r5, #4]
+ 108 0036 054B     		ldr	r3, .L11
+ 109 0038 1A68     		ldr	r2, [r3]
+ 110 003a 9446     		mov	ip, r2
+ 111 003c 6444     		add	r4, r4, ip
+ 112 003e 1C60     		str	r4, [r3]
+ 113 0040 3078     		ldrb	r0, [r6]
+ 114              	.L7:
+ 115              		@ sp needed
+ 116 0042 70BD     		pop	{r4, r5, r6, pc}
+ 117              	.L10:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 3
+
+
+ 118 0044 0120     		movs	r0, #1
+ 119 0046 4042     		rsbs	r0, r0, #0
+ 120 0048 FBE7     		b	.L7
+ 121              	.L12:
+ 122 004a C046     		.align	2
+ 123              	.L11:
+ 124 004c 00000000 		.word	.LANCHOR3
+ 125 0050 00000000 		.word	.LANCHOR1
+ 126 0054 00000000 		.word	z_comp_buf
+ 127 0058 00000000 		.word	.LANCHOR2
+ 129              		.section	.text.push_bwry_pixels,"ax",%progbits
+ 130              		.align	1
+ 131              		.syntax unified
+ 132              		.code	16
+ 133              		.thumb_func
+ 135              	push_bwry_pixels:
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 139 0002 CE46     		mov	lr, r9
+ 140 0004 4746     		mov	r7, r8
+ 141 0006 80B5     		push	{r7, lr}
+ 142 0008 8446     		mov	ip, r0
+ 143 000a 8946     		mov	r9, r1
+ 144 000c 0624     		movs	r4, #6
+ 145 000e 0025     		movs	r5, #0
+ 146 0010 0020     		movs	r0, #0
+ 147 0012 0127     		movs	r7, #1
+ 148 0014 05E0     		b	.L19
+ 149              	.L15:
+ 150 0016 032A     		cmp	r2, #3
+ 151 0018 10DD     		ble	.L16
+ 152 001a 8000     		lsls	r0, r0, #2
+ 153 001c 3043     		orrs	r0, r6
+ 154 001e C0B2     		uxtb	r0, r0
+ 155              	.L17:
+ 156 0020 013C     		subs	r4, r4, #1
+ 157              	.L19:
+ 158 0022 621C     		adds	r2, r4, #1
+ 159 0024 6346     		mov	r3, ip
+ 160 0026 1341     		asrs	r3, r3, r2
+ 161 0028 3B40     		ands	r3, r7
+ 162 002a 4E46     		mov	r6, r9
+ 163 002c 1641     		asrs	r6, r6, r2
+ 164 002e B046     		mov	r8, r6
+ 165 0030 9E1C     		adds	r6, r3, #2
+ 166 0032 4146     		mov	r1, r8
+ 167 0034 0F42     		tst	r7, r1
+ 168 0036 EED1     		bne	.L15
+ 169 0038 1E00     		movs	r6, r3
+ 170 003a ECE7     		b	.L15
+ 171              	.L16:
+ 172 003c AD00     		lsls	r5, r5, #2
+ 173 003e 3543     		orrs	r5, r6
+ 174 0040 EDB2     		uxtb	r5, r5
+ 175 0042 002C     		cmp	r4, #0
+ 176 0044 ECDA     		bge	.L17
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 4
+
+
+ 177 0046 FFF7FEFF 		bl	epd_data
+ 178 004a 2800     		movs	r0, r5
+ 179 004c FFF7FEFF 		bl	epd_data
+ 180 0050 034A     		ldr	r2, .L20
+ 181 0052 1368     		ldr	r3, [r2]
+ 182 0054 0233     		adds	r3, r3, #2
+ 183 0056 1360     		str	r3, [r2]
+ 184              		@ sp needed
+ 185 0058 C0BC     		pop	{r6, r7}
+ 186 005a B946     		mov	r9, r7
+ 187 005c B046     		mov	r8, r6
+ 188 005e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 189              	.L21:
+ 190              		.align	2
+ 191              	.L20:
+ 192 0060 00000000 		.word	.LANCHOR4
+ 194              		.section	.rodata.draw_zlib.str1.4,"aMS",%progbits,1
+ 195              		.align	2
+ 196              	.LC13:
+ 197 0000 5A4C4942 		.ascii	"ZLIB: Base=0x%08lX, CompSize=%lu, DecompSizeHeader="
+ 197      3A204261 
+ 197      73653D30 
+ 197      78253038 
+ 197      6C582C20 
+ 198 0033 256C750A 		.ascii	"%lu\012\000"
+ 198      00
+ 199              		.align	2
+ 200              	.LC17:
+ 201 0038 5A4C4942 		.ascii	"ZLIB: Header Bytes: %02X %02X %02X %02X\012\000"
+ 201      3A204865 
+ 201      61646572 
+ 201      20427974 
+ 201      65733A20 
+ 202 0061 000000   		.align	2
+ 203              	.LC21:
+ 204 0064 5A4C4942 		.ascii	"ZLIB Error: parse_header failed (%d)\012\000"
+ 204      20457272 
+ 204      6F723A20 
+ 204      70617273 
+ 204      655F6865 
+ 205 008a 0000     		.align	2
+ 206              	.LC24:
+ 207 008c 5A4C4942 		.ascii	"ZLIB Error: Failed to read image info header\012\000"
+ 207      20457272 
+ 207      6F723A20 
+ 207      4661696C 
+ 207      65642074 
+ 208 00ba 0000     		.align	2
+ 209              	.LC26:
+ 210 00bc 5A4C4942 		.ascii	"ZLIB: Info -> %dbpp\012\000"
+ 210      3A20496E 
+ 210      666F202D 
+ 210      3E202564 
+ 210      6270700A 
+ 211 00d1 000000   		.align	2
+ 212              	.LC34:
+ 213 00d4 5A4C4942 		.ascii	"ZLIB: Skipping %lu bytes on Stream 1...\012\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 5
+
+
+ 213      3A20536B 
+ 213      69707069 
+ 213      6E672025 
+ 213      6C752062 
+ 214 00fd 000000   		.align	2
+ 215              	.LC36:
+ 216 0100 536B6970 		.ascii	"Skip Error!\012\000"
+ 216      20457272 
+ 216      6F72210A 
+ 216      00
+ 217 010d 000000   		.align	2
+ 218              	.LC39:
+ 219 0110 5A4C4942 		.ascii	"ZLIB Done. Sent %lu bytes\012\000"
+ 219      20446F6E 
+ 219      652E2053 
+ 219      656E7420 
+ 219      256C7520 
+ 220              		.section	.text.draw_zlib,"ax",%progbits
+ 221              		.align	1
+ 222              		.syntax unified
+ 223              		.code	16
+ 224              		.thumb_func
+ 226              	draw_zlib:
+ 227              		@ args = 0, pretend = 0, frame = 2584
+ 228              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 230 0002 CE46     		mov	lr, r9
+ 231 0004 4746     		mov	r7, r8
+ 232 0006 80B5     		push	{r7, lr}
+ 233 0008 934C     		ldr	r4, .L42
+ 234 000a A544     		add	sp, sp, r4
+ 235 000c 1530     		adds	r0, r0, #21
+ 236 000e 934D     		ldr	r5, .L42+4
+ 237 0010 2860     		str	r0, [r5]
+ 238 0012 934E     		ldr	r6, .L42+8
+ 239 0014 0B7B     		ldrb	r3, [r1, #12]
+ 240 0016 4C7B     		ldrb	r4, [r1, #13]
+ 241 0018 2402     		lsls	r4, r4, #8
+ 242 001a 1C43     		orrs	r4, r3
+ 243 001c 8A7B     		ldrb	r2, [r1, #14]
+ 244 001e 1204     		lsls	r2, r2, #16
+ 245 0020 1443     		orrs	r4, r2
+ 246 0022 CB7B     		ldrb	r3, [r1, #15]
+ 247 0024 1B06     		lsls	r3, r3, #24
+ 248 0026 2343     		orrs	r3, r4
+ 249 0028 043B     		subs	r3, r3, #4
+ 250 002a 3360     		str	r3, [r6]
+ 251 002c 0422     		movs	r2, #4
+ 252 002e 8D49     		ldr	r1, .L42+12
+ 253 0030 6944     		add	r1, r1, sp
+ 254 0032 FFF7FEFF 		bl	eepromRead
+ 255 0036 3268     		ldr	r2, [r6]
+ 256 0038 8A4B     		ldr	r3, .L42+12
+ 257 003a 6B44     		add	r3, r3, sp
+ 258 003c 1B68     		ldr	r3, [r3]
+ 259 003e 2968     		ldr	r1, [r5]
+ 260 0040 8948     		ldr	r0, .L42+16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 6
+
+
+ 261 0042 FFF7FEFF 		bl	uart_printf
+ 262 0046 8022     		movs	r2, #128
+ 263 0048 9200     		lsls	r2, r2, #2
+ 264 004a 884B     		ldr	r3, .L42+20
+ 265 004c 1A60     		str	r2, [r3]
+ 266 004e 884C     		ldr	r4, .L42+24
+ 267 0050 2868     		ldr	r0, [r5]
+ 268 0052 0430     		adds	r0, r0, #4
+ 269 0054 2100     		movs	r1, r4
+ 270 0056 FFF7FEFF 		bl	eepromRead
+ 271 005a A378     		ldrb	r3, [r4, #2]
+ 272 005c 6278     		ldrb	r2, [r4, #1]
+ 273 005e 2178     		ldrb	r1, [r4]
+ 274 0060 E078     		ldrb	r0, [r4, #3]
+ 275 0062 0090     		str	r0, [sp]
+ 276 0064 8348     		ldr	r0, .L42+28
+ 277 0066 FFF7FEFF 		bl	uart_printf
+ 278 006a A323     		movs	r3, #163
+ 279 006c DB00     		lsls	r3, r3, #3
+ 280 006e 6B44     		add	r3, r3, sp
+ 281 0070 1C60     		str	r4, [r3]
+ 282 0072 8023     		movs	r3, #128
+ 283 0074 9B00     		lsls	r3, r3, #2
+ 284 0076 9C46     		mov	ip, r3
+ 285 0078 6444     		add	r4, r4, ip
+ 286 007a 7F4B     		ldr	r3, .L42+32
+ 287 007c 6B44     		add	r3, r3, sp
+ 288 007e 1C60     		str	r4, [r3]
+ 289 0080 7E4B     		ldr	r3, .L42+36
+ 290 0082 A422     		movs	r2, #164
+ 291 0084 D200     		lsls	r2, r2, #3
+ 292 0086 6A44     		add	r2, r2, sp
+ 293 0088 1360     		str	r3, [r2]
+ 294 008a A320     		movs	r0, #163
+ 295 008c C000     		lsls	r0, r0, #3
+ 296 008e 6844     		add	r0, r0, sp
+ 297 0090 FFF7FEFF 		bl	uzlib_zlib_parse_header
+ 298 0094 011E     		subs	r1, r0, #0
+ 299 0096 45DB     		blt	.L39
+ 300 0098 8022     		movs	r2, #128
+ 301 009a 5200     		lsls	r2, r2, #1
+ 302 009c 8240     		lsls	r2, r2, r0
+ 303 009e 7849     		ldr	r1, .L42+40
+ 304 00a0 A323     		movs	r3, #163
+ 305 00a2 DB00     		lsls	r3, r3, #3
+ 306 00a4 6B44     		add	r3, r3, sp
+ 307 00a6 1800     		movs	r0, r3
+ 308 00a8 FFF7FEFF 		bl	uzlib_uncompress_init
+ 309 00ac A323     		movs	r3, #163
+ 310 00ae DB00     		lsls	r3, r3, #3
+ 311 00b0 6B44     		add	r3, r3, sp
+ 312 00b2 A222     		movs	r2, #162
+ 313 00b4 D200     		lsls	r2, r2, #3
+ 314 00b6 6A44     		add	r2, r2, sp
+ 315 00b8 9A61     		str	r2, [r3, #24]
+ 316 00ba A222     		movs	r2, #162
+ 317 00bc D200     		lsls	r2, r2, #3
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 7
+
+
+ 318 00be 6A44     		add	r2, r2, sp
+ 319 00c0 5A61     		str	r2, [r3, #20]
+ 320 00c2 704A     		ldr	r2, .L42+44
+ 321 00c4 6A44     		add	r2, r2, sp
+ 322 00c6 DA61     		str	r2, [r3, #28]
+ 323 00c8 A323     		movs	r3, #163
+ 324 00ca DB00     		lsls	r3, r3, #3
+ 325 00cc 6B44     		add	r3, r3, sp
+ 326 00ce 1800     		movs	r0, r3
+ 327 00d0 FFF7FEFF 		bl	uzlib_uncompress
+ 328 00d4 0028     		cmp	r0, #0
+ 329 00d6 2ADB     		blt	.L40
+ 330 00d8 A223     		movs	r3, #162
+ 331 00da DB00     		lsls	r3, r3, #3
+ 332 00dc 6B44     		add	r3, r3, sp
+ 333 00de 5C79     		ldrb	r4, [r3, #5]
+ 334 00e0 2100     		movs	r1, r4
+ 335 00e2 6948     		ldr	r0, .L42+48
+ 336 00e4 FFF7FEFF 		bl	uart_printf
+ 337 00e8 6849     		ldr	r1, .L42+52
+ 338 00ea 0D7E     		ldrb	r5, [r1, #24]
+ 339 00ec 4A7E     		ldrb	r2, [r1, #25]
+ 340 00ee 1202     		lsls	r2, r2, #8
+ 341 00f0 1543     		orrs	r5, r2
+ 342 00f2 887D     		ldrb	r0, [r1, #22]
+ 343 00f4 CB7D     		ldrb	r3, [r1, #23]
+ 344 00f6 1B02     		lsls	r3, r3, #8
+ 345 00f8 0343     		orrs	r3, r0
+ 346 00fa 6B43     		muls	r3, r5
+ 347 00fc DA17     		asrs	r2, r3, #31
+ 348 00fe 0725     		movs	r5, #7
+ 349 0100 1540     		ands	r5, r2
+ 350 0102 ED18     		adds	r5, r5, r3
+ 351 0104 ED10     		asrs	r5, r5, #3
+ 352 0106 1020     		movs	r0, #16
+ 353 0108 FFF7FEFF 		bl	epd_cmd
+ 354 010c 012C     		cmp	r4, #1
+ 355 010e 2BD1     		bne	.L26
+ 356 0110 002D     		cmp	r5, #0
+ 357 0112 00D1     		bne	.LCB352
+ 358 0114 93E0     		b	.L27	@long jump
+ 359              	.LCB352:
+ 360 0116 0027     		movs	r7, #0
+ 361 0118 03AC     		add	r4, sp, #12
+ 362 011a 0D26     		movs	r6, #13
+ 363 011c 6E44     		add	r6, r6, sp
+ 364 011e 5B4B     		ldr	r3, .L42+52
+ 365 0120 9846     		mov	r8, r3
+ 366 0122 10E0     		b	.L29
+ 367              	.L39:
+ 368 0124 5A48     		ldr	r0, .L42+56
+ 369 0126 FFF7FEFF 		bl	uart_printf
+ 370 012a 0020     		movs	r0, #0
+ 371 012c 8DE0     		b	.L24
+ 372              	.L40:
+ 373 012e 5948     		ldr	r0, .L42+60
+ 374 0130 FFF7FEFF 		bl	uart_printf
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 8
+
+
+ 375 0134 0020     		movs	r0, #0
+ 376 0136 88E0     		b	.L24
+ 377              	.L28:
+ 378 0138 2078     		ldrb	r0, [r4]
+ 379 013a 0021     		movs	r1, #0
+ 380 013c FFF7FEFF 		bl	push_bwry_pixels
+ 381 0140 0137     		adds	r7, r7, #1
+ 382 0142 BD42     		cmp	r5, r7
+ 383 0144 7BD0     		beq	.L27
+ 384              	.L29:
+ 385 0146 A323     		movs	r3, #163
+ 386 0148 DB00     		lsls	r3, r3, #3
+ 387 014a 6B44     		add	r3, r3, sp
+ 388 014c 9C61     		str	r4, [r3, #24]
+ 389 014e 5C61     		str	r4, [r3, #20]
+ 390 0150 DE61     		str	r6, [r3, #28]
+ 391 0152 1800     		movs	r0, r3
+ 392 0154 FFF7FEFF 		bl	uzlib_uncompress
+ 393 0158 4346     		mov	r3, r8
+ 394 015a DB7F     		ldrb	r3, [r3, #31]
+ 395 015c 002B     		cmp	r3, #0
+ 396 015e EBD0     		beq	.L28
+ 397 0160 2378     		ldrb	r3, [r4]
+ 398 0162 DB43     		mvns	r3, r3
+ 399 0164 2370     		strb	r3, [r4]
+ 400 0166 E7E7     		b	.L28
+ 401              	.L26:
+ 402 0168 8022     		movs	r2, #128
+ 403 016a 9200     		lsls	r2, r2, #2
+ 404 016c 4A4B     		ldr	r3, .L42+64
+ 405 016e 1A60     		str	r2, [r3]
+ 406 0170 4A4C     		ldr	r4, .L42+68
+ 407 0172 3A4B     		ldr	r3, .L42+4
+ 408 0174 1868     		ldr	r0, [r3]
+ 409 0176 0430     		adds	r0, r0, #4
+ 410 0178 2100     		movs	r1, r4
+ 411 017a FFF7FEFF 		bl	eepromRead
+ 412 017e 0394     		str	r4, [sp, #12]
+ 413 0180 8023     		movs	r3, #128
+ 414 0182 9B00     		lsls	r3, r3, #2
+ 415 0184 9C46     		mov	ip, r3
+ 416 0186 6444     		add	r4, r4, ip
+ 417 0188 0494     		str	r4, [sp, #16]
+ 418 018a 454B     		ldr	r3, .L42+72
+ 419 018c 0593     		str	r3, [sp, #20]
+ 420 018e 03A8     		add	r0, sp, #12
+ 421 0190 FFF7FEFF 		bl	uzlib_zlib_parse_header
+ 422 0194 8022     		movs	r2, #128
+ 423 0196 5200     		lsls	r2, r2, #1
+ 424 0198 8240     		lsls	r2, r2, r0
+ 425 019a 4249     		ldr	r1, .L42+76
+ 426 019c 03A8     		add	r0, sp, #12
+ 427 019e FFF7FEFF 		bl	uzlib_uncompress_init
+ 428 01a2 A91D     		adds	r1, r5, #6
+ 429 01a4 4048     		ldr	r0, .L42+80
+ 430 01a6 FFF7FEFF 		bl	uart_printf
+ 431 01aa 6C1D     		adds	r4, r5, #5
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 9
+
+
+ 432 01ac 0926     		movs	r6, #9
+ 433 01ae 6E44     		add	r6, r6, sp
+ 434 01b0 0A27     		movs	r7, #10
+ 435 01b2 6F44     		add	r7, r7, sp
+ 436 01b4 00E0     		b	.L31
+ 437              	.L36:
+ 438 01b6 1C00     		movs	r4, r3
+ 439              	.L31:
+ 440 01b8 0996     		str	r6, [sp, #36]
+ 441 01ba 0896     		str	r6, [sp, #32]
+ 442 01bc 0A97     		str	r7, [sp, #40]
+ 443 01be 03A8     		add	r0, sp, #12
+ 444 01c0 FFF7FEFF 		bl	uzlib_uncompress
+ 445 01c4 0028     		cmp	r0, #0
+ 446 01c6 0BDB     		blt	.L41
+ 447 01c8 631E     		subs	r3, r4, #1
+ 448 01ca 002C     		cmp	r4, #0
+ 449 01cc F3D1     		bne	.L36
+ 450 01ce 002D     		cmp	r5, #0
+ 451 01d0 35D0     		beq	.L27
+ 452 01d2 0A27     		movs	r7, #10
+ 453 01d4 6F44     		add	r7, r7, sp
+ 454 01d6 0B26     		movs	r6, #11
+ 455 01d8 6E44     		add	r6, r6, sp
+ 456 01da 2C4B     		ldr	r3, .L42+52
+ 457 01dc 9946     		mov	r9, r3
+ 458 01de 0BE0     		b	.L35
+ 459              	.L41:
+ 460 01e0 3248     		ldr	r0, .L42+84
+ 461 01e2 FFF7FEFF 		bl	uart_printf
+ 462 01e6 0020     		movs	r0, #0
+ 463 01e8 2FE0     		b	.L24
+ 464              	.L34:
+ 465 01ea 3178     		ldrb	r1, [r6]
+ 466 01ec 3878     		ldrb	r0, [r7]
+ 467 01ee FFF7FEFF 		bl	push_bwry_pixels
+ 468 01f2 0134     		adds	r4, r4, #1
+ 469 01f4 A542     		cmp	r5, r4
+ 470 01f6 22D0     		beq	.L27
+ 471              	.L35:
+ 472 01f8 A323     		movs	r3, #163
+ 473 01fa DB00     		lsls	r3, r3, #3
+ 474 01fc 6B44     		add	r3, r3, sp
+ 475 01fe 9F61     		str	r7, [r3, #24]
+ 476 0200 5F61     		str	r7, [r3, #20]
+ 477 0202 DE61     		str	r6, [r3, #28]
+ 478 0204 0996     		str	r6, [sp, #36]
+ 479 0206 0896     		str	r6, [sp, #32]
+ 480 0208 03AB     		add	r3, sp, #12
+ 481 020a 9846     		mov	r8, r3
+ 482 020c 0A93     		str	r3, [sp, #40]
+ 483 020e A320     		movs	r0, #163
+ 484 0210 C000     		lsls	r0, r0, #3
+ 485 0212 6844     		add	r0, r0, sp
+ 486 0214 FFF7FEFF 		bl	uzlib_uncompress
+ 487 0218 4046     		mov	r0, r8
+ 488 021a FFF7FEFF 		bl	uzlib_uncompress
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 10
+
+
+ 489 021e 4B46     		mov	r3, r9
+ 490 0220 DB7F     		ldrb	r3, [r3, #31]
+ 491 0222 002B     		cmp	r3, #0
+ 492 0224 02D0     		beq	.L33
+ 493 0226 3B78     		ldrb	r3, [r7]
+ 494 0228 DB43     		mvns	r3, r3
+ 495 022a 3B70     		strb	r3, [r7]
+ 496              	.L33:
+ 497 022c 174A     		ldr	r2, .L42+52
+ 498 022e 2023     		movs	r3, #32
+ 499 0230 D35C     		ldrb	r3, [r2, r3]
+ 500 0232 002B     		cmp	r3, #0
+ 501 0234 D9D0     		beq	.L34
+ 502 0236 3378     		ldrb	r3, [r6]
+ 503 0238 DB43     		mvns	r3, r3
+ 504 023a 3370     		strb	r3, [r6]
+ 505 023c D5E7     		b	.L34
+ 506              	.L27:
+ 507 023e 1C4B     		ldr	r3, .L42+88
+ 508 0240 1968     		ldr	r1, [r3]
+ 509 0242 1C48     		ldr	r0, .L42+92
+ 510 0244 FFF7FEFF 		bl	uart_printf
+ 511 0248 0120     		movs	r0, #1
+ 512              	.L24:
+ 513 024a 1B4B     		ldr	r3, .L42+96
+ 514 024c 9D44     		add	sp, sp, r3
+ 515              		@ sp needed
+ 516 024e C0BC     		pop	{r6, r7}
+ 517 0250 B946     		mov	r9, r7
+ 518 0252 B046     		mov	r8, r6
+ 519 0254 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 520              	.L43:
+ 521 0256 C046     		.align	2
+ 522              	.L42:
+ 523 0258 DCF5FFFF 		.word	-2596
+ 524 025c 00000000 		.word	.LANCHOR2
+ 525 0260 00000000 		.word	.LANCHOR1
+ 526 0264 1C0A0000 		.word	2588
+ 527 0268 00000000 		.word	.LC13
+ 528 026c 00000000 		.word	.LANCHOR3
+ 529 0270 00000000 		.word	z_comp_buf
+ 530 0274 38000000 		.word	.LC17
+ 531 0278 1C050000 		.word	1308
+ 532 027c 00000000 		.word	zlib_read_cb0
+ 533 0280 00000000 		.word	z_dict
+ 534 0284 16050000 		.word	1302
+ 535 0288 BC000000 		.word	.LC26
+ 536 028c 00000000 		.word	settings
+ 537 0290 64000000 		.word	.LC21
+ 538 0294 8C000000 		.word	.LC24
+ 539 0298 00000000 		.word	.LANCHOR0
+ 540 029c 00000000 		.word	z_comp_buf1
+ 541 02a0 00000000 		.word	zlib_read_cb1
+ 542 02a4 00000000 		.word	z_dict1
+ 543 02a8 D4000000 		.word	.LC34
+ 544 02ac 00010000 		.word	.LC36
+ 545 02b0 00000000 		.word	.LANCHOR4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 11
+
+
+ 546 02b4 10010000 		.word	.LC39
+ 547 02b8 240A0000 		.word	2596
+ 549              		.section	.rodata.drawImageAtAddress.str1.4,"aMS",%progbits,1
+ 550              		.align	2
+ 551              	.LC41:
+ 552 0000 0A445241 		.ascii	"\012DRAW START: 0x%08lX\012\000"
+ 552      57205354 
+ 552      4152543A 
+ 552      20307825 
+ 552      30386C58 
+ 553 0016 0000     		.align	2
+ 554              	.LC45:
+ 555 0018 4D6F6465 		.ascii	"Mode: RAW 1BPP\012\000"
+ 555      3A205241 
+ 555      57203142 
+ 555      50500A00 
+ 556              		.align	2
+ 557              	.LC47:
+ 558 0028 4D6F6465 		.ascii	"Mode: RAW 2BPP\012\000"
+ 558      3A205241 
+ 558      57203242 
+ 558      50500A00 
+ 559              		.align	2
+ 560              	.LC49:
+ 561 0038 5A4C4942 		.ascii	"ZLIB Failed!\012\000"
+ 561      20466169 
+ 561      6C656421 
+ 561      0A00
+ 562 0046 0000     		.align	2
+ 563              	.LC52:
+ 564 0048 52656672 		.ascii	"Refresh triggered...\012\000"
+ 564      65736820 
+ 564      74726967 
+ 564      67657265 
+ 564      642E2E2E 
+ 565              		.section	.text.drawImageAtAddress,"ax",%progbits
+ 566              		.align	1
+ 567              		.global	drawImageAtAddress
+ 568              		.syntax unified
+ 569              		.code	16
+ 570              		.thumb_func
+ 572              	drawImageAtAddress:
+ 573              		@ args = 0, pretend = 0, frame = 32
+ 574              		@ frame_needed = 0, uses_anonymous_args = 0
+ 575 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 576 0002 CE46     		mov	lr, r9
+ 577 0004 4746     		mov	r7, r8
+ 578 0006 80B5     		push	{r7, lr}
+ 579 0008 89B0     		sub	sp, sp, #36
+ 580 000a 0600     		movs	r6, r0
+ 581 000c 0100     		movs	r1, r0
+ 582 000e 5148     		ldr	r0, .L59
+ 583 0010 FFF7FEFF 		bl	uart_printf
+ 584 0014 504B     		ldr	r3, .L59+4
+ 585 0016 0022     		movs	r2, #0
+ 586 0018 1A60     		str	r2, [r3]
+ 587 001a FFF7FEFF 		bl	eepromPowerUp
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 12
+
+
+ 588 001e 02AF     		add	r7, sp, #8
+ 589 0020 1522     		movs	r2, #21
+ 590 0022 3900     		movs	r1, r7
+ 591 0024 3000     		movs	r0, r6
+ 592 0026 FFF7FEFF 		bl	eepromRead
+ 593 002a 4C49     		ldr	r1, .L59+8
+ 594 002c 0D7E     		ldrb	r5, [r1, #24]
+ 595 002e 4A7E     		ldrb	r2, [r1, #25]
+ 596 0030 1202     		lsls	r2, r2, #8
+ 597 0032 1543     		orrs	r5, r2
+ 598 0034 887D     		ldrb	r0, [r1, #22]
+ 599 0036 CB7D     		ldrb	r3, [r1, #23]
+ 600 0038 1B02     		lsls	r3, r3, #8
+ 601 003a 0343     		orrs	r3, r0
+ 602 003c 6B43     		muls	r3, r5
+ 603 003e DA17     		asrs	r2, r3, #31
+ 604 0040 0725     		movs	r5, #7
+ 605 0042 1540     		ands	r5, r2
+ 606 0044 ED18     		adds	r5, r5, r3
+ 607 0046 ED10     		asrs	r5, r5, #3
+ 608 0048 3400     		movs	r4, r6
+ 609 004a 1534     		adds	r4, r4, #21
+ 610 004c FFF7FEFF 		bl	epd_board_init
+ 611 0050 FFF7FEFF 		bl	epd_init
+ 612 0054 3B7C     		ldrb	r3, [r7, #16]
+ 613 0056 202B     		cmp	r3, #32
+ 614 0058 1AD0     		beq	.L56
+ 615 005a 212B     		cmp	r3, #33
+ 616 005c 38D0     		beq	.L57
+ 617 005e 302B     		cmp	r3, #48
+ 618 0060 67D0     		beq	.L58
+ 619              	.L46:
+ 620 0062 FFF7FEFF 		bl	eepromPowerDown
+ 621 0066 3E4B     		ldr	r3, .L59+12
+ 622 0068 0122     		movs	r2, #1
+ 623 006a 1A70     		strb	r2, [r3]
+ 624 006c 0420     		movs	r0, #4
+ 625 006e FFF7FEFF 		bl	epd_cmd
+ 626 0072 FFF7FEFF 		bl	epd_wait_busy
+ 627 0076 0022     		movs	r2, #0
+ 628 0078 0121     		movs	r1, #1
+ 629 007a 1220     		movs	r0, #18
+ 630 007c FFF7FEFF 		bl	epd_write
+ 631 0080 3848     		ldr	r0, .L59+16
+ 632 0082 FFF7FEFF 		bl	uart_printf
+ 633              	.L44:
+ 634 0086 09B0     		add	sp, sp, #36
+ 635              		@ sp needed
+ 636 0088 C0BC     		pop	{r6, r7}
+ 637 008a B946     		mov	r9, r7
+ 638 008c B046     		mov	r8, r6
+ 639 008e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 640              	.L56:
+ 641 0090 3548     		ldr	r0, .L59+20
+ 642 0092 FFF7FEFF 		bl	uart_printf
+ 643 0096 1020     		movs	r0, #16
+ 644 0098 FFF7FEFF 		bl	epd_cmd
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 13
+
+
+ 645 009c 002D     		cmp	r5, #0
+ 646 009e E0D0     		beq	.L46
+ 647 00a0 2D19     		adds	r5, r5, r4
+ 648 00a2 6B46     		mov	r3, sp
+ 649 00a4 DE1D     		adds	r6, r3, #7
+ 650 00a6 2D4F     		ldr	r7, .L59+8
+ 651 00a8 06E0     		b	.L48
+ 652              	.L47:
+ 653 00aa 3078     		ldrb	r0, [r6]
+ 654 00ac 0021     		movs	r1, #0
+ 655 00ae FFF7FEFF 		bl	push_bwry_pixels
+ 656 00b2 0134     		adds	r4, r4, #1
+ 657 00b4 AC42     		cmp	r4, r5
+ 658 00b6 D4D0     		beq	.L46
+ 659              	.L48:
+ 660 00b8 0122     		movs	r2, #1
+ 661 00ba 3100     		movs	r1, r6
+ 662 00bc 2000     		movs	r0, r4
+ 663 00be FFF7FEFF 		bl	eepromRead
+ 664 00c2 FB7F     		ldrb	r3, [r7, #31]
+ 665 00c4 002B     		cmp	r3, #0
+ 666 00c6 F0D0     		beq	.L47
+ 667 00c8 3378     		ldrb	r3, [r6]
+ 668 00ca DB43     		mvns	r3, r3
+ 669 00cc 3370     		strb	r3, [r6]
+ 670 00ce ECE7     		b	.L47
+ 671              	.L57:
+ 672 00d0 2648     		ldr	r0, .L59+24
+ 673 00d2 FFF7FEFF 		bl	uart_printf
+ 674 00d6 1020     		movs	r0, #16
+ 675 00d8 FFF7FEFF 		bl	epd_cmd
+ 676 00dc 002D     		cmp	r5, #0
+ 677 00de C0D0     		beq	.L46
+ 678 00e0 2B19     		adds	r3, r5, r4
+ 679 00e2 9946     		mov	r9, r3
+ 680 00e4 6B46     		mov	r3, sp
+ 681 00e6 9F1D     		adds	r7, r3, #6
+ 682 00e8 DE1D     		adds	r6, r3, #7
+ 683 00ea 1C4B     		ldr	r3, .L59+8
+ 684 00ec 9846     		mov	r8, r3
+ 685 00ee 06E0     		b	.L52
+ 686              	.L51:
+ 687 00f0 3178     		ldrb	r1, [r6]
+ 688 00f2 3878     		ldrb	r0, [r7]
+ 689 00f4 FFF7FEFF 		bl	push_bwry_pixels
+ 690 00f8 0134     		adds	r4, r4, #1
+ 691 00fa 4C45     		cmp	r4, r9
+ 692 00fc B1D0     		beq	.L46
+ 693              	.L52:
+ 694 00fe 0122     		movs	r2, #1
+ 695 0100 3900     		movs	r1, r7
+ 696 0102 2000     		movs	r0, r4
+ 697 0104 FFF7FEFF 		bl	eepromRead
+ 698 0108 2819     		adds	r0, r5, r4
+ 699 010a 0122     		movs	r2, #1
+ 700 010c 3100     		movs	r1, r6
+ 701 010e FFF7FEFF 		bl	eepromRead
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 14
+
+
+ 702 0112 4346     		mov	r3, r8
+ 703 0114 DB7F     		ldrb	r3, [r3, #31]
+ 704 0116 002B     		cmp	r3, #0
+ 705 0118 02D0     		beq	.L50
+ 706 011a 3B78     		ldrb	r3, [r7]
+ 707 011c DB43     		mvns	r3, r3
+ 708 011e 3B70     		strb	r3, [r7]
+ 709              	.L50:
+ 710 0120 0E4A     		ldr	r2, .L59+8
+ 711 0122 2023     		movs	r3, #32
+ 712 0124 D35C     		ldrb	r3, [r2, r3]
+ 713 0126 002B     		cmp	r3, #0
+ 714 0128 E2D0     		beq	.L51
+ 715 012a 3378     		ldrb	r3, [r6]
+ 716 012c DB43     		mvns	r3, r3
+ 717 012e 3370     		strb	r3, [r6]
+ 718 0130 DEE7     		b	.L51
+ 719              	.L58:
+ 720 0132 02A9     		add	r1, sp, #8
+ 721 0134 3000     		movs	r0, r6
+ 722 0136 FFF7FEFF 		bl	draw_zlib
+ 723 013a 0028     		cmp	r0, #0
+ 724 013c 00D0     		beq	.LCB749
+ 725 013e 90E7     		b	.L46	@long jump
+ 726              	.LCB749:
+ 727 0140 0B48     		ldr	r0, .L59+28
+ 728 0142 FFF7FEFF 		bl	uart_printf
+ 729 0146 FFF7FEFF 		bl	eepromPowerDown
+ 730 014a FFF7FEFF 		bl	epd_sleep
+ 731 014e FFF7FEFF 		bl	epd_board_sleep
+ 732 0152 98E7     		b	.L44
+ 733              	.L60:
+ 734              		.align	2
+ 735              	.L59:
+ 736 0154 00000000 		.word	.LC41
+ 737 0158 00000000 		.word	.LANCHOR4
+ 738 015c 00000000 		.word	settings
+ 739 0160 00000000 		.word	.LANCHOR5
+ 740 0164 48000000 		.word	.LC52
+ 741 0168 18000000 		.word	.LC45
+ 742 016c 28000000 		.word	.LC47
+ 743 0170 38000000 		.word	.LC49
+ 745              		.section	.rodata.epd_refresh_done.str1.4,"aMS",%progbits,1
+ 746              		.align	2
+ 747              	.LC55:
+ 748 0000 52656672 		.ascii	"Refresh finished.\012\000"
+ 748      65736820 
+ 748      66696E69 
+ 748      73686564 
+ 748      2E0A00
+ 749              		.section	.text.epd_refresh_done,"ax",%progbits
+ 750              		.align	1
+ 751              		.global	epd_refresh_done
+ 752              		.syntax unified
+ 753              		.code	16
+ 754              		.thumb_func
+ 756              	epd_refresh_done:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 15
+
+
+ 757              		@ args = 0, pretend = 0, frame = 0
+ 758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 759 0000 10B5     		push	{r4, lr}
+ 760 0002 1B20     		movs	r0, #27
+ 761 0004 FFF7FEFF 		bl	GPIO_GetPin
+ 762 0008 0C4B     		ldr	r3, .L66
+ 763 000a 1A6D     		ldr	r2, [r3, #80]
+ 764 000c 1B6D     		ldr	r3, [r3, #80]
+ 765 000e 0024     		movs	r4, #0
+ 766 0010 0342     		tst	r3, r0
+ 767 0012 05D0     		beq	.L62
+ 768 0014 0A4B     		ldr	r3, .L66+4
+ 769 0016 1B78     		ldrb	r3, [r3]
+ 770 0018 DCB2     		uxtb	r4, r3
+ 771 001a 002B     		cmp	r3, #0
+ 772 001c 02D1     		bne	.L65
+ 773 001e 0124     		movs	r4, #1
+ 774              	.L62:
+ 775 0020 2000     		movs	r0, r4
+ 776              		@ sp needed
+ 777 0022 10BD     		pop	{r4, pc}
+ 778              	.L65:
+ 779 0024 064B     		ldr	r3, .L66+4
+ 780 0026 0022     		movs	r2, #0
+ 781 0028 1A70     		strb	r2, [r3]
+ 782 002a FFF7FEFF 		bl	epd_sleep
+ 783 002e FFF7FEFF 		bl	epd_board_sleep
+ 784 0032 0448     		ldr	r0, .L66+8
+ 785 0034 FFF7FEFF 		bl	uart_printf
+ 786 0038 F2E7     		b	.L62
+ 787              	.L67:
+ 788 003a C046     		.align	2
+ 789              	.L66:
+ 790 003c 00100040 		.word	1073745920
+ 791 0040 00000000 		.word	.LANCHOR5
+ 792 0044 00000000 		.word	.LC55
+ 794              		.global	g_epd_refreshing
+ 795              		.global	byteCounter
+ 796              		.section	.bss.byteCounter,"aw",%nobits
+ 797              		.align	2
+ 798              		.set	.LANCHOR4,. + 0
+ 801              	byteCounter:
+ 802 0000 00000000 		.space	4
+ 803              		.section	.bss.g_epd_refreshing,"aw",%nobits
+ 804              		.set	.LANCHOR5,. + 0
+ 807              	g_epd_refreshing:
+ 808 0000 00       		.space	1
+ 809              		.section	.bss.z_comp_buf,"aw",%nobits
+ 810              		.align	2
+ 813              	z_comp_buf:
+ 814 0000 00000000 		.space	512
+ 814      00000000 
+ 814      00000000 
+ 814      00000000 
+ 814      00000000 
+ 815              		.section	.bss.z_comp_buf1,"aw",%nobits
+ 816              		.align	2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 16
+
+
+ 819              	z_comp_buf1:
+ 820 0000 00000000 		.space	512
+ 820      00000000 
+ 820      00000000 
+ 820      00000000 
+ 820      00000000 
+ 821              		.section	.bss.z_comp_size,"aw",%nobits
+ 822              		.align	2
+ 823              		.set	.LANCHOR1,. + 0
+ 826              	z_comp_size:
+ 827 0000 00000000 		.space	4
+ 828              		.section	.bss.z_dict,"aw",%nobits
+ 829              		.align	2
+ 832              	z_dict:
+ 833 0000 00000000 		.space	4096
+ 833      00000000 
+ 833      00000000 
+ 833      00000000 
+ 833      00000000 
+ 834              		.section	.bss.z_dict1,"aw",%nobits
+ 835              		.align	2
+ 838              	z_dict1:
+ 839 0000 00000000 		.space	4096
+ 839      00000000 
+ 839      00000000 
+ 839      00000000 
+ 839      00000000 
+ 840              		.section	.bss.z_eeprom_base,"aw",%nobits
+ 841              		.align	2
+ 842              		.set	.LANCHOR2,. + 0
+ 845              	z_eeprom_base:
+ 846 0000 00000000 		.space	4
+ 847              		.section	.bss.z_pos0,"aw",%nobits
+ 848              		.align	2
+ 849              		.set	.LANCHOR3,. + 0
+ 852              	z_pos0:
+ 853 0000 00000000 		.space	4
+ 854              		.section	.bss.z_pos1,"aw",%nobits
+ 855              		.align	2
+ 856              		.set	.LANCHOR0,. + 0
+ 859              	z_pos1:
+ 860 0000 00000000 		.space	4
+ 861              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 drawing.c
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:16     .text.zlib_read_cb1:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:21     .text.zlib_read_cb1:00000000 zlib_read_cb1
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:67     .text.zlib_read_cb1:0000004c $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:819    .bss.z_comp_buf1:00000000 z_comp_buf1
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:73     .text.zlib_read_cb0:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:78     .text.zlib_read_cb0:00000000 zlib_read_cb0
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:124    .text.zlib_read_cb0:0000004c $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:813    .bss.z_comp_buf:00000000 z_comp_buf
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:130    .text.push_bwry_pixels:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:135    .text.push_bwry_pixels:00000000 push_bwry_pixels
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:192    .text.push_bwry_pixels:00000060 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:195    .rodata.draw_zlib.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:221    .text.draw_zlib:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:226    .text.draw_zlib:00000000 draw_zlib
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:523    .text.draw_zlib:00000258 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:832    .bss.z_dict:00000000 z_dict
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:838    .bss.z_dict1:00000000 z_dict1
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:550    .rodata.drawImageAtAddress.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:566    .text.drawImageAtAddress:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:572    .text.drawImageAtAddress:00000000 drawImageAtAddress
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:736    .text.drawImageAtAddress:00000154 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:746    .rodata.epd_refresh_done.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:750    .text.epd_refresh_done:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:756    .text.epd_refresh_done:00000000 epd_refresh_done
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:790    .text.epd_refresh_done:0000003c $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:807    .bss.g_epd_refreshing:00000000 g_epd_refreshing
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:801    .bss.byteCounter:00000000 byteCounter
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:797    .bss.byteCounter:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:808    .bss.g_epd_refreshing:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:810    .bss.z_comp_buf:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:816    .bss.z_comp_buf1:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:822    .bss.z_comp_size:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:826    .bss.z_comp_size:00000000 z_comp_size
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:829    .bss.z_dict:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:835    .bss.z_dict1:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:841    .bss.z_eeprom_base:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:845    .bss.z_eeprom_base:00000000 z_eeprom_base
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:848    .bss.z_pos0:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:852    .bss.z_pos0:00000000 z_pos0
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:855    .bss.z_pos1:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s:859    .bss.z_pos1:00000000 z_pos1
+
+UNDEFINED SYMBOLS
+eepromRead
+epd_data
+uart_printf
+uzlib_zlib_parse_header
+uzlib_uncompress_init
+uzlib_uncompress
+epd_cmd
+settings
+eepromPowerUp
+epd_board_init
+epd_init
+eepromPowerDown
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc0MZoDN.s 			page 18
+
+
+epd_wait_busy
+epd_write
+epd_sleep
+epd_board_sleep
+GPIO_GetPin

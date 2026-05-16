@@ -1,0 +1,2391 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"system_rtl876x.c"
+  14              		.section	.rodata.str1.4,"aMS",%progbits,1
+  15              		.align	2
+  16              	.LC0:
+  17 0000 496E6974 		.ascii	"InitialSP\000"
+  17      69616C53 
+  17      5000
+  18 000a 0000     		.align	2
+  19              	.LC1:
+  20 000c 52657365 		.ascii	"Reset\000"
+  20      7400
+  21 0012 0000     		.align	2
+  22              	.LC2:
+  23 0014 4E4D4900 		.ascii	"NMI\000"
+  24              		.align	2
+  25              	.LC3:
+  26 0018 48617264 		.ascii	"HardFault\000"
+  26      4661756C 
+  26      7400
+  27 0022 0000     		.align	2
+  28              	.LC4:
+  29 0024 4D656D4D 		.ascii	"MemManage\000"
+  29      616E6167 
+  29      6500
+  30 002e 0000     		.align	2
+  31              	.LC5:
+  32 0030 42757346 		.ascii	"BusFault\000"
+  32      61756C74 
+  32      00
+  33 0039 000000   		.align	2
+  34              	.LC6:
+  35 003c 55736167 		.ascii	"UsageFault\000"
+  35      65466175 
+  35      6C7400
+  36 0047 00       		.align	2
+  37              	.LC7:
+  38 0048 52737664 		.ascii	"Rsvd\000"
+  38      00
+  39 004d 000000   		.align	2
+  40              	.LC8:
+  41 0050 53564300 		.ascii	"SVC\000"
+  42              		.align	2
+  43              	.LC9:
+  44 0054 44656275 		.ascii	"DebugMon\000"
+  44      674D6F6E 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 2
+
+
+  44      00
+  45 005d 000000   		.align	2
+  46              	.LC10:
+  47 0060 50656E64 		.ascii	"PendSV\000"
+  47      535600
+  48 0067 00       		.align	2
+  49              	.LC11:
+  50 0068 53797354 		.ascii	"SysTick\000"
+  50      69636B00 
+  51              		.align	2
+  52              	.LC13:
+  53 0070 53797374 		.ascii	"System\000"
+  53      656D00
+  54 0077 00       		.align	2
+  55              	.LC14:
+  56 0078 57444700 		.ascii	"WDG\000"
+  57              		.align	2
+  58              	.LC15:
+  59 007c 42544D41 		.ascii	"BTMAC\000"
+  59      4300
+  60 0082 0000     		.align	2
+  61              	.LC16:
+  62 0084 54494D33 		.ascii	"TIM3\000"
+  62      00
+  63 0089 000000   		.align	2
+  64              	.LC17:
+  65 008c 54494D32 		.ascii	"TIM2\000"
+  65      00
+  66 0091 000000   		.align	2
+  67              	.LC18:
+  68 0094 506C6174 		.ascii	"Platform\000"
+  68      666F726D 
+  68      00
+  69 009d 000000   		.align	2
+  70              	.LC19:
+  71 00a0 49325330 		.ascii	"I2S0_TX\000"
+  71      5F545800 
+  72              		.align	2
+  73              	.LC20:
+  74 00a8 49325330 		.ascii	"I2S0_RX\000"
+  74      5F525800 
+  75              		.align	2
+  76              	.LC21:
+  77 00b0 54696D65 		.ascii	"Timer4-5\000"
+  77      72342D35 
+  77      00
+  78 00b9 000000   		.align	2
+  79              	.LC22:
+  80 00bc 4750494F 		.ascii	"GPIO4\000"
+  80      3400
+  81 00c2 0000     		.align	2
+  82              	.LC23:
+  83 00c4 4750494F 		.ascii	"GPIO5\000"
+  83      3500
+  84 00ca 0000     		.align	2
+  85              	.LC24:
+  86 00cc 55415254 		.ascii	"UART1\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 3
+
+
+  86      3100
+  87 00d2 0000     		.align	2
+  88              	.LC25:
+  89 00d4 55415254 		.ascii	"UART0\000"
+  89      3000
+  90 00da 0000     		.align	2
+  91              	.LC26:
+  92 00dc 52544300 		.ascii	"RTC\000"
+  93              		.align	2
+  94              	.LC27:
+  95 00e0 53504930 		.ascii	"SPI0\000"
+  95      00
+  96 00e5 000000   		.align	2
+  97              	.LC28:
+  98 00e8 53504931 		.ascii	"SPI1\000"
+  98      00
+  99 00ed 000000   		.align	2
+ 100              	.LC29:
+ 101 00f0 49324330 		.ascii	"I2C0\000"
+ 101      00
+ 102 00f5 000000   		.align	2
+ 103              	.LC30:
+ 104 00f8 49324331 		.ascii	"I2C1\000"
+ 104      00
+ 105 00fd 000000   		.align	2
+ 106              	.LC31:
+ 107 0100 41444300 		.ascii	"ADC\000"
+ 108              		.align	2
+ 109              	.LC32:
+ 110 0104 50657269 		.ascii	"Peripheral\000"
+ 110      70686572 
+ 110      616C00
+ 111 010f 00       		.align	2
+ 112              	.LC33:
+ 113 0110 47444D41 		.ascii	"GDMA0 Channel0\000"
+ 113      30204368 
+ 113      616E6E65 
+ 113      6C3000
+ 114 011f 00       		.align	2
+ 115              	.LC34:
+ 116 0120 47444D41 		.ascii	"GDMA0 Channel1\000"
+ 116      30204368 
+ 116      616E6E65 
+ 116      6C3100
+ 117 012f 00       		.align	2
+ 118              	.LC35:
+ 119 0130 47444D41 		.ascii	"GDMA0 Channel2\000"
+ 119      30204368 
+ 119      616E6E65 
+ 119      6C3200
+ 120 013f 00       		.align	2
+ 121              	.LC36:
+ 122 0140 47444D41 		.ascii	"GDMA0 Channel3\000"
+ 122      30204368 
+ 122      616E6E65 
+ 122      6C3300
+ 123 014f 00       		.align	2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 4
+
+
+ 124              	.LC37:
+ 125 0150 456E6861 		.ascii	"Enhanced_Timer0\000"
+ 125      6E636564 
+ 125      5F54696D 
+ 125      65723000 
+ 126              		.align	2
+ 127              	.LC38:
+ 128 0160 456E6861 		.ascii	"Enhanced_Timer1\000"
+ 128      6E636564 
+ 128      5F54696D 
+ 128      65723100 
+ 129              		.align	2
+ 130              	.LC39:
+ 131 0170 4750494F 		.ascii	"GPIO_Group3\000"
+ 131      5F47726F 
+ 131      75703300 
+ 132              		.align	2
+ 133              	.LC40:
+ 134 017c 4750494F 		.ascii	"GPIO_Group2\000"
+ 134      5F47726F 
+ 134      75703200 
+ 135              		.align	2
+ 136              	.LC41:
+ 137 0188 495200   		.ascii	"IR\000"
+ 138 018b 00       		.align	2
+ 139              	.LC42:
+ 140 018c 4750494F 		.ascii	"GPIO_Group1\000"
+ 140      5F47726F 
+ 140      75703100 
+ 141              		.align	2
+ 142              	.LC43:
+ 143 0198 4750494F 		.ascii	"GPIO_Group0\000"
+ 143      5F47726F 
+ 143      75703000 
+ 144              		.align	2
+ 145              	.LC44:
+ 146 01a4 54494D34 		.ascii	"TIM4\000"
+ 146      00
+ 147 01a9 000000   		.align	2
+ 148              	.LC45:
+ 149 01ac 54494D35 		.ascii	"TIM5\000"
+ 149      00
+ 150 01b1 000000   		.align	2
+ 151              	.LC46:
+ 152 01b4 5350495F 		.ascii	"SPI_Flash\000"
+ 152      466C6173 
+ 152      6800
+ 153 01be 0000     		.align	2
+ 154              	.LC47:
+ 155 01c0 51646563 		.ascii	"Qdecode\000"
+ 155      6F646500 
+ 156              		.align	2
+ 157              	.LC48:
+ 158 01c8 4B657973 		.ascii	"Keyscan\000"
+ 158      63616E00 
+ 159              		.align	2
+ 160              	.LC49:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 5
+
+
+ 161 01d0 53504932 		.ascii	"SPI2W\000"
+ 161      5700
+ 162 01d6 0000     		.align	2
+ 163              	.LC50:
+ 164 01d8 4C50434F 		.ascii	"LPCOMP\000"
+ 164      4D5000
+ 165 01df 00       		.align	2
+ 166              	.LC51:
+ 167 01e0 5054415F 		.ascii	"PTA_Mailbox\000"
+ 167      4D61696C 
+ 167      626F7800 
+ 168              		.align	2
+ 169              	.LC52:
+ 170 01ec 4341505F 		.ascii	"CAP_Touch\000"
+ 170      546F7563 
+ 170      6800
+ 171 01f6 0000     		.align	2
+ 172              	.LC53:
+ 173 01f8 54524E47 		.ascii	"TRNG\000"
+ 173      00
+ 174              		.text
+ 175              		.section	.app.flash.text,"ax",%progbits
+ 176              		.align	1
+ 177              		.global	wdg_system_reset_app_cb
+ 178              		.syntax unified
+ 179              		.code	16
+ 180              		.thumb_func
+ 182              	wdg_system_reset_app_cb:
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185 0000 10B5     		push	{r4, lr}
+ 186 0002 034B     		ldr	r3, .L3
+ 187 0004 1B68     		ldr	r3, [r3]
+ 188 0006 002B     		cmp	r3, #0
+ 189 0008 00D0     		beq	.L1
+ 190 000a 9847     		blx	r3
+ 191              	.L1:
+ 192              		@ sp needed
+ 193 000c 10BD     		pop	{r4, pc}
+ 194              	.L4:
+ 195 000e C046     		.align	2
+ 196              	.L3:
+ 197 0010 00000000 		.word	user_wdg_cb
+ 199              		.section	.text.set_active_timer_callback,"ax",%progbits
+ 200              		.align	1
+ 201              		.global	set_active_timer_callback
+ 202              		.syntax unified
+ 203              		.code	16
+ 204              		.thumb_func
+ 206              	set_active_timer_callback:
+ 207              		@ args = 0, pretend = 0, frame = 0
+ 208              		@ frame_needed = 0, uses_anonymous_args = 0
+ 209 0000 10B5     		push	{r4, lr}
+ 210 0002 FFF7FEFF 		bl	power_manager_resume_all
+ 211 0006 054C     		ldr	r4, .L6
+ 212 0008 2000     		movs	r0, r4
+ 213 000a FFF7FEFF 		bl	os_timer_stop
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 6
+
+
+ 214 000e 2000     		movs	r0, r4
+ 215 0010 FFF7FEFF 		bl	os_timer_delete
+ 216 0014 0023     		movs	r3, #0
+ 217 0016 2360     		str	r3, [r4]
+ 218              		@ sp needed
+ 219 0018 10BD     		pop	{r4, pc}
+ 220              	.L7:
+ 221 001a C046     		.align	2
+ 222              	.L6:
+ 223 001c 00000000 		.word	.LANCHOR0
+ 225              		.section	.text.random_seed_init,"ax",%progbits
+ 226              		.align	1
+ 227              		.global	random_seed_init
+ 228              		.syntax unified
+ 229              		.code	16
+ 230              		.thumb_func
+ 232              	random_seed_init:
+ 233              		@ args = 0, pretend = 0, frame = 0
+ 234              		@ frame_needed = 0, uses_anonymous_args = 0
+ 235 0000 10B5     		push	{r4, lr}
+ 236 0002 0120     		movs	r0, #1
+ 237 0004 4042     		rsbs	r0, r0, #0
+ 238 0006 FFF7FEFF 		bl	platform_random
+ 239 000a 014B     		ldr	r3, .L9
+ 240 000c 1860     		str	r0, [r3]
+ 241              		@ sp needed
+ 242 000e 10BD     		pop	{r4, pc}
+ 243              	.L10:
+ 244              		.align	2
+ 245              	.L9:
+ 246 0010 00000000 		.word	.LANCHOR1
+ 248              		.section	.app.flash.text
+ 249              		.align	1
+ 250              		.global	ram_cache_init
+ 251              		.syntax unified
+ 252              		.code	16
+ 253              		.thumb_func
+ 255              	ram_cache_init:
+ 256              		@ args = 0, pretend = 0, frame = 0
+ 257              		@ frame_needed = 0, uses_anonymous_args = 0
+ 258 0014 10B5     		push	{r4, lr}
+ 259 0016 034A     		ldr	r2, .L12
+ 260 0018 0349     		ldr	r1, .L12+4
+ 261 001a 0448     		ldr	r0, .L12+8
+ 262 001c FFF7FEFF 		bl	memcpy
+ 263              		@ sp needed
+ 264 0020 10BD     		pop	{r4, pc}
+ 265              	.L13:
+ 266 0022 C046     		.align	2
+ 267              	.L12:
+ 268 0024 00000000 		.word	__cache_dataon_length__
+ 269 0028 00000000 		.word	__cache_data_load_ad__
+ 270 002c 00000000 		.word	__cache_dataon_start__
+ 272              		.align	1
+ 273              		.global	get_image_entry_addr
+ 274              		.syntax unified
+ 275              		.code	16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 7
+
+
+ 276              		.thumb_func
+ 278              	get_image_entry_addr:
+ 279              		@ args = 0, pretend = 0, frame = 0
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281 0030 70B5     		push	{r4, r5, r6, lr}
+ 282 0032 0500     		movs	r5, r0
+ 283 0034 FFF7FEFF 		bl	get_active_ota_bank_addr
+ 284 0038 0400     		movs	r4, r0
+ 285 003a 1549     		ldr	r1, .L21
+ 286 003c FFF7FEFF 		bl	check_header_valid
+ 287 0040 0028     		cmp	r0, #0
+ 288 0042 1BD0     		beq	.L16
+ 289 0044 134B     		ldr	r3, .L21+4
+ 290 0046 E818     		adds	r0, r5, r3
+ 291 0048 C000     		lsls	r0, r0, #3
+ 292 004a 9D34     		adds	r4, r4, #157
+ 293 004c FF34     		adds	r4, r4, #255
+ 294 004e 0419     		adds	r4, r0, r4
+ 295 0050 2368     		ldr	r3, [r4]
+ 296 0052 002B     		cmp	r3, #0
+ 297 0054 14D0     		beq	.L17
+ 298 0056 2800     		movs	r0, r5
+ 299 0058 FFF7FEFF 		bl	get_header_addr_by_img_id
+ 300 005c 0400     		movs	r4, r0
+ 301 005e 2900     		movs	r1, r5
+ 302 0060 FFF7FEFF 		bl	check_header_valid
+ 303 0064 0028     		cmp	r0, #0
+ 304 0066 0DD0     		beq	.L18
+ 305 0068 A388     		ldrh	r3, [r4, #4]
+ 306 006a AB42     		cmp	r3, r5
+ 307 006c 0CD1     		bne	.L19
+ 308 006e 0A4B     		ldr	r3, .L21+8
+ 309 0070 9D42     		cmp	r5, r3
+ 310 0072 0BD8     		bhi	.L20
+ 311 0074 E369     		ldr	r3, [r4, #28]
+ 312 0076 0120     		movs	r0, #1
+ 313 0078 1843     		orrs	r0, r3
+ 314              	.L14:
+ 315              		@ sp needed
+ 316 007a 70BD     		pop	{r4, r5, r6, pc}
+ 317              	.L16:
+ 318 007c 0020     		movs	r0, #0
+ 319 007e FCE7     		b	.L14
+ 320              	.L17:
+ 321 0080 0020     		movs	r0, #0
+ 322 0082 FAE7     		b	.L14
+ 323              	.L18:
+ 324 0084 0020     		movs	r0, #0
+ 325 0086 F8E7     		b	.L14
+ 326              	.L19:
+ 327 0088 0020     		movs	r0, #0
+ 328 008a F6E7     		b	.L14
+ 329              	.L20:
+ 330 008c 0020     		movs	r0, #0
+ 331 008e F4E7     		b	.L14
+ 332              	.L22:
+ 333              		.align	2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 8
+
+
+ 334              	.L21:
+ 335 0090 90270000 		.word	10128
+ 336 0094 6FD8FFFF 		.word	-10129
+ 337 0098 9A270000 		.word	10138
+ 339              		.align	1
+ 340              		.global	set_os_clock
+ 341              		.syntax unified
+ 342              		.code	16
+ 343              		.thumb_func
+ 345              	set_os_clock:
+ 346              		@ args = 0, pretend = 0, frame = 0
+ 347              		@ frame_needed = 0, uses_anonymous_args = 0
+ 348              		@ link register save eliminated.
+ 349 009c 0228     		cmp	r0, #2
+ 350 009e 17D0     		beq	.L24
+ 351 00a0 07D8     		bhi	.L25
+ 352 00a2 0028     		cmp	r0, #0
+ 353 00a4 0ED0     		beq	.L31
+ 354 00a6 0E4A     		ldr	r2, .L32
+ 355 00a8 C823     		movs	r3, #200
+ 356 00aa 9B00     		lsls	r3, r3, #2
+ 357 00ac C821     		movs	r1, #200
+ 358 00ae D150     		str	r1, [r2, r3]
+ 359 00b0 0DE0     		b	.L23
+ 360              	.L25:
+ 361 00b2 0328     		cmp	r0, #3
+ 362 00b4 0BD1     		bne	.L23
+ 363 00b6 0A4A     		ldr	r2, .L32
+ 364 00b8 C823     		movs	r3, #200
+ 365 00ba 9B00     		lsls	r3, r3, #2
+ 366 00bc FA21     		movs	r1, #250
+ 367 00be 8900     		lsls	r1, r1, #2
+ 368 00c0 D150     		str	r1, [r2, r3]
+ 369 00c2 04E0     		b	.L23
+ 370              	.L31:
+ 371 00c4 064A     		ldr	r2, .L32
+ 372 00c6 C823     		movs	r3, #200
+ 373 00c8 9B00     		lsls	r3, r3, #2
+ 374 00ca 6421     		movs	r1, #100
+ 375 00cc D150     		str	r1, [r2, r3]
+ 376              	.L23:
+ 377              		@ sp needed
+ 378 00ce 7047     		bx	lr
+ 379              	.L24:
+ 380 00d0 034A     		ldr	r2, .L32
+ 381 00d2 C823     		movs	r3, #200
+ 382 00d4 9B00     		lsls	r3, r3, #2
+ 383 00d6 FA21     		movs	r1, #250
+ 384 00d8 4900     		lsls	r1, r1, #1
+ 385 00da D150     		str	r1, [r2, r3]
+ 386 00dc F7E7     		b	.L23
+ 387              	.L33:
+ 388 00de C046     		.align	2
+ 389              	.L32:
+ 390 00e0 64012000 		.word	2097508
+ 392              		.align	1
+ 393              		.global	print_reset_reason
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 9
+
+
+ 394              		.syntax unified
+ 395              		.code	16
+ 396              		.thumb_func
+ 398              	print_reset_reason:
+ 399              		@ args = 0, pretend = 0, frame = 32
+ 400              		@ frame_needed = 0, uses_anonymous_args = 0
+ 401 00e4 F0B5     		push	{r4, r5, r6, r7, lr}
+ 402 00e6 CE46     		mov	lr, r9
+ 403 00e8 00B5     		push	{lr}
+ 404 00ea 8AB0     		sub	sp, sp, #40
+ 405 00ec E120     		movs	r0, #225
+ 406 00ee 4000     		lsls	r0, r0, #1
+ 407 00f0 FFF7FEFF 		bl	btaon_fast_read_safe
+ 408 00f4 0390     		str	r0, [sp, #12]
+ 409 00f6 E020     		movs	r0, #224
+ 410 00f8 4000     		lsls	r0, r0, #1
+ 411 00fa FFF7FEFF 		bl	btaon_fast_read_safe
+ 412 00fe 0600     		movs	r6, r0
+ 413 0100 E320     		movs	r0, #227
+ 414 0102 4000     		lsls	r0, r0, #1
+ 415 0104 FFF7FEFF 		bl	btaon_fast_read_safe
+ 416 0108 0400     		movs	r4, r0
+ 417 010a E220     		movs	r0, #226
+ 418 010c 4000     		lsls	r0, r0, #1
+ 419 010e FFF7FEFF 		bl	btaon_fast_read_safe
+ 420 0112 2404     		lsls	r4, r4, #16
+ 421 0114 0443     		orrs	r4, r0
+ 422 0116 E520     		movs	r0, #229
+ 423 0118 4000     		lsls	r0, r0, #1
+ 424 011a FFF7FEFF 		bl	btaon_fast_read_safe
+ 425 011e 0500     		movs	r5, r0
+ 426 0120 E420     		movs	r0, #228
+ 427 0122 4000     		lsls	r0, r0, #1
+ 428 0124 FFF7FEFF 		bl	btaon_fast_read_safe
+ 429 0128 0700     		movs	r7, r0
+ 430 012a E720     		movs	r0, #231
+ 431 012c 4000     		lsls	r0, r0, #1
+ 432 012e FFF7FEFF 		bl	btaon_fast_read_safe
+ 433 0132 0490     		str	r0, [sp, #16]
+ 434 0134 E620     		movs	r0, #230
+ 435 0136 4000     		lsls	r0, r0, #1
+ 436 0138 FFF7FEFF 		bl	btaon_fast_read_safe
+ 437 013c 0590     		str	r0, [sp, #20]
+ 438 013e E920     		movs	r0, #233
+ 439 0140 4000     		lsls	r0, r0, #1
+ 440 0142 FFF7FEFF 		bl	btaon_fast_read_safe
+ 441 0146 0690     		str	r0, [sp, #24]
+ 442 0148 E820     		movs	r0, #232
+ 443 014a 4000     		lsls	r0, r0, #1
+ 444 014c FFF7FEFF 		bl	btaon_fast_read_safe
+ 445 0150 0790     		str	r0, [sp, #28]
+ 446 0152 EB20     		movs	r0, #235
+ 447 0154 4000     		lsls	r0, r0, #1
+ 448 0156 FFF7FEFF 		bl	btaon_fast_read_safe
+ 449 015a 0890     		str	r0, [sp, #32]
+ 450 015c EA20     		movs	r0, #234
+ 451 015e 4000     		lsls	r0, r0, #1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 10
+
+
+ 452 0160 FFF7FEFF 		bl	btaon_fast_read_safe
+ 453 0164 0990     		str	r0, [sp, #36]
+ 454 0166 002C     		cmp	r4, #0
+ 455 0168 26D1     		bne	.L35
+ 456 016a FFF7FEFF 		bl	reset_reason_get
+ 457 016e C028     		cmp	r0, #192
+ 458 0170 1CD0     		beq	.L40
+ 459 0172 2C49     		ldr	r1, .L41
+ 460 0174 0022     		movs	r2, #0
+ 461 0176 3431     		adds	r1, r1, #52
+ 462 0178 2B48     		ldr	r0, .L41+4
+ 463 017a FFF7FEFF 		bl	log_buffer
+ 464              	.L37:
+ 465 017e 2B4C     		ldr	r4, .L41+8
+ 466 0180 2568     		ldr	r5, [r4]
+ 467 0182 FFF7FEFF 		bl	WDG_ClockEnable
+ 468 0186 0022     		movs	r2, #0
+ 469 0188 0021     		movs	r1, #0
+ 470 018a 0120     		movs	r0, #1
+ 471 018c FFF7FEFF 		bl	WDG_Config
+ 472 0190 FFF7FEFF 		bl	WDG_Enable
+ 473 0194 264B     		ldr	r3, .L41+12
+ 474 0196 1B68     		ldr	r3, [r3]
+ 475 0198 0120     		movs	r0, #1
+ 476 019a 9847     		blx	r3
+ 477 019c FFF7FEFF 		bl	WDG_Disable
+ 478 01a0 244B     		ldr	r3, .L41+16
+ 479 01a2 1B68     		ldr	r3, [r3]
+ 480 01a4 9620     		movs	r0, #150
+ 481 01a6 9847     		blx	r3
+ 482 01a8 2560     		str	r5, [r4]
+ 483 01aa 37E0     		b	.L34
+ 484              	.L40:
+ 485 01ac 0022     		movs	r2, #0
+ 486 01ae 1D49     		ldr	r1, .L41
+ 487 01b0 1D48     		ldr	r0, .L41+4
+ 488 01b2 FFF7FEFF 		bl	log_buffer
+ 489 01b6 E2E7     		b	.L37
+ 490              	.L35:
+ 491 01b8 FFF7FEFF 		bl	reset_reason_get
+ 492 01bc 031C     		adds	r3, r0, #0
+ 493 01be 0028     		cmp	r0, #0
+ 494 01c0 00D1     		bne	.L39
+ 495 01c2 0123     		movs	r3, #1
+ 496              	.L39:
+ 497 01c4 DBB2     		uxtb	r3, r3
+ 498 01c6 1749     		ldr	r1, .L41
+ 499 01c8 174A     		ldr	r2, .L41+4
+ 500 01ca 9146     		mov	r9, r2
+ 501 01cc 0122     		movs	r2, #1
+ 502 01ce 5431     		adds	r1, r1, #84
+ 503 01d0 4846     		mov	r0, r9
+ 504 01d2 FFF7FEFF 		bl	log_buffer
+ 505 01d6 039B     		ldr	r3, [sp, #12]
+ 506 01d8 5B04     		lsls	r3, r3, #17
+ 507 01da 7600     		lsls	r6, r6, #1
+ 508 01dc 3343     		orrs	r3, r6
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 11
+
+
+ 509 01de 164E     		ldr	r6, .L41+20
+ 510 01e0 2D04     		lsls	r5, r5, #16
+ 511 01e2 2F43     		orrs	r7, r5
+ 512 01e4 0197     		str	r7, [sp, #4]
+ 513 01e6 0094     		str	r4, [sp]
+ 514 01e8 0322     		movs	r2, #3
+ 515 01ea 3100     		movs	r1, r6
+ 516 01ec 4846     		mov	r0, r9
+ 517 01ee FFF7FEFF 		bl	log_buffer
+ 518 01f2 049B     		ldr	r3, [sp, #16]
+ 519 01f4 5B04     		lsls	r3, r3, #17
+ 520 01f6 059A     		ldr	r2, [sp, #20]
+ 521 01f8 5000     		lsls	r0, r2, #1
+ 522 01fa 0343     		orrs	r3, r0
+ 523 01fc 3100     		movs	r1, r6
+ 524 01fe 2C31     		adds	r1, r1, #44
+ 525 0200 089A     		ldr	r2, [sp, #32]
+ 526 0202 1004     		lsls	r0, r2, #16
+ 527 0204 099A     		ldr	r2, [sp, #36]
+ 528 0206 1043     		orrs	r0, r2
+ 529 0208 0190     		str	r0, [sp, #4]
+ 530 020a 069A     		ldr	r2, [sp, #24]
+ 531 020c 1004     		lsls	r0, r2, #16
+ 532 020e 079A     		ldr	r2, [sp, #28]
+ 533 0210 1043     		orrs	r0, r2
+ 534 0212 0090     		str	r0, [sp]
+ 535 0214 0322     		movs	r2, #3
+ 536 0216 4846     		mov	r0, r9
+ 537 0218 FFF7FEFF 		bl	log_buffer
+ 538              	.L34:
+ 539 021c 0AB0     		add	sp, sp, #40
+ 540              		@ sp needed
+ 541 021e 80BC     		pop	{r7}
+ 542 0220 B946     		mov	r9, r7
+ 543 0222 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 544              	.L42:
+ 545              		.align	2
+ 546              	.L41:
+ 547 0224 00000000 		.word	.LANCHOR2
+ 548 0228 02031023 		.word	588251906
+ 549 022c 00600040 		.word	1073766400
+ 550 0230 00000000 		.word	platform_delay_ms
+ 551 0234 00000000 		.word	platform_delay_us
+ 552 0238 80000000 		.word	.LANCHOR3
+ 554              		.section	.text.show_sdk_lib_version,"ax",%progbits
+ 555              		.align	1
+ 556              		.weak	show_sdk_lib_version
+ 557              		.syntax unified
+ 558              		.code	16
+ 559              		.thumb_func
+ 561              	show_sdk_lib_version:
+ 562              		@ args = 0, pretend = 0, frame = 0
+ 563              		@ frame_needed = 0, uses_anonymous_args = 0
+ 564              		@ link register save eliminated.
+ 565              		@ sp needed
+ 566 0000 7047     		bx	lr
+ 568              		.section	.app.overlay_a,"ax",%progbits
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 12
+
+
+ 569              		.align	1
+ 570              		.global	AppUpdateVectorTable
+ 571              		.syntax unified
+ 572              		.code	16
+ 573              		.thumb_func
+ 575              	AppUpdateVectorTable:
+ 576              		@ args = 0, pretend = 0, frame = 232
+ 577              		@ frame_needed = 0, uses_anonymous_args = 0
+ 578 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 579 0002 C646     		mov	lr, r8
+ 580 0004 00B5     		push	{lr}
+ 581 0006 BAB0     		sub	sp, sp, #232
+ 582 0008 4022     		movs	r2, #64
+ 583 000a 2D49     		ldr	r1, .L56
+ 584 000c 2AA8     		add	r0, sp, #168
+ 585 000e FFF7FEFF 		bl	memcpy
+ 586 0012 A822     		movs	r2, #168
+ 587 0014 2B49     		ldr	r1, .L56+4
+ 588 0016 6846     		mov	r0, sp
+ 589 0018 FFF7FEFF 		bl	memcpy
+ 590 001c 2A4C     		ldr	r4, .L56+8
+ 591 001e 2B4B     		ldr	r3, .L56+12
+ 592 0020 9A68     		ldr	r2, [r3, #8]
+ 593 0022 8023     		movs	r3, #128
+ 594 0024 9B03     		lsls	r3, r3, #14
+ 595 0026 9A42     		cmp	r2, r3
+ 596 0028 0BD1     		bne	.L55
+ 597              	.L45:
+ 598 002a A608     		lsrs	r6, r4, #2
+ 599 002c 032C     		cmp	r4, #3
+ 600 002e 3ED9     		bls	.L47
+ 601 0030 274D     		ldr	r5, .L56+16
+ 602 0032 0024     		movs	r4, #0
+ 603 0034 274F     		ldr	r7, .L56+20
+ 604 0036 284B     		ldr	r3, .L56+24
+ 605 0038 5C22     		movs	r2, #92
+ 606 003a 9446     		mov	ip, r2
+ 607 003c 6344     		add	r3, r3, ip
+ 608 003e 9846     		mov	r8, r3
+ 609 0040 1AE0     		b	.L46
+ 610              	.L55:
+ 611 0042 8020     		movs	r0, #128
+ 612 0044 8003     		lsls	r0, r0, #14
+ 613 0046 FFF7FEFF 		bl	RamVectorTableInit
+ 614 004a EEE7     		b	.L45
+ 615              	.L49:
+ 616 004c 234B     		ldr	r3, .L56+28
+ 617 004e 2A68     		ldr	r2, [r5]
+ 618 0050 9A42     		cmp	r2, r3
+ 619 0052 10D1     		bne	.L48
+ 620 0054 1BE0     		b	.L50
+ 621              	.L51:
+ 622 0056 224B     		ldr	r3, .L56+32
+ 623 0058 6B44     		add	r3, r3, sp
+ 624 005a 5959     		ldr	r1, [r3, r5]
+ 625 005c 8D20     		movs	r0, #141
+ 626 005e 8005     		lsls	r0, r0, #22
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 13
+
+
+ 627 0060 FFF7FEFF 		bl	trace_string
+ 628 0064 0300     		movs	r3, r0
+ 629 0066 0122     		movs	r2, #1
+ 630 0068 1E49     		ldr	r1, .L56+36
+ 631 006a 1F48     		ldr	r0, .L56+40
+ 632 006c FFF7FEFF 		bl	log_buffer
+ 633              	.L52:
+ 634 0070 184B     		ldr	r3, .L56+20
+ 635 0072 5B59     		ldr	r3, [r3, r5]
+ 636 0074 2B60     		str	r3, [r5]
+ 637              	.L48:
+ 638 0076 0435     		adds	r5, r5, #4
+ 639              	.L46:
+ 640 0078 0134     		adds	r4, r4, #1
+ 641 007a B442     		cmp	r4, r6
+ 642 007c 17D2     		bcs	.L47
+ 643 007e 012C     		cmp	r4, #1
+ 644 0080 F9D9     		bls	.L48
+ 645 0082 7B59     		ldr	r3, [r7, r5]
+ 646 0084 194A     		ldr	r2, .L56+44
+ 647 0086 9342     		cmp	r3, r2
+ 648 0088 E0D0     		beq	.L49
+ 649 008a 002B     		cmp	r3, #0
+ 650 008c F3D0     		beq	.L48
+ 651              	.L50:
+ 652 008e 0F2C     		cmp	r4, #15
+ 653 0090 E1D8     		bhi	.L51
+ 654 0092 174B     		ldr	r3, .L56+48
+ 655 0094 6B44     		add	r3, r3, sp
+ 656 0096 5959     		ldr	r1, [r3, r5]
+ 657 0098 8D20     		movs	r0, #141
+ 658 009a 8005     		lsls	r0, r0, #22
+ 659 009c FFF7FEFF 		bl	trace_string
+ 660 00a0 0300     		movs	r3, r0
+ 661 00a2 0122     		movs	r2, #1
+ 662 00a4 4146     		mov	r1, r8
+ 663 00a6 1048     		ldr	r0, .L56+40
+ 664 00a8 FFF7FEFF 		bl	log_buffer
+ 665 00ac E0E7     		b	.L52
+ 666              	.L47:
+ 667              		.syntax divided
+ 668              	@ 890 "../sdk/inc/platform/cmsis_gcc.h" 1
+ 669 00ae BFF35F8F 		dmb 0xF
+ 670              	@ 0 "" 2
+ 671              	@ 879 "../sdk/inc/platform/cmsis_gcc.h" 1
+ 672 00b2 BFF34F8F 		dsb 0xF
+ 673              	@ 0 "" 2
+ 674              		.thumb
+ 675              		.syntax unified
+ 676 00b6 3AB0     		add	sp, sp, #232
+ 677              		@ sp needed
+ 678 00b8 80BC     		pop	{r7}
+ 679 00ba B846     		mov	r8, r7
+ 680 00bc F0BD     		pop	{r4, r5, r6, r7, pc}
+ 681              	.L57:
+ 682 00be C046     		.align	2
+ 683              	.L56:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 14
+
+
+ 684 00c0 00000000 		.word	.LANCHOR4
+ 685 00c4 40000000 		.word	.LC68
+ 686 00c8 00000000 		.word	__ram_vector_table_length__
+ 687 00cc 00ED00E0 		.word	-536810240
+ 688 00d0 04002000 		.word	2097156
+ 689 00d4 0000E0FF 		.word	__ram_vector_load_ad__-2097152
+ 690 00d8 80000000 		.word	.LANCHOR3
+ 691 00dc 00000000 		.word	ROM_Default_Handler
+ 692 00e0 C0FFDFFF 		.word	-2097216
+ 693 00e4 00010000 		.word	.LANCHOR5
+ 694 00e8 01011023 		.word	588251393
+ 695 00ec 00000000 		.word	Default_Handler
+ 696 00f0 A800E0FF 		.word	-2096984
+ 698              		.section	.rodata.str1.4
+ 699 01fd 000000   		.align	2
+ 700              	.LC77:
+ 701 0200 4300     		.ascii	"C\000"
+ 702 0202 0000     		.align	2
+ 703              	.LC80:
+ 704 0204 312E322E 		.ascii	"1.2.2.49\000"
+ 704      322E3439 
+ 704      00
+ 705 020d 000000   		.align	2
+ 706              	.LC82:
+ 707 0210 57656420 		.ascii	"Wed Aug 28 19:02:16 2024\000"
+ 707      41756720 
+ 707      32382031 
+ 707      393A3032 
+ 707      3A313620 
+ 708              		.section	.app.flash.text
+ 709              		.align	1
+ 710              		.global	pre_main
+ 711              		.syntax unified
+ 712              		.code	16
+ 713              		.thumb_func
+ 715              	pre_main:
+ 716              		@ args = 0, pretend = 0, frame = 0
+ 717              		@ frame_needed = 0, uses_anonymous_args = 0
+ 718 023c 70B5     		push	{r4, r5, r6, lr}
+ 719 023e 82B0     		sub	sp, sp, #8
+ 720              		.syntax divided
+ 721              	@ 142 "../sdk/inc/platform/cmsis_gcc.h" 1
+ 722 0240 72B6     		cpsid i
+ 723              	@ 0 "" 2
+ 724              		.thumb
+ 725              		.syntax unified
+ 726 0242 FFF7FEFF 		bl	print_reset_reason
+ 727 0246 FFF7FEFF 		bl	ram_cache_init
+ 728 024a 1049     		ldr	r1, .L60
+ 729 024c 0020     		movs	r0, #0
+ 730 024e FFF7FEFF 		bl	setlocale
+ 731 0252 0F4E     		ldr	r6, .L60+4
+ 732 0254 8D25     		movs	r5, #141
+ 733 0256 AD05     		lsls	r5, r5, #22
+ 734 0258 0E49     		ldr	r1, .L60+8
+ 735 025a 2800     		movs	r0, r5
+ 736 025c FFF7FEFF 		bl	trace_string
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 15
+
+
+ 737 0260 0400     		movs	r4, r0
+ 738 0262 0D49     		ldr	r1, .L60+12
+ 739 0264 2800     		movs	r0, r5
+ 740 0266 FFF7FEFF 		bl	trace_string
+ 741 026a 0090     		str	r0, [sp]
+ 742 026c 2300     		movs	r3, r4
+ 743 026e 0222     		movs	r2, #2
+ 744 0270 3100     		movs	r1, r6
+ 745 0272 2831     		adds	r1, r1, #40
+ 746 0274 0948     		ldr	r0, .L60+16
+ 747 0276 FFF7FEFF 		bl	log_buffer
+ 748 027a FFF7FEFF 		bl	AppUpdateVectorTable
+ 749 027e 084B     		ldr	r3, .L60+20
+ 750 0280 1B68     		ldr	r3, [r3]
+ 751 0282 002B     		cmp	r3, #0
+ 752 0284 00D0     		beq	.L58
+ 753 0286 9847     		blx	r3
+ 754              	.L58:
+ 755 0288 02B0     		add	sp, sp, #8
+ 756              		@ sp needed
+ 757 028a 70BD     		pop	{r4, r5, r6, pc}
+ 758              	.L61:
+ 759              		.align	2
+ 760              	.L60:
+ 761 028c 00020000 		.word	.LC77
+ 762 0290 00010000 		.word	.LANCHOR5
+ 763 0294 04020000 		.word	.LC80
+ 764 0298 10020000 		.word	.LC82
+ 765 029c 00031023 		.word	588251904
+ 766 02a0 00000000 		.word	app_pre_main_cb
+ 768              		.section	.app.data_ram.text,"ax",%progbits
+ 769              		.align	1
+ 770              		.global	GPIO_Group3_Handler
+ 771              		.syntax unified
+ 772              		.code	16
+ 773              		.thumb_func
+ 775              	GPIO_Group3_Handler:
+ 776              		@ args = 0, pretend = 0, frame = 0
+ 777              		@ frame_needed = 0, uses_anonymous_args = 0
+ 778 0000 10B5     		push	{r4, lr}
+ 779 0002 154B     		ldr	r3, .L79
+ 780 0004 1C6C     		ldr	r4, [r3, #64]
+ 781 0006 2307     		lsls	r3, r4, #28
+ 782 0008 0ED4     		bmi	.L71
+ 783              	.L63:
+ 784 000a 2306     		lsls	r3, r4, #24
+ 785 000c 0FD4     		bmi	.L72
+ 786              	.L64:
+ 787 000e 2305     		lsls	r3, r4, #20
+ 788 0010 10D4     		bmi	.L73
+ 789              	.L65:
+ 790 0012 2304     		lsls	r3, r4, #16
+ 791 0014 11D4     		bmi	.L74
+ 792              	.L66:
+ 793 0016 2303     		lsls	r3, r4, #12
+ 794 0018 12D4     		bmi	.L75
+ 795              	.L67:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 16
+
+
+ 796 001a 2302     		lsls	r3, r4, #8
+ 797 001c 13D4     		bmi	.L76
+ 798              	.L68:
+ 799 001e 2301     		lsls	r3, r4, #4
+ 800 0020 14D4     		bmi	.L77
+ 801              	.L69:
+ 802 0022 002C     		cmp	r4, #0
+ 803 0024 15DB     		blt	.L78
+ 804              	.L62:
+ 805              		@ sp needed
+ 806 0026 10BD     		pop	{r4, pc}
+ 807              	.L71:
+ 808 0028 FFF7FEFF 		bl	GPIO3_Handler
+ 809 002c EDE7     		b	.L63
+ 810              	.L72:
+ 811 002e FFF7FEFF 		bl	GPIO7_Handler
+ 812 0032 ECE7     		b	.L64
+ 813              	.L73:
+ 814 0034 FFF7FEFF 		bl	GPIO11_Handler
+ 815 0038 EBE7     		b	.L65
+ 816              	.L74:
+ 817 003a FFF7FEFF 		bl	GPIO15_Handler
+ 818 003e EAE7     		b	.L66
+ 819              	.L75:
+ 820 0040 FFF7FEFF 		bl	GPIO19_Handler
+ 821 0044 E9E7     		b	.L67
+ 822              	.L76:
+ 823 0046 FFF7FEFF 		bl	GPIO23_Handler
+ 824 004a E8E7     		b	.L68
+ 825              	.L77:
+ 826 004c FFF7FEFF 		bl	GPIO27_Handler
+ 827 0050 E7E7     		b	.L69
+ 828              	.L78:
+ 829 0052 FFF7FEFF 		bl	GPIO31_Handler
+ 830 0056 E6E7     		b	.L62
+ 831              	.L80:
+ 832              		.align	2
+ 833              	.L79:
+ 834 0058 00100040 		.word	1073745920
+ 836              		.align	1
+ 837              		.global	GPIO_Group2_Handler
+ 838              		.syntax unified
+ 839              		.code	16
+ 840              		.thumb_func
+ 842              	GPIO_Group2_Handler:
+ 843              		@ args = 0, pretend = 0, frame = 0
+ 844              		@ frame_needed = 0, uses_anonymous_args = 0
+ 845 005c 10B5     		push	{r4, lr}
+ 846 005e 154B     		ldr	r3, .L98
+ 847 0060 1C6C     		ldr	r4, [r3, #64]
+ 848 0062 6307     		lsls	r3, r4, #29
+ 849 0064 0ED4     		bmi	.L90
+ 850              	.L82:
+ 851 0066 6306     		lsls	r3, r4, #25
+ 852 0068 0FD4     		bmi	.L91
+ 853              	.L83:
+ 854 006a 6305     		lsls	r3, r4, #21
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 17
+
+
+ 855 006c 10D4     		bmi	.L92
+ 856              	.L84:
+ 857 006e 6304     		lsls	r3, r4, #17
+ 858 0070 11D4     		bmi	.L93
+ 859              	.L85:
+ 860 0072 6303     		lsls	r3, r4, #13
+ 861 0074 12D4     		bmi	.L94
+ 862              	.L86:
+ 863 0076 6302     		lsls	r3, r4, #9
+ 864 0078 13D4     		bmi	.L95
+ 865              	.L87:
+ 866 007a 6301     		lsls	r3, r4, #5
+ 867 007c 14D4     		bmi	.L96
+ 868              	.L88:
+ 869 007e 6300     		lsls	r3, r4, #1
+ 870 0080 15D4     		bmi	.L97
+ 871              	.L81:
+ 872              		@ sp needed
+ 873 0082 10BD     		pop	{r4, pc}
+ 874              	.L90:
+ 875 0084 FFF7FEFF 		bl	GPIO2_Handler
+ 876 0088 EDE7     		b	.L82
+ 877              	.L91:
+ 878 008a FFF7FEFF 		bl	GPIO6_Handler
+ 879 008e ECE7     		b	.L83
+ 880              	.L92:
+ 881 0090 FFF7FEFF 		bl	GPIO10_Handler
+ 882 0094 EBE7     		b	.L84
+ 883              	.L93:
+ 884 0096 FFF7FEFF 		bl	GPIO14_Handler
+ 885 009a EAE7     		b	.L85
+ 886              	.L94:
+ 887 009c FFF7FEFF 		bl	GPIO18_Handler
+ 888 00a0 E9E7     		b	.L86
+ 889              	.L95:
+ 890 00a2 FFF7FEFF 		bl	GPIO22_Handler
+ 891 00a6 E8E7     		b	.L87
+ 892              	.L96:
+ 893 00a8 FFF7FEFF 		bl	GPIO26_Handler
+ 894 00ac E7E7     		b	.L88
+ 895              	.L97:
+ 896 00ae FFF7FEFF 		bl	GPIO30_Handler
+ 897 00b2 E6E7     		b	.L81
+ 898              	.L99:
+ 899              		.align	2
+ 900              	.L98:
+ 901 00b4 00100040 		.word	1073745920
+ 903              		.align	1
+ 904              		.global	GPIO_Group1_Handler
+ 905              		.syntax unified
+ 906              		.code	16
+ 907              		.thumb_func
+ 909              	GPIO_Group1_Handler:
+ 910              		@ args = 0, pretend = 0, frame = 0
+ 911              		@ frame_needed = 0, uses_anonymous_args = 0
+ 912 00b8 10B5     		push	{r4, lr}
+ 913 00ba 134B     		ldr	r3, .L115
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 18
+
+
+ 914 00bc 1C6C     		ldr	r4, [r3, #64]
+ 915 00be A307     		lsls	r3, r4, #30
+ 916 00c0 0CD4     		bmi	.L108
+ 917              	.L101:
+ 918 00c2 A305     		lsls	r3, r4, #22
+ 919 00c4 0DD4     		bmi	.L109
+ 920              	.L102:
+ 921 00c6 A304     		lsls	r3, r4, #18
+ 922 00c8 0ED4     		bmi	.L110
+ 923              	.L103:
+ 924 00ca A303     		lsls	r3, r4, #14
+ 925 00cc 0FD4     		bmi	.L111
+ 926              	.L104:
+ 927 00ce A302     		lsls	r3, r4, #10
+ 928 00d0 10D4     		bmi	.L112
+ 929              	.L105:
+ 930 00d2 A301     		lsls	r3, r4, #6
+ 931 00d4 11D4     		bmi	.L113
+ 932              	.L106:
+ 933 00d6 A300     		lsls	r3, r4, #2
+ 934 00d8 12D4     		bmi	.L114
+ 935              	.L100:
+ 936              		@ sp needed
+ 937 00da 10BD     		pop	{r4, pc}
+ 938              	.L108:
+ 939 00dc FFF7FEFF 		bl	GPIO1_Handler
+ 940 00e0 EFE7     		b	.L101
+ 941              	.L109:
+ 942 00e2 FFF7FEFF 		bl	GPIO9_Handler
+ 943 00e6 EEE7     		b	.L102
+ 944              	.L110:
+ 945 00e8 FFF7FEFF 		bl	GPIO13_Handler
+ 946 00ec EDE7     		b	.L103
+ 947              	.L111:
+ 948 00ee FFF7FEFF 		bl	GPIO17_Handler
+ 949 00f2 ECE7     		b	.L104
+ 950              	.L112:
+ 951 00f4 FFF7FEFF 		bl	GPIO21_Handler
+ 952 00f8 EBE7     		b	.L105
+ 953              	.L113:
+ 954 00fa FFF7FEFF 		bl	GPIO25_Handler
+ 955 00fe EAE7     		b	.L106
+ 956              	.L114:
+ 957 0100 FFF7FEFF 		bl	GPIO29_Handler
+ 958 0104 E9E7     		b	.L100
+ 959              	.L116:
+ 960 0106 C046     		.align	2
+ 961              	.L115:
+ 962 0108 00100040 		.word	1073745920
+ 964              		.align	1
+ 965              		.global	GPIO_Group0_Handler
+ 966              		.syntax unified
+ 967              		.code	16
+ 968              		.thumb_func
+ 970              	GPIO_Group0_Handler:
+ 971              		@ args = 0, pretend = 0, frame = 0
+ 972              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 19
+
+
+ 973 010c 10B5     		push	{r4, lr}
+ 974 010e 134B     		ldr	r3, .L132
+ 975 0110 1C6C     		ldr	r4, [r3, #64]
+ 976 0112 E307     		lsls	r3, r4, #31
+ 977 0114 0CD4     		bmi	.L125
+ 978              	.L118:
+ 979 0116 E305     		lsls	r3, r4, #23
+ 980 0118 0DD4     		bmi	.L126
+ 981              	.L119:
+ 982 011a E304     		lsls	r3, r4, #19
+ 983 011c 0ED4     		bmi	.L127
+ 984              	.L120:
+ 985 011e E303     		lsls	r3, r4, #15
+ 986 0120 0FD4     		bmi	.L128
+ 987              	.L121:
+ 988 0122 E302     		lsls	r3, r4, #11
+ 989 0124 10D4     		bmi	.L129
+ 990              	.L122:
+ 991 0126 E301     		lsls	r3, r4, #7
+ 992 0128 11D4     		bmi	.L130
+ 993              	.L123:
+ 994 012a E300     		lsls	r3, r4, #3
+ 995 012c 12D4     		bmi	.L131
+ 996              	.L117:
+ 997              		@ sp needed
+ 998 012e 10BD     		pop	{r4, pc}
+ 999              	.L125:
+ 1000 0130 FFF7FEFF 		bl	GPIO0_Handler
+ 1001 0134 EFE7     		b	.L118
+ 1002              	.L126:
+ 1003 0136 FFF7FEFF 		bl	GPIO8_Handler
+ 1004 013a EEE7     		b	.L119
+ 1005              	.L127:
+ 1006 013c FFF7FEFF 		bl	GPIO12_Handler
+ 1007 0140 EDE7     		b	.L120
+ 1008              	.L128:
+ 1009 0142 FFF7FEFF 		bl	GPIO16_Handler
+ 1010 0146 ECE7     		b	.L121
+ 1011              	.L129:
+ 1012 0148 FFF7FEFF 		bl	GPIO20_Handler
+ 1013 014c EBE7     		b	.L122
+ 1014              	.L130:
+ 1015 014e FFF7FEFF 		bl	GPIO24_Handler
+ 1016 0152 EAE7     		b	.L123
+ 1017              	.L131:
+ 1018 0154 FFF7FEFF 		bl	GPIO28_Handler
+ 1019 0158 E9E7     		b	.L117
+ 1020              	.L133:
+ 1021 015a C046     		.align	2
+ 1022              	.L132:
+ 1023 015c 00100040 		.word	1073745920
+ 1025              		.section	.text.__2printf,"ax",%progbits
+ 1026              		.align	1
+ 1027              		.global	__2printf
+ 1028              		.syntax unified
+ 1029              		.code	16
+ 1030              		.thumb_func
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 20
+
+
+ 1032              	__2printf:
+ 1033              		@ args = 4, pretend = 16, frame = 0
+ 1034              		@ frame_needed = 0, uses_anonymous_args = 1
+ 1035              		@ link register save eliminated.
+ 1036 0000 0FB4     		push	{r0, r1, r2, r3}
+ 1037 0002 0020     		movs	r0, #0
+ 1038              		@ sp needed
+ 1039 0004 04B0     		add	sp, sp, #16
+ 1040 0006 7047     		bx	lr
+ 1042              		.section	.text.malloc,"ax",%progbits
+ 1043              		.align	1
+ 1044              		.global	malloc
+ 1045              		.syntax unified
+ 1046              		.code	16
+ 1047              		.thumb_func
+ 1049              	malloc:
+ 1050              		@ args = 0, pretend = 0, frame = 0
+ 1051              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1052 0000 10B5     		push	{r4, lr}
+ 1053 0002 0100     		movs	r1, r0
+ 1054 0004 024B     		ldr	r3, .L136
+ 1055 0006 034A     		ldr	r2, .L136+4
+ 1056 0008 0020     		movs	r0, #0
+ 1057 000a FFF7FEFF 		bl	os_mem_alloc_intern
+ 1058              		@ sp needed
+ 1059 000e 10BD     		pop	{r4, pc}
+ 1060              	.L137:
+ 1061              		.align	2
+ 1062              	.L136:
+ 1063 0010 25050000 		.word	1317
+ 1064 0014 00000000 		.word	.LANCHOR6
+ 1066              		.section	.text.calloc,"ax",%progbits
+ 1067              		.align	1
+ 1068              		.global	calloc
+ 1069              		.syntax unified
+ 1070              		.code	16
+ 1071              		.thumb_func
+ 1073              	calloc:
+ 1074              		@ args = 0, pretend = 0, frame = 0
+ 1075              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1076 0000 10B5     		push	{r4, lr}
+ 1077 0002 4143     		muls	r1, r0
+ 1078 0004 024B     		ldr	r3, .L139
+ 1079 0006 034A     		ldr	r2, .L139+4
+ 1080 0008 0020     		movs	r0, #0
+ 1081 000a FFF7FEFF 		bl	os_mem_zalloc_intern
+ 1082              		@ sp needed
+ 1083 000e 10BD     		pop	{r4, pc}
+ 1084              	.L140:
+ 1085              		.align	2
+ 1086              	.L139:
+ 1087 0010 2A050000 		.word	1322
+ 1088 0014 00000000 		.word	.LANCHOR7
+ 1090              		.section	.text.realloc,"ax",%progbits
+ 1091              		.align	1
+ 1092              		.global	realloc
+ 1093              		.syntax unified
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 21
+
+
+ 1094              		.code	16
+ 1095              		.thumb_func
+ 1097              	realloc:
+ 1098              		@ args = 0, pretend = 0, frame = 0
+ 1099              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1100 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1101 0002 C646     		mov	lr, r8
+ 1102 0004 00B5     		push	{lr}
+ 1103 0006 0400     		movs	r4, r0
+ 1104 0008 0D00     		movs	r5, r1
+ 1105 000a 0028     		cmp	r0, #0
+ 1106 000c 36D0     		beq	.L148
+ 1107 000e 0029     		cmp	r1, #0
+ 1108 0010 3BD0     		beq	.L149
+ 1109 0012 0300     		movs	r3, r0
+ 1110 0014 083B     		subs	r3, r3, #8
+ 1111 0016 5E68     		ldr	r6, [r3, #4]
+ 1112 0018 3601     		lsls	r6, r6, #4
+ 1113 001a 3609     		lsrs	r6, r6, #4
+ 1114 001c 0823     		movs	r3, #8
+ 1115 001e 5B42     		rsbs	r3, r3, #0
+ 1116 0020 9846     		mov	r8, r3
+ 1117 0022 B044     		add	r8, r8, r6
+ 1118 0024 0F33     		adds	r3, r3, #15
+ 1119 0026 0A00     		movs	r2, r1
+ 1120 0028 9A43     		bics	r2, r3
+ 1121 002a 1300     		movs	r3, r2
+ 1122 002c 0833     		adds	r3, r3, #8
+ 1123 002e 0700     		movs	r7, r0
+ 1124 0030 9845     		cmp	r8, r3
+ 1125 0032 1FD0     		beq	.L141
+ 1126 0034 FFF7FEFF 		bl	os_sched_suspend
+ 1127 0038 2000     		movs	r0, r4
+ 1128 003a FFF7FEFF 		bl	os_mem_free
+ 1129 003e 154B     		ldr	r3, .L150
+ 1130 0040 154A     		ldr	r2, .L150+4
+ 1131 0042 2900     		movs	r1, r5
+ 1132 0044 0020     		movs	r0, #0
+ 1133 0046 FFF7FEFF 		bl	os_mem_alloc_intern
+ 1134 004a 0700     		movs	r7, r0
+ 1135 004c 8442     		cmp	r4, r0
+ 1136 004e 0FD0     		beq	.L145
+ 1137 0050 0300     		movs	r3, r0
+ 1138 0052 083B     		subs	r3, r3, #8
+ 1139 0054 5B68     		ldr	r3, [r3, #4]
+ 1140 0056 1B01     		lsls	r3, r3, #4
+ 1141 0058 1B09     		lsrs	r3, r3, #4
+ 1142 005a 9E42     		cmp	r6, r3
+ 1143 005c 03D3     		bcc	.L146
+ 1144 005e 0822     		movs	r2, #8
+ 1145 0060 5242     		rsbs	r2, r2, #0
+ 1146 0062 9046     		mov	r8, r2
+ 1147 0064 9844     		add	r8, r8, r3
+ 1148              	.L146:
+ 1149 0066 4246     		mov	r2, r8
+ 1150 0068 2100     		movs	r1, r4
+ 1151 006a 3800     		movs	r0, r7
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 22
+
+
+ 1152 006c FFF7FEFF 		bl	memcpy
+ 1153              	.L145:
+ 1154 0070 FFF7FEFF 		bl	os_sched_resume
+ 1155              	.L141:
+ 1156 0074 3800     		movs	r0, r7
+ 1157              		@ sp needed
+ 1158 0076 80BC     		pop	{r7}
+ 1159 0078 B846     		mov	r8, r7
+ 1160 007a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1161              	.L148:
+ 1162 007c 074B     		ldr	r3, .L150+8
+ 1163 007e 064A     		ldr	r2, .L150+4
+ 1164 0080 0020     		movs	r0, #0
+ 1165 0082 FFF7FEFF 		bl	os_mem_alloc_intern
+ 1166 0086 0700     		movs	r7, r0
+ 1167 0088 F4E7     		b	.L141
+ 1168              	.L149:
+ 1169 008a FFF7FEFF 		bl	os_mem_free
+ 1170 008e 0027     		movs	r7, #0
+ 1171 0090 F0E7     		b	.L141
+ 1172              	.L151:
+ 1173 0092 C046     		.align	2
+ 1174              	.L150:
+ 1175 0094 4B050000 		.word	1355
+ 1176 0098 00000000 		.word	.LANCHOR8
+ 1177 009c 36050000 		.word	1334
+ 1179              		.section	.text.free,"ax",%progbits
+ 1180              		.align	1
+ 1181              		.global	free
+ 1182              		.syntax unified
+ 1183              		.code	16
+ 1184              		.thumb_func
+ 1186              	free:
+ 1187              		@ args = 0, pretend = 0, frame = 0
+ 1188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1189 0000 10B5     		push	{r4, lr}
+ 1190 0002 FFF7FEFF 		bl	os_mem_free
+ 1191              		@ sp needed
+ 1192 0006 10BD     		pop	{r4, pc}
+ 1194              		.section	.text.log_direct_app,"ax",%progbits
+ 1195              		.align	1
+ 1196              		.global	log_direct_app
+ 1197              		.syntax unified
+ 1198              		.code	16
+ 1199              		.thumb_func
+ 1201              	log_direct_app:
+ 1202              		@ args = 4, pretend = 12, frame = 136
+ 1203              		@ frame_needed = 0, uses_anonymous_args = 1
+ 1204 0000 0EB4     		push	{r1, r2, r3}
+ 1205 0002 70B5     		push	{r4, r5, r6, lr}
+ 1206 0004 A3B0     		sub	sp, sp, #140
+ 1207 0006 0400     		movs	r4, r0
+ 1208 0008 234B     		ldr	r3, .L164
+ 1209 000a 1B78     		ldrb	r3, [r3]
+ 1210 000c 002B     		cmp	r3, #0
+ 1211 000e 04D0     		beq	.L153
+ 1212 0010 224A     		ldr	r2, .L164+4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 23
+
+
+ 1213 0012 234B     		ldr	r3, .L164+8
+ 1214 0014 D35C     		ldrb	r3, [r2, r3]
+ 1215 0016 DB07     		lsls	r3, r3, #31
+ 1216 0018 04D5     		bpl	.L163
+ 1217              	.L153:
+ 1218 001a 23B0     		add	sp, sp, #140
+ 1219              		@ sp needed
+ 1220 001c 70BC     		pop	{r4, r5, r6}
+ 1221 001e 08BC     		pop	{r3}
+ 1222 0020 03B0     		add	sp, sp, #12
+ 1223 0022 1847     		bx	r3
+ 1224              	.L163:
+ 1225 0024 FFF7FEFF 		bl	log_timestamp_get
+ 1226 0028 02AB     		add	r3, sp, #8
+ 1227 002a 7E22     		movs	r2, #126
+ 1228 002c 1A70     		strb	r2, [r3]
+ 1229 002e 1871     		strb	r0, [r3, #4]
+ 1230 0030 000A     		lsrs	r0, r0, #8
+ 1231 0032 5871     		strb	r0, [r3, #5]
+ 1232 0034 220E     		lsrs	r2, r4, #24
+ 1233 0036 9A71     		strb	r2, [r3, #6]
+ 1234 0038 240C     		lsrs	r4, r4, #16
+ 1235 003a DC71     		strb	r4, [r3, #7]
+ 1236 003c 28AB     		add	r3, sp, #160
+ 1237 003e 0193     		str	r3, [sp, #4]
+ 1238 0040 279A     		ldr	r2, [sp, #156]
+ 1239 0042 7821     		movs	r1, #120
+ 1240 0044 04A8     		add	r0, sp, #16
+ 1241 0046 FFF7FEFF 		bl	vsnprintf
+ 1242 004a 03B2     		sxth	r3, r0
+ 1243 004c 0826     		movs	r6, #8
+ 1244 004e 0204     		lsls	r2, r0, #16
+ 1245 0050 04D4     		bmi	.L157
+ 1246 0052 7836     		adds	r6, r6, #120
+ 1247 0054 782B     		cmp	r3, #120
+ 1248 0056 01DC     		bgt	.L157
+ 1249 0058 0830     		adds	r0, r0, #8
+ 1250 005a 86B2     		uxth	r6, r0
+ 1251              	.L157:
+ 1252 005c 02AC     		add	r4, sp, #8
+ 1253 005e 6670     		strb	r6, [r4, #1]
+ 1254 0060 FFF7FEFF 		bl	os_lock
+ 1255 0064 0F4A     		ldr	r2, .L164+12
+ 1256 0066 1378     		ldrb	r3, [r2]
+ 1257 0068 591C     		adds	r1, r3, #1
+ 1258 006a 1170     		strb	r1, [r2]
+ 1259 006c A370     		strb	r3, [r4, #2]
+ 1260 006e FFF7FEFF 		bl	os_unlock
+ 1261 0072 2378     		ldrb	r3, [r4]
+ 1262 0074 6278     		ldrb	r2, [r4, #1]
+ 1263 0076 5340     		eors	r3, r2
+ 1264 0078 A278     		ldrb	r2, [r4, #2]
+ 1265 007a 5340     		eors	r3, r2
+ 1266 007c E370     		strb	r3, [r4, #3]
+ 1267 007e 002E     		cmp	r6, #0
+ 1268 0080 CBD0     		beq	.L153
+ 1269 0082 2500     		movs	r5, r4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 24
+
+
+ 1270 0084 0024     		movs	r4, #0
+ 1271              	.L159:
+ 1272 0086 2878     		ldrb	r0, [r5]
+ 1273 0088 FFF7FEFF 		bl	LogUartTxChar
+ 1274 008c 0134     		adds	r4, r4, #1
+ 1275 008e A4B2     		uxth	r4, r4
+ 1276 0090 0135     		adds	r5, r5, #1
+ 1277 0092 A642     		cmp	r6, r4
+ 1278 0094 F7D1     		bne	.L159
+ 1279 0096 C0E7     		b	.L153
+ 1280              	.L165:
+ 1281              		.align	2
+ 1282              	.L164:
+ 1283 0098 00000000 		.word	is_log_init
+ 1284 009c 64012000 		.word	2097508
+ 1285 00a0 36020000 		.word	566
+ 1286 00a4 00000000 		.word	log_seq_num
+ 1288              		.global	__aeabi_uidiv
+ 1289              		.section	.rodata.common_main.str1.4,"aMS",%progbits,1
+ 1290              		.align	2
+ 1291              	.LC90:
+ 1292 0000 496E2053 		.ascii	"In SoC Mode\000"
+ 1292      6F43204D 
+ 1292      6F646500 
+ 1293              		.align	2
+ 1294              	.LC92:
+ 1295 000c 5741524E 		.ascii	"WARNING: In HCI Mode, will not run APP Task\000"
+ 1295      494E473A 
+ 1295      20496E20 
+ 1295      48434920 
+ 1295      4D6F6465 
+ 1296              		.section	.text.common_main,"ax",%progbits
+ 1297              		.align	1
+ 1298              		.global	common_main
+ 1299              		.syntax unified
+ 1300              		.code	16
+ 1301              		.thumb_func
+ 1303              	common_main:
+ 1304              		@ args = 0, pretend = 0, frame = 0
+ 1305              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1306 0000 70B5     		push	{r4, r5, r6, lr}
+ 1307 0002 0720     		movs	r0, #7
+ 1308 0004 FFF7FEFF 		bl	flash_get_bank_addr
+ 1309 0008 0400     		movs	r4, r0
+ 1310 000a 0720     		movs	r0, #7
+ 1311 000c FFF7FEFF 		bl	flash_get_bank_size
+ 1312 0010 154D     		ldr	r5, .L169
+ 1313 0012 9E23     		movs	r3, #158
+ 1314 0014 9B00     		lsls	r3, r3, #2
+ 1315 0016 E958     		ldr	r1, [r5, r3]
+ 1316 0018 FFF7FEFF 		bl	__aeabi_uidiv
+ 1317 001c C1B2     		uxtb	r1, r0
+ 1318 001e 2000     		movs	r0, r4
+ 1319 0020 FFF7FEFF 		bl	ftl_init
+ 1320 0024 114A     		ldr	r2, .L169+4
+ 1321 0026 D178     		ldrb	r1, [r2, #3]
+ 1322 0028 8023     		movs	r3, #128
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 25
+
+
+ 1323 002a 5B42     		rsbs	r3, r3, #0
+ 1324 002c 0B43     		orrs	r3, r1
+ 1325 002e D370     		strb	r3, [r2, #3]
+ 1326 0030 FFF7FEFF 		bl	random_seed_init
+ 1327 0034 BC23     		movs	r3, #188
+ 1328 0036 5B00     		lsls	r3, r3, #1
+ 1329 0038 EB5C     		ldrb	r3, [r5, r3]
+ 1330 003a DB07     		lsls	r3, r3, #31
+ 1331 003c 0BD5     		bpl	.L167
+ 1332 003e 8C20     		movs	r0, #140
+ 1333 0040 0B49     		ldr	r1, .L169+8
+ 1334 0042 8005     		lsls	r0, r0, #22
+ 1335 0044 FFF7FEFF 		bl	log_direct_app
+ 1336 0048 FFF7FEFF 		bl	show_sdk_lib_version
+ 1337 004c FFF7FEFF 		bl	main
+ 1338              	.L168:
+ 1339 0050 FFF7FEFF 		bl	os_sched_start
+ 1340              		@ sp needed
+ 1341 0054 70BD     		pop	{r4, r5, r6, pc}
+ 1342              	.L167:
+ 1343 0056 8C20     		movs	r0, #140
+ 1344 0058 0649     		ldr	r1, .L169+12
+ 1345 005a 8005     		lsls	r0, r0, #22
+ 1346 005c FFF7FEFF 		bl	log_direct_app
+ 1347 0060 FFF7FEFF 		bl	WDG_Disable
+ 1348 0064 F4E7     		b	.L168
+ 1349              	.L170:
+ 1350 0066 C046     		.align	2
+ 1351              	.L169:
+ 1352 0068 64012000 		.word	2097508
+ 1353 006c 98032000 		.word	2098072
+ 1354 0070 00000000 		.word	.LC90
+ 1355 0074 0C000000 		.word	.LC92
+ 1357              		.section	.text.get_cpu_clock,"ax",%progbits
+ 1358              		.align	1
+ 1359              		.global	get_cpu_clock
+ 1360              		.syntax unified
+ 1361              		.code	16
+ 1362              		.thumb_func
+ 1364              	get_cpu_clock:
+ 1365              		@ args = 0, pretend = 0, frame = 0
+ 1366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1367              		@ link register save eliminated.
+ 1368 0000 014B     		ldr	r3, .L172
+ 1369 0002 1868     		ldr	r0, [r3]
+ 1370              		@ sp needed
+ 1371 0004 7047     		bx	lr
+ 1372              	.L173:
+ 1373 0006 C046     		.align	2
+ 1374              	.L172:
+ 1375 0008 00000000 		.word	SystemCpuClock
+ 1377              		.section	.text.get_ic_type,"ax",%progbits
+ 1378              		.align	1
+ 1379              		.global	get_ic_type
+ 1380              		.syntax unified
+ 1381              		.code	16
+ 1382              		.thumb_func
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 26
+
+
+ 1384              	get_ic_type:
+ 1385              		@ args = 0, pretend = 0, frame = 0
+ 1386              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1387              		@ link register save eliminated.
+ 1388 0000 014B     		ldr	r3, .L175
+ 1389 0002 1878     		ldrb	r0, [r3]
+ 1390              		@ sp needed
+ 1391 0004 7047     		bx	lr
+ 1392              	.L176:
+ 1393 0006 C046     		.align	2
+ 1394              	.L175:
+ 1395 0008 EF2C2000 		.word	2108655
+ 1397              		.section	.rodata.set_boot_active_time.str1.4,"aMS",%progbits,1
+ 1398              		.align	2
+ 1399              	.LC96:
+ 1400 0000 53657441 		.ascii	"SetActiveTimer\000"
+ 1400      63746976 
+ 1400      6554696D 
+ 1400      657200
+ 1401              		.section	.text.set_boot_active_time,"ax",%progbits
+ 1402              		.align	1
+ 1403              		.global	set_boot_active_time
+ 1404              		.syntax unified
+ 1405              		.code	16
+ 1406              		.thumb_func
+ 1408              	set_boot_active_time:
+ 1409              		@ args = 0, pretend = 0, frame = 0
+ 1410              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1411 0000 10B5     		push	{r4, lr}
+ 1412 0002 82B0     		sub	sp, sp, #8
+ 1413 0004 0400     		movs	r4, r0
+ 1414 0006 0E4B     		ldr	r3, .L181
+ 1415 0008 1B68     		ldr	r3, [r3]
+ 1416 000a 002B     		cmp	r3, #0
+ 1417 000c 05D0     		beq	.L180
+ 1418 000e 0100     		movs	r1, r0
+ 1419 0010 0B48     		ldr	r0, .L181
+ 1420 0012 FFF7FEFF 		bl	os_timer_restart
+ 1421              	.L177:
+ 1422 0016 02B0     		add	sp, sp, #8
+ 1423              		@ sp needed
+ 1424 0018 10BD     		pop	{r4, pc}
+ 1425              	.L180:
+ 1426 001a FFF7FEFF 		bl	power_manager_suspend_all
+ 1427 001e 094B     		ldr	r3, .L181+4
+ 1428 0020 0193     		str	r3, [sp, #4]
+ 1429 0022 0023     		movs	r3, #0
+ 1430 0024 0093     		str	r3, [sp]
+ 1431 0026 2300     		movs	r3, r4
+ 1432 0028 0022     		movs	r2, #0
+ 1433 002a 0749     		ldr	r1, .L181+8
+ 1434 002c 0448     		ldr	r0, .L181
+ 1435 002e FFF7FEFF 		bl	os_timer_create
+ 1436 0032 0028     		cmp	r0, #0
+ 1437 0034 EFD0     		beq	.L177
+ 1438 0036 0248     		ldr	r0, .L181
+ 1439 0038 FFF7FEFF 		bl	os_timer_start
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 27
+
+
+ 1440 003c EBE7     		b	.L177
+ 1441              	.L182:
+ 1442 003e C046     		.align	2
+ 1443              	.L181:
+ 1444 0040 00000000 		.word	.LANCHOR0
+ 1445 0044 00000000 		.word	set_active_timer_callback
+ 1446 0048 00000000 		.word	.LC96
+ 1448              		.section	.text._close,"ax",%progbits
+ 1449              		.align	1
+ 1450              		.weak	_close
+ 1451              		.syntax unified
+ 1452              		.code	16
+ 1453              		.thumb_func
+ 1455              	_close:
+ 1456              		@ args = 0, pretend = 0, frame = 0
+ 1457              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1458              		@ link register save eliminated.
+ 1459 0000 0120     		movs	r0, #1
+ 1460 0002 4042     		rsbs	r0, r0, #0
+ 1461              		@ sp needed
+ 1462 0004 7047     		bx	lr
+ 1464              		.section	.text._fstat,"ax",%progbits
+ 1465              		.align	1
+ 1466              		.weak	_fstat
+ 1467              		.syntax unified
+ 1468              		.code	16
+ 1469              		.thumb_func
+ 1471              	_fstat:
+ 1472              		@ args = 0, pretend = 0, frame = 0
+ 1473              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1474              		@ link register save eliminated.
+ 1475 0000 8023     		movs	r3, #128
+ 1476 0002 9B01     		lsls	r3, r3, #6
+ 1477 0004 4B60     		str	r3, [r1, #4]
+ 1478 0006 0020     		movs	r0, #0
+ 1479              		@ sp needed
+ 1480 0008 7047     		bx	lr
+ 1482              		.section	.text._getpid,"ax",%progbits
+ 1483              		.align	1
+ 1484              		.weak	_getpid
+ 1485              		.syntax unified
+ 1486              		.code	16
+ 1487              		.thumb_func
+ 1489              	_getpid:
+ 1490              		@ args = 0, pretend = 0, frame = 0
+ 1491              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1492              		@ link register save eliminated.
+ 1493 0000 0120     		movs	r0, #1
+ 1494              		@ sp needed
+ 1495 0002 7047     		bx	lr
+ 1497              		.section	.text._isatty,"ax",%progbits
+ 1498              		.align	1
+ 1499              		.weak	_isatty
+ 1500              		.syntax unified
+ 1501              		.code	16
+ 1502              		.thumb_func
+ 1504              	_isatty:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 28
+
+
+ 1505              		@ args = 0, pretend = 0, frame = 0
+ 1506              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1507              		@ link register save eliminated.
+ 1508 0000 0120     		movs	r0, #1
+ 1509              		@ sp needed
+ 1510 0002 7047     		bx	lr
+ 1512              		.section	.text._kill,"ax",%progbits
+ 1513              		.align	1
+ 1514              		.weak	_kill
+ 1515              		.syntax unified
+ 1516              		.code	16
+ 1517              		.thumb_func
+ 1519              	_kill:
+ 1520              		@ args = 0, pretend = 0, frame = 0
+ 1521              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1522              		@ link register save eliminated.
+ 1523 0000 024B     		ldr	r3, .L188
+ 1524 0002 1622     		movs	r2, #22
+ 1525 0004 1A60     		str	r2, [r3]
+ 1526 0006 0120     		movs	r0, #1
+ 1527 0008 4042     		rsbs	r0, r0, #0
+ 1528              		@ sp needed
+ 1529 000a 7047     		bx	lr
+ 1530              	.L189:
+ 1531              		.align	2
+ 1532              	.L188:
+ 1533 000c 00000000 		.word	errno
+ 1535              		.section	.text._lseek,"ax",%progbits
+ 1536              		.align	1
+ 1537              		.weak	_lseek
+ 1538              		.syntax unified
+ 1539              		.code	16
+ 1540              		.thumb_func
+ 1542              	_lseek:
+ 1543              		@ args = 0, pretend = 0, frame = 0
+ 1544              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1545              		@ link register save eliminated.
+ 1546 0000 0020     		movs	r0, #0
+ 1547              		@ sp needed
+ 1548 0002 7047     		bx	lr
+ 1550              		.section	.text._read,"ax",%progbits
+ 1551              		.align	1
+ 1552              		.weak	_read
+ 1553              		.syntax unified
+ 1554              		.code	16
+ 1555              		.thumb_func
+ 1557              	_read:
+ 1558              		@ args = 0, pretend = 0, frame = 0
+ 1559              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1560              		@ link register save eliminated.
+ 1561 0000 0020     		movs	r0, #0
+ 1562              		@ sp needed
+ 1563 0002 7047     		bx	lr
+ 1565              		.section	.text._write,"ax",%progbits
+ 1566              		.align	1
+ 1567              		.weak	_write
+ 1568              		.syntax unified
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 29
+
+
+ 1569              		.code	16
+ 1570              		.thumb_func
+ 1572              	_write:
+ 1573              		@ args = 0, pretend = 0, frame = 0
+ 1574              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1575              		@ link register save eliminated.
+ 1576 0000 1000     		movs	r0, r2
+ 1577              		@ sp needed
+ 1578 0002 7047     		bx	lr
+ 1580              		.section	.app.data_ram.text
+ 1581              		.align	1
+ 1582              		.global	memset
+ 1583              		.syntax unified
+ 1584              		.code	16
+ 1585              		.thumb_func
+ 1587              	memset:
+ 1588              		@ args = 0, pretend = 0, frame = 0
+ 1589              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1590 0160 10B5     		push	{r4, lr}
+ 1591 0162 0B00     		movs	r3, r1
+ 1592 0164 1100     		movs	r1, r2
+ 1593 0166 1A00     		movs	r2, r3
+ 1594 0168 FFF7FEFF 		bl	__aeabi_memset
+ 1595              		@ sp needed
+ 1596 016c 10BD     		pop	{r4, pc}
+ 1598 016e C046     		.section	.app.flash.text
+ 1599              		.align	1
+ 1600              		.global	ram_init
+ 1601              		.syntax unified
+ 1602              		.code	16
+ 1603              		.thumb_func
+ 1605              	ram_init:
+ 1606              		@ args = 0, pretend = 0, frame = 0
+ 1607              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1608 02a4 10B5     		push	{r4, lr}
+ 1609 02a6 084A     		ldr	r2, .L195
+ 1610 02a8 0849     		ldr	r1, .L195+4
+ 1611 02aa 0948     		ldr	r0, .L195+8
+ 1612 02ac FFF7FEFF 		bl	memcpy
+ 1613 02b0 084A     		ldr	r2, .L195+12
+ 1614 02b2 0949     		ldr	r1, .L195+16
+ 1615 02b4 0948     		ldr	r0, .L195+20
+ 1616 02b6 FFF7FEFF 		bl	memcpy
+ 1617 02ba 094A     		ldr	r2, .L195+24
+ 1618 02bc 0021     		movs	r1, #0
+ 1619 02be 0948     		ldr	r0, .L195+28
+ 1620 02c0 FFF7FEFF 		bl	memset
+ 1621              		@ sp needed
+ 1622 02c4 10BD     		pop	{r4, pc}
+ 1623              	.L196:
+ 1624 02c6 C046     		.align	2
+ 1625              	.L195:
+ 1626 02c8 00000000 		.word	__ram_dataon_ro_length__
+ 1627 02cc 00000000 		.word	__ram_ro_load_ad__
+ 1628 02d0 00000000 		.word	__ram_dataon_ro_start__
+ 1629 02d4 00000000 		.word	__ram_dataon_rw_length__
+ 1630 02d8 00000000 		.word	__ram_rw_load_ad__
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 30
+
+
+ 1631 02dc 00000000 		.word	__ram_dataon_rw_start__
+ 1632 02e0 00000000 		.word	__ram_dataon_zi_length__
+ 1633 02e4 00000000 		.word	__ram_dataon_zi_start__
+ 1635              		.align	1
+ 1636              		.global	SystemInit
+ 1637              		.syntax unified
+ 1638              		.code	16
+ 1639              		.thumb_func
+ 1641              	SystemInit:
+ 1642              		@ args = 0, pretend = 0, frame = 0
+ 1643              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1644 02e8 10B5     		push	{r4, lr}
+ 1645 02ea FFF7FEFF 		bl	check_hci_mode_flag
+ 1646 02ee 0028     		cmp	r0, #0
+ 1647 02f0 05D1     		bne	.L197
+ 1648 02f2 384A     		ldr	r2, .L202
+ 1649 02f4 BC23     		movs	r3, #188
+ 1650 02f6 5B00     		lsls	r3, r3, #1
+ 1651 02f8 D35C     		ldrb	r3, [r2, r3]
+ 1652 02fa DB07     		lsls	r3, r3, #31
+ 1653 02fc 00D4     		bmi	.L200
+ 1654              	.L197:
+ 1655              		@ sp needed
+ 1656 02fe 10BD     		pop	{r4, pc}
+ 1657              	.L200:
+ 1658 0300 FFF7FEFF 		bl	check_hci_mode_flag
+ 1659 0304 0028     		cmp	r0, #0
+ 1660 0306 5ED0     		beq	.L201
+ 1661              	.L199:
+ 1662 0308 334B     		ldr	r3, .L202+4
+ 1663 030a 344A     		ldr	r2, .L202+8
+ 1664 030c 1A60     		str	r2, [r3]
+ 1665 030e 3448     		ldr	r0, .L202+12
+ 1666 0310 FFF7FEFF 		bl	get_image_entry_addr
+ 1667 0314 334B     		ldr	r3, .L202+16
+ 1668 0316 1860     		str	r0, [r3]
+ 1669 0318 334B     		ldr	r3, .L202+20
+ 1670 031a 344A     		ldr	r2, .L202+24
+ 1671 031c 1A60     		str	r2, [r3]
+ 1672 031e 344B     		ldr	r3, .L202+28
+ 1673 0320 344A     		ldr	r2, .L202+32
+ 1674 0322 1A60     		str	r2, [r3]
+ 1675 0324 2B4C     		ldr	r4, .L202
+ 1676 0326 8723     		movs	r3, #135
+ 1677 0328 9B00     		lsls	r3, r3, #2
+ 1678 032a 334A     		ldr	r2, .L202+36
+ 1679 032c E250     		str	r2, [r4, r3]
+ 1680 032e A421     		movs	r1, #164
+ 1681 0330 8020     		movs	r0, #128
+ 1682 0332 0022     		movs	r2, #0
+ 1683 0334 0902     		lsls	r1, r1, #8
+ 1684 0336 C001     		lsls	r0, r0, #7
+ 1685 0338 FFF7FEFF 		bl	update_ram_layout
+ 1686 033c A823     		movs	r3, #168
+ 1687 033e 9B00     		lsls	r3, r3, #2
+ 1688 0340 8022     		movs	r2, #128
+ 1689 0342 5204     		lsls	r2, r2, #17
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 31
+
+
+ 1690 0344 E250     		str	r2, [r4, r3]
+ 1691 0346 0433     		adds	r3, r3, #4
+ 1692 0348 8022     		movs	r2, #128
+ 1693 034a 1204     		lsls	r2, r2, #16
+ 1694 034c E250     		str	r2, [r4, r3]
+ 1695 034e 2B4A     		ldr	r2, .L202+40
+ 1696 0350 5378     		ldrb	r3, [r2, #1]
+ 1697 0352 0821     		movs	r1, #8
+ 1698 0354 8B43     		bics	r3, r1
+ 1699 0356 5370     		strb	r3, [r2, #1]
+ 1700 0358 EC23     		movs	r3, #236
+ 1701 035a FF33     		adds	r3, r3, #255
+ 1702 035c 0622     		movs	r2, #6
+ 1703 035e E254     		strb	r2, [r4, r3]
+ 1704 0360 8522     		movs	r2, #133
+ 1705 0362 9200     		lsls	r2, r2, #2
+ 1706 0364 A35C     		ldrb	r3, [r4, r2]
+ 1707 0366 0221     		movs	r1, #2
+ 1708 0368 0B43     		orrs	r3, r1
+ 1709 036a DBB2     		uxtb	r3, r3
+ 1710 036c 2021     		movs	r1, #32
+ 1711 036e 0B43     		orrs	r3, r1
+ 1712 0370 0421     		movs	r1, #4
+ 1713 0372 0B43     		orrs	r3, r1
+ 1714 0374 A354     		strb	r3, [r4, r2]
+ 1715 0376 224A     		ldr	r2, .L202+44
+ 1716 0378 9378     		ldrb	r3, [r2, #2]
+ 1717 037a 0121     		movs	r1, #1
+ 1718 037c 8B43     		bics	r3, r1
+ 1719 037e 9370     		strb	r3, [r2, #2]
+ 1720 0380 E822     		movs	r2, #232
+ 1721 0382 5200     		lsls	r2, r2, #1
+ 1722 0384 A35C     		ldrb	r3, [r4, r2]
+ 1723 0386 0B43     		orrs	r3, r1
+ 1724 0388 A354     		strb	r3, [r4, r2]
+ 1725 038a 1E4A     		ldr	r2, .L202+48
+ 1726 038c A35C     		ldrb	r3, [r4, r2]
+ 1727 038e 1021     		movs	r1, #16
+ 1728 0390 8B43     		bics	r3, r1
+ 1729 0392 A354     		strb	r3, [r4, r2]
+ 1730 0394 EA23     		movs	r3, #234
+ 1731 0396 9B00     		lsls	r3, r3, #2
+ 1732 0398 273A     		subs	r2, r2, #39
+ 1733 039a FF3A     		subs	r2, r2, #255
+ 1734 039c E254     		strb	r2, [r4, r3]
+ 1735 039e 1A4B     		ldr	r3, .L202+52
+ 1736 03a0 B43A     		subs	r2, r2, #180
+ 1737 03a2 E254     		strb	r2, [r4, r3]
+ 1738 03a4 194B     		ldr	r3, .L202+56
+ 1739 03a6 8C32     		adds	r2, r2, #140
+ 1740 03a8 E254     		strb	r2, [r4, r3]
+ 1741 03aa 194B     		ldr	r3, .L202+60
+ 1742 03ac 3732     		adds	r2, r2, #55
+ 1743 03ae E254     		strb	r2, [r4, r3]
+ 1744 03b0 184B     		ldr	r3, .L202+64
+ 1745 03b2 FA3A     		subs	r2, r2, #250
+ 1746 03b4 DA70     		strb	r2, [r3, #3]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 32
+
+
+ 1747 03b6 FFF7FEFF 		bl	ram_init
+ 1748 03ba 174B     		ldr	r3, .L202+68
+ 1749 03bc 1B68     		ldr	r3, [r3]
+ 1750 03be 002B     		cmp	r3, #0
+ 1751 03c0 9DD0     		beq	.L197
+ 1752 03c2 9847     		blx	r3
+ 1753 03c4 9BE7     		b	.L197
+ 1754              	.L201:
+ 1755 03c6 1830     		adds	r0, r0, #24
+ 1756 03c8 FFF7FEFF 		bl	Pinmux_Deinit_rom
+ 1757 03cc 1920     		movs	r0, #25
+ 1758 03ce FFF7FEFF 		bl	Pinmux_Deinit_rom
+ 1759 03d2 99E7     		b	.L199
+ 1760              	.L203:
+ 1761              		.align	2
+ 1762              	.L202:
+ 1763 03d4 64012000 		.word	2097508
+ 1764 03d8 00000000 		.word	app_pre_main
+ 1765 03dc 00000000 		.word	pre_main
+ 1766 03e0 9A270000 		.word	10138
+ 1767 03e4 00000000 		.word	upperstack_entry
+ 1768 03e8 00000000 		.word	app_main
+ 1769 03ec 00000000 		.word	common_main
+ 1770 03f0 00000000 		.word	app_cb_wdg_reset
+ 1771 03f4 00000000 		.word	wdg_system_reset_app_cb
+ 1772 03f8 007C2000 		.word	2128896
+ 1773 03fc 4C032000 		.word	2097996
+ 1774 0400 98032000 		.word	2098072
+ 1775 0404 16020000 		.word	534
+ 1776 0408 A9030000 		.word	937
+ 1777 040c AA030000 		.word	938
+ 1778 0410 AB030000 		.word	939
+ 1779 0414 00052000 		.word	2098432
+ 1780 0418 00000000 		.word	os_patch
+ 1782              		.global	active_timer_handle
+ 1783              		.global	random_seed_value
+ 1784              		.global	auth_header
+ 1785              		.global	img_header
+ 1786              		.global	app_cb_table
+ 1787              		.weak	os_patch
+ 1788              		.weak	app_pre_main_cb
+ 1789              		.weak	user_wdg_cb
+ 1790              		.section	.rodata
+ 1791              		.align	2
+ 1792              		.set	.LANCHOR4,. + 0
+ 1793              	.LC66:
+ 1794 0000 00000000 		.word	.LC0
+ 1795 0004 0C000000 		.word	.LC1
+ 1796 0008 14000000 		.word	.LC2
+ 1797 000c 18000000 		.word	.LC3
+ 1798 0010 24000000 		.word	.LC4
+ 1799 0014 30000000 		.word	.LC5
+ 1800 0018 3C000000 		.word	.LC6
+ 1801 001c 48000000 		.word	.LC7
+ 1802 0020 48000000 		.word	.LC7
+ 1803 0024 48000000 		.word	.LC7
+ 1804 0028 48000000 		.word	.LC7
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 33
+
+
+ 1805 002c 50000000 		.word	.LC8
+ 1806 0030 54000000 		.word	.LC9
+ 1807 0034 48000000 		.word	.LC7
+ 1808 0038 60000000 		.word	.LC10
+ 1809 003c 68000000 		.word	.LC11
+ 1810              	.LC68:
+ 1811 0040 70000000 		.word	.LC13
+ 1812 0044 78000000 		.word	.LC14
+ 1813 0048 7C000000 		.word	.LC15
+ 1814 004c 84000000 		.word	.LC16
+ 1815 0050 8C000000 		.word	.LC17
+ 1816 0054 94000000 		.word	.LC18
+ 1817 0058 A0000000 		.word	.LC19
+ 1818 005c A8000000 		.word	.LC20
+ 1819 0060 B0000000 		.word	.LC21
+ 1820 0064 BC000000 		.word	.LC22
+ 1821 0068 C4000000 		.word	.LC23
+ 1822 006c CC000000 		.word	.LC24
+ 1823 0070 D4000000 		.word	.LC25
+ 1824 0074 DC000000 		.word	.LC26
+ 1825 0078 E0000000 		.word	.LC27
+ 1826 007c E8000000 		.word	.LC28
+ 1827 0080 F0000000 		.word	.LC29
+ 1828 0084 F8000000 		.word	.LC30
+ 1829 0088 00010000 		.word	.LC31
+ 1830 008c 04010000 		.word	.LC32
+ 1831 0090 10010000 		.word	.LC33
+ 1832 0094 20010000 		.word	.LC34
+ 1833 0098 30010000 		.word	.LC35
+ 1834 009c 40010000 		.word	.LC36
+ 1835 00a0 50010000 		.word	.LC37
+ 1836 00a4 60010000 		.word	.LC38
+ 1837 00a8 70010000 		.word	.LC39
+ 1838 00ac 7C010000 		.word	.LC40
+ 1839 00b0 88010000 		.word	.LC41
+ 1840 00b4 8C010000 		.word	.LC42
+ 1841 00b8 98010000 		.word	.LC43
+ 1842 00bc 48000000 		.word	.LC7
+ 1843 00c0 A4010000 		.word	.LC44
+ 1844 00c4 AC010000 		.word	.LC45
+ 1845 00c8 B4010000 		.word	.LC46
+ 1846 00cc C0010000 		.word	.LC47
+ 1847 00d0 C8010000 		.word	.LC48
+ 1848 00d4 D0010000 		.word	.LC49
+ 1849 00d8 D8010000 		.word	.LC50
+ 1850 00dc E0010000 		.word	.LC51
+ 1851 00e0 EC010000 		.word	.LC52
+ 1852 00e4 F8010000 		.word	.LC53
+ 1853              		.section	.TRACE,"a"
+ 1854              		.align	2
+ 1855              		.set	.LANCHOR2,. + 0
+ 1856              		.set	.LANCHOR3,. + 128
+ 1857              		.set	.LANCHOR5,. + 256
+ 1860              	format.10:
+ 1861 0000 212A2A5B 		.ascii	"!**[Debug Info]RESET Reason: Wakeup From Powerdown\000"
+ 1861      44656275 
+ 1861      6720496E 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 34
+
+
+ 1861      666F5D52 
+ 1861      45534554 
+ 1862 0033 00       		.space	1
+ 1865              	format.9:
+ 1866 0034 212A2A5B 		.ascii	"!**[Debug Info]RESET Reason: HW\000"
+ 1866      44656275 
+ 1866      6720496E 
+ 1866      666F5D52 
+ 1866      45534554 
+ 1869              	format.8:
+ 1870 0054 212A2A5B 		.ascii	"!**[Debug Info]RESET Reason: SW, TYPE 0x%x\000"
+ 1870      44656275 
+ 1870      6720496E 
+ 1870      666F5D52 
+ 1870      45534554 
+ 1871 007f 00       		.space	1
+ 1874              	format.7:
+ 1875 0080 212A2A5B 		.ascii	"!**[Debug Info]WDG: pc %x, lr %x, psr %x\000"
+ 1875      44656275 
+ 1875      6720496E 
+ 1875      666F5D57 
+ 1875      44473A20 
+ 1876 00a9 000000   		.space	3
+ 1879              	format.6:
+ 1880 00ac 212A2A5B 		.ascii	"!**[Debug Info]AON WDG: pc %x, lr %x, psr %x\000"
+ 1880      44656275 
+ 1880      6720496E 
+ 1880      666F5D41 
+ 1880      4F4E2057 
+ 1881 00d9 000000   		.space	3
+ 1884              	format.4:
+ 1885 00dc 21212A57 		.ascii	"!!*Warning! %s is updated by APP!\000"
+ 1885      61726E69 
+ 1885      6E672120 
+ 1885      25732069 
+ 1885      73207570 
+ 1886 00fe 0000     		.space	2
+ 1889              	format.3:
+ 1890 0100 21212A57 		.ascii	"!!*Warning! ISR %s is updated by APP!\000"
+ 1890      61726E69 
+ 1890      6E672120 
+ 1890      49535220 
+ 1890      25732069 
+ 1891 0126 0000     		.space	2
+ 1894              	format.5:
+ 1895 0128 21212153 		.ascii	"!!!SDK Ver: %s, Build Time: %s\000"
+ 1895      444B2056 
+ 1895      65723A20 
+ 1895      25732C20 
+ 1895      4275696C 
+ 1896              		.section	.app.flash.header,"a"
+ 1897              		.align	2
+ 1900              	img_header:
+ 1901 0000 0C       		.byte	12
+ 1902 0001 00       		.byte	0
+ 1903 0002 01       		.byte	1
+ 1904 0003 09       		.byte	9
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 35
+
+
+ 1905 0004 9327     		.short	10131
+ 1906 0006 0000     		.space	2
+ 1907 0008 00010000 		.word	256
+ 1908 000c F94C6B7E 		.ascii	"\371Lk~\021\305\353\021\202\202\367J\014\014\357["
+ 1908      11C5EB11 
+ 1908      8282F74A 
+ 1908      0C0CEF5B 
+ 1909 001c 00000000 		.word	SystemInit
+ 1910 0020 00000000 		.word	0
+ 1911 0024 00000000 		.word	0
+ 1912 0028 00208300 		.word	8593408
+ 1913 002c 00000000 		.space	52
+ 1913      00000000 
+ 1913      00000000 
+ 1913      00000000 
+ 1913      00000000 
+ 1914 0060 21       		.byte	33
+ 1915 0061 20       		.byte	32
+ 1916 0062 00       		.byte	0
+ 1917 0063 88       		.byte	136
+ 1918 0064 DACB6522 		.word	577096666
+ 1919 0068 73646B23 		.ascii	"sdk#####"
+ 1919      23232323 
+ 1920 0070 00000000 		.space	360
+ 1920      00000000 
+ 1920      00000000 
+ 1920      00000000 
+ 1920      00000000 
+ 1921 01d8 01D1850E 		.word	243650817
+ 1922 01dc 00000000 		.word	app_cb_table
+ 1923              		.section	.app.flash.header.auth,"a"
+ 1924              		.align	2
+ 1927              	auth_header:
+ 1928 0000 00000000 		.space	256
+ 1928      00000000 
+ 1928      00000000 
+ 1928      00000000 
+ 1928      00000000 
+ 1929 0100 FFFFFFFF 		.ascii	"\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 1929      FFFFFFFF 
+ 1929      FFFFFFFF 
+ 1929      FF
+ 1930 010d FFFFFF   		.ascii	"\377\377\377"
+ 1931 0110 00000000 		.space	256
+ 1931      00000000 
+ 1931      00000000 
+ 1931      00000000 
+ 1931      00000000 
+ 1932 0210 FFFFFFFF 		.ascii	"\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 1932      FFFFFFFF 
+ 1932      FFFFFFFF 
+ 1932      FF
+ 1933 021d FFFFFF   		.ascii	"\377\377\377"
+ 1934              		.section	.bss.active_timer_handle,"aw",%nobits
+ 1935              		.align	2
+ 1936              		.set	.LANCHOR0,. + 0
+ 1939              	active_timer_handle:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 36
+
+
+ 1940 0000 00000000 		.space	4
+ 1941              		.section	.bss.app_pre_main_cb,"aw",%nobits
+ 1942              		.align	2
+ 1945              	app_pre_main_cb:
+ 1946 0000 00000000 		.space	4
+ 1947              		.section	.bss.os_patch,"aw",%nobits
+ 1948              		.align	2
+ 1951              	os_patch:
+ 1952 0000 00000000 		.space	4
+ 1953              		.section	.bss.random_seed_value,"aw",%nobits
+ 1954              		.align	2
+ 1955              		.set	.LANCHOR1,. + 0
+ 1958              	random_seed_value:
+ 1959 0000 00000000 		.space	4
+ 1960              		.section	.bss.user_wdg_cb,"aw",%nobits
+ 1961              		.align	2
+ 1964              	user_wdg_cb:
+ 1965 0000 00000000 		.space	4
+ 1966              		.section	.rodata.__func__.0,"a"
+ 1967              		.align	2
+ 1968              		.set	.LANCHOR8,. + 0
+ 1971              	__func__.0:
+ 1972 0000 7265616C 		.ascii	"realloc\000"
+ 1972      6C6F6300 
+ 1973              		.section	.rodata.__func__.1,"a"
+ 1974              		.align	2
+ 1975              		.set	.LANCHOR7,. + 0
+ 1978              	__func__.1:
+ 1979 0000 63616C6C 		.ascii	"calloc\000"
+ 1979      6F6300
+ 1980              		.section	.rodata.__func__.2,"a"
+ 1981              		.align	2
+ 1982              		.set	.LANCHOR6,. + 0
+ 1985              	__func__.2:
+ 1986 0000 6D616C6C 		.ascii	"malloc\000"
+ 1986      6F6300
+ 1987              		.section	.rodata.app_cb_table,"a"
+ 1988              		.align	2
+ 1991              	app_cb_table:
+ 1992 0000 01D1850E 		.word	243650817
+ 1993 0004 01000000 		.word	1
+ 1994 0008 00000000 		.word	0
+ 1995              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 37
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_rtl876x.c
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:15     .rodata.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:176    .app.flash.text:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:182    .app.flash.text:00000000 wdg_system_reset_app_cb
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:197    .app.flash.text:00000010 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1964   .bss.user_wdg_cb:00000000 user_wdg_cb
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:200    .text.set_active_timer_callback:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:206    .text.set_active_timer_callback:00000000 set_active_timer_callback
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:223    .text.set_active_timer_callback:0000001c $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:226    .text.random_seed_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:232    .text.random_seed_init:00000000 random_seed_init
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:246    .text.random_seed_init:00000010 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:249    .app.flash.text:00000014 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:255    .app.flash.text:00000014 ram_cache_init
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:268    .app.flash.text:00000024 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:272    .app.flash.text:00000030 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:278    .app.flash.text:00000030 get_image_entry_addr
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:335    .app.flash.text:00000090 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:339    .app.flash.text:0000009c $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:345    .app.flash.text:0000009c set_os_clock
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:390    .app.flash.text:000000e0 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:392    .app.flash.text:000000e4 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:398    .app.flash.text:000000e4 print_reset_reason
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:547    .app.flash.text:00000224 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:555    .text.show_sdk_lib_version:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:561    .text.show_sdk_lib_version:00000000 show_sdk_lib_version
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:569    .app.overlay_a:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:575    .app.overlay_a:00000000 AppUpdateVectorTable
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:684    .app.overlay_a:000000c0 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:709    .app.flash.text:0000023c $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:715    .app.flash.text:0000023c pre_main
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:761    .app.flash.text:0000028c $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1945   .bss.app_pre_main_cb:00000000 app_pre_main_cb
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:769    .app.data_ram.text:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:775    .app.data_ram.text:00000000 GPIO_Group3_Handler
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:834    .app.data_ram.text:00000058 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:836    .app.data_ram.text:0000005c $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:842    .app.data_ram.text:0000005c GPIO_Group2_Handler
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:901    .app.data_ram.text:000000b4 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:903    .app.data_ram.text:000000b8 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:909    .app.data_ram.text:000000b8 GPIO_Group1_Handler
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:962    .app.data_ram.text:00000108 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:964    .app.data_ram.text:0000010c $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:970    .app.data_ram.text:0000010c GPIO_Group0_Handler
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1023   .app.data_ram.text:0000015c $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1026   .text.__2printf:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1032   .text.__2printf:00000000 __2printf
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1043   .text.malloc:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1049   .text.malloc:00000000 malloc
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1063   .text.malloc:00000010 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1067   .text.calloc:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1073   .text.calloc:00000000 calloc
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1087   .text.calloc:00000010 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1091   .text.realloc:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1097   .text.realloc:00000000 realloc
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1175   .text.realloc:00000094 $d
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 38
+
+
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1180   .text.free:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1186   .text.free:00000000 free
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1195   .text.log_direct_app:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1201   .text.log_direct_app:00000000 log_direct_app
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1283   .text.log_direct_app:00000098 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1290   .rodata.common_main.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1297   .text.common_main:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1303   .text.common_main:00000000 common_main
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1352   .text.common_main:00000068 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1358   .text.get_cpu_clock:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1364   .text.get_cpu_clock:00000000 get_cpu_clock
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1375   .text.get_cpu_clock:00000008 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1378   .text.get_ic_type:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1384   .text.get_ic_type:00000000 get_ic_type
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1395   .text.get_ic_type:00000008 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1398   .rodata.set_boot_active_time.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1402   .text.set_boot_active_time:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1408   .text.set_boot_active_time:00000000 set_boot_active_time
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1444   .text.set_boot_active_time:00000040 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1449   .text._close:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1455   .text._close:00000000 _close
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1465   .text._fstat:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1471   .text._fstat:00000000 _fstat
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1483   .text._getpid:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1489   .text._getpid:00000000 _getpid
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1498   .text._isatty:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1504   .text._isatty:00000000 _isatty
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1513   .text._kill:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1519   .text._kill:00000000 _kill
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1533   .text._kill:0000000c $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1536   .text._lseek:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1542   .text._lseek:00000000 _lseek
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1551   .text._read:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1557   .text._read:00000000 _read
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1566   .text._write:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1572   .text._write:00000000 _write
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1581   .app.data_ram.text:00000160 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1587   .app.data_ram.text:00000160 memset
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1599   .app.flash.text:000002a4 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1605   .app.flash.text:000002a4 ram_init
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1626   .app.flash.text:000002c8 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1635   .app.flash.text:000002e8 $t
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1641   .app.flash.text:000002e8 SystemInit
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1763   .app.flash.text:000003d4 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1951   .bss.os_patch:00000000 os_patch
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1939   .bss.active_timer_handle:00000000 active_timer_handle
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1958   .bss.random_seed_value:00000000 random_seed_value
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1927   .app.flash.header.auth:00000000 auth_header
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1900   .app.flash.header:00000000 img_header
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1991   .rodata.app_cb_table:00000000 app_cb_table
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1791   .rodata:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1854   .TRACE:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1860   .TRACE:00000000 format.10
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1865   .TRACE:00000034 format.9
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1869   .TRACE:00000054 format.8
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1874   .TRACE:00000080 format.7
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1879   .TRACE:000000ac format.6
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 39
+
+
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1884   .TRACE:000000dc format.4
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1889   .TRACE:00000100 format.3
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1894   .TRACE:00000128 format.5
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1897   .app.flash.header:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1924   .app.flash.header.auth:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1935   .bss.active_timer_handle:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1942   .bss.app_pre_main_cb:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1948   .bss.os_patch:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1954   .bss.random_seed_value:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1961   .bss.user_wdg_cb:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1967   .rodata.__func__.0:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1971   .rodata.__func__.0:00000000 __func__.0
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1974   .rodata.__func__.1:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1978   .rodata.__func__.1:00000000 __func__.1
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1981   .rodata.__func__.2:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1985   .rodata.__func__.2:00000000 __func__.2
+C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s:1988   .rodata.app_cb_table:00000000 $d
+
+UNDEFINED SYMBOLS
+power_manager_resume_all
+os_timer_stop
+os_timer_delete
+platform_random
+memcpy
+__cache_dataon_length__
+__cache_data_load_ad__
+__cache_dataon_start__
+get_active_ota_bank_addr
+check_header_valid
+get_header_addr_by_img_id
+btaon_fast_read_safe
+reset_reason_get
+log_buffer
+WDG_ClockEnable
+WDG_Config
+WDG_Enable
+WDG_Disable
+platform_delay_ms
+platform_delay_us
+RamVectorTableInit
+trace_string
+__ram_vector_table_length__
+__ram_vector_load_ad__
+ROM_Default_Handler
+Default_Handler
+setlocale
+GPIO3_Handler
+GPIO7_Handler
+GPIO11_Handler
+GPIO15_Handler
+GPIO19_Handler
+GPIO23_Handler
+GPIO27_Handler
+GPIO31_Handler
+GPIO2_Handler
+GPIO6_Handler
+GPIO10_Handler
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 40
+
+
+GPIO14_Handler
+GPIO18_Handler
+GPIO22_Handler
+GPIO26_Handler
+GPIO30_Handler
+GPIO1_Handler
+GPIO9_Handler
+GPIO13_Handler
+GPIO17_Handler
+GPIO21_Handler
+GPIO25_Handler
+GPIO29_Handler
+GPIO0_Handler
+GPIO8_Handler
+GPIO12_Handler
+GPIO16_Handler
+GPIO20_Handler
+GPIO24_Handler
+GPIO28_Handler
+os_mem_alloc_intern
+os_mem_zalloc_intern
+os_sched_suspend
+os_mem_free
+os_sched_resume
+log_timestamp_get
+vsnprintf
+os_lock
+os_unlock
+LogUartTxChar
+is_log_init
+log_seq_num
+__aeabi_uidiv
+flash_get_bank_addr
+flash_get_bank_size
+ftl_init
+main
+os_sched_start
+SystemCpuClock
+os_timer_restart
+power_manager_suspend_all
+os_timer_create
+os_timer_start
+errno
+__aeabi_memset
+__ram_dataon_ro_length__
+__ram_ro_load_ad__
+__ram_dataon_ro_start__
+__ram_dataon_rw_length__
+__ram_rw_load_ad__
+__ram_dataon_rw_start__
+__ram_dataon_zi_length__
+__ram_dataon_zi_start__
+check_hci_mode_flag
+update_ram_layout
+Pinmux_Deinit_rom
+app_pre_main
+upperstack_entry
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMGrsxq.s 			page 41
+
+
+app_main
+app_cb_wdg_reset

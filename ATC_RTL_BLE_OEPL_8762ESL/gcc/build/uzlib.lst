@@ -1,0 +1,1696 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"uzlib.c"
+  14              		.text
+  15              		.section	.text.tinf_build_tree,"ax",%progbits
+  16              		.align	1
+  17              		.syntax unified
+  18              		.code	16
+  19              		.thumb_func
+  21              	tinf_build_tree:
+  22              		@ args = 0, pretend = 0, frame = 32
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  25 0002 89B0     		sub	sp, sp, #36
+  26 0004 0500     		movs	r5, r0
+  27 0006 0600     		movs	r6, r0
+  28 0008 2036     		adds	r6, r6, #32
+  29 000a 0300     		movs	r3, r0
+  30 000c 0024     		movs	r4, #0
+  31              	.L2:
+  32 000e 1C80     		strh	r4, [r3]
+  33 0010 0233     		adds	r3, r3, #2
+  34 0012 B342     		cmp	r3, r6
+  35 0014 FBD1     		bne	.L2
+  36 0016 002A     		cmp	r2, #0
+  37 0018 09D0     		beq	.L3
+  38 001a 0C00     		movs	r4, r1
+  39 001c 5718     		adds	r7, r2, r1
+  40              	.L4:
+  41 001e 2378     		ldrb	r3, [r4]
+  42 0020 5B00     		lsls	r3, r3, #1
+  43 0022 C65A     		ldrh	r6, [r0, r3]
+  44 0024 0136     		adds	r6, r6, #1
+  45 0026 C652     		strh	r6, [r0, r3]
+  46 0028 0134     		adds	r4, r4, #1
+  47 002a BC42     		cmp	r4, r7
+  48 002c F7D1     		bne	.L4
+  49              	.L3:
+  50 002e 0023     		movs	r3, #0
+  51 0030 0380     		strh	r3, [r0]
+  52 0032 6B46     		mov	r3, sp
+  53 0034 08AF     		add	r7, sp, #32
+  54 0036 0024     		movs	r4, #0
+  55              	.L5:
+  56 0038 1C80     		strh	r4, [r3]
+  57 003a 2E88     		ldrh	r6, [r5]
+  58 003c A419     		adds	r4, r4, r6
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 2
+
+
+  59 003e 0233     		adds	r3, r3, #2
+  60 0040 0235     		adds	r5, r5, #2
+  61 0042 BB42     		cmp	r3, r7
+  62 0044 F8D1     		bne	.L5
+  63 0046 002A     		cmp	r2, #0
+  64 0048 11D0     		beq	.L1
+  65 004a 0023     		movs	r3, #0
+  66 004c 02E0     		b	.L8
+  67              	.L7:
+  68 004e 0133     		adds	r3, r3, #1
+  69 0050 9A42     		cmp	r2, r3
+  70 0052 0CD0     		beq	.L1
+  71              	.L8:
+  72 0054 CC5C     		ldrb	r4, [r1, r3]
+  73 0056 002C     		cmp	r4, #0
+  74 0058 F9D0     		beq	.L7
+  75 005a 6400     		lsls	r4, r4, #1
+  76 005c 6D46     		mov	r5, sp
+  77 005e 655B     		ldrh	r5, [r4, r5]
+  78 0060 6E1C     		adds	r6, r5, #1
+  79 0062 6F46     		mov	r7, sp
+  80 0064 E653     		strh	r6, [r4, r7]
+  81 0066 1035     		adds	r5, r5, #16
+  82 0068 6D00     		lsls	r5, r5, #1
+  83 006a 2B52     		strh	r3, [r5, r0]
+  84 006c EFE7     		b	.L7
+  85              	.L1:
+  86 006e 09B0     		add	sp, sp, #36
+  87              		@ sp needed
+  88 0070 F0BD     		pop	{r4, r5, r6, r7, pc}
+  90              		.section	.text.uzlib_get_byte,"ax",%progbits
+  91              		.align	1
+  92              		.global	uzlib_get_byte
+  93              		.syntax unified
+  94              		.code	16
+  95              		.thumb_func
+  97              	uzlib_get_byte:
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100 0000 10B5     		push	{r4, lr}
+ 101 0002 0400     		movs	r4, r0
+ 102 0004 0368     		ldr	r3, [r0]
+ 103 0006 4268     		ldr	r2, [r0, #4]
+ 104 0008 9342     		cmp	r3, r2
+ 105 000a 0ED3     		bcc	.L17
+ 106 000c 8368     		ldr	r3, [r0, #8]
+ 107 000e 002B     		cmp	r3, #0
+ 108 0010 06D0     		beq	.L16
+ 109 0012 2522     		movs	r2, #37
+ 110 0014 825C     		ldrb	r2, [r0, r2]
+ 111 0016 002A     		cmp	r2, #0
+ 112 0018 02D1     		bne	.L16
+ 113 001a 9847     		blx	r3
+ 114 001c 0028     		cmp	r0, #0
+ 115 001e 08DA     		bge	.L18
+ 116              	.L16:
+ 117 0020 2523     		movs	r3, #37
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 3
+
+
+ 118 0022 0122     		movs	r2, #1
+ 119 0024 E254     		strb	r2, [r4, r3]
+ 120 0026 0020     		movs	r0, #0
+ 121              	.L15:
+ 122              		@ sp needed
+ 123 0028 10BD     		pop	{r4, pc}
+ 124              	.L17:
+ 125 002a 5A1C     		adds	r2, r3, #1
+ 126 002c 0260     		str	r2, [r0]
+ 127 002e 1878     		ldrb	r0, [r3]
+ 128 0030 FAE7     		b	.L15
+ 129              	.L18:
+ 130 0032 C0B2     		uxtb	r0, r0
+ 131 0034 F8E7     		b	.L15
+ 133              		.section	.text.tinf_skip_bytes,"ax",%progbits
+ 134              		.align	1
+ 135              		.global	tinf_skip_bytes
+ 136              		.syntax unified
+ 137              		.code	16
+ 138              		.thumb_func
+ 140              	tinf_skip_bytes:
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143 0000 70B5     		push	{r4, r5, r6, lr}
+ 144 0002 0500     		movs	r5, r0
+ 145 0004 0C1E     		subs	r4, r1, #0
+ 146 0006 05D0     		beq	.L19
+ 147              	.L21:
+ 148 0008 2800     		movs	r0, r5
+ 149 000a FFF7FEFF 		bl	uzlib_get_byte
+ 150 000e 013C     		subs	r4, r4, #1
+ 151 0010 002C     		cmp	r4, #0
+ 152 0012 F9D1     		bne	.L21
+ 153              	.L19:
+ 154              		@ sp needed
+ 155 0014 70BD     		pop	{r4, r5, r6, pc}
+ 157              		.section	.text.tinf_get_uint16,"ax",%progbits
+ 158              		.align	1
+ 159              		.global	tinf_get_uint16
+ 160              		.syntax unified
+ 161              		.code	16
+ 162              		.thumb_func
+ 164              	tinf_get_uint16:
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167 0000 70B5     		push	{r4, r5, r6, lr}
+ 168 0002 0400     		movs	r4, r0
+ 169 0004 FFF7FEFF 		bl	uzlib_get_byte
+ 170 0008 0500     		movs	r5, r0
+ 171 000a 2000     		movs	r0, r4
+ 172 000c FFF7FEFF 		bl	uzlib_get_byte
+ 173 0010 0002     		lsls	r0, r0, #8
+ 174 0012 2843     		orrs	r0, r5
+ 175 0014 80B2     		uxth	r0, r0
+ 176              		@ sp needed
+ 177 0016 70BD     		pop	{r4, r5, r6, pc}
+ 179              		.section	.text.uzlib_gzip_parse_header,"ax",%progbits
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 4
+
+
+ 180              		.align	1
+ 181              		.global	uzlib_gzip_parse_header
+ 182              		.syntax unified
+ 183              		.code	16
+ 184              		.thumb_func
+ 186              	uzlib_gzip_parse_header:
+ 187              		@ args = 0, pretend = 0, frame = 0
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189 0000 70B5     		push	{r4, r5, r6, lr}
+ 190 0002 0400     		movs	r4, r0
+ 191 0004 FFF7FEFF 		bl	uzlib_get_byte
+ 192 0008 1F28     		cmp	r0, #31
+ 193 000a 39D1     		bne	.L32
+ 194 000c 2000     		movs	r0, r4
+ 195 000e FFF7FEFF 		bl	uzlib_get_byte
+ 196 0012 8B28     		cmp	r0, #139
+ 197 0014 37D1     		bne	.L33
+ 198 0016 2000     		movs	r0, r4
+ 199 0018 FFF7FEFF 		bl	uzlib_get_byte
+ 200 001c 0828     		cmp	r0, #8
+ 201 001e 35D1     		bne	.L34
+ 202 0020 2000     		movs	r0, r4
+ 203 0022 FFF7FEFF 		bl	uzlib_get_byte
+ 204 0026 0500     		movs	r5, r0
+ 205 0028 E023     		movs	r3, #224
+ 206 002a 1842     		tst	r0, r3
+ 207 002c 31D1     		bne	.L35
+ 208 002e 0621     		movs	r1, #6
+ 209 0030 2000     		movs	r0, r4
+ 210 0032 FFF7FEFF 		bl	tinf_skip_bytes
+ 211 0036 6B07     		lsls	r3, r5, #29
+ 212 0038 16D4     		bmi	.L38
+ 213              	.L26:
+ 214 003a 2B07     		lsls	r3, r5, #28
+ 215 003c 04D5     		bpl	.L27
+ 216              	.L28:
+ 217 003e 2000     		movs	r0, r4
+ 218 0040 FFF7FEFF 		bl	uzlib_get_byte
+ 219 0044 0028     		cmp	r0, #0
+ 220 0046 FAD1     		bne	.L28
+ 221              	.L27:
+ 222 0048 EB06     		lsls	r3, r5, #27
+ 223 004a 04D5     		bpl	.L29
+ 224              	.L30:
+ 225 004c 2000     		movs	r0, r4
+ 226 004e FFF7FEFF 		bl	uzlib_get_byte
+ 227 0052 0028     		cmp	r0, #0
+ 228 0054 FAD1     		bne	.L30
+ 229              	.L29:
+ 230 0056 AB07     		lsls	r3, r5, #30
+ 231 0058 0ED4     		bmi	.L39
+ 232              	.L31:
+ 233 005a 2423     		movs	r3, #36
+ 234 005c 0222     		movs	r2, #2
+ 235 005e E254     		strb	r2, [r4, r3]
+ 236 0060 253B     		subs	r3, r3, #37
+ 237 0062 2362     		str	r3, [r4, #32]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 5
+
+
+ 238 0064 0020     		movs	r0, #0
+ 239              	.L24:
+ 240              		@ sp needed
+ 241 0066 70BD     		pop	{r4, r5, r6, pc}
+ 242              	.L38:
+ 243 0068 2000     		movs	r0, r4
+ 244 006a FFF7FEFF 		bl	tinf_get_uint16
+ 245 006e 0100     		movs	r1, r0
+ 246 0070 2000     		movs	r0, r4
+ 247 0072 FFF7FEFF 		bl	tinf_skip_bytes
+ 248 0076 E0E7     		b	.L26
+ 249              	.L39:
+ 250 0078 2000     		movs	r0, r4
+ 251 007a FFF7FEFF 		bl	tinf_get_uint16
+ 252 007e ECE7     		b	.L31
+ 253              	.L32:
+ 254 0080 0320     		movs	r0, #3
+ 255 0082 4042     		rsbs	r0, r0, #0
+ 256 0084 EFE7     		b	.L24
+ 257              	.L33:
+ 258 0086 0320     		movs	r0, #3
+ 259 0088 4042     		rsbs	r0, r0, #0
+ 260 008a ECE7     		b	.L24
+ 261              	.L34:
+ 262 008c 0320     		movs	r0, #3
+ 263 008e 4042     		rsbs	r0, r0, #0
+ 264 0090 E9E7     		b	.L24
+ 265              	.L35:
+ 266 0092 0320     		movs	r0, #3
+ 267 0094 4042     		rsbs	r0, r0, #0
+ 268 0096 E6E7     		b	.L24
+ 270              		.section	.text.tinf_getbit,"ax",%progbits
+ 271              		.align	1
+ 272              		.syntax unified
+ 273              		.code	16
+ 274              		.thumb_func
+ 276              	tinf_getbit:
+ 277              		@ args = 0, pretend = 0, frame = 0
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279 0000 10B5     		push	{r4, lr}
+ 280 0002 0400     		movs	r4, r0
+ 281 0004 0369     		ldr	r3, [r0, #16]
+ 282 0006 5A1E     		subs	r2, r3, #1
+ 283 0008 0261     		str	r2, [r0, #16]
+ 284 000a 002B     		cmp	r3, #0
+ 285 000c 05D0     		beq	.L42
+ 286              	.L41:
+ 287 000e E368     		ldr	r3, [r4, #12]
+ 288 0010 5A08     		lsrs	r2, r3, #1
+ 289 0012 E260     		str	r2, [r4, #12]
+ 290 0014 0120     		movs	r0, #1
+ 291 0016 1840     		ands	r0, r3
+ 292              		@ sp needed
+ 293 0018 10BD     		pop	{r4, pc}
+ 294              	.L42:
+ 295 001a FFF7FEFF 		bl	uzlib_get_byte
+ 296 001e E060     		str	r0, [r4, #12]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 6
+
+
+ 297 0020 0723     		movs	r3, #7
+ 298 0022 2361     		str	r3, [r4, #16]
+ 299 0024 F3E7     		b	.L41
+ 301              		.section	.text.tinf_read_bits,"ax",%progbits
+ 302              		.align	1
+ 303              		.syntax unified
+ 304              		.code	16
+ 305              		.thumb_func
+ 307              	tinf_read_bits:
+ 308              		@ args = 0, pretend = 0, frame = 0
+ 309              		@ frame_needed = 0, uses_anonymous_args = 0
+ 310 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 311 0002 C646     		mov	lr, r8
+ 312 0004 00B5     		push	{lr}
+ 313 0006 0500     		movs	r5, r0
+ 314 0008 9046     		mov	r8, r2
+ 315 000a 0026     		movs	r6, #0
+ 316 000c 0029     		cmp	r1, #0
+ 317 000e 10D0     		beq	.L44
+ 318 0010 0127     		movs	r7, #1
+ 319 0012 8F40     		lsls	r7, r7, r1
+ 320 0014 012F     		cmp	r7, #1
+ 321 0016 0BD9     		bls	.L48
+ 322 0018 0124     		movs	r4, #1
+ 323 001a 02E0     		b	.L46
+ 324              	.L45:
+ 325 001c 6400     		lsls	r4, r4, #1
+ 326 001e A742     		cmp	r7, r4
+ 327 0020 07D9     		bls	.L44
+ 328              	.L46:
+ 329 0022 2800     		movs	r0, r5
+ 330 0024 FFF7FEFF 		bl	tinf_getbit
+ 331 0028 0028     		cmp	r0, #0
+ 332 002a F7D0     		beq	.L45
+ 333 002c 3619     		adds	r6, r6, r4
+ 334 002e F5E7     		b	.L45
+ 335              	.L48:
+ 336 0030 0026     		movs	r6, #0
+ 337              	.L44:
+ 338 0032 3000     		movs	r0, r6
+ 339 0034 4044     		add	r0, r0, r8
+ 340              		@ sp needed
+ 341 0036 80BC     		pop	{r7}
+ 342 0038 B846     		mov	r8, r7
+ 343 003a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 345              		.section	.text.tinf_decode_symbol,"ax",%progbits
+ 346              		.align	1
+ 347              		.syntax unified
+ 348              		.code	16
+ 349              		.thumb_func
+ 351              	tinf_decode_symbol:
+ 352              		@ args = 0, pretend = 0, frame = 0
+ 353              		@ frame_needed = 0, uses_anonymous_args = 0
+ 354 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 355 0002 CE46     		mov	lr, r9
+ 356 0004 4746     		mov	r7, r8
+ 357 0006 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 7
+
+
+ 358 0008 8146     		mov	r9, r0
+ 359 000a 8846     		mov	r8, r1
+ 360 000c FFF7FEFF 		bl	tinf_getbit
+ 361 0010 4346     		mov	r3, r8
+ 362 0012 9C1C     		adds	r4, r3, #2
+ 363 0014 4746     		mov	r7, r8
+ 364 0016 2037     		adds	r7, r7, #32
+ 365 0018 0025     		movs	r5, #0
+ 366              	.L51:
+ 367 001a 2388     		ldrh	r3, [r4]
+ 368 001c 2A00     		movs	r2, r5
+ 369 001e ED18     		adds	r5, r5, r3
+ 370 0020 C31A     		subs	r3, r0, r3
+ 371 0022 0DD4     		bmi	.L55
+ 372 0024 5E00     		lsls	r6, r3, #1
+ 373 0026 4846     		mov	r0, r9
+ 374 0028 FFF7FEFF 		bl	tinf_getbit
+ 375 002c 3018     		adds	r0, r6, r0
+ 376 002e 0234     		adds	r4, r4, #2
+ 377 0030 BC42     		cmp	r4, r7
+ 378 0032 F2D1     		bne	.L51
+ 379 0034 0320     		movs	r0, #3
+ 380 0036 4042     		rsbs	r0, r0, #0
+ 381              	.L50:
+ 382              		@ sp needed
+ 383 0038 C0BC     		pop	{r6, r7}
+ 384 003a B946     		mov	r9, r7
+ 385 003c B046     		mov	r8, r6
+ 386 003e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 387              	.L55:
+ 388 0040 8018     		adds	r0, r0, r2
+ 389 0042 1030     		adds	r0, r0, #16
+ 390 0044 4000     		lsls	r0, r0, #1
+ 391 0046 4346     		mov	r3, r8
+ 392 0048 C05A     		ldrh	r0, [r0, r3]
+ 393 004a F5E7     		b	.L50
+ 395              		.section	.text.tinf_decode_trees,"ax",%progbits
+ 396              		.align	1
+ 397              		.syntax unified
+ 398              		.code	16
+ 399              		.thumb_func
+ 401              	tinf_decode_trees:
+ 402              		@ args = 0, pretend = 0, frame = 328
+ 403              		@ frame_needed = 0, uses_anonymous_args = 0
+ 404 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 405 0002 DE46     		mov	lr, fp
+ 406 0004 5746     		mov	r7, r10
+ 407 0006 4646     		mov	r6, r8
+ 408 0008 C0B5     		push	{r6, r7, lr}
+ 409 000a D2B0     		sub	sp, sp, #328
+ 410 000c 0600     		movs	r6, r0
+ 411 000e 8846     		mov	r8, r1
+ 412 0010 0192     		str	r2, [sp, #4]
+ 413 0012 0222     		movs	r2, #2
+ 414 0014 FF32     		adds	r2, r2, #255
+ 415 0016 0521     		movs	r1, #5
+ 416 0018 FFF7FEFF 		bl	tinf_read_bits
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 8
+
+
+ 417 001c 8246     		mov	r10, r0
+ 418 001e 0122     		movs	r2, #1
+ 419 0020 0521     		movs	r1, #5
+ 420 0022 3000     		movs	r0, r6
+ 421 0024 FFF7FEFF 		bl	tinf_read_bits
+ 422 0028 8346     		mov	fp, r0
+ 423 002a 0422     		movs	r2, #4
+ 424 002c 0421     		movs	r1, #4
+ 425 002e 3000     		movs	r0, r6
+ 426 0030 FFF7FEFF 		bl	tinf_read_bits
+ 427 0034 1321     		movs	r1, #19
+ 428 0036 02AB     		add	r3, sp, #8
+ 429 0038 9C46     		mov	ip, r3
+ 430 003a 6144     		add	r1, r1, ip
+ 431 003c 0022     		movs	r2, #0
+ 432              	.L57:
+ 433 003e 1A70     		strb	r2, [r3]
+ 434 0040 0133     		adds	r3, r3, #1
+ 435 0042 8B42     		cmp	r3, r1
+ 436 0044 FBD1     		bne	.L57
+ 437 0046 0028     		cmp	r0, #0
+ 438 0048 0CD0     		beq	.L58
+ 439 004a 344C     		ldr	r4, .L77
+ 440 004c 2518     		adds	r5, r4, r0
+ 441              	.L59:
+ 442 004e 0022     		movs	r2, #0
+ 443 0050 0321     		movs	r1, #3
+ 444 0052 3000     		movs	r0, r6
+ 445 0054 FFF7FEFF 		bl	tinf_read_bits
+ 446 0058 2378     		ldrb	r3, [r4]
+ 447 005a 02AA     		add	r2, sp, #8
+ 448 005c D054     		strb	r0, [r2, r3]
+ 449 005e 0134     		adds	r4, r4, #1
+ 450 0060 AC42     		cmp	r4, r5
+ 451 0062 F4D1     		bne	.L59
+ 452              	.L58:
+ 453 0064 1322     		movs	r2, #19
+ 454 0066 02A9     		add	r1, sp, #8
+ 455 0068 4046     		mov	r0, r8
+ 456 006a FFF7FEFF 		bl	tinf_build_tree
+ 457 006e 5746     		mov	r7, r10
+ 458 0070 5F44     		add	r7, r7, fp
+ 459 0072 002F     		cmp	r7, #0
+ 460 0074 38D0     		beq	.L60
+ 461 0076 0024     		movs	r4, #0
+ 462 0078 26E0     		b	.L66
+ 463              	.L76:
+ 464 007a 002C     		cmp	r4, #0
+ 465 007c 48D0     		beq	.L69
+ 466 007e 2300     		movs	r3, r4
+ 467 0080 02AA     		add	r2, sp, #8
+ 468 0082 9446     		mov	ip, r2
+ 469 0084 6344     		add	r3, r3, ip
+ 470 0086 013B     		subs	r3, r3, #1
+ 471 0088 1D78     		ldrb	r5, [r3]
+ 472 008a 0322     		movs	r2, #3
+ 473 008c 0221     		movs	r1, #2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 9
+
+
+ 474 008e 06E0     		b	.L62
+ 475              	.L67:
+ 476 0090 0322     		movs	r2, #3
+ 477 0092 0321     		movs	r1, #3
+ 478 0094 0025     		movs	r5, #0
+ 479 0096 02E0     		b	.L62
+ 480              	.L68:
+ 481 0098 0B22     		movs	r2, #11
+ 482 009a 0721     		movs	r1, #7
+ 483 009c 0025     		movs	r5, #0
+ 484              	.L62:
+ 485 009e 3000     		movs	r0, r6
+ 486 00a0 FFF7FEFF 		bl	tinf_read_bits
+ 487 00a4 0200     		movs	r2, r0
+ 488 00a6 0119     		adds	r1, r0, r4
+ 489 00a8 B942     		cmp	r1, r7
+ 490 00aa 34D8     		bhi	.L70
+ 491 00ac 0028     		cmp	r0, #0
+ 492 00ae 09D0     		beq	.L64
+ 493 00b0 2300     		movs	r3, r4
+ 494 00b2 02A8     		add	r0, sp, #8
+ 495 00b4 8446     		mov	ip, r0
+ 496 00b6 6344     		add	r3, r3, ip
+ 497 00b8 9818     		adds	r0, r3, r2
+ 498              	.L65:
+ 499 00ba 1D70     		strb	r5, [r3]
+ 500 00bc 0133     		adds	r3, r3, #1
+ 501 00be 9842     		cmp	r0, r3
+ 502 00c0 FBD1     		bne	.L65
+ 503 00c2 0C00     		movs	r4, r1
+ 504              	.L64:
+ 505 00c4 BC42     		cmp	r4, r7
+ 506 00c6 0FD2     		bcs	.L60
+ 507              	.L66:
+ 508 00c8 4146     		mov	r1, r8
+ 509 00ca 3000     		movs	r0, r6
+ 510 00cc FFF7FEFF 		bl	tinf_decode_symbol
+ 511 00d0 0028     		cmp	r0, #0
+ 512 00d2 17DB     		blt	.L56
+ 513 00d4 1128     		cmp	r0, #17
+ 514 00d6 DBD0     		beq	.L67
+ 515 00d8 1228     		cmp	r0, #18
+ 516 00da DDD0     		beq	.L68
+ 517 00dc 1028     		cmp	r0, #16
+ 518 00de CCD0     		beq	.L76
+ 519 00e0 02AB     		add	r3, sp, #8
+ 520 00e2 1855     		strb	r0, [r3, r4]
+ 521 00e4 0134     		adds	r4, r4, #1
+ 522 00e6 EDE7     		b	.L64
+ 523              	.L60:
+ 524 00e8 5246     		mov	r2, r10
+ 525 00ea 02A9     		add	r1, sp, #8
+ 526 00ec 4046     		mov	r0, r8
+ 527 00ee FFF7FEFF 		bl	tinf_build_tree
+ 528 00f2 5146     		mov	r1, r10
+ 529 00f4 02AB     		add	r3, sp, #8
+ 530 00f6 9C46     		mov	ip, r3
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 10
+
+
+ 531 00f8 6144     		add	r1, r1, ip
+ 532 00fa 5A46     		mov	r2, fp
+ 533 00fc 0198     		ldr	r0, [sp, #4]
+ 534 00fe FFF7FEFF 		bl	tinf_build_tree
+ 535 0102 0020     		movs	r0, #0
+ 536              	.L56:
+ 537 0104 52B0     		add	sp, sp, #328
+ 538              		@ sp needed
+ 539 0106 E0BC     		pop	{r5, r6, r7}
+ 540 0108 BB46     		mov	fp, r7
+ 541 010a B246     		mov	r10, r6
+ 542 010c A846     		mov	r8, r5
+ 543 010e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 544              	.L69:
+ 545 0110 0320     		movs	r0, #3
+ 546 0112 4042     		rsbs	r0, r0, #0
+ 547 0114 F6E7     		b	.L56
+ 548              	.L70:
+ 549 0116 0320     		movs	r0, #3
+ 550 0118 4042     		rsbs	r0, r0, #0
+ 551 011a F3E7     		b	.L56
+ 552              	.L78:
+ 553              		.align	2
+ 554              	.L77:
+ 555 011c 00000000 		.word	.LANCHOR0
+ 557              		.section	.text.tinf_get_le_uint32,"ax",%progbits
+ 558              		.align	1
+ 559              		.global	tinf_get_le_uint32
+ 560              		.syntax unified
+ 561              		.code	16
+ 562              		.thumb_func
+ 564              	tinf_get_le_uint32:
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 567 0000 70B5     		push	{r4, r5, r6, lr}
+ 568 0002 0600     		movs	r6, r0
+ 569 0004 0425     		movs	r5, #4
+ 570 0006 0020     		movs	r0, #0
+ 571              	.L80:
+ 572 0008 040A     		lsrs	r4, r0, #8
+ 573 000a 3000     		movs	r0, r6
+ 574 000c FFF7FEFF 		bl	uzlib_get_byte
+ 575 0010 0006     		lsls	r0, r0, #24
+ 576 0012 2043     		orrs	r0, r4
+ 577 0014 013D     		subs	r5, r5, #1
+ 578 0016 002D     		cmp	r5, #0
+ 579 0018 F6D1     		bne	.L80
+ 580              		@ sp needed
+ 581 001a 70BD     		pop	{r4, r5, r6, pc}
+ 583              		.section	.text.tinf_get_be_uint32,"ax",%progbits
+ 584              		.align	1
+ 585              		.global	tinf_get_be_uint32
+ 586              		.syntax unified
+ 587              		.code	16
+ 588              		.thumb_func
+ 590              	tinf_get_be_uint32:
+ 591              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 11
+
+
+ 592              		@ frame_needed = 0, uses_anonymous_args = 0
+ 593 0000 70B5     		push	{r4, r5, r6, lr}
+ 594 0002 0600     		movs	r6, r0
+ 595 0004 0425     		movs	r5, #4
+ 596 0006 0020     		movs	r0, #0
+ 597              	.L83:
+ 598 0008 0402     		lsls	r4, r0, #8
+ 599 000a 3000     		movs	r0, r6
+ 600 000c FFF7FEFF 		bl	uzlib_get_byte
+ 601 0010 2043     		orrs	r0, r4
+ 602 0012 013D     		subs	r5, r5, #1
+ 603 0014 002D     		cmp	r5, #0
+ 604 0016 F7D1     		bne	.L83
+ 605              		@ sp needed
+ 606 0018 70BD     		pop	{r4, r5, r6, pc}
+ 608              		.section	.text.uzlib_uncompress_init,"ax",%progbits
+ 609              		.align	1
+ 610              		.global	uzlib_uncompress_init
+ 611              		.syntax unified
+ 612              		.code	16
+ 613              		.thumb_func
+ 615              	uzlib_uncompress_init:
+ 616              		@ args = 0, pretend = 0, frame = 0
+ 617              		@ frame_needed = 0, uses_anonymous_args = 0
+ 618 0000 10B5     		push	{r4, lr}
+ 619 0002 0023     		movs	r3, #0
+ 620 0004 2524     		movs	r4, #37
+ 621 0006 0355     		strb	r3, [r0, r4]
+ 622 0008 0361     		str	r3, [r0, #16]
+ 623 000a C362     		str	r3, [r0, #44]
+ 624 000c 263C     		subs	r4, r4, #38
+ 625 000e 8462     		str	r4, [r0, #40]
+ 626 0010 C263     		str	r2, [r0, #60]
+ 627 0012 8163     		str	r1, [r0, #56]
+ 628 0014 0364     		str	r3, [r0, #64]
+ 629 0016 0363     		str	r3, [r0, #48]
+ 630              		@ sp needed
+ 631 0018 10BD     		pop	{r4, pc}
+ 633              		.section	.text.uzlib_uncompress,"ax",%progbits
+ 634              		.align	1
+ 635              		.global	uzlib_uncompress
+ 636              		.syntax unified
+ 637              		.code	16
+ 638              		.thumb_func
+ 640              	uzlib_uncompress:
+ 641              		@ args = 0, pretend = 0, frame = 0
+ 642              		@ frame_needed = 0, uses_anonymous_args = 0
+ 643 0000 70B5     		push	{r4, r5, r6, lr}
+ 644 0002 0400     		movs	r4, r0
+ 645 0004 24E1     		b	.L111
+ 646              	.L89:
+ 647 0006 A56A     		ldr	r5, [r4, #40]
+ 648 0008 2000     		movs	r0, r4
+ 649 000a FFF7FEFF 		bl	tinf_getbit
+ 650 000e E062     		str	r0, [r4, #44]
+ 651 0010 0022     		movs	r2, #0
+ 652 0012 0221     		movs	r1, #2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 12
+
+
+ 653 0014 2000     		movs	r0, r4
+ 654 0016 FFF7FEFF 		bl	tinf_read_bits
+ 655 001a A062     		str	r0, [r4, #40]
+ 656 001c 0128     		cmp	r0, #1
+ 657 001e 00D0     		beq	.LCB738
+ 658 0020 61E1     		b	.L90	@long jump
+ 659              	.LCB738:
+ 660 0022 012D     		cmp	r5, #1
+ 661 0024 01D1     		bne	.L114
+ 662 0026 A36A     		ldr	r3, [r4, #40]
+ 663 0028 19E1     		b	.L113
+ 664              	.L114:
+ 665 002a 0022     		movs	r2, #0
+ 666 002c 4423     		movs	r3, #68
+ 667 002e E252     		strh	r2, [r4, r3]
+ 668 0030 2300     		movs	r3, r4
+ 669 0032 4433     		adds	r3, r3, #68
+ 670 0034 5A80     		strh	r2, [r3, #2]
+ 671 0036 9A80     		strh	r2, [r3, #4]
+ 672 0038 DA80     		strh	r2, [r3, #6]
+ 673 003a 1A81     		strh	r2, [r3, #8]
+ 674 003c 5A81     		strh	r2, [r3, #10]
+ 675 003e 9A81     		strh	r2, [r3, #12]
+ 676 0040 1832     		adds	r2, r2, #24
+ 677 0042 DA81     		strh	r2, [r3, #14]
+ 678 0044 8032     		adds	r2, r2, #128
+ 679 0046 1A82     		strh	r2, [r3, #16]
+ 680 0048 283A     		subs	r2, r2, #40
+ 681 004a 5A82     		strh	r2, [r3, #18]
+ 682 004c 2200     		movs	r2, r4
+ 683 004e 6432     		adds	r2, r2, #100
+ 684 0050 8023     		movs	r3, #128
+ 685 0052 5B00     		lsls	r3, r3, #1
+ 686 0054 8C21     		movs	r1, #140
+ 687 0056 4900     		lsls	r1, r1, #1
+ 688              	.L92:
+ 689 0058 1380     		strh	r3, [r2]
+ 690 005a 0133     		adds	r3, r3, #1
+ 691 005c 9BB2     		uxth	r3, r3
+ 692 005e 0232     		adds	r2, r2, #2
+ 693 0060 8B42     		cmp	r3, r1
+ 694 0062 F9D1     		bne	.L92
+ 695 0064 2200     		movs	r2, r4
+ 696 0066 9432     		adds	r2, r2, #148
+ 697 0068 0023     		movs	r3, #0
+ 698              	.L93:
+ 699 006a 1380     		strh	r3, [r2]
+ 700 006c 0133     		adds	r3, r3, #1
+ 701 006e 0232     		adds	r2, r2, #2
+ 702 0070 902B     		cmp	r3, #144
+ 703 0072 FAD1     		bne	.L93
+ 704 0074 2300     		movs	r3, r4
+ 705 0076 B533     		adds	r3, r3, #181
+ 706 0078 FF33     		adds	r3, r3, #255
+ 707 007a 8C22     		movs	r2, #140
+ 708 007c 5200     		lsls	r2, r2, #1
+ 709 007e 1A80     		strh	r2, [r3]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 13
+
+
+ 710 0080 1A22     		movs	r2, #26
+ 711 0082 FF32     		adds	r2, r2, #255
+ 712 0084 0233     		adds	r3, r3, #2
+ 713 0086 1A80     		strh	r2, [r3]
+ 714 0088 0233     		adds	r3, r3, #2
+ 715 008a 0132     		adds	r2, r2, #1
+ 716 008c 1A80     		strh	r2, [r3]
+ 717 008e 1C22     		movs	r2, #28
+ 718 0090 FF32     		adds	r2, r2, #255
+ 719 0092 0233     		adds	r3, r3, #2
+ 720 0094 1A80     		strh	r2, [r3]
+ 721 0096 0233     		adds	r3, r3, #2
+ 722 0098 0132     		adds	r2, r2, #1
+ 723 009a 1A80     		strh	r2, [r3]
+ 724 009c 1E22     		movs	r2, #30
+ 725 009e FF32     		adds	r2, r2, #255
+ 726 00a0 0233     		adds	r3, r3, #2
+ 727 00a2 1A80     		strh	r2, [r3]
+ 728 00a4 0233     		adds	r3, r3, #2
+ 729 00a6 0132     		adds	r2, r2, #1
+ 730 00a8 1A80     		strh	r2, [r3]
+ 731 00aa 2022     		movs	r2, #32
+ 732 00ac FF32     		adds	r2, r2, #255
+ 733 00ae 0233     		adds	r3, r3, #2
+ 734 00b0 1A80     		strh	r2, [r3]
+ 735 00b2 2200     		movs	r2, r4
+ 736 00b4 C532     		adds	r2, r2, #197
+ 737 00b6 FF32     		adds	r2, r2, #255
+ 738 00b8 9023     		movs	r3, #144
+ 739 00ba 8021     		movs	r1, #128
+ 740 00bc 4900     		lsls	r1, r1, #1
+ 741              	.L94:
+ 742 00be 1380     		strh	r3, [r2]
+ 743 00c0 0133     		adds	r3, r3, #1
+ 744 00c2 9BB2     		uxth	r3, r3
+ 745 00c4 0232     		adds	r2, r2, #2
+ 746 00c6 8B42     		cmp	r3, r1
+ 747 00c8 F9D1     		bne	.L94
+ 748 00ca 0022     		movs	r2, #0
+ 749 00cc A923     		movs	r3, #169
+ 750 00ce 9B00     		lsls	r3, r3, #2
+ 751 00d0 E252     		strh	r2, [r4, r3]
+ 752 00d2 E318     		adds	r3, r4, r3
+ 753 00d4 5A80     		strh	r2, [r3, #2]
+ 754 00d6 9A80     		strh	r2, [r3, #4]
+ 755 00d8 DA80     		strh	r2, [r3, #6]
+ 756 00da 1A81     		strh	r2, [r3, #8]
+ 757 00dc 2032     		adds	r2, r2, #32
+ 758 00de 5A81     		strh	r2, [r3, #10]
+ 759 00e0 B123     		movs	r3, #177
+ 760 00e2 9B00     		lsls	r3, r3, #2
+ 761 00e4 E218     		adds	r2, r4, r3
+ 762 00e6 0023     		movs	r3, #0
+ 763              	.L95:
+ 764 00e8 1380     		strh	r3, [r2]
+ 765 00ea 0133     		adds	r3, r3, #1
+ 766 00ec 0232     		adds	r2, r2, #2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 14
+
+
+ 767 00ee 202B     		cmp	r3, #32
+ 768 00f0 FAD1     		bne	.L95
+ 769 00f2 B7E0     		b	.L96
+ 770              	.L98:
+ 771 00f4 236B     		ldr	r3, [r4, #48]
+ 772 00f6 002B     		cmp	r3, #0
+ 773 00f8 0AD0     		beq	.L127
+ 774              	.L99:
+ 775 00fa 236B     		ldr	r3, [r4, #48]
+ 776 00fc 013B     		subs	r3, r3, #1
+ 777 00fe 2363     		str	r3, [r4, #48]
+ 778 0100 002B     		cmp	r3, #0
+ 779 0102 21D1     		bne	.L128
+ 780              	.L101:
+ 781 0104 E36A     		ldr	r3, [r4, #44]
+ 782 0106 002B     		cmp	r3, #0
+ 783 0108 00D1     		bne	.LCB873
+ 784 010a 7CE7     		b	.L89	@long jump
+ 785              	.LCB873:
+ 786 010c 0120     		movs	r0, #1
+ 787 010e C8E0     		b	.L86
+ 788              	.L127:
+ 789 0110 2000     		movs	r0, r4
+ 790 0112 FFF7FEFF 		bl	uzlib_get_byte
+ 791 0116 0600     		movs	r6, r0
+ 792 0118 2000     		movs	r0, r4
+ 793 011a FFF7FEFF 		bl	uzlib_get_byte
+ 794 011e 0502     		lsls	r5, r0, #8
+ 795 0120 AD19     		adds	r5, r5, r6
+ 796 0122 2000     		movs	r0, r4
+ 797 0124 FFF7FEFF 		bl	uzlib_get_byte
+ 798 0128 0600     		movs	r6, r0
+ 799 012a 2000     		movs	r0, r4
+ 800 012c FFF7FEFF 		bl	uzlib_get_byte
+ 801 0130 0002     		lsls	r0, r0, #8
+ 802 0132 8019     		adds	r0, r0, r6
+ 803 0134 724B     		ldr	r3, .L137
+ 804 0136 5840     		eors	r0, r3
+ 805 0138 8542     		cmp	r5, r0
+ 806 013a 00D0     		beq	.LCB898
+ 807 013c B4E0     		b	.L116	@long jump
+ 808              	.LCB898:
+ 809 013e 0135     		adds	r5, r5, #1
+ 810 0140 2563     		str	r5, [r4, #48]
+ 811 0142 0023     		movs	r3, #0
+ 812 0144 2361     		str	r3, [r4, #16]
+ 813 0146 D8E7     		b	.L99
+ 814              	.L128:
+ 815 0148 2000     		movs	r0, r4
+ 816 014a FFF7FEFF 		bl	uzlib_get_byte
+ 817 014e A369     		ldr	r3, [r4, #24]
+ 818 0150 5A1C     		adds	r2, r3, #1
+ 819 0152 A261     		str	r2, [r4, #24]
+ 820 0154 1870     		strb	r0, [r3]
+ 821 0156 A36B     		ldr	r3, [r4, #56]
+ 822 0158 002B     		cmp	r3, #0
+ 823 015a 75D0     		beq	.L102
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 15
+
+
+ 824 015c 226C     		ldr	r2, [r4, #64]
+ 825 015e 511C     		adds	r1, r2, #1
+ 826 0160 2164     		str	r1, [r4, #64]
+ 827 0162 9854     		strb	r0, [r3, r2]
+ 828 0164 236C     		ldr	r3, [r4, #64]
+ 829 0166 E26B     		ldr	r2, [r4, #60]
+ 830 0168 9342     		cmp	r3, r2
+ 831 016a 6DD1     		bne	.L102
+ 832 016c 0023     		movs	r3, #0
+ 833 016e 2364     		str	r3, [r4, #64]
+ 834 0170 6AE0     		b	.L102
+ 835              	.L135:
+ 836 0172 2100     		movs	r1, r4
+ 837 0174 4431     		adds	r1, r1, #68
+ 838 0176 2000     		movs	r0, r4
+ 839 0178 FFF7FEFF 		bl	tinf_decode_symbol
+ 840 017c 2523     		movs	r3, #37
+ 841 017e E35C     		ldrb	r3, [r4, r3]
+ 842 0180 002B     		cmp	r3, #0
+ 843 0182 00D0     		beq	.LCB939
+ 844 0184 93E0     		b	.L117	@long jump
+ 845              	.LCB939:
+ 846 0186 FF28     		cmp	r0, #255
+ 847 0188 2EDD     		ble	.L129
+ 848 018a 8023     		movs	r3, #128
+ 849 018c 5B00     		lsls	r3, r3, #1
+ 850 018e 9842     		cmp	r0, r3
+ 851 0190 B8D0     		beq	.L101
+ 852 0192 0238     		subs	r0, r0, #2
+ 853 0194 FF38     		subs	r0, r0, #255
+ 854 0196 1C28     		cmp	r0, #28
+ 855 0198 00DD     		ble	.LCB949
+ 856 019a 8BE0     		b	.L118	@long jump
+ 857              	.LCB949:
+ 858 019c 4300     		lsls	r3, r0, #1
+ 859 019e 594A     		ldr	r2, .L137+4
+ 860 01a0 9A5A     		ldrh	r2, [r3, r2]
+ 861 01a2 594B     		ldr	r3, .L137+8
+ 862 01a4 195C     		ldrb	r1, [r3, r0]
+ 863 01a6 2000     		movs	r0, r4
+ 864 01a8 FFF7FEFF 		bl	tinf_read_bits
+ 865 01ac 2063     		str	r0, [r4, #48]
+ 866 01ae A923     		movs	r3, #169
+ 867 01b0 9B00     		lsls	r3, r3, #2
+ 868 01b2 E118     		adds	r1, r4, r3
+ 869 01b4 2000     		movs	r0, r4
+ 870 01b6 FFF7FEFF 		bl	tinf_decode_symbol
+ 871 01ba 1D28     		cmp	r0, #29
+ 872 01bc 00DD     		ble	.LCB965
+ 873 01be 7CE0     		b	.L119	@long jump
+ 874              	.LCB965:
+ 875 01c0 4300     		lsls	r3, r0, #1
+ 876 01c2 524A     		ldr	r2, .L137+12
+ 877 01c4 9A5A     		ldrh	r2, [r3, r2]
+ 878 01c6 524B     		ldr	r3, .L137+16
+ 879 01c8 195C     		ldrb	r1, [r3, r0]
+ 880 01ca 2000     		movs	r0, r4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 16
+
+
+ 881 01cc FFF7FEFF 		bl	tinf_read_bits
+ 882 01d0 A36B     		ldr	r3, [r4, #56]
+ 883 01d2 002B     		cmp	r3, #0
+ 884 01d4 1ED0     		beq	.L105
+ 885 01d6 E26B     		ldr	r2, [r4, #60]
+ 886 01d8 9042     		cmp	r0, r2
+ 887 01da 00D9     		bls	.LCB978
+ 888 01dc 70E0     		b	.L120	@long jump
+ 889              	.LCB978:
+ 890 01de 216C     		ldr	r1, [r4, #64]
+ 891 01e0 081A     		subs	r0, r1, r0
+ 892 01e2 14D4     		bmi	.L130
+ 893 01e4 6063     		str	r0, [r4, #52]
+ 894 01e6 43E0     		b	.L112
+ 895              	.L129:
+ 896 01e8 A369     		ldr	r3, [r4, #24]
+ 897 01ea 5A1C     		adds	r2, r3, #1
+ 898 01ec A261     		str	r2, [r4, #24]
+ 899 01ee C0B2     		uxtb	r0, r0
+ 900 01f0 1870     		strb	r0, [r3]
+ 901 01f2 A36B     		ldr	r3, [r4, #56]
+ 902 01f4 002B     		cmp	r3, #0
+ 903 01f6 27D0     		beq	.L102
+ 904 01f8 226C     		ldr	r2, [r4, #64]
+ 905 01fa 511C     		adds	r1, r2, #1
+ 906 01fc 2164     		str	r1, [r4, #64]
+ 907 01fe 9854     		strb	r0, [r3, r2]
+ 908 0200 236C     		ldr	r3, [r4, #64]
+ 909 0202 E26B     		ldr	r2, [r4, #60]
+ 910 0204 9342     		cmp	r3, r2
+ 911 0206 1FD1     		bne	.L102
+ 912 0208 0023     		movs	r3, #0
+ 913 020a 2364     		str	r3, [r4, #64]
+ 914 020c 1CE0     		b	.L102
+ 915              	.L130:
+ 916 020e 1018     		adds	r0, r2, r0
+ 917 0210 6063     		str	r0, [r4, #52]
+ 918 0212 2DE0     		b	.L112
+ 919              	.L105:
+ 920 0214 A369     		ldr	r3, [r4, #24]
+ 921 0216 6269     		ldr	r2, [r4, #20]
+ 922 0218 9B1A     		subs	r3, r3, r2
+ 923 021a 9842     		cmp	r0, r3
+ 924 021c 53D8     		bhi	.L121
+ 925 021e 4042     		rsbs	r0, r0, #0
+ 926 0220 6063     		str	r0, [r4, #52]
+ 927              	.L108:
+ 928 0222 A369     		ldr	r3, [r4, #24]
+ 929 0224 626B     		ldr	r2, [r4, #52]
+ 930 0226 9A5C     		ldrb	r2, [r3, r2]
+ 931 0228 1A70     		strb	r2, [r3]
+ 932 022a A369     		ldr	r3, [r4, #24]
+ 933 022c 0133     		adds	r3, r3, #1
+ 934 022e A361     		str	r3, [r4, #24]
+ 935 0230 07E0     		b	.L110
+ 936              	.L136:
+ 937 0232 0023     		movs	r3, #0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 17
+
+
+ 938 0234 2364     		str	r3, [r4, #64]
+ 939              	.L109:
+ 940 0236 636B     		ldr	r3, [r4, #52]
+ 941 0238 0133     		adds	r3, r3, #1
+ 942 023a 6363     		str	r3, [r4, #52]
+ 943 023c E26B     		ldr	r2, [r4, #60]
+ 944 023e 9342     		cmp	r3, r2
+ 945 0240 2AD0     		beq	.L131
+ 946              	.L110:
+ 947 0242 236B     		ldr	r3, [r4, #48]
+ 948 0244 013B     		subs	r3, r3, #1
+ 949 0246 2363     		str	r3, [r4, #48]
+ 950              	.L102:
+ 951 0248 A369     		ldr	r3, [r4, #24]
+ 952 024a E269     		ldr	r2, [r4, #28]
+ 953 024c 9342     		cmp	r3, r2
+ 954 024e 29D2     		bcs	.L132
+ 955              	.L111:
+ 956 0250 A36A     		ldr	r3, [r4, #40]
+ 957 0252 0133     		adds	r3, r3, #1
+ 958 0254 3AD0     		beq	.L133
+ 959              	.L88:
+ 960 0256 A36A     		ldr	r3, [r4, #40]
+ 961 0258 002B     		cmp	r3, #0
+ 962 025a 00D1     		bne	.LCB1076
+ 963 025c 4AE7     		b	.L98	@long jump
+ 964              	.LCB1076:
+ 965              	.L113:
+ 966 025e 013B     		subs	r3, r3, #1
+ 967 0260 012B     		cmp	r3, #1
+ 968 0262 1CD8     		bhi	.L134
+ 969              	.L96:
+ 970 0264 236B     		ldr	r3, [r4, #48]
+ 971 0266 002B     		cmp	r3, #0
+ 972 0268 83D0     		beq	.L135
+ 973 026a A36B     		ldr	r3, [r4, #56]
+ 974 026c 002B     		cmp	r3, #0
+ 975 026e D8D0     		beq	.L108
+ 976              	.L112:
+ 977 0270 A269     		ldr	r2, [r4, #24]
+ 978 0272 511C     		adds	r1, r2, #1
+ 979 0274 A161     		str	r1, [r4, #24]
+ 980 0276 616B     		ldr	r1, [r4, #52]
+ 981 0278 5B5C     		ldrb	r3, [r3, r1]
+ 982 027a 1370     		strb	r3, [r2]
+ 983 027c A36B     		ldr	r3, [r4, #56]
+ 984 027e 002B     		cmp	r3, #0
+ 985 0280 D9D0     		beq	.L109
+ 986 0282 226C     		ldr	r2, [r4, #64]
+ 987 0284 511C     		adds	r1, r2, #1
+ 988 0286 2164     		str	r1, [r4, #64]
+ 989 0288 616B     		ldr	r1, [r4, #52]
+ 990 028a 595C     		ldrb	r1, [r3, r1]
+ 991 028c 9954     		strb	r1, [r3, r2]
+ 992 028e 236C     		ldr	r3, [r4, #64]
+ 993 0290 E26B     		ldr	r2, [r4, #60]
+ 994 0292 9342     		cmp	r3, r2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 18
+
+
+ 995 0294 CFD1     		bne	.L109
+ 996 0296 CCE7     		b	.L136
+ 997              	.L131:
+ 998 0298 0023     		movs	r3, #0
+ 999 029a 6363     		str	r3, [r4, #52]
+ 1000 029c D1E7     		b	.L110
+ 1001              	.L134:
+ 1002 029e 0320     		movs	r0, #3
+ 1003 02a0 4042     		rsbs	r0, r0, #0
+ 1004              	.L86:
+ 1005              		@ sp needed
+ 1006 02a2 70BD     		pop	{r4, r5, r6, pc}
+ 1007              	.L132:
+ 1008 02a4 0020     		movs	r0, #0
+ 1009 02a6 FCE7     		b	.L86
+ 1010              	.L116:
+ 1011 02a8 0320     		movs	r0, #3
+ 1012 02aa 4042     		rsbs	r0, r0, #0
+ 1013 02ac F9E7     		b	.L86
+ 1014              	.L117:
+ 1015 02ae 0320     		movs	r0, #3
+ 1016 02b0 4042     		rsbs	r0, r0, #0
+ 1017 02b2 F6E7     		b	.L86
+ 1018              	.L118:
+ 1019 02b4 0320     		movs	r0, #3
+ 1020 02b6 4042     		rsbs	r0, r0, #0
+ 1021 02b8 F3E7     		b	.L86
+ 1022              	.L119:
+ 1023 02ba 0320     		movs	r0, #3
+ 1024 02bc 4042     		rsbs	r0, r0, #0
+ 1025 02be F0E7     		b	.L86
+ 1026              	.L120:
+ 1027 02c0 0520     		movs	r0, #5
+ 1028 02c2 4042     		rsbs	r0, r0, #0
+ 1029 02c4 EDE7     		b	.L86
+ 1030              	.L121:
+ 1031 02c6 0320     		movs	r0, #3
+ 1032 02c8 4042     		rsbs	r0, r0, #0
+ 1033 02ca EAE7     		b	.L86
+ 1034              	.L133:
+ 1035 02cc 2000     		movs	r0, r4
+ 1036 02ce FFF7FEFF 		bl	tinf_getbit
+ 1037 02d2 E062     		str	r0, [r4, #44]
+ 1038 02d4 0022     		movs	r2, #0
+ 1039 02d6 0221     		movs	r1, #2
+ 1040 02d8 2000     		movs	r0, r4
+ 1041 02da FFF7FEFF 		bl	tinf_read_bits
+ 1042 02de A062     		str	r0, [r4, #40]
+ 1043 02e0 0128     		cmp	r0, #1
+ 1044 02e2 00D1     		bne	.LCB1190
+ 1045 02e4 A1E6     		b	.L114	@long jump
+ 1046              	.LCB1190:
+ 1047              	.L90:
+ 1048 02e6 0228     		cmp	r0, #2
+ 1049 02e8 B5D1     		bne	.L88
+ 1050 02ea A923     		movs	r3, #169
+ 1051 02ec 9B00     		lsls	r3, r3, #2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 19
+
+
+ 1052 02ee E218     		adds	r2, r4, r3
+ 1053 02f0 2100     		movs	r1, r4
+ 1054 02f2 4431     		adds	r1, r1, #68
+ 1055 02f4 2000     		movs	r0, r4
+ 1056 02f6 FFF7FEFF 		bl	tinf_decode_trees
+ 1057 02fa 0028     		cmp	r0, #0
+ 1058 02fc ABD0     		beq	.L88
+ 1059 02fe D0E7     		b	.L86
+ 1060              	.L138:
+ 1061              		.align	2
+ 1062              	.L137:
+ 1063 0300 FFFF0000 		.word	65535
+ 1064 0304 00000000 		.word	.LANCHOR1
+ 1065 0308 00000000 		.word	.LANCHOR2
+ 1066 030c 00000000 		.word	.LANCHOR3
+ 1067 0310 00000000 		.word	.LANCHOR4
+ 1069              		.global	__aeabi_uidivmod
+ 1070              		.section	.text.uzlib_adler32,"ax",%progbits
+ 1071              		.align	1
+ 1072              		.global	uzlib_adler32
+ 1073              		.syntax unified
+ 1074              		.code	16
+ 1075              		.thumb_func
+ 1077              	uzlib_adler32:
+ 1078              		@ args = 0, pretend = 0, frame = 48
+ 1079              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1080 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1081 0002 DE46     		mov	lr, fp
+ 1082 0004 5746     		mov	r7, r10
+ 1083 0006 4E46     		mov	r6, r9
+ 1084 0008 4546     		mov	r5, r8
+ 1085 000a E0B5     		push	{r5, r6, r7, lr}
+ 1086 000c 8DB0     		sub	sp, sp, #52
+ 1087 000e 0400     		movs	r4, r0
+ 1088 0010 0800     		movs	r0, r1
+ 1089 0012 0A91     		str	r1, [sp, #40]
+ 1090 0014 1104     		lsls	r1, r2, #16
+ 1091 0016 0B0C     		lsrs	r3, r1, #16
+ 1092 0018 9B46     		mov	fp, r3
+ 1093 001a 130C     		lsrs	r3, r2, #16
+ 1094 001c 9846     		mov	r8, r3
+ 1095 001e 0028     		cmp	r0, #0
+ 1096 0020 00D1     		bne	.LCB1236
+ 1097 0022 9DE0     		b	.L140	@long jump
+ 1098              	.LCB1236:
+ 1099 0024 4346     		mov	r3, r8
+ 1100 0026 0293     		str	r3, [sp, #8]
+ 1101 0028 8DE0     		b	.L146
+ 1102              	.L141:
+ 1103 002a 099A     		ldr	r2, [sp, #36]
+ 1104 002c 0B92     		str	r2, [sp, #44]
+ 1105 002e D317     		asrs	r3, r2, #31
+ 1106 0030 0F21     		movs	r1, #15
+ 1107 0032 0B40     		ands	r3, r1
+ 1108 0034 9446     		mov	ip, r2
+ 1109 0036 6344     		add	r3, r3, ip
+ 1110 0038 1B11     		asrs	r3, r3, #4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 20
+
+
+ 1111 003a 00D1     		bne	.LCB1255
+ 1112 003c 8BE0     		b	.L147	@long jump
+ 1113              	.LCB1255:
+ 1114 003e 1B01     		lsls	r3, r3, #4
+ 1115 0040 E318     		adds	r3, r4, r3
+ 1116 0042 0893     		str	r3, [sp, #32]
+ 1117 0044 5A46     		mov	r2, fp
+ 1118              	.L143:
+ 1119 0046 2378     		ldrb	r3, [r4]
+ 1120 0048 9B18     		adds	r3, r3, r2
+ 1121 004a 6278     		ldrb	r2, [r4, #1]
+ 1122 004c 9346     		mov	fp, r2
+ 1123 004e 9B44     		add	fp, fp, r3
+ 1124 0050 A278     		ldrb	r2, [r4, #2]
+ 1125 0052 1100     		movs	r1, r2
+ 1126 0054 5944     		add	r1, r1, fp
+ 1127 0056 E278     		ldrb	r2, [r4, #3]
+ 1128 0058 1500     		movs	r5, r2
+ 1129 005a 0391     		str	r1, [sp, #12]
+ 1130 005c 8C46     		mov	ip, r1
+ 1131 005e 6544     		add	r5, r5, ip
+ 1132 0060 2279     		ldrb	r2, [r4, #4]
+ 1133 0062 1700     		movs	r7, r2
+ 1134 0064 0495     		str	r5, [sp, #16]
+ 1135 0066 AC46     		mov	ip, r5
+ 1136 0068 6744     		add	r7, r7, ip
+ 1137 006a 6279     		ldrb	r2, [r4, #5]
+ 1138 006c 0597     		str	r7, [sp, #20]
+ 1139 006e BC46     		mov	ip, r7
+ 1140 0070 6244     		add	r2, r2, ip
+ 1141 0072 1000     		movs	r0, r2
+ 1142 0074 A279     		ldrb	r2, [r4, #6]
+ 1143 0076 0690     		str	r0, [sp, #24]
+ 1144 0078 8246     		mov	r10, r0
+ 1145 007a 9244     		add	r10, r10, r2
+ 1146 007c E279     		ldrb	r2, [r4, #7]
+ 1147 007e 5244     		add	r2, r2, r10
+ 1148 0080 9146     		mov	r9, r2
+ 1149 0082 227A     		ldrb	r2, [r4, #8]
+ 1150 0084 4A44     		add	r2, r2, r9
+ 1151 0086 9046     		mov	r8, r2
+ 1152 0088 627A     		ldrb	r2, [r4, #9]
+ 1153 008a 4244     		add	r2, r2, r8
+ 1154 008c 0192     		str	r2, [sp, #4]
+ 1155 008e A77A     		ldrb	r7, [r4, #10]
+ 1156 0090 9446     		mov	ip, r2
+ 1157 0092 6744     		add	r7, r7, ip
+ 1158 0094 E67A     		ldrb	r6, [r4, #11]
+ 1159 0096 F619     		adds	r6, r6, r7
+ 1160 0098 257B     		ldrb	r5, [r4, #12]
+ 1161 009a AD19     		adds	r5, r5, r6
+ 1162 009c 607B     		ldrb	r0, [r4, #13]
+ 1163 009e 4019     		adds	r0, r0, r5
+ 1164 00a0 A17B     		ldrb	r1, [r4, #14]
+ 1165 00a2 0918     		adds	r1, r1, r0
+ 1166 00a4 E27B     		ldrb	r2, [r4, #15]
+ 1167 00a6 0791     		str	r1, [sp, #28]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 21
+
+
+ 1168 00a8 8C46     		mov	ip, r1
+ 1169 00aa 6244     		add	r2, r2, ip
+ 1170 00ac 5B44     		add	r3, r3, fp
+ 1171 00ae 0399     		ldr	r1, [sp, #12]
+ 1172 00b0 8B46     		mov	fp, r1
+ 1173 00b2 5B44     		add	r3, r3, fp
+ 1174 00b4 0499     		ldr	r1, [sp, #16]
+ 1175 00b6 8B46     		mov	fp, r1
+ 1176 00b8 5B44     		add	r3, r3, fp
+ 1177 00ba 0599     		ldr	r1, [sp, #20]
+ 1178 00bc 8B46     		mov	fp, r1
+ 1179 00be 5B44     		add	r3, r3, fp
+ 1180 00c0 0699     		ldr	r1, [sp, #24]
+ 1181 00c2 8B46     		mov	fp, r1
+ 1182 00c4 5B44     		add	r3, r3, fp
+ 1183 00c6 5344     		add	r3, r3, r10
+ 1184 00c8 4B44     		add	r3, r3, r9
+ 1185 00ca 4344     		add	r3, r3, r8
+ 1186 00cc 0199     		ldr	r1, [sp, #4]
+ 1187 00ce 8C46     		mov	ip, r1
+ 1188 00d0 6344     		add	r3, r3, ip
+ 1189 00d2 DF19     		adds	r7, r3, r7
+ 1190 00d4 BE19     		adds	r6, r7, r6
+ 1191 00d6 7519     		adds	r5, r6, r5
+ 1192 00d8 2818     		adds	r0, r5, r0
+ 1193 00da 079B     		ldr	r3, [sp, #28]
+ 1194 00dc C118     		adds	r1, r0, r3
+ 1195 00de 8918     		adds	r1, r1, r2
+ 1196 00e0 029B     		ldr	r3, [sp, #8]
+ 1197 00e2 9C46     		mov	ip, r3
+ 1198 00e4 8C44     		add	ip, ip, r1
+ 1199 00e6 6346     		mov	r3, ip
+ 1200 00e8 0293     		str	r3, [sp, #8]
+ 1201 00ea 1034     		adds	r4, r4, #16
+ 1202 00ec 089B     		ldr	r3, [sp, #32]
+ 1203 00ee 9C42     		cmp	r4, r3
+ 1204 00f0 A9D1     		bne	.L143
+ 1205 00f2 9346     		mov	fp, r2
+ 1206              	.L142:
+ 1207 00f4 0B9B     		ldr	r3, [sp, #44]
+ 1208 00f6 DC17     		asrs	r4, r3, #31
+ 1209 00f8 240F     		lsrs	r4, r4, #28
+ 1210 00fa 1919     		adds	r1, r3, r4
+ 1211 00fc 0F23     		movs	r3, #15
+ 1212 00fe 1940     		ands	r1, r3
+ 1213 0100 0C1B     		subs	r4, r1, r4
+ 1214 0102 099A     		ldr	r2, [sp, #36]
+ 1215 0104 1342     		tst	r3, r2
+ 1216 0106 28D0     		beq	.L148
+ 1217 0108 089A     		ldr	r2, [sp, #32]
+ 1218 010a 1300     		movs	r3, r2
+ 1219 010c 1019     		adds	r0, r2, r4
+ 1220 010e 5A46     		mov	r2, fp
+ 1221 0110 0299     		ldr	r1, [sp, #8]
+ 1222              	.L145:
+ 1223 0112 1D78     		ldrb	r5, [r3]
+ 1224 0114 5219     		adds	r2, r2, r5
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 22
+
+
+ 1225 0116 8918     		adds	r1, r1, r2
+ 1226 0118 0133     		adds	r3, r3, #1
+ 1227 011a 8342     		cmp	r3, r0
+ 1228 011c F9D1     		bne	.L145
+ 1229 011e 9346     		mov	fp, r2
+ 1230 0120 0291     		str	r1, [sp, #8]
+ 1231 0122 089B     		ldr	r3, [sp, #32]
+ 1232 0124 9C46     		mov	ip, r3
+ 1233 0126 6444     		add	r4, r4, ip
+ 1234              	.L144:
+ 1235 0128 1349     		ldr	r1, .L153
+ 1236 012a 5846     		mov	r0, fp
+ 1237 012c FFF7FEFF 		bl	__aeabi_uidivmod
+ 1238 0130 8B46     		mov	fp, r1
+ 1239 0132 1149     		ldr	r1, .L153
+ 1240 0134 0298     		ldr	r0, [sp, #8]
+ 1241 0136 FFF7FEFF 		bl	__aeabi_uidivmod
+ 1242 013a 0291     		str	r1, [sp, #8]
+ 1243 013c 0A9B     		ldr	r3, [sp, #40]
+ 1244 013e 099A     		ldr	r2, [sp, #36]
+ 1245 0140 9B1A     		subs	r3, r3, r2
+ 1246 0142 0A93     		str	r3, [sp, #40]
+ 1247 0144 0BD0     		beq	.L152
+ 1248              	.L146:
+ 1249 0146 0A9B     		ldr	r3, [sp, #40]
+ 1250 0148 0993     		str	r3, [sp, #36]
+ 1251 014a 0C4A     		ldr	r2, .L153+4
+ 1252 014c 9342     		cmp	r3, r2
+ 1253 014e 00D8     		bhi	.LCB1411
+ 1254 0150 6BE7     		b	.L141	@long jump
+ 1255              	.LCB1411:
+ 1256 0152 0992     		str	r2, [sp, #36]
+ 1257 0154 69E7     		b	.L141
+ 1258              	.L147:
+ 1259 0156 0894     		str	r4, [sp, #32]
+ 1260 0158 CCE7     		b	.L142
+ 1261              	.L148:
+ 1262 015a 089C     		ldr	r4, [sp, #32]
+ 1263 015c E4E7     		b	.L144
+ 1264              	.L152:
+ 1265 015e 8846     		mov	r8, r1
+ 1266              	.L140:
+ 1267 0160 4346     		mov	r3, r8
+ 1268 0162 1804     		lsls	r0, r3, #16
+ 1269 0164 5B46     		mov	r3, fp
+ 1270 0166 1843     		orrs	r0, r3
+ 1271 0168 0DB0     		add	sp, sp, #52
+ 1272              		@ sp needed
+ 1273 016a F0BC     		pop	{r4, r5, r6, r7}
+ 1274 016c BB46     		mov	fp, r7
+ 1275 016e B246     		mov	r10, r6
+ 1276 0170 A946     		mov	r9, r5
+ 1277 0172 A046     		mov	r8, r4
+ 1278 0174 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1279              	.L154:
+ 1280 0176 C046     		.align	2
+ 1281              	.L153:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 23
+
+
+ 1282 0178 F1FF0000 		.word	65521
+ 1283 017c B0150000 		.word	5552
+ 1285              		.section	.text.uzlib_crc32,"ax",%progbits
+ 1286              		.align	1
+ 1287              		.global	uzlib_crc32
+ 1288              		.syntax unified
+ 1289              		.code	16
+ 1290              		.thumb_func
+ 1292              	uzlib_crc32:
+ 1293              		@ args = 0, pretend = 0, frame = 0
+ 1294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1295 0000 70B5     		push	{r4, r5, r6, lr}
+ 1296 0002 0029     		cmp	r1, #0
+ 1297 0004 17D0     		beq	.L158
+ 1298 0006 0400     		movs	r4, r0
+ 1299 0008 4518     		adds	r5, r0, r1
+ 1300 000a 1300     		movs	r3, r2
+ 1301 000c 0B4E     		ldr	r6, .L160
+ 1302 000e 0F21     		movs	r1, #15
+ 1303              	.L157:
+ 1304 0010 2078     		ldrb	r0, [r4]
+ 1305 0012 5840     		eors	r0, r3
+ 1306 0014 0B00     		movs	r3, r1
+ 1307 0016 0340     		ands	r3, r0
+ 1308 0018 9B00     		lsls	r3, r3, #2
+ 1309 001a 9A59     		ldr	r2, [r3, r6]
+ 1310 001c 0009     		lsrs	r0, r0, #4
+ 1311 001e 4240     		eors	r2, r0
+ 1312 0020 0B00     		movs	r3, r1
+ 1313 0022 1340     		ands	r3, r2
+ 1314 0024 9B00     		lsls	r3, r3, #2
+ 1315 0026 9B59     		ldr	r3, [r3, r6]
+ 1316 0028 1209     		lsrs	r2, r2, #4
+ 1317 002a 5340     		eors	r3, r2
+ 1318 002c 0134     		adds	r4, r4, #1
+ 1319 002e AC42     		cmp	r4, r5
+ 1320 0030 EED1     		bne	.L157
+ 1321              	.L155:
+ 1322 0032 1800     		movs	r0, r3
+ 1323              		@ sp needed
+ 1324 0034 70BD     		pop	{r4, r5, r6, pc}
+ 1325              	.L158:
+ 1326 0036 1300     		movs	r3, r2
+ 1327 0038 FBE7     		b	.L155
+ 1328              	.L161:
+ 1329 003a C046     		.align	2
+ 1330              	.L160:
+ 1331 003c 00000000 		.word	.LANCHOR5
+ 1333              		.section	.text.uzlib_uncompress_chksum,"ax",%progbits
+ 1334              		.align	1
+ 1335              		.global	uzlib_uncompress_chksum
+ 1336              		.syntax unified
+ 1337              		.code	16
+ 1338              		.thumb_func
+ 1340              	uzlib_uncompress_chksum:
+ 1341              		@ args = 0, pretend = 0, frame = 0
+ 1342              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 24
+
+
+ 1343 0000 70B5     		push	{r4, r5, r6, lr}
+ 1344 0002 0400     		movs	r4, r0
+ 1345 0004 8669     		ldr	r6, [r0, #24]
+ 1346 0006 FFF7FEFF 		bl	uzlib_uncompress
+ 1347 000a 051E     		subs	r5, r0, #0
+ 1348 000c 05DB     		blt	.L162
+ 1349 000e 2423     		movs	r3, #36
+ 1350 0010 E35C     		ldrb	r3, [r4, r3]
+ 1351 0012 012B     		cmp	r3, #1
+ 1352 0014 03D0     		beq	.L164
+ 1353 0016 022B     		cmp	r3, #2
+ 1354 0018 13D0     		beq	.L165
+ 1355              	.L162:
+ 1356 001a 2800     		movs	r0, r5
+ 1357              		@ sp needed
+ 1358 001c 70BD     		pop	{r4, r5, r6, pc}
+ 1359              	.L164:
+ 1360 001e A369     		ldr	r3, [r4, #24]
+ 1361 0020 991B     		subs	r1, r3, r6
+ 1362 0022 226A     		ldr	r2, [r4, #32]
+ 1363 0024 3000     		movs	r0, r6
+ 1364 0026 FFF7FEFF 		bl	uzlib_adler32
+ 1365 002a 2062     		str	r0, [r4, #32]
+ 1366 002c 012D     		cmp	r5, #1
+ 1367 002e F4D1     		bne	.L162
+ 1368 0030 2000     		movs	r0, r4
+ 1369 0032 FFF7FEFF 		bl	tinf_get_be_uint32
+ 1370 0036 236A     		ldr	r3, [r4, #32]
+ 1371 0038 8342     		cmp	r3, r0
+ 1372 003a EED0     		beq	.L162
+ 1373 003c 0425     		movs	r5, #4
+ 1374 003e 6D42     		rsbs	r5, r5, #0
+ 1375 0040 EBE7     		b	.L162
+ 1376              	.L165:
+ 1377 0042 A369     		ldr	r3, [r4, #24]
+ 1378 0044 991B     		subs	r1, r3, r6
+ 1379 0046 226A     		ldr	r2, [r4, #32]
+ 1380 0048 3000     		movs	r0, r6
+ 1381 004a FFF7FEFF 		bl	uzlib_crc32
+ 1382 004e 2062     		str	r0, [r4, #32]
+ 1383 0050 012D     		cmp	r5, #1
+ 1384 0052 E2D1     		bne	.L162
+ 1385 0054 2000     		movs	r0, r4
+ 1386 0056 FFF7FEFF 		bl	tinf_get_le_uint32
+ 1387 005a 236A     		ldr	r3, [r4, #32]
+ 1388 005c DB43     		mvns	r3, r3
+ 1389 005e 8342     		cmp	r3, r0
+ 1390 0060 03D1     		bne	.L168
+ 1391 0062 2000     		movs	r0, r4
+ 1392 0064 FFF7FEFF 		bl	tinf_get_le_uint32
+ 1393 0068 D7E7     		b	.L162
+ 1394              	.L168:
+ 1395 006a 0425     		movs	r5, #4
+ 1396 006c 6D42     		rsbs	r5, r5, #0
+ 1397 006e D4E7     		b	.L162
+ 1399              		.global	__aeabi_idivmod
+ 1400              		.section	.text.uzlib_zlib_parse_header,"ax",%progbits
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 25
+
+
+ 1401              		.align	1
+ 1402              		.global	uzlib_zlib_parse_header
+ 1403              		.syntax unified
+ 1404              		.code	16
+ 1405              		.thumb_func
+ 1407              	uzlib_zlib_parse_header:
+ 1408              		@ args = 0, pretend = 0, frame = 0
+ 1409              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1410 0000 70B5     		push	{r4, r5, r6, lr}
+ 1411 0002 0500     		movs	r5, r0
+ 1412 0004 FFF7FEFF 		bl	uzlib_get_byte
+ 1413 0008 0400     		movs	r4, r0
+ 1414 000a 2800     		movs	r0, r5
+ 1415 000c FFF7FEFF 		bl	uzlib_get_byte
+ 1416 0010 0600     		movs	r6, r0
+ 1417 0012 2002     		lsls	r0, r4, #8
+ 1418 0014 8019     		adds	r0, r0, r6
+ 1419 0016 1F21     		movs	r1, #31
+ 1420 0018 FFF7FEFF 		bl	__aeabi_idivmod
+ 1421 001c 0029     		cmp	r1, #0
+ 1422 001e 0ED1     		bne	.L171
+ 1423 0020 0F23     		movs	r3, #15
+ 1424 0022 2340     		ands	r3, r4
+ 1425 0024 082B     		cmp	r3, #8
+ 1426 0026 0DD1     		bne	.L172
+ 1427 0028 2409     		lsrs	r4, r4, #4
+ 1428 002a E0B2     		uxtb	r0, r4
+ 1429 002c 0728     		cmp	r0, #7
+ 1430 002e 0CD8     		bhi	.L173
+ 1431 0030 B306     		lsls	r3, r6, #26
+ 1432 0032 0DD4     		bmi	.L174
+ 1433 0034 0123     		movs	r3, #1
+ 1434 0036 2422     		movs	r2, #36
+ 1435 0038 AB54     		strb	r3, [r5, r2]
+ 1436 003a 2B62     		str	r3, [r5, #32]
+ 1437              	.L169:
+ 1438              		@ sp needed
+ 1439 003c 70BD     		pop	{r4, r5, r6, pc}
+ 1440              	.L171:
+ 1441 003e 0320     		movs	r0, #3
+ 1442 0040 4042     		rsbs	r0, r0, #0
+ 1443 0042 FBE7     		b	.L169
+ 1444              	.L172:
+ 1445 0044 0320     		movs	r0, #3
+ 1446 0046 4042     		rsbs	r0, r0, #0
+ 1447 0048 F8E7     		b	.L169
+ 1448              	.L173:
+ 1449 004a 0320     		movs	r0, #3
+ 1450 004c 4042     		rsbs	r0, r0, #0
+ 1451 004e F5E7     		b	.L169
+ 1452              	.L174:
+ 1453 0050 0320     		movs	r0, #3
+ 1454 0052 4042     		rsbs	r0, r0, #0
+ 1455 0054 F2E7     		b	.L169
+ 1457              		.global	clcidx
+ 1458              		.global	dist_base
+ 1459              		.global	dist_bits
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 26
+
+
+ 1460              		.global	length_base
+ 1461              		.global	length_bits
+ 1462              		.section	.rodata.clcidx,"a"
+ 1463              		.align	2
+ 1464              		.set	.LANCHOR0,. + 0
+ 1467              	clcidx:
+ 1468 0000 10111200 		.ascii	"\020\021\022\000\010\007\011\006\012\005\013\004\014"
+ 1468      08070906 
+ 1468      0A050B04 
+ 1468      0C
+ 1469 000d 030D020E 		.ascii	"\003\015\002\016\001\017"
+ 1469      010F
+ 1470              		.section	.rodata.dist_base,"a"
+ 1471              		.align	2
+ 1472              		.set	.LANCHOR3,. + 0
+ 1475              	dist_base:
+ 1476 0000 0100     		.short	1
+ 1477 0002 0200     		.short	2
+ 1478 0004 0300     		.short	3
+ 1479 0006 0400     		.short	4
+ 1480 0008 0500     		.short	5
+ 1481 000a 0700     		.short	7
+ 1482 000c 0900     		.short	9
+ 1483 000e 0D00     		.short	13
+ 1484 0010 1100     		.short	17
+ 1485 0012 1900     		.short	25
+ 1486 0014 2100     		.short	33
+ 1487 0016 3100     		.short	49
+ 1488 0018 4100     		.short	65
+ 1489 001a 6100     		.short	97
+ 1490 001c 8100     		.short	129
+ 1491 001e C100     		.short	193
+ 1492 0020 0101     		.short	257
+ 1493 0022 8101     		.short	385
+ 1494 0024 0102     		.short	513
+ 1495 0026 0103     		.short	769
+ 1496 0028 0104     		.short	1025
+ 1497 002a 0106     		.short	1537
+ 1498 002c 0108     		.short	2049
+ 1499 002e 010C     		.short	3073
+ 1500 0030 0110     		.short	4097
+ 1501 0032 0118     		.short	6145
+ 1502 0034 0120     		.short	8193
+ 1503 0036 0130     		.short	12289
+ 1504 0038 0140     		.short	16385
+ 1505 003a 0160     		.short	24577
+ 1506              		.section	.rodata.dist_bits,"a"
+ 1507              		.align	2
+ 1508              		.set	.LANCHOR4,. + 0
+ 1511              	dist_bits:
+ 1512 0000 00000000 		.ascii	"\000\000\000\000\001\001\002\002\003\003\004\004\005"
+ 1512      01010202 
+ 1512      03030404 
+ 1512      05
+ 1513 000d 05060607 		.ascii	"\005\006\006\007\007\010\010\011\011\012\012\013\013"
+ 1513      07080809 
+ 1513      090A0A0B 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 27
+
+
+ 1513      0B
+ 1514 001a 0C0C0D0D 		.ascii	"\014\014\015\015"
+ 1515              		.section	.rodata.length_base,"a"
+ 1516              		.align	2
+ 1517              		.set	.LANCHOR1,. + 0
+ 1520              	length_base:
+ 1521 0000 0300     		.short	3
+ 1522 0002 0400     		.short	4
+ 1523 0004 0500     		.short	5
+ 1524 0006 0600     		.short	6
+ 1525 0008 0700     		.short	7
+ 1526 000a 0800     		.short	8
+ 1527 000c 0900     		.short	9
+ 1528 000e 0A00     		.short	10
+ 1529 0010 0B00     		.short	11
+ 1530 0012 0D00     		.short	13
+ 1531 0014 0F00     		.short	15
+ 1532 0016 1100     		.short	17
+ 1533 0018 1300     		.short	19
+ 1534 001a 1700     		.short	23
+ 1535 001c 1B00     		.short	27
+ 1536 001e 1F00     		.short	31
+ 1537 0020 2300     		.short	35
+ 1538 0022 2B00     		.short	43
+ 1539 0024 3300     		.short	51
+ 1540 0026 3B00     		.short	59
+ 1541 0028 4300     		.short	67
+ 1542 002a 5300     		.short	83
+ 1543 002c 6300     		.short	99
+ 1544 002e 7300     		.short	115
+ 1545 0030 8300     		.short	131
+ 1546 0032 A300     		.short	163
+ 1547 0034 C300     		.short	195
+ 1548 0036 E300     		.short	227
+ 1549 0038 0201     		.short	258
+ 1550 003a 0000     		.space	2
+ 1551              		.section	.rodata.length_bits,"a"
+ 1552              		.align	2
+ 1553              		.set	.LANCHOR2,. + 0
+ 1556              	length_bits:
+ 1557 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\001\001\001\001\002"
+ 1557      00000000 
+ 1557      01010101 
+ 1557      02
+ 1558 000d 02020203 		.ascii	"\002\002\002\003\003\003\003\004\004\004\004\005\005"
+ 1558      03030304 
+ 1558      04040405 
+ 1558      05
+ 1559 001a 050500   		.ascii	"\005\005\000"
+ 1560 001d 00       		.space	1
+ 1561              		.section	.rodata.tinf_crc32tab,"a"
+ 1562              		.align	2
+ 1563              		.set	.LANCHOR5,. + 0
+ 1566              	tinf_crc32tab:
+ 1567 0000 00000000 		.word	0
+ 1568 0004 6410B71D 		.word	498536548
+ 1569 0008 C8206E3B 		.word	997073096
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 28
+
+
+ 1570 000c AC30D926 		.word	651767980
+ 1571 0010 9041DC76 		.word	1994146192
+ 1572 0014 F4516B6B 		.word	1802195444
+ 1573 0018 5861B24D 		.word	1303535960
+ 1574 001c 3C710550 		.word	1342533948
+ 1575 0020 2083B8ED 		.word	-306674912
+ 1576 0024 44930FF0 		.word	-267414716
+ 1577 0028 E8A3D6D6 		.word	-690576408
+ 1578 002c 8CB361CB 		.word	-882789492
+ 1579 0030 B0C2649B 		.word	-1687895376
+ 1580 0034 D4D2D386 		.word	-2032938284
+ 1581 0038 78E20AA0 		.word	-1609899400
+ 1582 003c 1CF2BDBD 		.word	-1111625188
+ 1583              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s 			page 29
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 uzlib.c
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:16     .text.tinf_build_tree:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:21     .text.tinf_build_tree:00000000 tinf_build_tree
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:91     .text.uzlib_get_byte:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:97     .text.uzlib_get_byte:00000000 uzlib_get_byte
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:134    .text.tinf_skip_bytes:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:140    .text.tinf_skip_bytes:00000000 tinf_skip_bytes
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:158    .text.tinf_get_uint16:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:164    .text.tinf_get_uint16:00000000 tinf_get_uint16
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:180    .text.uzlib_gzip_parse_header:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:186    .text.uzlib_gzip_parse_header:00000000 uzlib_gzip_parse_header
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:271    .text.tinf_getbit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:276    .text.tinf_getbit:00000000 tinf_getbit
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:302    .text.tinf_read_bits:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:307    .text.tinf_read_bits:00000000 tinf_read_bits
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:346    .text.tinf_decode_symbol:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:351    .text.tinf_decode_symbol:00000000 tinf_decode_symbol
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:396    .text.tinf_decode_trees:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:401    .text.tinf_decode_trees:00000000 tinf_decode_trees
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:555    .text.tinf_decode_trees:0000011c $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:558    .text.tinf_get_le_uint32:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:564    .text.tinf_get_le_uint32:00000000 tinf_get_le_uint32
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:584    .text.tinf_get_be_uint32:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:590    .text.tinf_get_be_uint32:00000000 tinf_get_be_uint32
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:609    .text.uzlib_uncompress_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:615    .text.uzlib_uncompress_init:00000000 uzlib_uncompress_init
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:634    .text.uzlib_uncompress:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:640    .text.uzlib_uncompress:00000000 uzlib_uncompress
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1063   .text.uzlib_uncompress:00000300 $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1071   .text.uzlib_adler32:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1077   .text.uzlib_adler32:00000000 uzlib_adler32
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1282   .text.uzlib_adler32:00000178 $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1286   .text.uzlib_crc32:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1292   .text.uzlib_crc32:00000000 uzlib_crc32
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1331   .text.uzlib_crc32:0000003c $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1334   .text.uzlib_uncompress_chksum:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1340   .text.uzlib_uncompress_chksum:00000000 uzlib_uncompress_chksum
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1401   .text.uzlib_zlib_parse_header:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1407   .text.uzlib_zlib_parse_header:00000000 uzlib_zlib_parse_header
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1467   .rodata.clcidx:00000000 clcidx
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1475   .rodata.dist_base:00000000 dist_base
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1511   .rodata.dist_bits:00000000 dist_bits
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1520   .rodata.length_base:00000000 length_base
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1556   .rodata.length_bits:00000000 length_bits
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1463   .rodata.clcidx:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1471   .rodata.dist_base:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1507   .rodata.dist_bits:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1516   .rodata.length_base:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1552   .rodata.length_bits:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1562   .rodata.tinf_crc32tab:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccWq4jhv.s:1566   .rodata.tinf_crc32tab:00000000 tinf_crc32tab
+
+UNDEFINED SYMBOLS
+__aeabi_uidivmod
+__aeabi_idivmod

@@ -1,0 +1,431 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"rtl876x_gpio.c"
+  14              		.text
+  15              		.section	.text.GPIO_DeInit,"ax",%progbits
+  16              		.align	1
+  17              		.global	GPIO_DeInit
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	GPIO_DeInit:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 8421     		movs	r1, #132
+  27 0004 0022     		movs	r2, #0
+  28 0006 8905     		lsls	r1, r1, #22
+  29 0008 0148     		ldr	r0, .L2
+  30 000a FFF7FEFF 		bl	RCC_PeriphClockCmd
+  31              		@ sp needed
+  32 000e 10BD     		pop	{r4, pc}
+  33              	.L3:
+  34              		.align	2
+  35              	.L2:
+  36 0010 0001000C 		.word	201326848
+  38              		.section	.text.GPIO_Init,"ax",%progbits
+  39              		.align	1
+  40              		.global	GPIO_Init
+  41              		.syntax unified
+  42              		.code	16
+  43              		.thumb_func
+  45              	GPIO_Init:
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48 0000 10B5     		push	{r4, lr}
+  49 0002 0379     		ldrb	r3, [r0, #4]
+  50 0004 012B     		cmp	r3, #1
+  51 0006 08D0     		beq	.L14
+  52 0008 314A     		ldr	r2, .L17
+  53 000a 5368     		ldr	r3, [r2, #4]
+  54 000c 0168     		ldr	r1, [r0]
+  55 000e 8B43     		bics	r3, r1
+  56 0010 5360     		str	r3, [r2, #4]
+  57 0012 4379     		ldrb	r3, [r0, #5]
+  58 0014 012B     		cmp	r3, #1
+  59 0016 13D0     		beq	.L15
+  60              	.L4:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s 			page 2
+
+
+  61              		@ sp needed
+  62 0018 10BD     		pop	{r4, pc}
+  63              	.L14:
+  64 001a 2D4A     		ldr	r2, .L17
+  65 001c 5368     		ldr	r3, [r2, #4]
+  66 001e 0168     		ldr	r1, [r0]
+  67 0020 0B43     		orrs	r3, r1
+  68 0022 5360     		str	r3, [r2, #4]
+  69 0024 437A     		ldrb	r3, [r0, #9]
+  70 0026 002B     		cmp	r3, #0
+  71 0028 04D1     		bne	.L6
+  72 002a 9368     		ldr	r3, [r2, #8]
+  73 002c 0168     		ldr	r1, [r0]
+  74 002e 8B43     		bics	r3, r1
+  75 0030 9360     		str	r3, [r2, #8]
+  76 0032 F1E7     		b	.L4
+  77              	.L6:
+  78 0034 264A     		ldr	r2, .L17
+  79 0036 9368     		ldr	r3, [r2, #8]
+  80 0038 0168     		ldr	r1, [r0]
+  81 003a 0B43     		orrs	r3, r1
+  82 003c 9360     		str	r3, [r2, #8]
+  83 003e EBE7     		b	.L4
+  84              	.L15:
+  85 0040 1300     		movs	r3, r2
+  86 0042 0022     		movs	r2, #0
+  87 0044 5A63     		str	r2, [r3, #52]
+  88 0046 8379     		ldrb	r3, [r0, #6]
+  89 0048 002B     		cmp	r3, #0
+  90 004a 19D1     		bne	.L8
+  91 004c 204B     		ldr	r3, .L17
+  92 004e 9A6B     		ldr	r2, [r3, #56]
+  93 0050 0168     		ldr	r1, [r0]
+  94 0052 8A43     		bics	r2, r1
+  95 0054 9A63     		str	r2, [r3, #56]
+  96 0056 1A6E     		ldr	r2, [r3, #96]
+  97 0058 0168     		ldr	r1, [r0]
+  98 005a 0A43     		orrs	r2, r1
+  99 005c 1A66     		str	r2, [r3, #96]
+ 100              	.L9:
+ 101 005e C379     		ldrb	r3, [r0, #7]
+ 102 0060 002B     		cmp	r3, #0
+ 103 0062 1BD1     		bne	.L11
+ 104 0064 1A4A     		ldr	r2, .L17
+ 105 0066 D36B     		ldr	r3, [r2, #60]
+ 106 0068 0168     		ldr	r1, [r0]
+ 107 006a 8B43     		bics	r3, r1
+ 108 006c D363     		str	r3, [r2, #60]
+ 109              	.L12:
+ 110 006e 037A     		ldrb	r3, [r0, #8]
+ 111 0070 002B     		cmp	r3, #0
+ 112 0072 19D1     		bne	.L13
+ 113 0074 164A     		ldr	r2, .L17
+ 114 0076 936C     		ldr	r3, [r2, #72]
+ 115 0078 0168     		ldr	r1, [r0]
+ 116 007a 8B43     		bics	r3, r1
+ 117 007c 9364     		str	r3, [r2, #72]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s 			page 3
+
+
+ 118 007e CBE7     		b	.L4
+ 119              	.L8:
+ 120 0080 012B     		cmp	r3, #1
+ 121 0082 05D0     		beq	.L16
+ 122 0084 124A     		ldr	r2, .L17
+ 123 0086 936E     		ldr	r3, [r2, #104]
+ 124 0088 0168     		ldr	r1, [r0]
+ 125 008a 0B43     		orrs	r3, r1
+ 126 008c 9366     		str	r3, [r2, #104]
+ 127 008e E6E7     		b	.L9
+ 128              	.L16:
+ 129 0090 0F4A     		ldr	r2, .L17
+ 130 0092 936B     		ldr	r3, [r2, #56]
+ 131 0094 0168     		ldr	r1, [r0]
+ 132 0096 0B43     		orrs	r3, r1
+ 133 0098 9363     		str	r3, [r2, #56]
+ 134 009a E0E7     		b	.L9
+ 135              	.L11:
+ 136 009c 0C4A     		ldr	r2, .L17
+ 137 009e D36B     		ldr	r3, [r2, #60]
+ 138 00a0 0168     		ldr	r1, [r0]
+ 139 00a2 0B43     		orrs	r3, r1
+ 140 00a4 D363     		str	r3, [r2, #60]
+ 141 00a6 E2E7     		b	.L12
+ 142              	.L13:
+ 143 00a8 094A     		ldr	r2, .L17
+ 144 00aa 936C     		ldr	r3, [r2, #72]
+ 145 00ac 0168     		ldr	r1, [r0]
+ 146 00ae 0B43     		orrs	r3, r1
+ 147 00b0 9364     		str	r3, [r2, #72]
+ 148 00b2 0849     		ldr	r1, .L17+4
+ 149 00b4 E023     		movs	r3, #224
+ 150 00b6 5B01     		lsls	r3, r3, #5
+ 151 00b8 0B60     		str	r3, [r1]
+ 152 00ba 0C68     		ldr	r4, [r1]
+ 153 00bc C268     		ldr	r2, [r0, #12]
+ 154 00be 064B     		ldr	r3, .L17+8
+ 155 00c0 5343     		muls	r3, r2
+ 156 00c2 5B0B     		lsrs	r3, r3, #13
+ 157 00c4 013B     		subs	r3, r3, #1
+ 158 00c6 FF22     		movs	r2, #255
+ 159 00c8 1340     		ands	r3, r2
+ 160 00ca 2343     		orrs	r3, r4
+ 161 00cc 0B60     		str	r3, [r1]
+ 162 00ce A3E7     		b	.L4
+ 163              	.L18:
+ 164              		.align	2
+ 165              	.L17:
+ 166 00d0 00100040 		.word	1073745920
+ 167 00d4 44030040 		.word	1073742660
+ 168 00d8 204E0000 		.word	20000
+ 170              		.section	.text.GPIO_StructInit,"ax",%progbits
+ 171              		.align	1
+ 172              		.global	GPIO_StructInit
+ 173              		.syntax unified
+ 174              		.code	16
+ 175              		.thumb_func
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s 			page 4
+
+
+ 177              	GPIO_StructInit:
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180              		@ link register save eliminated.
+ 181 0000 0123     		movs	r3, #1
+ 182 0002 5B42     		rsbs	r3, r3, #0
+ 183 0004 0360     		str	r3, [r0]
+ 184 0006 0023     		movs	r3, #0
+ 185 0008 0371     		strb	r3, [r0, #4]
+ 186 000a 4371     		strb	r3, [r0, #5]
+ 187 000c 8371     		strb	r3, [r0, #6]
+ 188 000e C371     		strb	r3, [r0, #7]
+ 189 0010 0372     		strb	r3, [r0, #8]
+ 190 0012 4372     		strb	r3, [r0, #9]
+ 191 0014 1433     		adds	r3, r3, #20
+ 192 0016 C360     		str	r3, [r0, #12]
+ 193              		@ sp needed
+ 194 0018 7047     		bx	lr
+ 196              		.section	.text.GPIO_INTConfig,"ax",%progbits
+ 197              		.align	1
+ 198              		.global	GPIO_INTConfig
+ 199              		.syntax unified
+ 200              		.code	16
+ 201              		.thumb_func
+ 203              	GPIO_INTConfig:
+ 204              		@ args = 0, pretend = 0, frame = 0
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 206              		@ link register save eliminated.
+ 207 0000 0029     		cmp	r1, #0
+ 208 0002 04D0     		beq	.L21
+ 209 0004 044A     		ldr	r2, .L23
+ 210 0006 136B     		ldr	r3, [r2, #48]
+ 211 0008 1843     		orrs	r0, r3
+ 212 000a 1063     		str	r0, [r2, #48]
+ 213              	.L20:
+ 214              		@ sp needed
+ 215 000c 7047     		bx	lr
+ 216              	.L21:
+ 217 000e 024A     		ldr	r2, .L23
+ 218 0010 136B     		ldr	r3, [r2, #48]
+ 219 0012 8343     		bics	r3, r0
+ 220 0014 1363     		str	r3, [r2, #48]
+ 221 0016 F9E7     		b	.L20
+ 222              	.L24:
+ 223              		.align	2
+ 224              	.L23:
+ 225 0018 00100040 		.word	1073745920
+ 227              		.section	.text.GPIO_ClearINTPendingBit,"ax",%progbits
+ 228              		.align	1
+ 229              		.global	GPIO_ClearINTPendingBit
+ 230              		.syntax unified
+ 231              		.code	16
+ 232              		.thumb_func
+ 234              	GPIO_ClearINTPendingBit:
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 237              		@ link register save eliminated.
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s 			page 5
+
+
+ 238 0000 014B     		ldr	r3, .L26
+ 239 0002 D864     		str	r0, [r3, #76]
+ 240              		@ sp needed
+ 241 0004 7047     		bx	lr
+ 242              	.L27:
+ 243 0006 C046     		.align	2
+ 244              	.L26:
+ 245 0008 00100040 		.word	1073745920
+ 247              		.section	.text.GPIO_MaskINTConfig,"ax",%progbits
+ 248              		.align	1
+ 249              		.global	GPIO_MaskINTConfig
+ 250              		.syntax unified
+ 251              		.code	16
+ 252              		.thumb_func
+ 254              	GPIO_MaskINTConfig:
+ 255              		@ args = 0, pretend = 0, frame = 0
+ 256              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257              		@ link register save eliminated.
+ 258 0000 0029     		cmp	r1, #0
+ 259 0002 04D0     		beq	.L29
+ 260 0004 044A     		ldr	r2, .L31
+ 261 0006 536B     		ldr	r3, [r2, #52]
+ 262 0008 1843     		orrs	r0, r3
+ 263 000a 5063     		str	r0, [r2, #52]
+ 264              	.L28:
+ 265              		@ sp needed
+ 266 000c 7047     		bx	lr
+ 267              	.L29:
+ 268 000e 024A     		ldr	r2, .L31
+ 269 0010 536B     		ldr	r3, [r2, #52]
+ 270 0012 8343     		bics	r3, r0
+ 271 0014 5363     		str	r3, [r2, #52]
+ 272 0016 F9E7     		b	.L28
+ 273              	.L32:
+ 274              		.align	2
+ 275              	.L31:
+ 276 0018 00100040 		.word	1073745920
+ 278              		.section	.text.GPIO_GetPin,"ax",%progbits
+ 279              		.align	1
+ 280              		.global	GPIO_GetPin
+ 281              		.syntax unified
+ 282              		.code	16
+ 283              		.thumb_func
+ 285              	GPIO_GetPin:
+ 286              		@ args = 0, pretend = 0, frame = 0
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              		@ link register save eliminated.
+ 289 0000 0300     		movs	r3, r0
+ 290 0002 1E28     		cmp	r0, #30
+ 291 0004 0ED9     		bls	.L39
+ 292 0006 2028     		cmp	r0, #32
+ 293 0008 13D0     		beq	.L37
+ 294 000a 0200     		movs	r2, r0
+ 295 000c 213A     		subs	r2, r2, #33
+ 296 000e 022A     		cmp	r2, #2
+ 297 0010 0BD9     		bls	.L40
+ 298 0012 FF20     		movs	r0, #255
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s 			page 6
+
+
+ 299 0014 1A00     		movs	r2, r3
+ 300 0016 243A     		subs	r2, r2, #36
+ 301 0018 022A     		cmp	r2, #2
+ 302 001a 05D8     		bhi	.L33
+ 303 001c 1A3B     		subs	r3, r3, #26
+ 304 001e FE38     		subs	r0, r0, #254
+ 305 0020 9840     		lsls	r0, r0, r3
+ 306 0022 01E0     		b	.L33
+ 307              	.L39:
+ 308 0024 0120     		movs	r0, #1
+ 309 0026 9840     		lsls	r0, r0, r3
+ 310              	.L33:
+ 311              		@ sp needed
+ 312 0028 7047     		bx	lr
+ 313              	.L40:
+ 314 002a 043B     		subs	r3, r3, #4
+ 315 002c 0120     		movs	r0, #1
+ 316 002e 9840     		lsls	r0, r0, r3
+ 317 0030 FAE7     		b	.L33
+ 318              	.L37:
+ 319 0032 8020     		movs	r0, #128
+ 320 0034 8001     		lsls	r0, r0, #6
+ 321 0036 F7E7     		b	.L33
+ 323              		.section	.text.GPIO_GetNum,"ax",%progbits
+ 324              		.align	1
+ 325              		.global	GPIO_GetNum
+ 326              		.syntax unified
+ 327              		.code	16
+ 328              		.thumb_func
+ 330              	GPIO_GetNum:
+ 331              		@ args = 0, pretend = 0, frame = 0
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+ 333              		@ link register save eliminated.
+ 334 0000 0300     		movs	r3, r0
+ 335 0002 1E28     		cmp	r0, #30
+ 336 0004 0FD9     		bls	.L42
+ 337 0006 2028     		cmp	r0, #32
+ 338 0008 0ED0     		beq	.L45
+ 339 000a 0200     		movs	r2, r0
+ 340 000c 213A     		subs	r2, r2, #33
+ 341 000e 022A     		cmp	r2, #2
+ 342 0010 07D9     		bls	.L47
+ 343 0012 FF20     		movs	r0, #255
+ 344 0014 1A00     		movs	r2, r3
+ 345 0016 243A     		subs	r2, r2, #36
+ 346 0018 022A     		cmp	r2, #2
+ 347 001a 04D8     		bhi	.L42
+ 348 001c 1A3B     		subs	r3, r3, #26
+ 349 001e D8B2     		uxtb	r0, r3
+ 350 0020 01E0     		b	.L42
+ 351              	.L47:
+ 352 0022 043B     		subs	r3, r3, #4
+ 353 0024 D8B2     		uxtb	r0, r3
+ 354              	.L42:
+ 355              		@ sp needed
+ 356 0026 7047     		bx	lr
+ 357              	.L45:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s 			page 7
+
+
+ 358 0028 0D20     		movs	r0, #13
+ 359 002a FCE7     		b	.L42
+ 361              		.section	.text.GPIO_DBClkCmd,"ax",%progbits
+ 362              		.align	1
+ 363              		.global	GPIO_DBClkCmd
+ 364              		.syntax unified
+ 365              		.code	16
+ 366              		.thumb_func
+ 368              	GPIO_DBClkCmd:
+ 369              		@ args = 0, pretend = 0, frame = 0
+ 370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 371              		@ link register save eliminated.
+ 372 0000 0028     		cmp	r0, #0
+ 373 0002 06D0     		beq	.L49
+ 374 0004 064A     		ldr	r2, .L51
+ 375 0006 1168     		ldr	r1, [r2]
+ 376 0008 8023     		movs	r3, #128
+ 377 000a 5B01     		lsls	r3, r3, #5
+ 378 000c 0B43     		orrs	r3, r1
+ 379 000e 1360     		str	r3, [r2]
+ 380              	.L48:
+ 381              		@ sp needed
+ 382 0010 7047     		bx	lr
+ 383              	.L49:
+ 384 0012 034A     		ldr	r2, .L51
+ 385 0014 1368     		ldr	r3, [r2]
+ 386 0016 0349     		ldr	r1, .L51+4
+ 387 0018 0B40     		ands	r3, r1
+ 388 001a 1360     		str	r3, [r2]
+ 389 001c F8E7     		b	.L48
+ 390              	.L52:
+ 391 001e C046     		.align	2
+ 392              	.L51:
+ 393 0020 44030040 		.word	1073742660
+ 394 0024 FFEFFFFF 		.word	-4097
+ 396              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtl876x_gpio.c
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:16     .text.GPIO_DeInit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:22     .text.GPIO_DeInit:00000000 GPIO_DeInit
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:36     .text.GPIO_DeInit:00000010 $d
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:39     .text.GPIO_Init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:45     .text.GPIO_Init:00000000 GPIO_Init
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:166    .text.GPIO_Init:000000d0 $d
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:171    .text.GPIO_StructInit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:177    .text.GPIO_StructInit:00000000 GPIO_StructInit
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:197    .text.GPIO_INTConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:203    .text.GPIO_INTConfig:00000000 GPIO_INTConfig
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:225    .text.GPIO_INTConfig:00000018 $d
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:228    .text.GPIO_ClearINTPendingBit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:234    .text.GPIO_ClearINTPendingBit:00000000 GPIO_ClearINTPendingBit
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:245    .text.GPIO_ClearINTPendingBit:00000008 $d
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:248    .text.GPIO_MaskINTConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:254    .text.GPIO_MaskINTConfig:00000000 GPIO_MaskINTConfig
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:276    .text.GPIO_MaskINTConfig:00000018 $d
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:279    .text.GPIO_GetPin:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:285    .text.GPIO_GetPin:00000000 GPIO_GetPin
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:324    .text.GPIO_GetNum:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:330    .text.GPIO_GetNum:00000000 GPIO_GetNum
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:362    .text.GPIO_DBClkCmd:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:368    .text.GPIO_DBClkCmd:00000000 GPIO_DBClkCmd
+C:\Users\pc\AppData\Local\Temp\ccMMwK2R.s:393    .text.GPIO_DBClkCmd:00000020 $d
+
+UNDEFINED SYMBOLS
+RCC_PeriphClockCmd

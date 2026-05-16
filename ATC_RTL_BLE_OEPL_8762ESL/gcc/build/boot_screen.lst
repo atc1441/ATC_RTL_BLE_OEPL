@@ -1,0 +1,646 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"boot_screen.c"
+  14              		.text
+  15              		.global	__aeabi_idiv
+  16              		.global	__aeabi_idivmod
+  17              		.section	.text.render_lines,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.code	16
+  21              		.thumb_func
+  23              	render_lines:
+  24              		@ args = 0, pretend = 0, frame = 120
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  27 0002 DE46     		mov	lr, fp
+  28 0004 5746     		mov	r7, r10
+  29 0006 4E46     		mov	r6, r9
+  30 0008 4546     		mov	r5, r8
+  31 000a E0B5     		push	{r5, r6, r7, lr}
+  32 000c 9FB0     		sub	sp, sp, #124
+  33 000e 0290     		str	r0, [sp, #8]
+  34 0010 8B46     		mov	fp, r1
+  35 0012 0B07     		lsls	r3, r1, #28
+  36 0014 5B1A     		subs	r3, r3, r1
+  37 0016 9B00     		lsls	r3, r3, #2
+  38 0018 5B1A     		subs	r3, r3, r1
+  39 001a 9B00     		lsls	r3, r3, #2
+  40 001c 1133     		adds	r3, r3, #17
+  41 001e FF33     		adds	r3, r3, #255
+  42 0020 5B10     		asrs	r3, r3, #1
+  43 0022 5A42     		rsbs	r2, r3, #0
+  44 0024 0092     		str	r2, [sp]
+  45 0026 8822     		movs	r2, #136
+  46 0028 5200     		lsls	r2, r2, #1
+  47 002a D31A     		subs	r3, r2, r3
+  48 002c 0193     		str	r3, [sp, #4]
+  49 002e FF23     		movs	r3, #255
+  50 0030 6A46     		mov	r2, sp
+  51 0032 D373     		strb	r3, [r2, #15]
+  52 0034 4CE0     		b	.L4
+  53              	.L2:
+  54 0036 2B70     		strb	r3, [r5]
+  55 0038 0134     		adds	r4, r4, #1
+  56 003a 0135     		adds	r5, r5, #1
+  57 003c 632C     		cmp	r4, #99
+  58 003e 30D0     		beq	.L12
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 2
+
+
+  59              	.L3:
+  60 0040 FF23     		movs	r3, #255
+  61 0042 002E     		cmp	r6, #0
+  62 0044 F7DB     		blt	.L2
+  63 0046 C345     		cmp	fp, r8
+  64 0048 F5DD     		ble	.L2
+  65 004a 4B46     		mov	r3, r9
+  66 004c 1F68     		ldr	r7, [r3]
+  67 004e 3800     		movs	r0, r7
+  68 0050 FFF7FEFF 		bl	strlen
+  69 0054 FF23     		movs	r3, #255
+  70 0056 A042     		cmp	r0, r4
+  71 0058 EDDD     		ble	.L2
+  72 005a 3F19     		adds	r7, r7, r4
+  73 005c 5246     		mov	r2, r10
+  74 005e 072A     		cmp	r2, #7
+  75 0060 E9D8     		bhi	.L2
+  76 0062 3A78     		ldrb	r2, [r7]
+  77 0064 1100     		movs	r1, r2
+  78 0066 2039     		subs	r1, r1, #32
+  79 0068 5E29     		cmp	r1, #94
+  80 006a E4D8     		bhi	.L2
+  81 006c CA00     		lsls	r2, r1, #3
+  82 006e 314B     		ldr	r3, .L14
+  83 0070 9C46     		mov	ip, r3
+  84 0072 6244     		add	r2, r2, ip
+  85 0074 5346     		mov	r3, r10
+  86 0076 D25C     		ldrb	r2, [r2, r3]
+  87 0078 1301     		lsls	r3, r2, #4
+  88 007a 1209     		lsrs	r2, r2, #4
+  89 007c 1343     		orrs	r3, r2
+  90 007e DBB2     		uxtb	r3, r3
+  91 0080 9A08     		lsrs	r2, r3, #2
+  92 0082 3321     		movs	r1, #51
+  93 0084 0A40     		ands	r2, r1
+  94 0086 9B00     		lsls	r3, r3, #2
+  95 0088 8B43     		bics	r3, r1
+  96 008a DBB2     		uxtb	r3, r3
+  97 008c 1A43     		orrs	r2, r3
+  98 008e 5308     		lsrs	r3, r2, #1
+  99 0090 2231     		adds	r1, r1, #34
+ 100 0092 0B40     		ands	r3, r1
+ 101 0094 5200     		lsls	r2, r2, #1
+ 102 0096 8A43     		bics	r2, r1
+ 103 0098 D2B2     		uxtb	r2, r2
+ 104 009a 1343     		orrs	r3, r2
+ 105 009c DB43     		mvns	r3, r3
+ 106 009e DBB2     		uxtb	r3, r3
+ 107 00a0 C9E7     		b	.L2
+ 108              	.L12:
+ 109 00a2 A420     		movs	r0, #164
+ 110 00a4 FFF7FEFF 		bl	epd_cmd
+ 111 00a8 3221     		movs	r1, #50
+ 112 00aa 05A8     		add	r0, sp, #20
+ 113 00ac FFF7FEFF 		bl	epd_stream_data
+ 114 00b0 2420     		movs	r0, #36
+ 115 00b2 FFF7FEFF 		bl	epd_cmd
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 3
+
+
+ 116 00b6 3221     		movs	r1, #50
+ 117 00b8 3520     		movs	r0, #53
+ 118 00ba 04AB     		add	r3, sp, #16
+ 119 00bc 9C46     		mov	ip, r3
+ 120 00be 6044     		add	r0, r0, ip
+ 121 00c0 FFF7FEFF 		bl	epd_stream_data
+ 122 00c4 009B     		ldr	r3, [sp]
+ 123 00c6 0133     		adds	r3, r3, #1
+ 124 00c8 0093     		str	r3, [sp]
+ 125 00ca 019A     		ldr	r2, [sp, #4]
+ 126 00cc 9342     		cmp	r3, r2
+ 127 00ce 1BD0     		beq	.L13
+ 128              	.L4:
+ 129 00d0 009C     		ldr	r4, [sp]
+ 130 00d2 2600     		movs	r6, r4
+ 131 00d4 1421     		movs	r1, #20
+ 132 00d6 2000     		movs	r0, r4
+ 133 00d8 FFF7FEFF 		bl	__aeabi_idiv
+ 134 00dc 8046     		mov	r8, r0
+ 135 00de 1421     		movs	r1, #20
+ 136 00e0 2000     		movs	r0, r4
+ 137 00e2 FFF7FEFF 		bl	__aeabi_idivmod
+ 138 00e6 CB0F     		lsrs	r3, r1, #31
+ 139 00e8 5B18     		adds	r3, r3, r1
+ 140 00ea 5B10     		asrs	r3, r3, #1
+ 141 00ec 9A46     		mov	r10, r3
+ 142 00ee 6322     		movs	r2, #99
+ 143 00f0 05AB     		add	r3, sp, #20
+ 144 00f2 6946     		mov	r1, sp
+ 145 00f4 C97B     		ldrb	r1, [r1, #15]
+ 146 00f6 9954     		strb	r1, [r3, r2]
+ 147 00f8 4346     		mov	r3, r8
+ 148 00fa 9B00     		lsls	r3, r3, #2
+ 149 00fc 029A     		ldr	r2, [sp, #8]
+ 150 00fe 9146     		mov	r9, r2
+ 151 0100 9944     		add	r9, r9, r3
+ 152 0102 05AD     		add	r5, sp, #20
+ 153 0104 0024     		movs	r4, #0
+ 154 0106 9BE7     		b	.L3
+ 155              	.L13:
+ 156 0108 2620     		movs	r0, #38
+ 157 010a FFF7FEFF 		bl	epd_cmd
+ 158 010e 0A4C     		ldr	r4, .L14+4
+ 159 0110 2100     		movs	r1, r4
+ 160 0112 0020     		movs	r0, #0
+ 161 0114 FFF7FEFF 		bl	epd_stream_const
+ 162 0118 A620     		movs	r0, #166
+ 163 011a FFF7FEFF 		bl	epd_cmd
+ 164 011e 2100     		movs	r1, r4
+ 165 0120 0020     		movs	r0, #0
+ 166 0122 FFF7FEFF 		bl	epd_stream_const
+ 167 0126 1FB0     		add	sp, sp, #124
+ 168              		@ sp needed
+ 169 0128 F0BC     		pop	{r4, r5, r6, r7}
+ 170 012a BB46     		mov	fp, r7
+ 171 012c B246     		mov	r10, r6
+ 172 012e A946     		mov	r9, r5
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 4
+
+
+ 173 0130 A046     		mov	r8, r4
+ 174 0132 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 175              	.L15:
+ 176              		.align	2
+ 177              	.L14:
+ 178 0134 00000000 		.word	font8
+ 179 0138 20350000 		.word	13600
+ 181              		.section	.rodata.boot_screen_draw.str1.4,"aMS",%progbits,1
+ 182              		.align	2
+ 183              	.LC1:
+ 184 0000 204F7065 		.ascii	" OpenEpaperLink RTL8762ESL\000"
+ 184      6E457061 
+ 184      7065724C 
+ 184      696E6B20 
+ 184      52544C38 
+ 185 001b 00       		.align	2
+ 186              	.LC3:
+ 187 001c 20424C45 		.ascii	" BLE Name: RTL_%02X%02X%02X\000"
+ 187      204E616D 
+ 187      653A2052 
+ 187      544C5F25 
+ 187      30325825 
+ 188              		.align	2
+ 189              	.LC5:
+ 190 0038 204D4143 		.ascii	" MAC: %02X:%02X:%02X:%02X:%02X:%02X\000"
+ 190      3A202530 
+ 190      32583A25 
+ 190      3032583A 
+ 190      25303258 
+ 191              		.align	2
+ 192              	.LC7:
+ 193 005c 20424154 		.ascii	" BAT: %u mV\000"
+ 193      3A202575 
+ 193      206D5600 
+ 194              		.align	2
+ 195              	.LC9:
+ 196 0068 2046573A 		.ascii	" FW:  v%04X\000"
+ 196      20207625 
+ 196      30345800 
+ 197              		.align	2
+ 198              	.LC11:
+ 199 0074 20415443 		.ascii	" ATC1441 Compiled on: May 16 2026 16:35:48\000"
+ 199      31343431 
+ 199      20436F6D 
+ 199      70696C65 
+ 199      64206F6E 
+ 200 009f 00       		.align	2
+ 201              	.LC14:
+ 202 00a0 424F4F54 		.ascii	"BOOT refresh triggered\012\000"
+ 202      20726566 
+ 202      72657368 
+ 202      20747269 
+ 202      67676572 
+ 203              		.section	.text.boot_screen_draw,"ax",%progbits
+ 204              		.align	1
+ 205              		.global	boot_screen_draw
+ 206              		.syntax unified
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 5
+
+
+ 207              		.code	16
+ 208              		.thumb_func
+ 210              	boot_screen_draw:
+ 211              		@ args = 0, pretend = 0, frame = 504
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 214 0002 CE46     		mov	lr, r9
+ 215 0004 4746     		mov	r7, r8
+ 216 0006 80B5     		push	{r7, lr}
+ 217 0008 354C     		ldr	r4, .L17
+ 218 000a A544     		add	sp, sp, r4
+ 219 000c 0400     		movs	r4, r0
+ 220 000e 0E00     		movs	r6, r1
+ 221 0010 0CAD     		add	r5, sp, #48
+ 222 0012 344A     		ldr	r2, .L17+4
+ 223 0014 2800     		movs	r0, r5
+ 224 0016 8ACA     		ldmia	r2!, {r1, r3, r7}
+ 225 0018 8AC0     		stmia	r0!, {r1, r3, r7}
+ 226 001a 8ACA     		ldmia	r2!, {r1, r3, r7}
+ 227 001c 8AC0     		stmia	r0!, {r1, r3, r7}
+ 228 001e 1388     		ldrh	r3, [r2]
+ 229 0020 0380     		strh	r3, [r0]
+ 230 0022 9378     		ldrb	r3, [r2, #2]
+ 231 0024 8370     		strb	r3, [r0, #2]
+ 232 0026 A378     		ldrb	r3, [r4, #2]
+ 233 0028 20AA     		add	r2, sp, #128
+ 234 002a 9046     		mov	r8, r2
+ 235 002c 2278     		ldrb	r2, [r4]
+ 236 002e 0192     		str	r2, [sp, #4]
+ 237 0030 6278     		ldrb	r2, [r4, #1]
+ 238 0032 0092     		str	r2, [sp]
+ 239 0034 2C4A     		ldr	r2, .L17+8
+ 240 0036 5021     		movs	r1, #80
+ 241 0038 4046     		mov	r0, r8
+ 242 003a FFF7FEFF 		bl	snprintf
+ 243 003e 6379     		ldrb	r3, [r4, #5]
+ 244 0040 34AF     		add	r7, sp, #208
+ 245 0042 2278     		ldrb	r2, [r4]
+ 246 0044 0492     		str	r2, [sp, #16]
+ 247 0046 6278     		ldrb	r2, [r4, #1]
+ 248 0048 0392     		str	r2, [sp, #12]
+ 249 004a A278     		ldrb	r2, [r4, #2]
+ 250 004c 0292     		str	r2, [sp, #8]
+ 251 004e E278     		ldrb	r2, [r4, #3]
+ 252 0050 0192     		str	r2, [sp, #4]
+ 253 0052 2279     		ldrb	r2, [r4, #4]
+ 254 0054 0092     		str	r2, [sp]
+ 255 0056 254A     		ldr	r2, .L17+12
+ 256 0058 5021     		movs	r1, #80
+ 257 005a 3800     		movs	r0, r7
+ 258 005c FFF7FEFF 		bl	snprintf
+ 259 0060 48AB     		add	r3, sp, #288
+ 260 0062 9946     		mov	r9, r3
+ 261 0064 3300     		movs	r3, r6
+ 262 0066 224A     		ldr	r2, .L17+16
+ 263 0068 5021     		movs	r1, #80
+ 264 006a 4846     		mov	r0, r9
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 6
+
+
+ 265 006c FFF7FEFF 		bl	snprintf
+ 266 0070 5CAE     		add	r6, sp, #368
+ 267 0072 4323     		movs	r3, #67
+ 268 0074 1F4A     		ldr	r2, .L17+20
+ 269 0076 5021     		movs	r1, #80
+ 270 0078 3000     		movs	r0, r6
+ 271 007a FFF7FEFF 		bl	snprintf
+ 272 007e 70AB     		add	r3, sp, #448
+ 273 0080 9C46     		mov	ip, r3
+ 274 0082 1D4B     		ldr	r3, .L17+24
+ 275 0084 6246     		mov	r2, ip
+ 276 0086 13CB     		ldmia	r3!, {r0, r1, r4}
+ 277 0088 13C2     		stmia	r2!, {r0, r1, r4}
+ 278 008a 13CB     		ldmia	r3!, {r0, r1, r4}
+ 279 008c 13C2     		stmia	r2!, {r0, r1, r4}
+ 280 008e 13CB     		ldmia	r3!, {r0, r1, r4}
+ 281 0090 13C2     		stmia	r2!, {r0, r1, r4}
+ 282 0092 1868     		ldr	r0, [r3]
+ 283 0094 1060     		str	r0, [r2]
+ 284 0096 9888     		ldrh	r0, [r3, #4]
+ 285 0098 9080     		strh	r0, [r2, #4]
+ 286 009a 9B79     		ldrb	r3, [r3, #6]
+ 287 009c 9371     		strb	r3, [r2, #6]
+ 288 009e 0695     		str	r5, [sp, #24]
+ 289 00a0 4346     		mov	r3, r8
+ 290 00a2 0793     		str	r3, [sp, #28]
+ 291 00a4 0897     		str	r7, [sp, #32]
+ 292 00a6 4B46     		mov	r3, r9
+ 293 00a8 0993     		str	r3, [sp, #36]
+ 294 00aa 0A96     		str	r6, [sp, #40]
+ 295 00ac 6346     		mov	r3, ip
+ 296 00ae 0B93     		str	r3, [sp, #44]
+ 297 00b0 FFF7FEFF 		bl	epd_board_init
+ 298 00b4 FFF7FEFF 		bl	epd_init
+ 299 00b8 0621     		movs	r1, #6
+ 300 00ba 06A8     		add	r0, sp, #24
+ 301 00bc FFF7FEFF 		bl	render_lines
+ 302 00c0 0E4B     		ldr	r3, .L17+28
+ 303 00c2 0122     		movs	r2, #1
+ 304 00c4 1A70     		strb	r2, [r3]
+ 305 00c6 2020     		movs	r0, #32
+ 306 00c8 FFF7FEFF 		bl	epd_cmd
+ 307 00cc 0C48     		ldr	r0, .L17+32
+ 308 00ce FFF7FEFF 		bl	uart_printf
+ 309 00d2 8523     		movs	r3, #133
+ 310 00d4 9B00     		lsls	r3, r3, #2
+ 311 00d6 9D44     		add	sp, sp, r3
+ 312              		@ sp needed
+ 313 00d8 C0BC     		pop	{r6, r7}
+ 314 00da B946     		mov	r9, r7
+ 315 00dc B046     		mov	r8, r6
+ 316 00de F0BD     		pop	{r4, r5, r6, r7, pc}
+ 317              	.L18:
+ 318              		.align	2
+ 319              	.L17:
+ 320 00e0 ECFDFFFF 		.word	-532
+ 321 00e4 00000000 		.word	.LC1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 7
+
+
+ 322 00e8 1C000000 		.word	.LC3
+ 323 00ec 38000000 		.word	.LC5
+ 324 00f0 5C000000 		.word	.LC7
+ 325 00f4 68000000 		.word	.LC9
+ 326 00f8 74000000 		.word	.LC11
+ 327 00fc 00000000 		.word	g_epd_refreshing
+ 328 0100 A0000000 		.word	.LC14
+ 330              		.section	.rodata.boot_screen_show_error.str1.4,"aMS",%progbits,1
+ 331              		.align	2
+ 332              	.LC17:
+ 333 0000 4550445F 		.ascii	"EPD_ERR refresh triggered\012\000"
+ 333      45525220 
+ 333      72656672 
+ 333      65736820 
+ 333      74726967 
+ 334              		.section	.text.boot_screen_show_error,"ax",%progbits
+ 335              		.align	1
+ 336              		.global	boot_screen_show_error
+ 337              		.syntax unified
+ 338              		.code	16
+ 339              		.thumb_func
+ 341              	boot_screen_show_error:
+ 342              		@ args = 0, pretend = 0, frame = 0
+ 343              		@ frame_needed = 0, uses_anonymous_args = 0
+ 344 0000 70B5     		push	{r4, r5, r6, lr}
+ 345 0002 0400     		movs	r4, r0
+ 346 0004 0D00     		movs	r5, r1
+ 347 0006 FFF7FEFF 		bl	epd_board_init
+ 348 000a FFF7FEFF 		bl	epd_init
+ 349 000e 2900     		movs	r1, r5
+ 350 0010 2000     		movs	r0, r4
+ 351 0012 FFF7FEFF 		bl	render_lines
+ 352 0016 054B     		ldr	r3, .L20
+ 353 0018 0122     		movs	r2, #1
+ 354 001a 1A70     		strb	r2, [r3]
+ 355 001c 2020     		movs	r0, #32
+ 356 001e FFF7FEFF 		bl	epd_cmd
+ 357 0022 0348     		ldr	r0, .L20+4
+ 358 0024 FFF7FEFF 		bl	uart_printf
+ 359              		@ sp needed
+ 360 0028 70BD     		pop	{r4, r5, r6, pc}
+ 361              	.L21:
+ 362 002a C046     		.align	2
+ 363              	.L20:
+ 364 002c 00000000 		.word	g_epd_refreshing
+ 365 0030 00000000 		.word	.LC17
+ 367              		.section	.rodata.font8,"a"
+ 368              		.align	2
+ 371              	font8:
+ 372 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 372      00000000 
+ 373 0008 183C3C18 		.ascii	"\030<<\030\030\000\030\000"
+ 373      18001800 
+ 374 0010 36360000 		.ascii	"66\000\000\000\000\000\000"
+ 374      00000000 
+ 375 0018 36367F36 		.ascii	"66\1776\17766\000"
+ 375      7F363600 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 8
+
+
+ 376 0020 0C3E031E 		.ascii	"\014>\003\0360\037\006\000"
+ 376      301F0600 
+ 377 0028 00633318 		.ascii	"\000c3\030\014fc\000"
+ 377      0C666300 
+ 378 0030 1C361C6E 		.ascii	"\0346\034n;3n\000"
+ 378      3B336E00 
+ 379 0038 06060300 		.ascii	"\006\006\003\000\000\000\000\000"
+ 379      00000000 
+ 380 0040 180C0606 		.ascii	"\030\014\006\006\006\014\030\000"
+ 380      060C1800 
+ 381 0048 060C1818 		.ascii	"\006\014\030\030\030\014\006\000"
+ 381      180C0600 
+ 382 0050 00663CFF 		.ascii	"\000f<\377<f\000\000"
+ 382      3C660000 
+ 383 0058 000C0C3F 		.ascii	"\000\014\014?\014\014\000\000"
+ 383      0C0C0000 
+ 384 0060 00000000 		.ascii	"\000\000\000\000\000\014\014\006"
+ 384      000C0C06 
+ 385 0068 0000003F 		.ascii	"\000\000\000?\000\000\000\000"
+ 385      00000000 
+ 386 0070 00000000 		.ascii	"\000\000\000\000\000\014\014\000"
+ 386      000C0C00 
+ 387 0078 6030180C 		.ascii	"`0\030\014\006\003\001\000"
+ 387      06030100 
+ 388 0080 3E63737B 		.ascii	">cs{og>\000"
+ 388      6F673E00 
+ 389 0088 0C0E0C0C 		.ascii	"\014\016\014\014\014\014?\000"
+ 389      0C0C3F00 
+ 390 0090 1E33301C 		.ascii	"\03630\034\0063?\000"
+ 390      06333F00 
+ 391 0098 1E33301C 		.ascii	"\03630\03403\036\000"
+ 391      30331E00 
+ 392 00a0 383C3633 		.ascii	"8<63\1770x\000"
+ 392      7F307800 
+ 393 00a8 3F031F30 		.ascii	"?\003\037003\036\000"
+ 393      30331E00 
+ 394 00b0 1C06031F 		.ascii	"\034\006\003\03733\036\000"
+ 394      33331E00 
+ 395 00b8 3F333018 		.ascii	"?30\030\014\014\014\000"
+ 395      0C0C0C00 
+ 396 00c0 1E33331E 		.ascii	"\03633\03633\036\000"
+ 396      33331E00 
+ 397 00c8 1E33333E 		.ascii	"\03633>0\030\016\000"
+ 397      30180E00 
+ 398 00d0 000C0C00 		.ascii	"\000\014\014\000\000\014\014\000"
+ 398      000C0C00 
+ 399 00d8 000C0C00 		.ascii	"\000\014\014\000\000\014\014\006"
+ 399      000C0C06 
+ 400 00e0 180C0603 		.ascii	"\030\014\006\003\006\014\030\000"
+ 400      060C1800 
+ 401 00e8 00003F00 		.ascii	"\000\000?\000\000?\000\000"
+ 401      003F0000 
+ 402 00f0 060C1830 		.ascii	"\006\014\0300\030\014\006\000"
+ 402      180C0600 
+ 403 00f8 1E333018 		.ascii	"\03630\030\014\000\014\000"
+ 403      0C000C00 
+ 404 0100 3E636F6B 		.ascii	">cokkc>\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 9
+
+
+ 404      6B633E00 
+ 405 0108 0C1E3333 		.ascii	"\014\03633?33\000"
+ 405      3F333300 
+ 406 0110 3F66663E 		.ascii	"?ff>ff?\000"
+ 406      66663F00 
+ 407 0118 3C660303 		.ascii	"<f\003\003\003f<\000"
+ 407      03663C00 
+ 408 0120 1F366666 		.ascii	"\0376fff6\037\000"
+ 408      66361F00 
+ 409 0128 7F46161E 		.ascii	"\177F\026\036\026F\177\000"
+ 409      16467F00 
+ 410 0130 7F46161E 		.ascii	"\177F\026\036\026\006\017\000"
+ 410      16060F00 
+ 411 0138 3C660303 		.ascii	"<f\003\003sf|\000"
+ 411      73667C00 
+ 412 0140 3333333F 		.ascii	"333?333\000"
+ 412      33333300 
+ 413 0148 1E0C0C0C 		.ascii	"\036\014\014\014\014\014\036\000"
+ 413      0C0C1E00 
+ 414 0150 78303030 		.ascii	"x00033\036\000"
+ 414      33331E00 
+ 415 0158 6766361E 		.ascii	"gf6\0366fg\000"
+ 415      36666700 
+ 416 0160 0F060606 		.ascii	"\017\006\006\006Ff\177\000"
+ 416      46667F00 
+ 417 0168 63777F7F 		.ascii	"cw\177\177kcc\000"
+ 417      6B636300 
+ 418 0170 63676F7B 		.ascii	"cgo{scc\000"
+ 418      73636300 
+ 419 0178 1C366363 		.ascii	"\0346ccc6\034\000"
+ 419      63361C00 
+ 420 0180 3F66663E 		.ascii	"?ff>\006\006\017\000"
+ 420      06060F00 
+ 421 0188 1E333333 		.ascii	"\036333;\0368\000"
+ 421      3B1E3800 
+ 422 0190 3F66663E 		.ascii	"?ff>6fg\000"
+ 422      36666700 
+ 423 0198 1E33070E 		.ascii	"\0363\007\01683\036\000"
+ 423      38331E00 
+ 424 01a0 3F2D0C0C 		.ascii	"?-\014\014\014\014\036\000"
+ 424      0C0C1E00 
+ 425 01a8 33333333 		.ascii	"333333?\000"
+ 425      33333F00 
+ 426 01b0 33333333 		.ascii	"33333\036\014\000"
+ 426      331E0C00 
+ 427 01b8 6363636B 		.ascii	"ccck\177wc\000"
+ 427      7F776300 
+ 428 01c0 6363361C 		.ascii	"cc6\034\0346c\000"
+ 428      1C366300 
+ 429 01c8 3333331E 		.ascii	"333\036\014\014\036\000"
+ 429      0C0C1E00 
+ 430 01d0 7F633118 		.ascii	"\177c1\030Lf\177\000"
+ 430      4C667F00 
+ 431 01d8 1E060606 		.ascii	"\036\006\006\006\006\006\036\000"
+ 431      06061E00 
+ 432 01e0 03060C18 		.ascii	"\003\006\014\0300`@\000"
+ 432      30604000 
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 10
+
+
+ 433 01e8 1E181818 		.ascii	"\036\030\030\030\030\030\036\000"
+ 433      18181E00 
+ 434 01f0 081C3663 		.ascii	"\010\0346c\000\000\000\000"
+ 434      00000000 
+ 435 01f8 00000000 		.ascii	"\000\000\000\000\000\000\000\377"
+ 435      000000FF 
+ 436 0200 0C0C1800 		.ascii	"\014\014\030\000\000\000\000\000"
+ 436      00000000 
+ 437 0208 00001E30 		.ascii	"\000\000\0360>3n\000"
+ 437      3E336E00 
+ 438 0210 0706063E 		.ascii	"\007\006\006>ff;\000"
+ 438      66663B00 
+ 439 0218 00001E33 		.ascii	"\000\000\0363\0033\036\000"
+ 439      03331E00 
+ 440 0220 3830303E 		.ascii	"800>33n\000"
+ 440      33336E00 
+ 441 0228 00001E33 		.ascii	"\000\000\0363?\003\036\000"
+ 441      3F031E00 
+ 442 0230 1C36060F 		.ascii	"\0346\006\017\006\006\017\000"
+ 442      06060F00 
+ 443 0238 00006E33 		.ascii	"\000\000n33>0\037"
+ 443      333E301F 
+ 444 0240 0706366E 		.ascii	"\007\0066nffg\000"
+ 444      66666700 
+ 445 0248 0C000E0C 		.ascii	"\014\000\016\014\014\014\036\000"
+ 445      0C0C1E00 
+ 446 0250 30003030 		.ascii	"0\00000033\036"
+ 446      3033331E 
+ 447 0258 07066636 		.ascii	"\007\006f6\0366g\000"
+ 447      1E366700 
+ 448 0260 0E0C0C0C 		.ascii	"\016\014\014\014\014\014\036\000"
+ 448      0C0C1E00 
+ 449 0268 0000337F 		.ascii	"\000\0003\177\177kc\000"
+ 449      7F6B6300 
+ 450 0270 00001F33 		.ascii	"\000\000\0373333\000"
+ 450      33333300 
+ 451 0278 00001E33 		.ascii	"\000\000\036333\036\000"
+ 451      33331E00 
+ 452 0280 00003B66 		.ascii	"\000\000;ff>\006\017"
+ 452      663E060F 
+ 453 0288 00006E33 		.ascii	"\000\000n33>0x"
+ 453      333E3078 
+ 454 0290 00003B6E 		.ascii	"\000\000;nf\006\017\000"
+ 454      66060F00 
+ 455 0298 00001E03 		.ascii	"\000\000\036\003\0360\037\000"
+ 455      1E301F00 
+ 456 02a0 080C3E0C 		.ascii	"\010\014>\014\014,\030\000"
+ 456      0C2C1800 
+ 457 02a8 00003333 		.ascii	"\000\0003333n\000"
+ 457      33336E00 
+ 458 02b0 00003333 		.ascii	"\000\000333\036\014\000"
+ 458      331E0C00 
+ 459 02b8 0000636B 		.ascii	"\000\000ck\177\1776\000"
+ 459      7F7F3600 
+ 460 02c0 00006336 		.ascii	"\000\000c6\0346c\000"
+ 460      1C366300 
+ 461 02c8 00003333 		.ascii	"\000\000333>0\037"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 11
+
+
+ 461      333E301F 
+ 462 02d0 00003F19 		.ascii	"\000\000?\031\014&?\000"
+ 462      0C263F00 
+ 463 02d8 380C0C07 		.ascii	"8\014\014\007\014\0148\000"
+ 463      0C0C3800 
+ 464 02e0 18181800 		.ascii	"\030\030\030\000\030\030\030\000"
+ 464      18181800 
+ 465 02e8 070C0C38 		.ascii	"\007\014\0148\014\014\007\000"
+ 465      0C0C0700 
+ 466 02f0 6E3B0000 		.ascii	"n;\000\000\000\000\000\000"
+ 466      00000000 
+ 467              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 boot_screen.c
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:18     .text.render_lines:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:23     .text.render_lines:00000000 render_lines
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:178    .text.render_lines:00000134 $d
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:371    .rodata.font8:00000000 font8
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:182    .rodata.boot_screen_draw.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:204    .text.boot_screen_draw:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:210    .text.boot_screen_draw:00000000 boot_screen_draw
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:320    .text.boot_screen_draw:000000e0 $d
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:331    .rodata.boot_screen_show_error.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:335    .text.boot_screen_show_error:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:341    .text.boot_screen_show_error:00000000 boot_screen_show_error
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:364    .text.boot_screen_show_error:0000002c $d
+C:\Users\pc\AppData\Local\Temp\ccwn2gJg.s:368    .rodata.font8:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_idiv
+__aeabi_idivmod
+strlen
+epd_cmd
+epd_stream_data
+epd_stream_const
+snprintf
+epd_board_init
+epd_init
+uart_printf
+g_epd_refreshing

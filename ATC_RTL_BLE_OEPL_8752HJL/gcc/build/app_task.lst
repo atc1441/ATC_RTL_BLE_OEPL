@@ -1,0 +1,386 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"app_task.c"
+  14              		.text
+  15              		.section	.rodata.adv_timer_callback.str1.4,"aMS",%progbits,1
+  16              		.align	2
+  17              	.LC0:
+  18 0000 54696D65 		.ascii	"Timer: Updating adv data\012\000"
+  18      723A2055 
+  18      70646174 
+  18      696E6720 
+  18      61647620 
+  19              		.section	.text.adv_timer_callback,"ax",%progbits
+  20              		.align	1
+  21              		.global	adv_timer_callback
+  22              		.syntax unified
+  23              		.code	16
+  24              		.thumb_func
+  26              	adv_timer_callback:
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29 0000 10B5     		push	{r4, lr}
+  30 0002 0448     		ldr	r0, .L2
+  31 0004 FFF7FEFF 		bl	uart_printf
+  32 0008 FFF7FEFF 		bl	battery_measure_mv
+  33 000c FFF7FEFF 		bl	set_adv_data
+  34              		@ sp needed
+  35 0010 10BD     		pop	{r4, pc}
+  36              	.L3:
+  37 0012 C046     		.align	2
+  38              	.L2:
+  39 0014 00000000 		.word	.LC0
+  41              		.section	.rodata.app_main_task.str1.4,"aMS",%progbits,1
+  42              		.align	2
+  43              	.LC5:
+  44 0000 6164765F 		.ascii	"adv_timer\000"
+  44      74696D65 
+  44      7200
+  45 000a 0000     		.align	2
+  46              	.LC9:
+  47 000c 41707020 		.ascii	"App task started\012\000"
+  47      7461736B 
+  47      20737461 
+  47      72746564 
+  47      0A00
+  48              		.section	.text.app_main_task,"ax",%progbits
+  49              		.align	1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s 			page 2
+
+
+  50              		.global	app_main_task
+  51              		.syntax unified
+  52              		.code	16
+  53              		.thumb_func
+  55              	app_main_task:
+  56              		@ Volatile: function does not return.
+  57              		@ args = 0, pretend = 0, frame = 16
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59 0000 70B5     		push	{r4, r5, r6, lr}
+  60 0002 86B0     		sub	sp, sp, #24
+  61 0004 2E4E     		ldr	r6, .L11
+  62 0006 2F4D     		ldr	r5, .L11+4
+  63 0008 5C23     		movs	r3, #92
+  64 000a 0093     		str	r3, [sp]
+  65 000c 3300     		movs	r3, r6
+  66 000e 0822     		movs	r2, #8
+  67 0010 2021     		movs	r1, #32
+  68 0012 2800     		movs	r0, r5
+  69 0014 FFF7FEFF 		bl	os_msg_queue_create_intern
+  70 0018 2B4C     		ldr	r4, .L11+8
+  71 001a 5D23     		movs	r3, #93
+  72 001c 0093     		str	r3, [sp]
+  73 001e 3300     		movs	r3, r6
+  74 0020 0122     		movs	r2, #1
+  75 0022 4021     		movs	r1, #64
+  76 0024 2000     		movs	r0, r4
+  77 0026 FFF7FEFF 		bl	os_msg_queue_create_intern
+  78 002a 2968     		ldr	r1, [r5]
+  79 002c 2068     		ldr	r0, [r4]
+  80 002e 2022     		movs	r2, #32
+  81 0030 FFF7FEFF 		bl	gap_start_bt_stack
+  82 0034 254C     		ldr	r4, .L11+12
+  83 0036 264B     		ldr	r3, .L11+16
+  84 0038 0193     		str	r3, [sp, #4]
+  85 003a 0123     		movs	r3, #1
+  86 003c 0093     		str	r3, [sp]
+  87 003e 254B     		ldr	r3, .L11+20
+  88 0040 0022     		movs	r2, #0
+  89 0042 2549     		ldr	r1, .L11+24
+  90 0044 2000     		movs	r0, r4
+  91 0046 FFF7FEFF 		bl	os_timer_create
+  92 004a 2000     		movs	r0, r4
+  93 004c FFF7FEFF 		bl	os_timer_start
+  94 0050 FFF7FEFF 		bl	driver_init
+  95 0054 0123     		movs	r3, #1
+  96 0056 0122     		movs	r2, #1
+  97 0058 2049     		ldr	r1, .L11+28
+  98 005a 0120     		movs	r0, #1
+  99 005c FFF7FEFF 		bl	AON_WDG_Config
+ 100 0060 FFF7FEFF 		bl	AON_WDG_Enable
+ 101 0064 1E48     		ldr	r0, .L11+32
+ 102 0066 FFF7FEFF 		bl	uart_printf
+ 103 006a 1E4C     		ldr	r4, .L11+36
+ 104 006c 144E     		ldr	r6, .L11
+ 105 006e 164D     		ldr	r5, .L11+8
+ 106 0070 01E0     		b	.L6
+ 107              	.L7:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s 			page 3
+
+
+ 108 0072 FFF7FEFF 		bl	gap_handle_msg
+ 109              	.L6:
+ 110 0076 2368     		ldr	r3, [r4]
+ 111 0078 0133     		adds	r3, r3, #1
+ 112 007a 2360     		str	r3, [r4]
+ 113 007c 0122     		movs	r2, #1
+ 114 007e 2868     		ldr	r0, [r5]
+ 115 0080 7023     		movs	r3, #112
+ 116 0082 0093     		str	r3, [sp]
+ 117 0084 3300     		movs	r3, r6
+ 118 0086 5242     		rsbs	r2, r2, #0
+ 119 0088 1721     		movs	r1, #23
+ 120 008a 6944     		add	r1, r1, sp
+ 121 008c FFF7FEFF 		bl	os_msg_recv_intern
+ 122 0090 0028     		cmp	r0, #0
+ 123 0092 F0D0     		beq	.L6
+ 124 0094 1723     		movs	r3, #23
+ 125 0096 6B44     		add	r3, r3, sp
+ 126 0098 1878     		ldrb	r0, [r3]
+ 127 009a 0228     		cmp	r0, #2
+ 128 009c E9D1     		bne	.L7
+ 129 009e 094B     		ldr	r3, .L11+4
+ 130 00a0 1868     		ldr	r0, [r3]
+ 131 00a2 7523     		movs	r3, #117
+ 132 00a4 0093     		str	r3, [sp]
+ 133 00a6 064B     		ldr	r3, .L11
+ 134 00a8 0022     		movs	r2, #0
+ 135 00aa 03A9     		add	r1, sp, #12
+ 136 00ac FFF7FEFF 		bl	os_msg_recv_intern
+ 137 00b0 0028     		cmp	r0, #0
+ 138 00b2 E0D0     		beq	.L6
+ 139 00b4 0398     		ldr	r0, [sp, #12]
+ 140 00b6 0499     		ldr	r1, [sp, #16]
+ 141 00b8 FFF7FEFF 		bl	app_handle_io_msg
+ 142 00bc DBE7     		b	.L6
+ 143              	.L12:
+ 144 00be C046     		.align	2
+ 145              	.L11:
+ 146 00c0 00000000 		.word	.LANCHOR0
+ 147 00c4 00000000 		.word	.LANCHOR1
+ 148 00c8 00000000 		.word	.LANCHOR2
+ 149 00cc 00000000 		.word	.LANCHOR3
+ 150 00d0 00000000 		.word	adv_timer_callback
+ 151 00d4 C0270900 		.word	600000
+ 152 00d8 00000000 		.word	.LC5
+ 153 00dc 30750000 		.word	30000
+ 154 00e0 0C000000 		.word	.LC9
+ 155 00e4 00000000 		.word	.LANCHOR4
+ 157              		.section	.rodata.app_task_init.str1.4,"aMS",%progbits,1
+ 158              		.align	2
+ 159              	.LC13:
+ 160 0000 61707000 		.ascii	"app\000"
+ 161              		.section	.text.app_task_init,"ax",%progbits
+ 162              		.align	1
+ 163              		.global	app_task_init
+ 164              		.syntax unified
+ 165              		.code	16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s 			page 4
+
+
+ 166              		.thumb_func
+ 168              	app_task_init:
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171 0000 00B5     		push	{lr}
+ 172 0002 83B0     		sub	sp, sp, #12
+ 173 0004 0123     		movs	r3, #1
+ 174 0006 0193     		str	r3, [sp, #4]
+ 175 0008 8023     		movs	r3, #128
+ 176 000a 9B01     		lsls	r3, r3, #6
+ 177 000c 0093     		str	r3, [sp]
+ 178 000e 0023     		movs	r3, #0
+ 179 0010 034A     		ldr	r2, .L14
+ 180 0012 0449     		ldr	r1, .L14+4
+ 181 0014 0448     		ldr	r0, .L14+8
+ 182 0016 FFF7FEFF 		bl	os_task_create
+ 183 001a 03B0     		add	sp, sp, #12
+ 184              		@ sp needed
+ 185 001c 00BD     		pop	{pc}
+ 186              	.L15:
+ 187 001e C046     		.align	2
+ 188              	.L14:
+ 189 0020 00000000 		.word	app_main_task
+ 190 0024 00000000 		.word	.LC13
+ 191 0028 00000000 		.word	.LANCHOR5
+ 193              		.section	.rodata.app_send_msg_to_apptask.str1.4,"aMS",%progbits,1
+ 194              		.align	2
+ 195              	.LC18:
+ 196 0000 4552523A 		.ascii	"ERR: io_queue full\012\000"
+ 196      20696F5F 
+ 196      71756575 
+ 196      65206675 
+ 196      6C6C0A00 
+ 197              		.align	2
+ 198              	.LC21:
+ 199 0014 4552523A 		.ascii	"ERR: evt_queue full\012\000"
+ 199      20657674 
+ 199      5F717565 
+ 199      75652066 
+ 199      756C6C0A 
+ 200              		.section	.text.app_send_msg_to_apptask,"ax",%progbits
+ 201              		.align	1
+ 202              		.global	app_send_msg_to_apptask
+ 203              		.syntax unified
+ 204              		.code	16
+ 205              		.thumb_func
+ 207              	app_send_msg_to_apptask:
+ 208              		@ args = 0, pretend = 0, frame = 8
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210 0000 10B5     		push	{r4, lr}
+ 211 0002 84B0     		sub	sp, sp, #16
+ 212 0004 0100     		movs	r1, r0
+ 213 0006 0F23     		movs	r3, #15
+ 214 0008 6B44     		add	r3, r3, sp
+ 215 000a 0222     		movs	r2, #2
+ 216 000c 1A70     		strb	r2, [r3]
+ 217 000e 104B     		ldr	r3, .L21
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s 			page 5
+
+
+ 218 0010 1868     		ldr	r0, [r3]
+ 219 0012 4223     		movs	r3, #66
+ 220 0014 0093     		str	r3, [sp]
+ 221 0016 0F4B     		ldr	r3, .L21+4
+ 222 0018 0022     		movs	r2, #0
+ 223 001a FFF7FEFF 		bl	os_msg_send_intern
+ 224 001e 041E     		subs	r4, r0, #0
+ 225 0020 0ED0     		beq	.L19
+ 226 0022 0D4B     		ldr	r3, .L21+8
+ 227 0024 1868     		ldr	r0, [r3]
+ 228 0026 4623     		movs	r3, #70
+ 229 0028 0093     		str	r3, [sp]
+ 230 002a 0A4B     		ldr	r3, .L21+4
+ 231 002c 0022     		movs	r2, #0
+ 232 002e 0F21     		movs	r1, #15
+ 233 0030 6944     		add	r1, r1, sp
+ 234 0032 FFF7FEFF 		bl	os_msg_send_intern
+ 235 0036 041E     		subs	r4, r0, #0
+ 236 0038 06D0     		beq	.L20
+ 237              	.L18:
+ 238 003a 2000     		movs	r0, r4
+ 239 003c 04B0     		add	sp, sp, #16
+ 240              		@ sp needed
+ 241 003e 10BD     		pop	{r4, pc}
+ 242              	.L19:
+ 243 0040 0648     		ldr	r0, .L21+12
+ 244 0042 FFF7FEFF 		bl	uart_printf
+ 245 0046 F8E7     		b	.L18
+ 246              	.L20:
+ 247 0048 0548     		ldr	r0, .L21+16
+ 248 004a FFF7FEFF 		bl	uart_printf
+ 249 004e F4E7     		b	.L18
+ 250              	.L22:
+ 251              		.align	2
+ 252              	.L21:
+ 253 0050 00000000 		.word	.LANCHOR1
+ 254 0054 00000000 		.word	.LANCHOR6
+ 255 0058 00000000 		.word	.LANCHOR2
+ 256 005c 00000000 		.word	.LC18
+ 257 0060 14000000 		.word	.LC21
+ 259              		.global	loop_count
+ 260              		.global	adv_timer_handle
+ 261              		.global	io_queue_handle
+ 262              		.global	evt_queue_handle
+ 263              		.global	app_task_handle
+ 264              		.section	.bss.adv_timer_handle,"aw",%nobits
+ 265              		.align	2
+ 266              		.set	.LANCHOR3,. + 0
+ 269              	adv_timer_handle:
+ 270 0000 00000000 		.space	4
+ 271              		.section	.bss.app_task_handle,"aw",%nobits
+ 272              		.align	2
+ 273              		.set	.LANCHOR5,. + 0
+ 276              	app_task_handle:
+ 277 0000 00000000 		.space	4
+ 278              		.section	.bss.evt_queue_handle,"aw",%nobits
+ 279              		.align	2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s 			page 6
+
+
+ 280              		.set	.LANCHOR2,. + 0
+ 283              	evt_queue_handle:
+ 284 0000 00000000 		.space	4
+ 285              		.section	.bss.io_queue_handle,"aw",%nobits
+ 286              		.align	2
+ 287              		.set	.LANCHOR1,. + 0
+ 290              	io_queue_handle:
+ 291 0000 00000000 		.space	4
+ 292              		.section	.bss.loop_count,"aw",%nobits
+ 293              		.align	2
+ 294              		.set	.LANCHOR4,. + 0
+ 297              	loop_count:
+ 298 0000 00000000 		.space	4
+ 299              		.section	.rodata.__func__.0,"a"
+ 300              		.align	2
+ 301              		.set	.LANCHOR0,. + 0
+ 304              	__func__.0:
+ 305 0000 6170705F 		.ascii	"app_main_task\000"
+ 305      6D61696E 
+ 305      5F746173 
+ 305      6B00
+ 306              		.section	.rodata.__func__.1,"a"
+ 307              		.align	2
+ 308              		.set	.LANCHOR6,. + 0
+ 311              	__func__.1:
+ 312 0000 6170705F 		.ascii	"app_send_msg_to_apptask\000"
+ 312      73656E64 
+ 312      5F6D7367 
+ 312      5F746F5F 
+ 312      61707074 
+ 313              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 app_task.c
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:16     .rodata.adv_timer_callback.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:20     .text.adv_timer_callback:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:26     .text.adv_timer_callback:00000000 adv_timer_callback
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:39     .text.adv_timer_callback:00000014 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:42     .rodata.app_main_task.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:49     .text.app_main_task:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:55     .text.app_main_task:00000000 app_main_task
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:146    .text.app_main_task:000000c0 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:158    .rodata.app_task_init.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:162    .text.app_task_init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:168    .text.app_task_init:00000000 app_task_init
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:189    .text.app_task_init:00000020 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:194    .rodata.app_send_msg_to_apptask.str1.4:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:201    .text.app_send_msg_to_apptask:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:207    .text.app_send_msg_to_apptask:00000000 app_send_msg_to_apptask
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:253    .text.app_send_msg_to_apptask:00000050 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:297    .bss.loop_count:00000000 loop_count
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:269    .bss.adv_timer_handle:00000000 adv_timer_handle
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:290    .bss.io_queue_handle:00000000 io_queue_handle
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:283    .bss.evt_queue_handle:00000000 evt_queue_handle
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:276    .bss.app_task_handle:00000000 app_task_handle
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:265    .bss.adv_timer_handle:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:272    .bss.app_task_handle:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:279    .bss.evt_queue_handle:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:286    .bss.io_queue_handle:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:293    .bss.loop_count:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:300    .rodata.__func__.0:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:304    .rodata.__func__.0:00000000 __func__.0
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:307    .rodata.__func__.1:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc1tsXp7.s:311    .rodata.__func__.1:00000000 __func__.1
+
+UNDEFINED SYMBOLS
+uart_printf
+battery_measure_mv
+set_adv_data
+os_msg_queue_create_intern
+gap_start_bt_stack
+os_timer_create
+os_timer_start
+driver_init
+AON_WDG_Config
+AON_WDG_Enable
+gap_handle_msg
+os_msg_recv_intern
+app_handle_io_msg
+os_task_create
+os_msg_send_intern

@@ -1,0 +1,281 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"custom_service.c"
+  14              		.text
+  15              		.section	.text.custom_service_attr_read_cb,"ax",%progbits
+  16              		.align	1
+  17              		.global	custom_service_attr_read_cb
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	custom_service_attr_read_cb:
+  23              		@ args = 8, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 0020     		movs	r0, #0
+  27              		@ sp needed
+  28 0002 7047     		bx	lr
+  30              		.section	.text.custom_service_attr_write_cb,"ax",%progbits
+  31              		.align	1
+  32              		.global	custom_service_attr_write_cb
+  33              		.syntax unified
+  34              		.code	16
+  35              		.thumb_func
+  37              	custom_service_attr_write_cb:
+  38              		@ args = 12, pretend = 0, frame = 8
+  39              		@ frame_needed = 0, uses_anonymous_args = 0
+  40 0000 10B5     		push	{r4, lr}
+  41 0002 82B0     		sub	sp, sp, #8
+  42 0004 0C00     		movs	r4, r1
+  43 0006 04AB     		add	r3, sp, #16
+  44 0008 1B88     		ldrh	r3, [r3]
+  45 000a 022A     		cmp	r2, #2
+  46 000c 02D0     		beq	.L6
+  47 000e 0948     		ldr	r0, .L7
+  48              	.L3:
+  49 0010 02B0     		add	sp, sp, #8
+  50              		@ sp needed
+  51 0012 10BD     		pop	{r4, pc}
+  52              	.L6:
+  53 0014 6A46     		mov	r2, sp
+  54 0016 1070     		strb	r0, [r2]
+  55 0018 0122     		movs	r2, #1
+  56 001a 6946     		mov	r1, sp
+  57 001c 4A70     		strb	r2, [r1, #1]
+  58 001e 4B80     		strh	r3, [r1, #2]
+  59 0020 059B     		ldr	r3, [sp, #20]
+  60 0022 0193     		str	r3, [sp, #4]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s 			page 2
+
+
+  61 0024 044B     		ldr	r3, .L7+4
+  62 0026 1B68     		ldr	r3, [r3]
+  63 0028 002B     		cmp	r3, #0
+  64 002a 01D0     		beq	.L4
+  65 002c 2000     		movs	r0, r4
+  66 002e 9847     		blx	r3
+  67              	.L4:
+  68 0030 0020     		movs	r0, #0
+  69 0032 EDE7     		b	.L3
+  70              	.L8:
+  71              		.align	2
+  72              	.L7:
+  73 0034 0A040000 		.word	1034
+  74 0038 00000000 		.word	.LANCHOR0
+  76              		.section	.text.custom_service_cccd_update_cb,"ax",%progbits
+  77              		.align	1
+  78              		.global	custom_service_cccd_update_cb
+  79              		.syntax unified
+  80              		.code	16
+  81              		.thumb_func
+  83              	custom_service_cccd_update_cb:
+  84              		@ args = 0, pretend = 0, frame = 8
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 10B5     		push	{r4, lr}
+  87 0002 82B0     		sub	sp, sp, #8
+  88 0004 0C00     		movs	r4, r1
+  89 0006 032A     		cmp	r2, #3
+  90 0008 01D0     		beq	.L12
+  91              	.L9:
+  92 000a 02B0     		add	sp, sp, #8
+  93              		@ sp needed
+  94 000c 10BD     		pop	{r4, pc}
+  95              	.L12:
+  96 000e 6A46     		mov	r2, sp
+  97 0010 1070     		strb	r0, [r2]
+  98 0012 0022     		movs	r2, #0
+  99 0014 0192     		str	r2, [sp, #4]
+ 100 0016 6946     		mov	r1, sp
+ 101 0018 4A80     		strh	r2, [r1, #2]
+ 102 001a 0132     		adds	r2, r2, #1
+ 103 001c 1340     		ands	r3, r2
+ 104 001e 0322     		movs	r2, #3
+ 105 0020 D31A     		subs	r3, r2, r3
+ 106 0022 4B70     		strb	r3, [r1, #1]
+ 107 0024 034B     		ldr	r3, .L13
+ 108 0026 1B68     		ldr	r3, [r3]
+ 109 0028 002B     		cmp	r3, #0
+ 110 002a EED0     		beq	.L9
+ 111 002c 2000     		movs	r0, r4
+ 112 002e 9847     		blx	r3
+ 113 0030 EBE7     		b	.L9
+ 114              	.L14:
+ 115 0032 C046     		.align	2
+ 116              	.L13:
+ 117 0034 00000000 		.word	.LANCHOR0
+ 119              		.section	.text.custom_service_add_service,"ax",%progbits
+ 120              		.align	1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s 			page 3
+
+
+ 121              		.global	custom_service_add_service
+ 122              		.syntax unified
+ 123              		.code	16
+ 124              		.thumb_func
+ 126              	custom_service_add_service:
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129 0000 30B5     		push	{r4, r5, lr}
+ 130 0002 83B0     		sub	sp, sp, #12
+ 131 0004 0400     		movs	r4, r0
+ 132 0006 0C4A     		ldr	r2, .L19
+ 133 0008 131D     		adds	r3, r2, #4
+ 134 000a 6946     		mov	r1, sp
+ 135 000c 21CB     		ldmia	r3!, {r0, r5}
+ 136 000e 21C1     		stmia	r1!, {r0, r5}
+ 137 0010 1368     		ldr	r3, [r2]
+ 138 0012 7022     		movs	r2, #112
+ 139 0014 0949     		ldr	r1, .L19+4
+ 140 0016 0A48     		ldr	r0, .L19+8
+ 141 0018 FFF7FEFF 		bl	server_add_service
+ 142 001c 0028     		cmp	r0, #0
+ 143 001e 05D0     		beq	.L18
+ 144 0020 084B     		ldr	r3, .L19+12
+ 145 0022 1C60     		str	r4, [r3]
+ 146 0024 064B     		ldr	r3, .L19+8
+ 147 0026 1878     		ldrb	r0, [r3]
+ 148              	.L17:
+ 149 0028 03B0     		add	sp, sp, #12
+ 150              		@ sp needed
+ 151 002a 30BD     		pop	{r4, r5, pc}
+ 152              	.L18:
+ 153 002c 044B     		ldr	r3, .L19+8
+ 154 002e FF22     		movs	r2, #255
+ 155 0030 1A70     		strb	r2, [r3]
+ 156 0032 FF30     		adds	r0, r0, #255
+ 157 0034 F8E7     		b	.L17
+ 158              	.L20:
+ 159 0036 C046     		.align	2
+ 160              	.L19:
+ 161 0038 00000000 		.word	.LANCHOR1
+ 162 003c 00000000 		.word	.LANCHOR2
+ 163 0040 00000000 		.word	.LANCHOR3
+ 164 0044 00000000 		.word	.LANCHOR0
+ 166              		.section	.text.custom_service_send_notification,"ax",%progbits
+ 167              		.align	1
+ 168              		.global	custom_service_send_notification
+ 169              		.syntax unified
+ 170              		.code	16
+ 171              		.thumb_func
+ 173              	custom_service_send_notification:
+ 174              		@ args = 0, pretend = 0, frame = 0
+ 175              		@ frame_needed = 0, uses_anonymous_args = 0
+ 176 0000 10B5     		push	{r4, lr}
+ 177 0002 82B0     		sub	sp, sp, #8
+ 178 0004 0024     		movs	r4, #0
+ 179 0006 0194     		str	r4, [sp, #4]
+ 180 0008 0093     		str	r3, [sp]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s 			page 4
+
+
+ 181 000a 1300     		movs	r3, r2
+ 182 000c 0222     		movs	r2, #2
+ 183 000e FFF7FEFF 		bl	server_send_data
+ 184 0012 02B0     		add	sp, sp, #8
+ 185              		@ sp needed
+ 186 0014 10BD     		pop	{r4, pc}
+ 188              		.global	custom_service_cbs
+ 189              		.global	custom_service_tbl
+ 190              		.global	custom_service_id
+ 191              		.section	.bss.custom_service_id,"aw",%nobits
+ 192              		.set	.LANCHOR3,. + 0
+ 195              	custom_service_id:
+ 196 0000 00       		.space	1
+ 197              		.section	.bss.pfn_custom_service_cb,"aw",%nobits
+ 198              		.align	2
+ 199              		.set	.LANCHOR0,. + 0
+ 202              	pfn_custom_service_cb:
+ 203 0000 00000000 		.space	4
+ 204              		.section	.rodata.custom_service_cbs,"a"
+ 205              		.align	2
+ 206              		.set	.LANCHOR1,. + 0
+ 209              	custom_service_cbs:
+ 210 0000 00000000 		.word	custom_service_attr_read_cb
+ 211 0004 00000000 		.word	custom_service_attr_write_cb
+ 212 0008 00000000 		.word	custom_service_cccd_update_cb
+ 213              		.section	.rodata.custom_service_tbl,"a"
+ 214              		.align	2
+ 215              		.set	.LANCHOR2,. + 0
+ 218              	custom_service_tbl:
+ 219 0000 0208     		.short	2050
+ 220 0002 00283713 		.ascii	"\000(7\023\000"
+ 220      00
+ 221 0007 00000000 		.space	11
+ 221      00000000 
+ 221      000000
+ 222 0012 0200     		.short	2
+ 223 0014 00000000 		.word	0
+ 224 0018 01000000 		.word	1
+ 225 001c 0200     		.short	2
+ 226 001e 03281C00 		.ascii	"\003(\034\000"
+ 227 0022 00000000 		.space	12
+ 227      00000000 
+ 227      00000000 
+ 228 002e 0100     		.short	1
+ 229 0030 00000000 		.word	0
+ 230 0034 01000000 		.word	1
+ 231 0038 0400     		.short	4
+ 232 003a 371300   		.ascii	"7\023\000"
+ 233 003d 00000000 		.space	13
+ 233      00000000 
+ 233      00000000 
+ 233      00
+ 234 004a 0000     		.short	0
+ 235 004c 00000000 		.word	0
+ 236 0050 10000000 		.word	16
+ 237 0054 1200     		.short	18
+ 238 0056 02290000 		.ascii	"\002)\000\000\000"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s 			page 5
+
+
+ 238      00
+ 239 005b 00000000 		.space	11
+ 239      00000000 
+ 239      000000
+ 240 0066 0200     		.short	2
+ 241 0068 00000000 		.word	0
+ 242 006c 11000000 		.word	17
+ 243              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 custom_service.c
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:16     .text.custom_service_attr_read_cb:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:22     .text.custom_service_attr_read_cb:00000000 custom_service_attr_read_cb
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:31     .text.custom_service_attr_write_cb:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:37     .text.custom_service_attr_write_cb:00000000 custom_service_attr_write_cb
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:73     .text.custom_service_attr_write_cb:00000034 $d
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:77     .text.custom_service_cccd_update_cb:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:83     .text.custom_service_cccd_update_cb:00000000 custom_service_cccd_update_cb
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:117    .text.custom_service_cccd_update_cb:00000034 $d
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:120    .text.custom_service_add_service:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:126    .text.custom_service_add_service:00000000 custom_service_add_service
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:161    .text.custom_service_add_service:00000038 $d
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:167    .text.custom_service_send_notification:00000000 $t
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:173    .text.custom_service_send_notification:00000000 custom_service_send_notification
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:209    .rodata.custom_service_cbs:00000000 custom_service_cbs
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:218    .rodata.custom_service_tbl:00000000 custom_service_tbl
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:195    .bss.custom_service_id:00000000 custom_service_id
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:196    .bss.custom_service_id:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:198    .bss.pfn_custom_service_cb:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:202    .bss.pfn_custom_service_cb:00000000 pfn_custom_service_cb
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:205    .rodata.custom_service_cbs:00000000 $d
+C:\Users\pc\AppData\Local\Temp\cc7gxnk4.s:214    .rodata.custom_service_tbl:00000000 $d
+
+UNDEFINED SYMBOLS
+server_add_service
+server_send_data

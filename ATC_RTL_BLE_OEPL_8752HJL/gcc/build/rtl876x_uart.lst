@@ -1,0 +1,582 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"rtl876x_uart.c"
+  14              		.text
+  15              		.section	.text.UART_DeInit,"ax",%progbits
+  16              		.align	1
+  17              		.global	UART_DeInit
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  22              	UART_DeInit:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0E4B     		ldr	r3, .L8
+  27 0004 9842     		cmp	r0, r3
+  28 0006 06D0     		beq	.L5
+  29 0008 0D4B     		ldr	r3, .L8+4
+  30 000a 9842     		cmp	r0, r3
+  31 000c 0AD0     		beq	.L6
+  32 000e 0D4B     		ldr	r3, .L8+8
+  33 0010 9842     		cmp	r0, r3
+  34 0012 0DD0     		beq	.L7
+  35              	.L1:
+  36              		@ sp needed
+  37 0014 10BD     		pop	{r4, pc}
+  38              	.L5:
+  39 0016 8020     		movs	r0, #128
+  40 0018 0022     		movs	r2, #0
+  41 001a 0B49     		ldr	r1, .L8+12
+  42 001c 4001     		lsls	r0, r0, #5
+  43 001e FFF7FEFF 		bl	RCC_PeriphClockCmd
+  44 0022 F7E7     		b	.L1
+  45              	.L6:
+  46 0024 0022     		movs	r2, #0
+  47 0026 0949     		ldr	r1, .L8+16
+  48 0028 0948     		ldr	r0, .L8+20
+  49 002a FFF7FEFF 		bl	RCC_PeriphClockCmd
+  50 002e F1E7     		b	.L1
+  51              	.L7:
+  52 0030 0022     		movs	r2, #0
+  53 0032 0849     		ldr	r1, .L8+24
+  54 0034 0848     		ldr	r0, .L8+28
+  55 0036 FFF7FEFF 		bl	RCC_PeriphClockCmd
+  56 003a EBE7     		b	.L1
+  57              	.L9:
+  58              		.align	2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 2
+
+
+  59              	.L8:
+  60 003c 00100140 		.word	1073811456
+  61 0040 00200140 		.word	1073815552
+  62 0044 00240140 		.word	1073816576
+  63 0048 00100020 		.word	536875008
+  64 004c 01000040 		.word	1073741825
+  65 0050 01000008 		.word	134217729
+  66 0054 00040020 		.word	536871936
+  67 0058 02000008 		.word	134217730
+  69              		.section	.text.UART_Init,"ax",%progbits
+  70              		.align	1
+  71              		.global	UART_Init
+  72              		.syntax unified
+  73              		.code	16
+  74              		.thumb_func
+  76              	UART_Init:
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79 0000 10B5     		push	{r4, lr}
+  80 0002 C368     		ldr	r3, [r0, #12]
+  81 0004 8022     		movs	r2, #128
+  82 0006 9343     		bics	r3, r2
+  83 0008 C360     		str	r3, [r0, #12]
+  84 000a 0023     		movs	r3, #0
+  85 000c 4360     		str	r3, [r0, #4]
+  86 000e 4369     		ldr	r3, [r0, #20]
+  87 0010 8368     		ldr	r3, [r0, #8]
+  88 0012 0624     		movs	r4, #6
+  89 0014 2343     		orrs	r3, r4
+  90 0016 8360     		str	r3, [r0, #8]
+  91 0018 C368     		ldr	r3, [r0, #12]
+  92 001a 1343     		orrs	r3, r2
+  93 001c C360     		str	r3, [r0, #12]
+  94 001e 036A     		ldr	r3, [r0, #32]
+  95 0020 EA34     		adds	r4, r4, #234
+  96 0022 A343     		bics	r3, r4
+  97 0024 0362     		str	r3, [r0, #32]
+  98 0026 046A     		ldr	r4, [r0, #32]
+  99 0028 8B88     		ldrh	r3, [r1, #4]
+ 100 002a 1B01     		lsls	r3, r3, #4
+ 101 002c 2343     		orrs	r3, r4
+ 102 002e 0362     		str	r3, [r0, #32]
+ 103 0030 C369     		ldr	r3, [r0, #28]
+ 104 0032 254C     		ldr	r4, .L14
+ 105 0034 2340     		ands	r3, r4
+ 106 0036 C361     		str	r3, [r0, #28]
+ 107 0038 C469     		ldr	r4, [r0, #28]
+ 108 003a 0B88     		ldrh	r3, [r1]
+ 109 003c 1B04     		lsls	r3, r3, #16
+ 110 003e 2343     		orrs	r3, r4
+ 111 0040 C361     		str	r3, [r0, #28]
+ 112 0042 8B78     		ldrb	r3, [r1, #2]
+ 113 0044 0360     		str	r3, [r0]
+ 114 0046 4B88     		ldrh	r3, [r1, #2]
+ 115 0048 1B0A     		lsrs	r3, r3, #8
+ 116 004a 4360     		str	r3, [r0, #4]
+ 117 004c C368     		ldr	r3, [r0, #12]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 3
+
+
+ 118 004e 9343     		bics	r3, r2
+ 119 0050 C360     		str	r3, [r0, #12]
+ 120 0052 4B89     		ldrh	r3, [r1, #10]
+ 121 0054 0A89     		ldrh	r2, [r1, #8]
+ 122 0056 1343     		orrs	r3, r2
+ 123 0058 CA88     		ldrh	r2, [r1, #6]
+ 124 005a 1343     		orrs	r3, r2
+ 125 005c C360     		str	r3, [r0, #12]
+ 126 005e 8B89     		ldrh	r3, [r1, #12]
+ 127 0060 1B04     		lsls	r3, r3, #16
+ 128 0062 CA89     		ldrh	r2, [r1, #14]
+ 129 0064 1202     		lsls	r2, r2, #8
+ 130 0066 1343     		orrs	r3, r2
+ 131 0068 8A8A     		ldrh	r2, [r1, #20]
+ 132 006a 1343     		orrs	r3, r2
+ 133 006c 0122     		movs	r2, #1
+ 134 006e 1343     		orrs	r3, r2
+ 135 0070 8360     		str	r3, [r0, #8]
+ 136 0072 0369     		ldr	r3, [r0, #16]
+ 137 0074 2132     		adds	r2, r2, #33
+ 138 0076 9343     		bics	r3, r2
+ 139 0078 0361     		str	r3, [r0, #16]
+ 140 007a 0269     		ldr	r2, [r0, #16]
+ 141 007c 4B8A     		ldrh	r3, [r1, #18]
+ 142 007e 1343     		orrs	r3, r2
+ 143 0080 0361     		str	r3, [r0, #16]
+ 144 0082 0B8A     		ldrh	r3, [r1, #16]
+ 145 0084 0364     		str	r3, [r0, #64]
+ 146 0086 8B8A     		ldrh	r3, [r1, #20]
+ 147 0088 082B     		cmp	r3, #8
+ 148 008a 00D0     		beq	.L13
+ 149              	.L10:
+ 150              		@ sp needed
+ 151 008c 10BD     		pop	{r4, pc}
+ 152              	.L13:
+ 153 008e CB8A     		ldrh	r3, [r1, #22]
+ 154 0090 002B     		cmp	r3, #0
+ 155 0092 0AD0     		beq	.L12
+ 156 0094 836A     		ldr	r3, [r0, #40]
+ 157 0096 F822     		movs	r2, #248
+ 158 0098 9343     		bics	r3, r2
+ 159 009a 8362     		str	r3, [r0, #40]
+ 160 009c 846A     		ldr	r4, [r0, #40]
+ 161 009e 8B7E     		ldrb	r3, [r1, #26]
+ 162 00a0 DB00     		lsls	r3, r3, #3
+ 163 00a2 2343     		orrs	r3, r4
+ 164 00a4 F63A     		subs	r2, r2, #246
+ 165 00a6 1343     		orrs	r3, r2
+ 166 00a8 8362     		str	r3, [r0, #40]
+ 167              	.L12:
+ 168 00aa 0B8B     		ldrh	r3, [r1, #24]
+ 169 00ac 002B     		cmp	r3, #0
+ 170 00ae EDD0     		beq	.L10
+ 171 00b0 836A     		ldr	r3, [r0, #40]
+ 172 00b2 064A     		ldr	r2, .L14+4
+ 173 00b4 1340     		ands	r3, r2
+ 174 00b6 8362     		str	r3, [r0, #40]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 4
+
+
+ 175 00b8 846A     		ldr	r4, [r0, #40]
+ 176 00ba CB7E     		ldrb	r3, [r1, #27]
+ 177 00bc 1B02     		lsls	r3, r3, #8
+ 178 00be 2343     		orrs	r3, r4
+ 179 00c0 0422     		movs	r2, #4
+ 180 00c2 1343     		orrs	r3, r2
+ 181 00c4 8362     		str	r3, [r0, #40]
+ 182 00c6 E1E7     		b	.L10
+ 183              	.L15:
+ 184              		.align	2
+ 185              	.L14:
+ 186 00c8 FFFF00F8 		.word	-134152193
+ 187 00cc FFC0FFFF 		.word	-16129
+ 189              		.section	.text.UART_StructInit,"ax",%progbits
+ 190              		.align	1
+ 191              		.global	UART_StructInit
+ 192              		.syntax unified
+ 193              		.code	16
+ 194              		.thumb_func
+ 196              	UART_StructInit:
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199              		@ link register save eliminated.
+ 200 0000 1423     		movs	r3, #20
+ 201 0002 4380     		strh	r3, [r0, #2]
+ 202 0004 083B     		subs	r3, r3, #8
+ 203 0006 8380     		strh	r3, [r0, #4]
+ 204 0008 094B     		ldr	r3, .L17
+ 205 000a 0380     		strh	r3, [r0]
+ 206 000c 0122     		movs	r2, #1
+ 207 000e C280     		strh	r2, [r0, #6]
+ 208 0010 0023     		movs	r3, #0
+ 209 0012 0381     		strh	r3, [r0, #8]
+ 210 0014 4381     		strh	r3, [r0, #10]
+ 211 0016 1021     		movs	r1, #16
+ 212 0018 8181     		strh	r1, [r0, #12]
+ 213 001a C181     		strh	r1, [r0, #14]
+ 214 001c 0282     		strh	r2, [r0, #16]
+ 215 001e 4382     		strh	r3, [r0, #18]
+ 216 0020 8382     		strh	r3, [r0, #20]
+ 217 0022 C382     		strh	r3, [r0, #22]
+ 218 0024 0383     		strh	r3, [r0, #24]
+ 219 0026 0F33     		adds	r3, r3, #15
+ 220 0028 8376     		strb	r3, [r0, #26]
+ 221 002a 0123     		movs	r3, #1
+ 222 002c C376     		strb	r3, [r0, #27]
+ 223              		@ sp needed
+ 224 002e 7047     		bx	lr
+ 225              	.L18:
+ 226              		.align	2
+ 227              	.L17:
+ 228 0030 52020000 		.word	594
+ 230              		.section	.text.UART_MaskINTConfig,"ax",%progbits
+ 231              		.align	1
+ 232              		.global	UART_MaskINTConfig
+ 233              		.syntax unified
+ 234              		.code	16
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 5
+
+
+ 235              		.thumb_func
+ 237              	UART_MaskINTConfig:
+ 238              		@ args = 0, pretend = 0, frame = 0
+ 239              		@ frame_needed = 0, uses_anonymous_args = 0
+ 240              		@ link register save eliminated.
+ 241 0000 002A     		cmp	r2, #0
+ 242 0002 03D0     		beq	.L20
+ 243 0004 036D     		ldr	r3, [r0, #80]
+ 244 0006 1943     		orrs	r1, r3
+ 245 0008 0165     		str	r1, [r0, #80]
+ 246              	.L19:
+ 247              		@ sp needed
+ 248 000a 7047     		bx	lr
+ 249              	.L20:
+ 250 000c 036D     		ldr	r3, [r0, #80]
+ 251 000e 8B43     		bics	r3, r1
+ 252 0010 0365     		str	r3, [r0, #80]
+ 253 0012 FAE7     		b	.L19
+ 255              		.section	.text.UART_INTConfig,"ax",%progbits
+ 256              		.align	1
+ 257              		.global	UART_INTConfig
+ 258              		.syntax unified
+ 259              		.code	16
+ 260              		.thumb_func
+ 262              	UART_INTConfig:
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0000 10B5     		push	{r4, lr}
+ 266 0002 0B06     		lsls	r3, r1, #24
+ 267 0004 26D5     		bpl	.L23
+ 268 0006 012A     		cmp	r2, #1
+ 269 0008 0CD0     		beq	.L35
+ 270 000a 036C     		ldr	r3, [r0, #64]
+ 271 000c 5B00     		lsls	r3, r3, #1
+ 272 000e 5B08     		lsrs	r3, r3, #1
+ 273 0010 0364     		str	r3, [r0, #64]
+ 274 0012 836C     		ldr	r3, [r0, #72]
+ 275 0014 0122     		movs	r2, #1
+ 276 0016 9343     		bics	r3, r2
+ 277 0018 8364     		str	r3, [r0, #72]
+ 278 001a 4B06     		lsls	r3, r1, #25
+ 279 001c 1ED4     		bmi	.L27
+ 280 001e 8B06     		lsls	r3, r1, #26
+ 281 0020 22D1     		bne	.L32
+ 282 0022 24E0     		b	.L22
+ 283              	.L35:
+ 284 0024 426C     		ldr	r2, [r0, #68]
+ 285 0026 0124     		movs	r4, #1
+ 286 0028 2243     		orrs	r2, r4
+ 287 002a 4264     		str	r2, [r0, #68]
+ 288 002c 836C     		ldr	r3, [r0, #72]
+ 289 002e 2343     		orrs	r3, r4
+ 290 0030 8364     		str	r3, [r0, #72]
+ 291 0032 026C     		ldr	r2, [r0, #64]
+ 292 0034 8023     		movs	r3, #128
+ 293 0036 1B06     		lsls	r3, r3, #24
+ 294 0038 1343     		orrs	r3, r2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 6
+
+
+ 295 003a 0364     		str	r3, [r0, #64]
+ 296 003c 4B06     		lsls	r3, r1, #25
+ 297 003e 1CD5     		bpl	.L36
+ 298              	.L25:
+ 299 0040 C369     		ldr	r3, [r0, #28]
+ 300 0042 4022     		movs	r2, #64
+ 301 0044 1343     		orrs	r3, r2
+ 302 0046 C361     		str	r3, [r0, #28]
+ 303 0048 8B06     		lsls	r3, r1, #26
+ 304 004a 10D0     		beq	.L22
+ 305              	.L30:
+ 306 004c 4368     		ldr	r3, [r0, #4]
+ 307 004e 1943     		orrs	r1, r3
+ 308 0050 4160     		str	r1, [r0, #4]
+ 309 0052 0CE0     		b	.L22
+ 310              	.L23:
+ 311 0054 4B06     		lsls	r3, r1, #25
+ 312 0056 0BD5     		bpl	.L29
+ 313 0058 012A     		cmp	r2, #1
+ 314 005a F1D0     		beq	.L25
+ 315              	.L27:
+ 316 005c C369     		ldr	r3, [r0, #28]
+ 317 005e 4022     		movs	r2, #64
+ 318 0060 9343     		bics	r3, r2
+ 319 0062 C361     		str	r3, [r0, #28]
+ 320 0064 8B06     		lsls	r3, r1, #26
+ 321 0066 02D0     		beq	.L22
+ 322              	.L32:
+ 323 0068 4368     		ldr	r3, [r0, #4]
+ 324 006a 8B43     		bics	r3, r1
+ 325 006c 4360     		str	r3, [r0, #4]
+ 326              	.L22:
+ 327              		@ sp needed
+ 328 006e 10BD     		pop	{r4, pc}
+ 329              	.L29:
+ 330 0070 8B06     		lsls	r3, r1, #26
+ 331 0072 FCD0     		beq	.L22
+ 332 0074 012A     		cmp	r2, #1
+ 333 0076 F7D1     		bne	.L32
+ 334 0078 E8E7     		b	.L30
+ 335              	.L36:
+ 336 007a 8B06     		lsls	r3, r1, #26
+ 337 007c F7D0     		beq	.L22
+ 338 007e E5E7     		b	.L30
+ 340              		.section	.text.UART_SendData,"ax",%progbits
+ 341              		.align	1
+ 342              		.global	UART_SendData
+ 343              		.syntax unified
+ 344              		.code	16
+ 345              		.thumb_func
+ 347              	UART_SendData:
+ 348              		@ args = 0, pretend = 0, frame = 0
+ 349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 350              		@ link register save eliminated.
+ 351 0000 002A     		cmp	r2, #0
+ 352 0002 08D0     		beq	.L37
+ 353 0004 0B00     		movs	r3, r1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 7
+
+
+ 354 0006 8918     		adds	r1, r1, r2
+ 355 0008 89B2     		uxth	r1, r1
+ 356              	.L39:
+ 357 000a 1A78     		ldrb	r2, [r3]
+ 358 000c 4262     		str	r2, [r0, #36]
+ 359 000e 0133     		adds	r3, r3, #1
+ 360 0010 9AB2     		uxth	r2, r3
+ 361 0012 9142     		cmp	r1, r2
+ 362 0014 F9D1     		bne	.L39
+ 363              	.L37:
+ 364              		@ sp needed
+ 365 0016 7047     		bx	lr
+ 367              		.section	.text.UART_ReceiveData,"ax",%progbits
+ 368              		.align	1
+ 369              		.global	UART_ReceiveData
+ 370              		.syntax unified
+ 371              		.code	16
+ 372              		.thumb_func
+ 374              	UART_ReceiveData:
+ 375              		@ args = 0, pretend = 0, frame = 0
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377              		@ link register save eliminated.
+ 378 0000 002A     		cmp	r2, #0
+ 379 0002 08D0     		beq	.L41
+ 380 0004 0B00     		movs	r3, r1
+ 381 0006 8918     		adds	r1, r1, r2
+ 382 0008 89B2     		uxth	r1, r1
+ 383              	.L43:
+ 384 000a 426A     		ldr	r2, [r0, #36]
+ 385 000c 1A70     		strb	r2, [r3]
+ 386 000e 0133     		adds	r3, r3, #1
+ 387 0010 9AB2     		uxth	r2, r3
+ 388 0012 9142     		cmp	r1, r2
+ 389 0014 F9D1     		bne	.L43
+ 390              	.L41:
+ 391              		@ sp needed
+ 392 0016 7047     		bx	lr
+ 394              		.section	.text.UART_SetBaudRate,"ax",%progbits
+ 395              		.align	1
+ 396              		.global	UART_SetBaudRate
+ 397              		.syntax unified
+ 398              		.code	16
+ 399              		.thumb_func
+ 401              	UART_SetBaudRate:
+ 402              		@ args = 0, pretend = 0, frame = 0
+ 403              		@ frame_needed = 0, uses_anonymous_args = 0
+ 404 0000 70B5     		push	{r4, r5, r6, lr}
+ 405 0002 C568     		ldr	r5, [r0, #12]
+ 406 0004 8024     		movs	r4, #128
+ 407 0006 2543     		orrs	r5, r4
+ 408 0008 C560     		str	r5, [r0, #12]
+ 409 000a 056A     		ldr	r5, [r0, #32]
+ 410 000c F026     		movs	r6, #240
+ 411 000e B543     		bics	r5, r6
+ 412 0010 0562     		str	r5, [r0, #32]
+ 413 0012 056A     		ldr	r5, [r0, #32]
+ 414 0014 1201     		lsls	r2, r2, #4
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 8
+
+
+ 415 0016 2A43     		orrs	r2, r5
+ 416 0018 0262     		str	r2, [r0, #32]
+ 417 001a C269     		ldr	r2, [r0, #28]
+ 418 001c 074D     		ldr	r5, .L46
+ 419 001e 2A40     		ands	r2, r5
+ 420 0020 C261     		str	r2, [r0, #28]
+ 421 0022 C269     		ldr	r2, [r0, #28]
+ 422 0024 1B04     		lsls	r3, r3, #16
+ 423 0026 1343     		orrs	r3, r2
+ 424 0028 C361     		str	r3, [r0, #28]
+ 425 002a FF23     		movs	r3, #255
+ 426 002c 0B40     		ands	r3, r1
+ 427 002e 0360     		str	r3, [r0]
+ 428 0030 090A     		lsrs	r1, r1, #8
+ 429 0032 4160     		str	r1, [r0, #4]
+ 430 0034 C368     		ldr	r3, [r0, #12]
+ 431 0036 A343     		bics	r3, r4
+ 432 0038 C360     		str	r3, [r0, #12]
+ 433              		@ sp needed
+ 434 003a 70BD     		pop	{r4, r5, r6, pc}
+ 435              	.L47:
+ 436              		.align	2
+ 437              	.L46:
+ 438 003c FFFF00F8 		.word	-134152193
+ 440              		.section	.text.UART_SetParams,"ax",%progbits
+ 441              		.align	1
+ 442              		.global	UART_SetParams
+ 443              		.syntax unified
+ 444              		.code	16
+ 445              		.thumb_func
+ 447              	UART_SetParams:
+ 448              		@ args = 0, pretend = 0, frame = 0
+ 449              		@ frame_needed = 0, uses_anonymous_args = 0
+ 450              		@ link register save eliminated.
+ 451 0000 1343     		orrs	r3, r2
+ 452 0002 1943     		orrs	r1, r3
+ 453 0004 C160     		str	r1, [r0, #12]
+ 454              		@ sp needed
+ 455 0006 7047     		bx	lr
+ 457              		.section	.text.UART_LoopBackCmd,"ax",%progbits
+ 458              		.align	1
+ 459              		.global	UART_LoopBackCmd
+ 460              		.syntax unified
+ 461              		.code	16
+ 462              		.thumb_func
+ 464              	UART_LoopBackCmd:
+ 465              		@ args = 0, pretend = 0, frame = 0
+ 466              		@ frame_needed = 0, uses_anonymous_args = 0
+ 467              		@ link register save eliminated.
+ 468 0000 0129     		cmp	r1, #1
+ 469 0002 04D0     		beq	.L52
+ 470 0004 0369     		ldr	r3, [r0, #16]
+ 471 0006 1022     		movs	r2, #16
+ 472 0008 9343     		bics	r3, r2
+ 473 000a 0361     		str	r3, [r0, #16]
+ 474              	.L49:
+ 475              		@ sp needed
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 9
+
+
+ 476 000c 7047     		bx	lr
+ 477              	.L52:
+ 478 000e 0369     		ldr	r3, [r0, #16]
+ 479 0010 1022     		movs	r2, #16
+ 480 0012 1343     		orrs	r3, r2
+ 481 0014 0361     		str	r3, [r0, #16]
+ 482 0016 F9E7     		b	.L49
+ 484              		.section	.text.UART_GetFlagStatus,"ax",%progbits
+ 485              		.align	1
+ 486              		.global	UART_GetFlagStatus
+ 487              		.syntax unified
+ 488              		.code	16
+ 489              		.thumb_func
+ 491              	UART_GetFlagStatus:
+ 492              		@ args = 0, pretend = 0, frame = 0
+ 493              		@ frame_needed = 0, uses_anonymous_args = 0
+ 494              		@ link register save eliminated.
+ 495 0000 8023     		movs	r3, #128
+ 496 0002 1B01     		lsls	r3, r3, #4
+ 497 0004 9942     		cmp	r1, r3
+ 498 0006 11D0     		beq	.L59
+ 499 0008 8023     		movs	r3, #128
+ 500 000a DB00     		lsls	r3, r3, #3
+ 501 000c 9942     		cmp	r1, r3
+ 502 000e 11D0     		beq	.L60
+ 503 0010 8023     		movs	r3, #128
+ 504 0012 9B00     		lsls	r3, r3, #2
+ 505 0014 9942     		cmp	r1, r3
+ 506 0016 11D0     		beq	.L61
+ 507 0018 8023     		movs	r3, #128
+ 508 001a 5B00     		lsls	r3, r3, #1
+ 509 001c 9942     		cmp	r1, r3
+ 510 001e 11D0     		beq	.L62
+ 511 0020 4069     		ldr	r0, [r0, #20]
+ 512 0022 0140     		ands	r1, r0
+ 513 0024 4B1E     		subs	r3, r1, #1
+ 514 0026 9941     		sbcs	r1, r1, r3
+ 515 0028 C8B2     		uxtb	r0, r1
+ 516 002a 02E0     		b	.L55
+ 517              	.L59:
+ 518 002c 816D     		ldr	r1, [r0, #88]
+ 519 002e 0120     		movs	r0, #1
+ 520 0030 0840     		ands	r0, r1
+ 521              	.L55:
+ 522              		@ sp needed
+ 523 0032 7047     		bx	lr
+ 524              	.L60:
+ 525 0034 416D     		ldr	r1, [r0, #84]
+ 526 0036 0120     		movs	r0, #1
+ 527 0038 0840     		ands	r0, r1
+ 528 003a FAE7     		b	.L55
+ 529              	.L61:
+ 530 003c 416C     		ldr	r1, [r0, #68]
+ 531 003e 0120     		movs	r0, #1
+ 532 0040 0840     		ands	r0, r1
+ 533 0042 F6E7     		b	.L55
+ 534              	.L62:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 10
+
+
+ 535 0044 C069     		ldr	r0, [r0, #28]
+ 536 0046 0006     		lsls	r0, r0, #24
+ 537 0048 C00F     		lsrs	r0, r0, #31
+ 538 004a F2E7     		b	.L55
+ 540              		.ident	"GCC: (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtl876x_uart.c
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:16     .text.UART_DeInit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:22     .text.UART_DeInit:00000000 UART_DeInit
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:60     .text.UART_DeInit:0000003c $d
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:70     .text.UART_Init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:76     .text.UART_Init:00000000 UART_Init
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:186    .text.UART_Init:000000c8 $d
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:190    .text.UART_StructInit:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:196    .text.UART_StructInit:00000000 UART_StructInit
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:228    .text.UART_StructInit:00000030 $d
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:231    .text.UART_MaskINTConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:237    .text.UART_MaskINTConfig:00000000 UART_MaskINTConfig
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:256    .text.UART_INTConfig:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:262    .text.UART_INTConfig:00000000 UART_INTConfig
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:341    .text.UART_SendData:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:347    .text.UART_SendData:00000000 UART_SendData
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:368    .text.UART_ReceiveData:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:374    .text.UART_ReceiveData:00000000 UART_ReceiveData
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:395    .text.UART_SetBaudRate:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:401    .text.UART_SetBaudRate:00000000 UART_SetBaudRate
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:438    .text.UART_SetBaudRate:0000003c $d
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:441    .text.UART_SetParams:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:447    .text.UART_SetParams:00000000 UART_SetParams
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:458    .text.UART_LoopBackCmd:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:464    .text.UART_LoopBackCmd:00000000 UART_LoopBackCmd
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:485    .text.UART_GetFlagStatus:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccJs0xtE.s:491    .text.UART_GetFlagStatus:00000000 UART_GetFlagStatus
+
+UNDEFINED SYMBOLS
+RCC_PeriphClockCmd
