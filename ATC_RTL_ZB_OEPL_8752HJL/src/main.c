@@ -159,10 +159,10 @@ void board_init(void)
 void driver_init(void)
 {
     uart_printf("driver_init: start\n");
-    /* AON WDT: 30 s timeout, stop counting during DLPS, reload on wake. */
-    AON_WDG_Config(1, 30000u, 1, 1);
+    /* AON WDT: 90 s timeout, stop counting during DLPS, reload on wake. */
+    AON_WDG_Config(1, 90000u, 1, 1);
     AON_WDG_Enable();
-    uart_printf("driver_init: WDT enabled (30s)\n");
+    uart_printf("driver_init: WDT enabled (90s)\n");
     Pad_Config(LED_R, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_UP, PAD_OUT_DISABLE, PAD_OUT_LOW);
     Pad_Config(LED_G, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_UP, PAD_OUT_DISABLE, PAD_OUT_LOW);
     Pad_Config(LED_B, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_UP, PAD_OUT_DISABLE, PAD_OUT_LOW);
@@ -203,6 +203,7 @@ static void proto_task(void *arg)
 
     batteryVoltage = battery_measure_mv();
     printf("Battery: %u mV\r\n", batteryVoltage);
+    temperature = temperature_measure_celsius();
 
     initializeProto();
 
@@ -237,6 +238,7 @@ static void proto_task(void *arg)
     {
         wdt10s();
         batteryVoltage = battery_measure_mv();
+        temperature = temperature_measure_celsius();
 
         if (currentChannel)
         {

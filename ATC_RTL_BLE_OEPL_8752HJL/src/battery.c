@@ -2,6 +2,13 @@
 #include <rtl876x_adc.h>
 #include <rtl876x_rcc.h>
 #include <stdio.h>
+#include <stdint.h>
+
+/* ROM exports this as a data symbol (function pointer) at address 0x00200cd4.
+ * Declare as a function pointer variable so the compiler dereferences it
+ * rather than branching directly to the (even) address — which would fault
+ * on Cortex-M0+ because an even BLX target selects ARM mode. */
+extern int8_t (* const get_thermal_meter_celsius)(void);
 
 uint16_t battery_measure_mv(void)
 {
@@ -57,4 +64,11 @@ uint16_t battery_measure_mv(void)
     uint16_t result = (uint16_t)mv;
     printf("BATT: raw=%u  %u mV\n", raw, result);
     return result;
+}
+
+int8_t temperature_measure_celsius(void)
+{
+    int8_t t = get_thermal_meter_celsius();
+    printf("TEMP: %d C\n", (int)t);
+    return t;
 }

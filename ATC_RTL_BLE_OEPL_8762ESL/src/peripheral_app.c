@@ -100,8 +100,7 @@ settings_struct settings = {
     .screen_color_second_invert = 0,
 
 };
-uint8_t adc_temperature = 25;
-uint8_t epd_read_temperature = 0;
+uint8_t adc_temperature = 21;
 uint8_t device_name[OEPL_DEVICE_NAME_LEN] = "RTL_000000";
 
 /*============================================================================*
@@ -147,7 +146,7 @@ void set_adv_data(uint16_t battery_mv)
     ble_adv_data.fw_version = FIRMWARE_VERSION;
     ble_adv_data.capabilities = get_capabilities();
     ble_adv_data.battery_mv = battery_mv;
-    ble_adv_data.temperature = epd_read_temperature ? epd_read_temperature : adc_temperature;
+    ble_adv_data.temperature = adc_temperature;
     ble_adv_data.counter++;
 
     /* 2. Set Advertising Data: Flags + Local Name Complete

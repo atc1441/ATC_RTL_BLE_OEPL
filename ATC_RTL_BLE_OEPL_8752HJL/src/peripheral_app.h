@@ -151,7 +151,7 @@ typedef struct
 /*============================================================================*
  *                              Constants
  *============================================================================*/
-#define FIRMWARE_VERSION 0x0048
+#define FIRMWARE_VERSION 0x0049
 #define OEPL_DEVICE_NAME_LEN 11 // "RTL_" + 6 hex chars + null
 
 /*============================================================================*
@@ -161,8 +161,6 @@ extern T_SERVER_ID simp_srv_id; /**< Simple ble service id*/
 extern T_SERVER_ID bas_srv_id;  /**< Battery service id */
 extern T_SERVER_ID custom_srv_id; /**< Custom service id */
 extern settings_struct settings;
-extern uint8_t adc_temperature;
-extern uint8_t epd_read_temperature;
 extern uint8_t device_name[OEPL_DEVICE_NAME_LEN];
 
 /*============================================================================*
