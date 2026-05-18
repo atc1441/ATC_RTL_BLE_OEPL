@@ -5,10 +5,10 @@
   <img src="Overview.jpg" width="600">
 </p>
 
-Custom E-Paper firmware for Realtek RTL8762ESL and RTL8752HJL microcontrollers. This firmware enables the integration of E-Paper displays (Electronic Shelf Labels / ESL) into the **OpenEPaperLink** ecosystem.
+Custom E-Paper firmware for Realtek RTL8762ESL and RTL8752HJL microcontrollers. This firmware enables the integration of E-Paper displays (Electronic Shelf Labels / ESL) into the **OpenEPaperLink** ecosystem, using either Bluetooth Low Energy (BLE) or 802.15.4 wireless communication.
 
 ## Features
-- **OpenEPaperLink Compatibility:** Full support of the OEPL protocol for image updates via Bluetooth Low Energy (BLE).
+- **OpenEPaperLink Compatibility:** Full support of the OEPL protocol for image updates via Bluetooth Low Energy (BLE) or 802.15.4.
 - **Image Formats:** Supports RAW formats (1bpp, 2bpp(BWR/BWRY)) as well as ZLIB compressed images for faster transmission.
 - **Memory Management:** Efficient use of external SPI flash (EEPROM) to store up to 5 images in different slots.
 - **OTA Updates:** Support for Over-the-Air firmware updates via BLE.
@@ -28,8 +28,14 @@ The repository contains two separate projects for the different chip variants:
   <img src="RTL8762ESL_Chip.jpg" width="300" title="RTL8762ESL">
 </p>
 
-- `ATC_RTL_BLE_OEPL_8752HJL/`: Firmware for the RTL8752HJL chip.
-- `ATC_RTL_BLE_OEPL_8762ESL/`: Firmware for the RTL8762ESL chip.
+- `ATC_RTL_BLE_OEPL_8752HJL/`: BLE firmware for the RTL8752HJL chip.
+- `ATC_RTL_BLE_OEPL_8762ESL/`: BLE firmware for the RTL8762ESL chip.
+- `ATC_RTL_ZB_OEPL_8752HJL/`: OEPL(802.15.4) firmware for the RTL8752HJL chip (see below).
+
+### ATC_RTL_ZB_OEPL_8752HJL - 802.15.4 Variant
+
+This firmware implements the OpenEPaperLink protocol over **IEEE 802.15.4** instead of BLE, targeting the **RTL8752HJL** chip. Although the project is named with a "ZB" (Zigbee) prefix - reflecting the 802.15.4 radio layer used by the chip's SDK - it does **not** run standard Zigbee. It uses the **custom OEPL 802.15.4 protocol**, which is incompatible with regular Zigbee coordinators.
+
 
 ## Prerequisites
 Before you start, ensure the following tools are installed:
@@ -47,6 +53,8 @@ Before you start, ensure the following tools are installed:
    cd ATC_RTL_BLE_OEPL_8752HJL/gcc
    # OR
    cd ATC_RTL_BLE_OEPL_8762ESL/gcc
+   # OR
+   cd ATC_RTL_ZB_OEPL_8752HJL/gcc
    ```
 2. Start the compilation process:
    ```bash

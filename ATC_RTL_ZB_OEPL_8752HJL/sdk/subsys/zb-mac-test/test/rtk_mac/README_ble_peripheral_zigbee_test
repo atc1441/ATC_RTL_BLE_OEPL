@@ -1,0 +1,35 @@
+copy ble_peripheral project
+
+replace #include <simple_ble_service.h> by <simple_ble_service_nus.h>
+
+replace scan_rsp_data[] and adv_data[]
+
+/** @brief  GAP - scan response data (max size = 31 bytes) */
+static const uint8_t scan_rsp_data[] =
+{
+    0x11,                             /* length */
+    GAP_ADTYPE_128BIT_COMPLETE,            /* type="Appearance" */
+    GATT_UUID_SIMPLE_PROFILE
+};
+
+/** @brief  GAP - Advertisement data (max size = 31 bytes, best kept short to conserve power) */
+static const uint8_t adv_data[] =
+{
+    /* Flags */
+    0x02,             /* length */
+    GAP_ADTYPE_FLAGS, /* type="Flags" */
+    GAP_ADTYPE_FLAGS_LIMITED | GAP_ADTYPE_FLAGS_BREDR_NOT_SUPPORTED,
+#if 0
+    /* Service */
+    0x03,             /* length */
+    GAP_ADTYPE_16BIT_COMPLETE,
+    LO_WORD(GATT_UUID_SIMPLE_PROFILE),
+    HI_WORD(GATT_UUID_SIMPLE_PROFILE),
+#endif
+    /* Local name */
+    0x0F,             /* length */
+    GAP_ADTYPE_LOCAL_NAME_COMPLETE,
+    'B', 'L', 'E', '_', 'Z', 'I', 'G', 'B', 'E', 'E', 'T', 'E', 'S', 'T',
+};
+
+replace simple_ble_service.c by simple_ble_service_nus.c

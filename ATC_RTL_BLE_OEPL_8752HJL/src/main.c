@@ -209,9 +209,6 @@ void io_dlps_enter_cb(void)
     Pad_ControlSelectValue(EXT_FLASH_MOSI_PIN, PAD_SW_MODE);
     Pad_ControlSelectValue(EXT_FLASH_MISO_PIN, PAD_SW_MODE);
 
-    /* ADC: power down the analog block before sleep (AON reg 0x113 bit2 = 1). */
-    uint8_t adc_r = btaon_fast_read_safe(0x113);
-    btaon_fast_write(0x113, adc_r | 0x04u);
 
     /* EPD: if a display refresh is in progress, latch all output pins into
      * PAD_SW_MODE.  During DLPS the GPIO APB clock is off — without SW mode
@@ -244,9 +241,6 @@ void io_dlps_exit_cb(void)
     /* SPI flash: re-init GPIO pads after every wake-up. */
     SPI_Flash_enable_GPIO();
 
-    /* ADC: re-enable the analog block immediately on wake. */
-    uint8_t adc_r = btaon_fast_read_safe(0x113);
-    btaon_fast_write(0x113, adc_r & ~0x04u);
 
     /* EPD: restore PINMUX mode so the GPIO peripheral drives the pins again.
      * USE_GPIO_DLPS=1 has already restored the GPIO output register values,

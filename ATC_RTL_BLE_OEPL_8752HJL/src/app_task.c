@@ -92,7 +92,7 @@ void app_main_task(void *p_param)
     gap_start_bt_stack(evt_queue_handle, io_queue_handle, MAX_NUMBER_OF_GAP_MESSAGE);
 
     /* Create and start periodic advertising update timer (5 seconds) */
-    os_timer_create(&adv_timer_handle, "adv_timer", 0, 10*60000, true, adv_timer_callback);
+    os_timer_create(&adv_timer_handle, "adv_timer", 0, 5*60000, true, adv_timer_callback);
     os_timer_start(&adv_timer_handle);
 
     driver_init();
