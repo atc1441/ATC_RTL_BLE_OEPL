@@ -43,18 +43,14 @@ uint32_t getMillis(void)
 void doSleep(uint32_t t)
 {
     t += (uint32_t)(rand() % 61);
+    printf("Sleeping for: %lu\r\n", t);
     uart_flush();
     eepromPowerDown();
     radioSleep(t);
-    /* ADC: power down the analog block before sleep (AON reg 0x113 bit2 = 1). */
-    //uint8_t adc_r = btaon_fast_read_safe(0x113);
-    //btaon_fast_write(0x113, adc_r | 0x04u);
     AON_WDG_Disable();
     WaitMs(t); /* blocks task → DLPS framework calls enter/exit callbacks automatically */
     AON_WDG_Enable();
-    /* ADC: re-enable the analog block immediately on wake. */
-    //adc_r = btaon_fast_read_safe(0x113);
-    //btaon_fast_write(0x113, adc_r & ~0x04u);
+    
     uint32_t wakeup_cnt, last_wakeup, last_sleep;
     platform_pm_get_statistics(&wakeup_cnt, &last_wakeup, &last_sleep);
     printf("Sleep end: dlps_cb=%u dlps_total=%u pm_err=%u zb_err=%u\r\n",

@@ -5,6 +5,7 @@
 #include <rtl876x_pinmux.h>
 #include <platform_utils.h>
 #include <os_sched.h>
+#include <rtl876x_aon_wdg.h>
 
 // 224 * 480 * 2 / 8 = 26880 Bytes
 #define NEW_EPD_BUF_SIZE 26880
@@ -89,21 +90,37 @@ void epd_stream_const(uint8_t value, uint32_t n)
     GPIO_SetBits(GPIO_GetPin(EPD_CS_PIN));
 }
 
-/* Wait until BUSY pin goes HIGH (Controller ready / not low anymore) */
+/* Wait until BUSY pin goes HIGH. Timeout after 10 s. */
 void epd_wait_busy(void)
 {
     uart_printf("epd_wait_busy\n");
-    /* Laut Sniff: Warten bis Busy NICHT mehr LOW ist (also HIGH wird) */
+    uint32_t timeout = 10000u;
     while (GPIO_ReadInputDataBit(GPIO_GetPin(EPD_BUSY_PIN)) == Bit_RESET)
+    {
         platform_delay_ms(1);
+        if (--timeout == 0)
+        {
+            uart_printf("epd_wait_busy: timeout!\n");
+            break;
+        }
+    }
 }
 
+/* Wait until BUSY pin goes HIGH. Feeds WDT every 100 ms. Timeout after 240 s. */
 void epd_wait_busy_sleep(void)
 {
     uart_printf("epd_wait_busy_sleep\n");
-    /* Laut Sniff: Warten bis Busy NICHT mehr LOW ist (also HIGH wird) */
+    uint32_t timeout = 2400u; /* 2400 * 100 ms = 240 s */
     while (GPIO_ReadInputDataBit(GPIO_GetPin(EPD_BUSY_PIN)) == Bit_RESET)
+    {
         os_delay(100);
+        AON_WDG_Restart();
+        if (--timeout == 0)
+        {
+            uart_printf("epd_wait_busy_sleep: timeout!\n");
+            break;
+        }
+    }
 }
 
 /* Hardware reset: RST LOW for 10 ms, then HIGH, then 10 ms settle */
@@ -151,7 +168,7 @@ void epd_init(void)
     epd_hw_reset();
     epd_wait_busy();
 
-    epd_write(0x00, 2, 0b00000011, 0x29);                         /* PSR */
+    epd_write(0x00, 2, 0b00000011, 0x29);                   /* PSR */
     epd_write(0x01, 6, 0x07, 0x00, 0x22, 0x78, 0x0A, 0x22); /* PWR */
     epd_write(0x03, 3, 0x10, 0x54, 0x44);                   /* PFS */
     epd_write(0xE7, 1, 0x1C);                               /* Flash Control */
@@ -208,7 +225,7 @@ void epd_board_init(void)
     RCC_PeriphClockCmd(APBPeriph_GPIO, APBPeriph_GPIO_CLOCK, ENABLE);
 
     Pad_Config(EPD_PWR_PIN, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_NONE, PAD_OUT_ENABLE, PAD_OUT_LOW);
-    platform_delay_ms(10);
+    //platform_delay_ms(10);
     Pad_Config(EPD_BS_PIN, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_NONE, PAD_OUT_ENABLE, PAD_OUT_LOW);
     Pad_Config(EPD_CS_PIN, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_NONE, PAD_OUT_ENABLE, PAD_OUT_HIGH);
     Pad_Config(EPD_RST_PIN, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_NONE, PAD_OUT_ENABLE, PAD_OUT_HIGH);
@@ -261,6 +278,37 @@ void epd_draw_full(void)
     epd_sleep();
     epd_board_sleep();
     uart_printf("EPD sleep\n");
+}
+
+void epd_just_sleep()
+{
+    uart_printf("EPD just sleep\n");
+    epd_board_init();
+    GPIO_InitTypeDef g;
+    GPIO_StructInit(&g);
+
+    g.GPIO_Pin = GPIO_GetPin(EPD_PWR_PIN) | GPIO_GetPin(EPD_BS_PIN) |
+                 GPIO_GetPin(EPD_CS_PIN) | GPIO_GetPin(EPD_RST_PIN) |
+                 GPIO_GetPin(EPD_DC_PIN) | GPIO_GetPin(EPD_CLK_PIN) |
+                 GPIO_GetPin(EPD_MOSI_PIN);
+    g.GPIO_Mode = GPIO_Mode_OUT;
+    GPIO_Init(&g);
+
+    g.GPIO_Pin = GPIO_GetPin(EPD_BUSY_PIN);
+    g.GPIO_Mode = GPIO_Mode_IN;
+    GPIO_Init(&g);
+
+    /* Safe initial state */
+    GPIO_ResetBits(GPIO_GetPin(EPD_PWR_PIN));
+    GPIO_ResetBits(GPIO_GetPin(EPD_BS_PIN));
+    GPIO_SetBits(GPIO_GetPin(EPD_CS_PIN));
+    GPIO_SetBits(GPIO_GetPin(EPD_RST_PIN));
+    GPIO_ResetBits(GPIO_GetPin(EPD_DC_PIN));
+    GPIO_ResetBits(GPIO_GetPin(EPD_CLK_PIN));
+    GPIO_ResetBits(GPIO_GetPin(EPD_MOSI_PIN));
+    epd_hw_reset();
+    epd_wait_busy();
+    epd_sleep();
 }
 
 void EPD_Display_start(uint8_t color)

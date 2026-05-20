@@ -3,12 +3,17 @@
 #include "mac_driver_mpan.h"
 #include "mac_driver.h"
 #include "vector_table.h"
+#include "syncedproto.h"
 #include "power_manager_unit_zbmac.h"
+#include "boot_screen.h"
 #include <os_sync.h>
 #include <os_sched.h>
 #include <os_mem.h>
+#include <rtl876x_wdg.h>
 #include <string.h>
 #include <stdio.h>
+
+extern volatile uint32_t g_dlps_enter_count;
 
 /*============================================================================*
  * Constants
@@ -16,6 +21,7 @@
 #define ZIGBEE_IRQn 9
 #define PROTO_PAN_ID 0x4447u
 #define TX_TIMEOUT_US 50000u
+#define PHY_GRANT_TIMEOUT_US 1000000u
 
 #define RX_BUF_SLOTS 4u
 #define RX_BUF_MASK (RX_BUF_SLOTS - 1u)
@@ -50,9 +56,7 @@ static uint8_t s_channel = 11;
 static zbpm_adapter_t s_zbpm_adap;
 static uint8_t *s_mac_retention_buf = NULL;
 
-static zbpm_callback_t s_orig_enter_cb = NULL;
-static zbpm_callback_t s_orig_exit_cb  = NULL;
-
+static zbpm_callback_t s_orig_exit_cb = NULL;
 
 static void zbpm_exit_wrapper(void)
 {
@@ -95,11 +99,63 @@ static void rxdone_isr(uint8_t pan, uint32_t arg)
 /*============================================================================*
  * Radio HAL Internal Helpers
  *============================================================================*/
-static void radio_hw_apply_config(void)
+static void show_phy_error_and_reset(const char *reason)
 {
-    mac_channel_set(s_channel);
+    /*uint32_t wakeup_cnt, last_wakeup, last_sleep;
+    platform_pm_get_statistics(&wakeup_cnt, &last_wakeup, &last_sleep);
+    char l0[32], l1[40], l2[40];
+    snprintf(l0, sizeof(l0), "%s", reason);
+    snprintf(l1, sizeof(l1), "dlps_cb=%u tot=%u",
+             (unsigned)g_dlps_enter_count, (unsigned)wakeup_cnt);
+    snprintf(l2, sizeof(l2), "pm_err=%u zb_err=%u",
+             (unsigned)platform_pm_get_error_code(),
+             (unsigned)radioGetZbpmError());
+    const char *lines[] = {l0, l1, l2};
+    boot_screen_show_error(lines, 3);*/
+    uint8_t chIdx = 0x0F;
+    for (uint8_t i = 0; i < sizeof(channelList); i++)
+    {
+        if (channelList[i] == currentChannel)
+        {
+            chIdx = i;
+            break;
+        }
+    }
+    WDG_SystemReset(RESET_ALL, 0xE0 | chIdx);
 }
 
+static void radio_hw_apply_config(void)
+{
+    uint32_t t = mac_btus_get();
+    uint32_t prev_ts = t;
+    uint32_t stuck_loops = 0;
+
+    while (!mac_GrantPHYStatus())
+    {
+        uint32_t now = mac_btus_get();
+
+        if (now == prev_ts)
+        {
+            if (++stuck_loops >= 1000u)
+            {
+                printf("PHY timer stuck!\r\n");
+                show_phy_error_and_reset("PHY timer stuck!");
+            }
+        }
+        else
+        {
+            stuck_loops = 0;
+            prev_ts = now;
+        }
+
+        if ((uint32_t)(now - t) >= PHY_GRANT_TIMEOUT_US)
+        {
+            printf("PHY grant timeout!\r\n");
+            show_phy_error_and_reset("PHY grant timeout!");
+        }
+    }
+    mac_channel_set(s_channel);
+}
 /*============================================================================*
  * Public Radio HAL
  *============================================================================*/
@@ -150,11 +206,11 @@ bool radioInit(void)
     s_zbpm_adap.learning_guard_time = 7;
     s_zbpm_adap.wakeup_time_us = mac_btus_get();
     s_zbpm_adap.pretain_buf = s_mac_retention_buf;
-    //s_zbpm_adap.exit_callback_app = zbpm_exit_wrapper;
+    // s_zbpm_adap.exit_callback_app = zbpm_exit_wrapper;
 
     zbmac_pm_init(&s_zbpm_adap);
-    s_orig_exit_cb  = s_zbpm_adap.exit_callback;
-    s_zbpm_adap.exit_callback  = zbpm_exit_wrapper;
+    s_orig_exit_cb = s_zbpm_adap.exit_callback;
+    s_zbpm_adap.exit_callback = zbpm_exit_wrapper;
 
     s_mac_init = true;
     s_rx_on = true;
@@ -173,6 +229,7 @@ bool radioSetChannel(uint_fast8_t channel)
 
 bool radioRxEnable(bool on)
 {
+    radioRxFlush();
     s_rx_on = on;
     return true;
 }

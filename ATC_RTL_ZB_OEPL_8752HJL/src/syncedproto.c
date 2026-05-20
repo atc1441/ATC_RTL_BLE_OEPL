@@ -631,6 +631,7 @@ bool processAvailDataInfo(struct AvailDataInfo *avail)
             sendXferComplete();
             printf("FW update complete, flashing\r\n");
             write_ota_firmware_to_flash();
+            return true;
         }
         return false;
 

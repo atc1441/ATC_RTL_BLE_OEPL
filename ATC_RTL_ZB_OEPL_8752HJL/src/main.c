@@ -27,6 +27,7 @@
 #include "battery.h"
 #include "drawing.h"
 #include <rtl876x_aon_wdg.h>
+#include <rtl876x_wdg.h>
 #include "zigbee.h"
 #include "syncedproto.h"
 #include "powermgt.h"
@@ -68,7 +69,6 @@ void io_dlps_enter_cb(void)
 
 void io_dlps_exit_cb(void)
 {
-    /* Feed the AON watchdog on every wake-up. */
     AON_WDG_Restart();
 
     /* UART: restore PINMUX mode and APB clock. */
@@ -159,10 +159,10 @@ void board_init(void)
 void driver_init(void)
 {
     uart_printf("driver_init: start\n");
-    /* AON WDT: 90 s timeout, stop counting during DLPS, reload on wake. */
-    AON_WDG_Config(1, 90000u, 1, 1);
+    /* AON WDT: 30 s timeout, stop counting during DLPS, reload on wake. */
+    AON_WDG_Config(1, 30000u, 1, 1);
     AON_WDG_Enable();
-    uart_printf("driver_init: WDT enabled (90s)\n");
+    uart_printf("driver_init: WDT enabled (30s)\n");
     Pad_Config(LED_R, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_UP, PAD_OUT_DISABLE, PAD_OUT_LOW);
     Pad_Config(LED_G, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_UP, PAD_OUT_DISABLE, PAD_OUT_LOW);
     Pad_Config(LED_B, PAD_PINMUX_MODE, PAD_IS_PWRON, PAD_PULL_UP, PAD_OUT_DISABLE, PAD_OUT_LOW);
@@ -190,6 +190,10 @@ static void proto_task(void *arg)
     uint8_t screen_stale = 0;
     (void)arg;
     driver_init();
+    uint8_t resetReason = reset_reason_get();
+    uint8_t resetRadioBug = 0;
+    if (resetReason == RESET_REASON_WDG_TIMEOUT)
+        wakeUpReason = WAKEUP_REASON_WDT_RESET;
     pwr_mgr_init();
     eepromPowerUp();
 
@@ -209,11 +213,27 @@ static void proto_task(void *arg)
 
     /* AP scan on all channels */
     currentChannel = 0;
-    for (uint8_t i = 0; i < sizeof(channelList) && !currentChannel; i++)
+    uint8_t chIdx = 0;
+    if ((resetReason & 0xF0) == 0xE0)
+    { // RADIO Grant Bug, we dont refresh so normal function is not disturbed
+        currentChannel = (chIdx < sizeof(channelList)) ? channelList[chIdx] : 0;
+        uart_printf("RADIO Grant Bug Reboot!! Reusing old channel: %u\n", currentChannel);
+        epd_just_sleep();
+    }
+    if ((currentChannel == 0) || (chIdx >= sizeof(channelList)))
     {
-        uint8_t r = detectAP(channelList[i]);
-        if (r)
-            currentChannel = channelList[i];
+        for (uint8_t i = 0; i < sizeof(channelList) && !currentChannel; i++)
+        {
+            uint8_t r = detectAP(channelList[i]);
+            if (r)
+                currentChannel = channelList[i];
+        }
+    }
+    else
+    {
+        wakeUpReason = WAKEUP_REASON_TIMED;
+        resetRadioBug = 1;
+        epd_just_sleep();
     }
 
     if (currentChannel)
@@ -224,7 +244,8 @@ static void proto_task(void *arg)
         {
             wakeUpReason = WAKEUP_REASON_TIMED;
         }
-        status_screen_show(mSelfMac, batteryVoltage, currentChannel, "AP found");
+        if (!resetRadioBug)
+            status_screen_show(mSelfMac, batteryVoltage, currentChannel, "AP found");
     }
     else
     {
@@ -233,12 +254,14 @@ static void proto_task(void *arg)
     }
 
     prev_channel = currentChannel;
+    uint32_t sleepTimeOnline = SLEEP_DELAY_ONLINE;
 
     while (1)
     {
         wdt10s();
         batteryVoltage = battery_measure_mv();
         temperature = temperature_measure_celsius();
+        sleepTimeOnline = SLEEP_DELAY_ONLINE;
 
         if (currentChannel)
         {
@@ -258,6 +281,7 @@ static void proto_task(void *arg)
                     printf("Data transfer starting\r\n");
                     if (!processAvailDataInfo(avail))
                     {
+                        sleepTimeOnline = 5;
                     }
                 }
                 else
@@ -281,8 +305,7 @@ static void proto_task(void *arg)
                 }
                 screen_stale = false;
             }
-
-            doSleep(SLEEP_DELAY_ONLINE * 1000UL);
+            doSleep(sleepTimeOnline * 1000UL);
         }
         else
         {

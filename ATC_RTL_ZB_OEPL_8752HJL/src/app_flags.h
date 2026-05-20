@@ -28,7 +28,7 @@
 #define FLASH_SELFTEST_EN 0
 
 #define HW_TYPE 0x53
-#define FIRMWARE_VERSION 0x0031
+#define FIRMWARE_VERSION 0x0034
 
 #define DEBUG_BUILD 0
 

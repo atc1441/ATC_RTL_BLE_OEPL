@@ -13,7 +13,7 @@ Custom E-Paper firmware for Realtek RTL8762ESL and RTL8752HJL microcontrollers. 
 - **Memory Management:** Efficient use of external SPI flash (EEPROM) to store up to 5 images in different slots.
 - **OTA Updates:** Support for Over-the-Air firmware updates via BLE.
 - **Ultra-Low Power:** Optimized for minimal power consumption using the Deep Sleep mode (DLPS) of the Realtek chips.
-- **Battery Monitoring:** Integrated measurement and transmission of battery voltage to the Access Point, still a bit buggy!.
+- **Battery Monitoring:** Integrated measurement and transmission of battery voltage to the Access Point.
 
 ## Supported & Tested Models
 The following models are currently supported and have been verified:

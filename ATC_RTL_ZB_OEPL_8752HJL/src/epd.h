@@ -27,6 +27,7 @@ void epd_display_white(void);
 void epd_sleep(void);
 
 void epd_draw_full(void);
+void epd_just_sleep();
 
 void epd_wait_busy(void);
 void epd_wait_busy_sleep(void);

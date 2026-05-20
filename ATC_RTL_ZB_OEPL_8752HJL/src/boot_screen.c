@@ -11,6 +11,36 @@
 #include <rtl876x_rcc.h>
 #include <rtl876x_pinmux.h>
 #include <platform_utils.h>
+#include <rtl876x_wdg.h>
+#include "powermgt.h"
+
+static const char *reset_reason_str(void)
+{
+    static char unknown_buf[7]; /* "0xXX\0" */
+    T_SW_RESET_REASON r = reset_reason_get();
+    switch (r)
+    {
+    case RESET_REASON_HW:                return "HW";
+    case RESET_REASON_WDG_TIMEOUT:       return "WDT";
+    case RESET_REASON_POWERDOWN:         return "PWR_DOWN";
+    case SW_RESET_APP_START:             return "SW";
+    case SWITCH_HCI_MODE:                return "HCI_MODE";
+    case SWITCH_TEST_MODE:               return "TEST_MODE";
+    case DFU_SWITCH_TO_OTA_MODE:         return "DFU_OTA";
+    case DFU_ACTIVE_RESET:               return "DFU";
+    case DFU_FAIL_RESET:                 return "DFU_FAIL";
+    case UPPER_CMD_RESET:                return "UPPER_CMD";
+    case SINGLE_TONE_TIMEOUT_RESET:      return "TONE_TMO";
+    case UART_CMD_RESET:                 return "UART_CMD";
+    case RESET_REASON_FACTORY_RESET:     return "FACTORY";
+    case RESET_REASON_LPC_TRIGGER:       return "LPC";
+    case 0xE0:                           return "PHY grant timeout";
+    case 0x0D:                           return "Bl Reboot";
+    default:
+        snprintf(unknown_buf, sizeof(unknown_buf), "0x%02X", (unsigned)r);
+        return unknown_buf;
+    }
+}
 
 /* ---- 8×8 font, ASCII 0x20 (' ') through 0x7E ('~') ---------------------- */
 static const uint8_t font8[95][8] = {
@@ -185,13 +215,17 @@ void boot_screen_show_error(const char *const *lines, uint8_t n_lines)
     epd_init();
     render_lines_rotated(lines, (int)n_lines);
 
-    printf("EPD_ERR refresh triggered\n");
+    printf("EPD_ERR:");
+    for (uint8_t i = 0; i < n_lines; i++)
+        printf("  %s\n", lines[i]);
+    printf("\n");
+
     epd_cmd(0x04);
     epd_wait_busy();
     epd_write(0x12, 1, 0x00);
     epd_wait_busy_sleep();
     epd_sleep();
-    printf("Refresh finished.\n");
+    printf("EPD_ERR: refresh finished\n");
 }
 
 void status_screen_show(const uint8_t *mac8, uint16_t battery_mv,
@@ -207,7 +241,7 @@ void status_screen_show(const uint8_t *mac8, uint16_t battery_mv,
         snprintf(ln[2], sizeof(ln[2]), " BAT: %u mV    CH: %u", battery_mv, channel);
     snprintf(ln[3], sizeof(ln[3]), " AP:  %02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X", APmac[7], APmac[6], APmac[5], APmac[4], APmac[3], APmac[2], APmac[1], APmac[0]);
     snprintf(ln[4], sizeof(ln[4]), " RSSI: %d dBm", (int)mLastRSSI);
-    snprintf(ln[5], sizeof(ln[5]), " FW: v%04X", (unsigned)FIRMWARE_VERSION);
+    snprintf(ln[5], sizeof(ln[5]), " FW: v%04X  RST: %s", (unsigned)FIRMWARE_VERSION, reset_reason_str());
     snprintf(ln[6], sizeof(ln[6]), " ATC1441 Compiled on: " __DATE__ " " __TIME__);
     snprintf(ln[7], sizeof(ln[7]), " >> %s", status ? status : "");
 
@@ -217,13 +251,17 @@ void status_screen_show(const uint8_t *mac8, uint16_t battery_mv,
     epd_init();
     render_lines_rotated(ptrs, 8);
 
-    printf("STATUS: %s  ch=%u  bat=%u mV\n", status, channel, battery_mv);
+    printf("EPD_STATUS:");
+    for (int i = 0; i < 8; i++)
+        printf("  %s\n", ln[i]);
+    printf("\n");
+
     epd_cmd(0x04);
     epd_wait_busy();
 #if DO_EPD_REFRESH
     epd_write(0x12, 1, 0x00);
 #endif
-    epd_wait_busy();
+    epd_wait_busy_sleep();
     epd_sleep();
-    printf("Refresh finished.\n");
+    printf("EPD_STATUS: refresh finished\n");
 }

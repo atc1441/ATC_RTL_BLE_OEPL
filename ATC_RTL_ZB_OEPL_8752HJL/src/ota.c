@@ -24,28 +24,38 @@
 #include "patch_header_check.h"
 #include "boot_screen.h"
 #include "rtl876x_wdg.h"
+#include "syncedproto.h"
 #include <string.h>
 #include <stdio.h>
 
 /* ---- Stage 2: external flash → OTA_TMP ----------------------------------- */
+
+static void erase_tmp_ota()
+{
+    printf("Erase OTA TMP: 0x%08lX  %lu bytes\n",
+           (unsigned long)OTA_TMP_ADDR, OTA_TMP_SIZE);
+    /* Erase the required sectors in OTA_TMP. */
+    uint32_t sectors = (OTA_TMP_SIZE + 0xFFFu) >> 12;
+    for (uint32_t s = 0; s < sectors; s++)
+        flash_erase_locked(FLASH_ERASE_SECTOR, OTA_TMP_ADDR + s * 0x1000u);
+}
 
 static void copy_ext_to_tmp(uint32_t fw_size)
 {
     printf("OTA: ext→OTA_TMP 0x%08lX  %lu bytes\n",
            (unsigned long)OTA_TMP_ADDR, (unsigned long)fw_size);
 
-    /* Erase the required sectors in OTA_TMP. */
-    uint32_t sectors = (fw_size + 0xFFFu) >> 12;
-    for (uint32_t s = 0; s < sectors; s++)
-        flash_erase_locked(FLASH_ERASE_SECTOR, OTA_TMP_ADDR + s * 0x1000u);
+    erase_tmp_ota();
 
     /* Copy 256 bytes at a time from external flash to OTA_TMP. */
     uint8_t buf[256];
     eepromPowerUp();
-    for (uint32_t off = 0; off < fw_size; off += 256u) {
+    for (uint32_t off = 0; off < fw_size; off += 256u)
+    {
         uint32_t n = (fw_size - off < 256u) ? (fw_size - off) : 256u;
         eepromRead(OTA_EXT_START + off, buf, n);
-        if (n < 256u) memset(buf + n, 0xFFu, 256u - n);
+        if (n < 256u)
+            memset(buf + n, 0xFFu, 256u - n);
         flash_write_locked(OTA_TMP_ADDR + off, 256u, buf);
     }
     eepromPowerDown();
@@ -61,12 +71,13 @@ DATA_RAM_FUNCTION static void ota_do_apply(uint32_t sectors)
      * while the APP region is being erased or written.
      * Use raw Cortex-M CPSID instruction; __disable_irq() is not always
      * inlined and would produce a flash-resident external call. */
-    __asm volatile ("cpsid i" ::: "memory");
+    __asm volatile("cpsid i" ::: "memory");
 
     uint8_t page_buf[256]; /* 256 bytes on stack = always in RAM */
     uint32_t s, pg, i;
 
-    for (s = 0; s < sectors; s++) {
+    for (s = 0; s < sectors; s++)
+    {
         uint32_t sector_off = s * 0x1000u;
 
         /* (a) Read the first 256-byte page from OTA_TMP while flash is idle.
@@ -74,7 +85,8 @@ DATA_RAM_FUNCTION static void ota_do_apply(uint32_t sectors)
          *     operation is in progress. */
         volatile uint8_t *src =
             (volatile uint8_t *)(OTA_TMP_ADDR + sector_off);
-        for (i = 0u; i < 256u; i++) page_buf[i] = src[i];
+        for (i = 0u; i < 256u; i++)
+            page_buf[i] = src[i];
 
         /* (b) Erase 4 KB sector of BANK0_APP (flash busy). */
         flash_erase_locked(FLASH_ERASE_SECTOR, BANK0_APP_ADDR + sector_off);
@@ -84,25 +96,30 @@ DATA_RAM_FUNCTION static void ota_do_apply(uint32_t sectors)
 
         /* (d) Remaining pages: flash is idle after each write_locked returns,
          *     so OTA_TMP is readable again via pointer before the next write. */
-        for (pg = 256u; pg < 0x1000u; pg += 256u) {
+        for (pg = 256u; pg < 0x1000u; pg += 256u)
+        {
             src = (volatile uint8_t *)(OTA_TMP_ADDR + sector_off + pg);
-            for (i = 0u; i < 256u; i++) page_buf[i] = src[i];
+            for (i = 0u; i < 256u; i++)
+                page_buf[i] = src[i];
             flash_write_locked(BANK0_APP_ADDR + sector_off + pg, 256u, page_buf);
         }
     }
 
     /* All flash ops done — ROM function safe to call, resets entire chip. */
     WDG_SystemReset(RESET_ALL, DFU_ACTIVE_RESET);
-    
+
     /* Cortex-M AIRCR system reset — pure register write, no flash access. */
     *((volatile uint32_t *)0xE000ED0CUL) = 0x05FA0004UL;
-    while (1) {}
+    while (1)
+    {
+    }
 }
 
 /* ---- Public entry point --------------------------------------------------- */
 void ota_apply(uint32_t fw_size)
 {
-    if (fw_size == 0u || fw_size > OTA_EXT_SIZE) {
+    if (fw_size == 0u || fw_size > OTA_EXT_SIZE)
+    {
         printf("OTA: ERR invalid fw_size=%lu (max=%lu)\n",
                (unsigned long)fw_size, (unsigned long)OTA_EXT_SIZE);
         return;
@@ -127,41 +144,44 @@ void ota_apply(uint32_t fw_size)
            (unsigned)p_hdr->ctrl_header.crc16);
 
     /* Sanity-check image ID — must be AppPatch (0x2793). */
-    if (p_hdr->ctrl_header.image_id != AppPatch) {
+    if (p_hdr->ctrl_header.image_id != AppPatch)
+    {
+        erase_tmp_ota();
         printf("OTA: ERR wrong image_id 0x%04X (expected 0x%04X AppPatch) — abort\n",
                p_hdr->ctrl_header.image_id, (unsigned)AppPatch);
-        static const char * const e[] = {
+        static const char *const e[] = {
             " OTA FAILED",
             " Wrong image type",
             " Expected: AppPatch",
-            " Flash unchanged"
-        };
+            " Flash unchanged"};
         boot_screen_show_error(e, 4);
         return;
     }
 
     /* Sanity-check size: 1 KB header + payload must fit in APP slot. */
-    if ((uint32_t)p_hdr->ctrl_header.payload_len + IMG_HEADER_SIZE > BANK0_APP_SIZE) {
+    if ((uint32_t)p_hdr->ctrl_header.payload_len + IMG_HEADER_SIZE > BANK0_APP_SIZE)
+    {
+        erase_tmp_ota();
         printf("OTA: ERR image too large (%lu B) — abort\n",
                (unsigned long)((uint32_t)p_hdr->ctrl_header.payload_len + IMG_HEADER_SIZE));
-        static const char * const e[] = {
+        static const char *const e[] = {
             " OTA FAILED",
             " Image too large",
-            " Flash unchanged"
-        };
+            " Flash unchanged"};
         boot_screen_show_error(e, 3);
         return;
     }
 
     /* CRC16 / SHA-256 integrity check. */
-    if (!check_image_chksum(p_hdr)) {
+    if (!check_image_chksum(p_hdr))
+    {
+        erase_tmp_ota();
         printf("OTA: ERR checksum mismatch — abort, BANK0_APP unchanged\n");
-        static const char * const e[] = {
+        static const char *const e[] = {
             " OTA FAILED",
             " Checksum mismatch",
             " Please retry",
-            " Flash unchanged"
-        };
+            " Flash unchanged"};
         boot_screen_show_error(e, 4);
         return;
     }
@@ -171,7 +191,8 @@ void ota_apply(uint32_t fw_size)
            (unsigned long)BANK0_APP_ADDR);
 
     uint32_t sectors = (fw_size + 0xFFFu) >> 12;
-
+    currentChannel = 0;
+    WDG_SystemReset(RESET_ALL, DFU_ACTIVE_RESET); // The ROM Takes care of writing the firmware to the right spot.
     /* Stage 3: overwrite APP area from OTA_TMP — does not return. */
     ota_do_apply(sectors);
 }
