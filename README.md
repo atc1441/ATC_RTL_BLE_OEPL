@@ -30,7 +30,7 @@ The repository contains two separate projects for the different chip variants:
 
 - `ATC_RTL_BLE_OEPL_8752HJL/`: BLE firmware for the RTL8752HJL chip.
 - `ATC_RTL_BLE_OEPL_8762ESL/`: BLE firmware for the RTL8762ESL chip.
-- `ATC_RTL_ZB_OEPL_8752HJL/`: OEPL(802.15.4) firmware for the RTL8752HJL chip (see below).
+- `ATC_RTL_ZB_OEPL_8752HJL/`: OEPL(802.15.4) firmware for the RTL8752HJL chip (see below). PLEASE NOTE: This firmware has a breaking bug and hangs after a few hours of working fine, its something with the radio not recovering after sleep
 
 ### ATC_RTL_ZB_OEPL_8752HJL - 802.15.4 Variant
 
