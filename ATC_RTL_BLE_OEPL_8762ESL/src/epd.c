@@ -159,13 +159,13 @@ void epd_init(void)
 
     epd_write(0x91, 1, 0x03);       /* Partial/Full mode control             */
 
-    /* BW RAM address window: X = 49..0 (bytes), Y = 271..0 */
+    /* BW RAM address window: X = 49..0 (bytes), Y = 0..271 */
     epd_write(0x44, 2, 0x31, 0x00); /* RAM-X Start=49, End=0                 */
-    epd_write(0x45, 4, 0x00, 0x00, 0x0F, 0x01); /* RAM-Y Start=271, End=0   */
+    epd_write(0x45, 4, 0x00, 0x00, 0x0F, 0x01); /* RAM-Y Start=0, End=271   */
 
-    /* BW RAM counters: start at (49, 271) — top-right in this orientation   */
+    /* BW RAM counters: start at (49, 0) — top-right, Y increments downward  */
     epd_write(0x4E, 1, 0x31);
-    epd_write(0x4F, 2, 0x0F, 0x01);
+    epd_write(0x4F, 2, 0x00, 0x00);
 
     /* Red RAM address window: X = 0..49 (bytes), Y = 271..0 */
     epd_write(0xC4, 2, 0x00, 0x31); /* Red-RAM-X Start=0, End=49            */

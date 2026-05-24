@@ -133,7 +133,7 @@ static void draw_rows_deinterleave(uint32_t data_base, uint32_t n_rows,
 {
     static uint8_t row_buf[128]; 
     const uint32_t bytes_p1 = 50; // Panel 1: 400px
-    const uint32_t bytes_p2 = 50; // Panel 2: 392px
+    const uint32_t bytes_p2 = 50; // Panel 2: 400px
 
     for (uint32_t r = 0; r < n_rows; r++)
     {
