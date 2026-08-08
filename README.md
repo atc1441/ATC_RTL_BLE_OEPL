@@ -18,7 +18,7 @@ Custom E-Paper firmware for Realtek RTL8762ESL and RTL8752HJL microcontrollers. 
 ## Supported & Tested Models
 The following models are currently supported and have been verified:
 - **ELM35R2C4P:** 3.5" BWRY (Black/White/Red/Yellow), 224x480 pixels, based on **RTL8752HJL**.
-- **ELO58R2CRN:** 5.85" BWR (Black/White/Red), 272x792 pixels, based on **RTL8762ESL**.
+- **EL058R2CRN:** 5.85" BWR (Black/White/Red), 272x792 pixels, based on **RTL8762ESL**.
 
 ## Project Structure
 The repository contains two separate projects for the different chip variants:
