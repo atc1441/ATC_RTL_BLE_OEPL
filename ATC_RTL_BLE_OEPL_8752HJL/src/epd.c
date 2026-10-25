@@ -1,4 +1,5 @@
 #include "epd.h"
+#include "panel_config.h"
 #include "board.h"
 #include <rtl876x_gpio.h>
 #include <rtl876x_rcc.h>
@@ -6,8 +7,8 @@
 #include <platform_utils.h>
 #include <os_sched.h>
 
-// 224 * 480 * 2 / 8 = 26880 Bytes
-#define NEW_EPD_BUF_SIZE 26880
+// 224 * 480 * 2 / 8 = 26880 Bytes (ELM35)
+#define NEW_EPD_BUF_SIZE (EPD_NATIVE_W * EPD_NATIVE_H * 2 / 8)
 
 void spi_write_byte(uint8_t byte)
 {
@@ -143,6 +144,7 @@ void epd_init(void)
     epd_hw_reset();
     epd_wait_busy();
 
+#if defined(PANEL_ELM35)
     epd_write(0x00, 2, 0b00000011, 0x29);                         /* PSR */
     epd_write(0x01, 6, 0x07, 0x00, 0x22, 0x78, 0x0A, 0x22); /* PWR */
     epd_write(0x03, 3, 0x10, 0x54, 0x44);                   /* PFS */
@@ -156,6 +158,34 @@ void epd_init(void)
     epd_write(0xE3, 1, 0x22);                               /* PWS */
     epd_write(0xE9, 1, 0x01);
     epd_write(0x30, 1, 0x08); /* PLL */
+#elif defined(PANEL_FPC7909)
+    /* FPC-7909 / ELM75R8B4C, JD79665AA, init GDEM075F52 */
+    epd_write(0x00, 2, 0x0F, 0x29);                         /* PSR */
+    epd_write(0x06, 4, 0x0F, 0x8B, 0x93, 0xA1);             /* BTST */
+    epd_write(0x41, 1, 0x00);                               /* TSE */
+    epd_write(0x50, 1, 0x37);                               /* VCOM and Data Interval */
+    epd_write(0x60, 2, 0x02, 0x02);                         /* TCON */
+    epd_write(0x61, 4, 0x03, 0x20, 0x01, 0xE0);             /* Resolution 800x480 */
+    epd_write(0x62, 8, 0x98, 0x98, 0x98, 0x75, 0xCA, 0xB2, 0x98, 0x7E);
+    epd_write(0x65, 4, 0x00, 0x00, 0x00, 0x00);             /* GSST */
+    epd_write(0xE7, 1, 0x1C);
+    epd_write(0xE3, 1, 0x00);                               /* PWS */
+    epd_write(0xE9, 1, 0x01);
+    epd_write(0x30, 1, 0x08);                               /* PLL */
+    epd_cmd(0x04);                                          /* Power On */
+    epd_wait_busy();
+#elif defined(PANEL_HINK_E0276A01)
+    /* HINK-E0276A01 / EL028R8B4C, init GDEM027F71 */
+    epd_write(0x00, 2, 0x0F, 0x29);                         /* PSR */
+    epd_write(0x06, 4, 0x0F, 0x8B, 0x9C, 0x96);             /* BTST */
+    epd_write(0x50, 1, 0x37);                               /* VCOM and Data Interval */
+    epd_write(0x61, 4, 0x00, 0x80, 0x01, 0x28);             /* Resolution 128x296 */
+    epd_write(0xE3, 1, 0x22);                               /* PWS */
+    epd_write(0x30, 1, 0x08);                               /* PLL */
+    epd_write(0xE9, 1, 0x01);
+    epd_cmd(0x04);                                          /* Power On */
+    epd_wait_busy();
+#endif
 }
 
 /* -------------------------------------------------------------------------

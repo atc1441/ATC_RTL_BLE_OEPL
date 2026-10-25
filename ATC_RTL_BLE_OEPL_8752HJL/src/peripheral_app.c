@@ -27,6 +27,7 @@
 #include "ble_cmd_handler.h"
 #include "ota.h"
 #include "mac_edit.h"
+#include "panel_config.h"
 #include "platform_utils.h"
 
 
@@ -88,14 +89,14 @@ T_GAP_CONN_STATE gap_conn_state = GAP_CONN_STATE_DISCONNECTED; /**< GAP connecti
 
 struct BleAdvDataStruct ble_adv_data;
 settings_struct settings = {
-    .oepl_hw_type = 0x53,
+    .oepl_hw_type = EPD_OEPL_HW,
     .screen_available = 1,
     .screen_type = 1,
     .screen_functions = 0,
     .screen_w_h_inversed_ble = 1,
     .screen_w_h_inversed = 0,
-    .screen_h = 224,
-    .screen_w = 480,
+    .screen_h = EPD_SCREEN_H,
+    .screen_w = EPD_SCREEN_W,
     .screen_h_offset = 0,
     .screen_w_offset = 0,
     .screen_colors = 3,

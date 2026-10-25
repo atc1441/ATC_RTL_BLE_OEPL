@@ -1,10 +1,12 @@
 #include "drawing.h"
+#include "panel_config.h"
 #include "epd.h"
 #include "board.h"
 #include "eeprom.h"
 #include "peripheral_app.h"
 #include "tag_types.h"
 #include "zlib/uzlib.h"
+#include "os_mem.h"
 #include <string.h>
 #include <rtl876x_gpio.h>
 #include <rtl876x_rcc.h>
@@ -50,6 +52,134 @@ static void push_bwry_pixels(uint8_t bw_byte, uint8_t ry_byte)
     epd_data(outL);
     byteCounter += 2;
 }
+
+/*
+ * Image RAM write: frame_begin(), frame_put() for each byte of both planes,
+ * frame_end(). Panels whose controller RAM does not match the uploaded image
+ * (EPD_ROTATE_IMG) buffer both planes and write them transformed, the others
+ * stream the bytes straight to the controller.
+ *
+ * Two image layouts reach such a panel:
+ *  - EPD_SCREEN_H x EPD_SCREEN_W (BLE upload page): rotated by 90 degrees,
+ *  - EPD_NATIVE_W x EPD_NATIVE_H (OEPL gateway, rotatebuffer 1): already in
+ *    controller RAM order.
+ * The zlib header tells which one it is, raw images use the settings size.
+ */
+#if EPD_ROTATE_IMG
+#define IMG_W EPD_SCREEN_H
+#define IMG_H EPD_SCREEN_W
+
+static uint8_t *rot_bw;
+static uint8_t *rot_ry;
+static int rot_w;
+static int rot_h;
+
+static void frame_abort(void)
+{
+    if (rot_bw)
+        os_mem_free(rot_bw);
+    if (rot_ry)
+        os_mem_free(rot_ry);
+    rot_bw = NULL;
+    rot_ry = NULL;
+}
+
+static bool rot_start(uint32_t plane_bytes, int w, int h)
+{
+    if (!((w == EPD_NATIVE_W && h == EPD_NATIVE_H) ||
+          (w == EPD_NATIVE_H && h == EPD_NATIVE_W)))
+    {
+        printf("EPD: unsupported image size %dx%d\n", w, h);
+        return false;
+    }
+    rot_w = w;
+    rot_h = h;
+    rot_bw = (uint8_t *)os_mem_alloc(RAM_TYPE_DATA_ON, plane_bytes);
+    rot_ry = (uint8_t *)os_mem_alloc(RAM_TYPE_DATA_ON, plane_bytes);
+    if (!rot_bw || !rot_ry)
+    {
+        printf("EPD: no RAM for rotation\n");
+        frame_abort();
+        return false;
+    }
+    return true;
+}
+
+static bool frame_begin(uint32_t plane_bytes)
+{
+    return rot_start(plane_bytes, IMG_W, IMG_H);
+}
+
+/* img_hdr: 6 byte image header, width at [1..2], height at [3..4] */
+static bool frame_begin_zlib(const uint8_t *img_hdr, uint32_t plane_bytes)
+{
+    int w = img_hdr[1] | (img_hdr[2] << 8);
+    int h = img_hdr[3] | (img_hdr[4] << 8);
+    if (w % 8 != 0 || (uint32_t)w * (uint32_t)h / 8 != plane_bytes)
+    {
+        w = IMG_W;
+        h = IMG_H;
+    }
+    return rot_start(plane_bytes, w, h);
+}
+
+static void frame_put(uint32_t i, uint8_t bw_byte, uint8_t ry_byte)
+{
+    rot_bw[i] = bw_byte;
+    rot_ry[i] = ry_byte;
+}
+
+static int plane_bit(const uint8_t *plane, int x, int y)
+{
+    return (plane[y * (rot_w / 8) + x / 8] >> (7 - (x % 8))) & 1;
+}
+
+static void frame_end(void)
+{
+    const bool native = (rot_w == EPD_NATIVE_W);
+
+    epd_cmd(0x10);
+    for (int yp = 0; yp < EPD_NATIVE_H; yp++)
+    {
+        for (int xp = 0; xp < EPD_NATIVE_W; xp += 8)
+        {
+            uint8_t bw_byte = 0;
+            uint8_t ry_byte = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                int sx = native ? xp + i : yp;
+                int sy = native ? yp : rot_h - 1 - (xp + i);
+                bw_byte = (uint8_t)((bw_byte << 1) | plane_bit(rot_bw, sx, sy));
+                ry_byte = (uint8_t)((ry_byte << 1) | plane_bit(rot_ry, sx, sy));
+            }
+            push_bwry_pixels(bw_byte, ry_byte);
+        }
+    }
+    frame_abort();
+}
+#else
+static bool frame_begin(uint32_t plane_bytes)
+{
+    (void)plane_bytes;
+    epd_cmd(0x10);
+    return true;
+}
+
+static bool frame_begin_zlib(const uint8_t *img_hdr, uint32_t plane_bytes)
+{
+    (void)img_hdr;
+    return frame_begin(plane_bytes);
+}
+
+static void frame_put(uint32_t i, uint8_t bw_byte, uint8_t ry_byte)
+{
+    (void)i;
+    push_bwry_pixels(bw_byte, ry_byte);
+}
+
+static void frame_end(void) {}
+static void frame_abort(void) {}
+#endif
 
 static int zlib_read_cb0(struct uzlib_uncomp *data)
 {
@@ -117,7 +247,8 @@ static bool draw_zlib(uint32_t addr, const struct EepromImageHeader *eih)
     printf("ZLIB: Info -> %dbpp\n", bpp);
 
     uint32_t plane_bytes = (settings.screen_w * settings.screen_h) / 8;
-    epd_cmd(0x10);
+    if (!frame_begin_zlib(img_hdr, plane_bytes))
+        return false;
 
     if (bpp == 1)
     {
@@ -130,7 +261,7 @@ static bool draw_zlib(uint32_t addr, const struct EepromImageHeader *eih)
             uzlib_uncompress(&d0);
             if (settings.screen_color_black_invert)
                 b = ~b;
-            push_bwry_pixels(b, 0x00);
+            frame_put(i, b, 0x00);
         }
     }
     else
@@ -155,6 +286,7 @@ static bool draw_zlib(uint32_t addr, const struct EepromImageHeader *eih)
             if (uzlib_uncompress(&d1) < TINF_OK)
             {
                 printf("Skip Error!\n");
+                frame_abort();
                 return false;
             }
         }
@@ -174,9 +306,10 @@ static bool draw_zlib(uint32_t addr, const struct EepromImageHeader *eih)
                 b0 = ~b0;
             if (settings.screen_color_second_invert)
                 b1 = ~b1;
-            push_bwry_pixels(b0, b1);
+            frame_put(i, b0, b1);
         }
     }
+    frame_end();
     printf("ZLIB Done. Sent %lu bytes\n", byteCounter);
     return true;
 }
@@ -199,20 +332,33 @@ void drawImageAtAddress(uint32_t addr, uint8_t lut)
     if (eih.dataType == DATATYPE_IMG_RAW_1BPP)
     {
         printf("Mode: RAW 1BPP\n");
-        epd_cmd(0x10);
+        if (!frame_begin(plane_bytes))
+        {
+            eepromPowerDown();
+            epd_sleep();
+            epd_board_sleep();
+            return;
+        }
         for (uint32_t i = 0; i < plane_bytes; i++)
         {
             uint8_t b;
             eepromRead(data_base + i, &b, 1);
             if (settings.screen_color_black_invert)
                 b = ~b;
-            push_bwry_pixels(b, 0x00);
+            frame_put(i, b, 0x00);
         }
+        frame_end();
     }
     else if (eih.dataType == DATATYPE_IMG_RAW_2BPP)
     {
         printf("Mode: RAW 2BPP\n");
-        epd_cmd(0x10);
+        if (!frame_begin(plane_bytes))
+        {
+            eepromPowerDown();
+            epd_sleep();
+            epd_board_sleep();
+            return;
+        }
         for (uint32_t i = 0; i < plane_bytes; i++)
         {
             uint8_t b0, b1;
@@ -222,8 +368,9 @@ void drawImageAtAddress(uint32_t addr, uint8_t lut)
                 b0 = ~b0;
             if (settings.screen_color_second_invert)
                 b1 = ~b1;
-            push_bwry_pixels(b0, b1);
+            frame_put(i, b0, b1);
         }
+        frame_end();
     }
     else if (eih.dataType == DATATYPE_IMG_ZLIB)
     {
