@@ -17,7 +17,9 @@ Custom E-Paper firmware for Realtek RTL8762ESL and RTL8752HJL microcontrollers. 
 
 ## Supported & Tested Models
 The following models are currently supported and have been verified:
-- **ELM35R2C4P:** 3.5" BWRY (Black/White/Red/Yellow), 224x480 pixels, based on **RTL8752HJL**.
+- **ELM35R2C4P:** 3.5" BWRY (Black/White/Red/Yellow), 224x480 pixels, based on **RTL8752HJL** (default `make` target / OEPL type `0x53`).
+- **FPC-7909 / ELM75R8B4C:** 7.5" BWRY, 800x480 pixels, based on **RTL8752HJL** (`make PANEL=FPC7909`, OEPL type `0x4C`).
+- **HINK-E0276A01 / EL028R8B4C:** 2.8" BWRY, 128x296 pixels, based on **RTL8752HJL** (`make PANEL=HINK`, OEPL type `0x6E`).
 - **ELO58R2CRN:** 5.85" BWR (Black/White/Red), 272x792 pixels, based on **RTL8762ESL**.
 
 ## Project Structure
@@ -59,6 +61,12 @@ Before you start, ensure the following tools are installed:
 2. Start the compilation process:
    ```bash
    make
+   ```
+   For **RTL8752HJL BLE**, the default panel is ELM35R2C4P. Optional panels:
+   ```bash
+   make PANEL=ELM35     # default — upstream ELM35R2C4P
+   make PANEL=FPC7909   # Solum 7.5" FPC-7909
+   make PANEL=HINK      # Solum 2.8" HINK-E0276A01
    ```
    The finished binary files will be located in the `bin/` subfolder.
 

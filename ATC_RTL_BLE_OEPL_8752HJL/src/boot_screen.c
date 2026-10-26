@@ -1,4 +1,5 @@
 #include "boot_screen.h"
+#include "panel_config.h"
 #include "peripheral_app.h"
 #include "epd.h"
 #include "board.h"
@@ -109,15 +110,16 @@ static const uint8_t font8[95][8] = {
     /*7E '~'*/ {0x6E, 0x3B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
 };
 
-#define EPD_WIDTH 480
-#define EPD_HEIGHT 224
-#define BYTES_PER_ROW 120
-#define MAX_CHARS 60
-#define CHAR_H 24
-#define V_WIDTH 480
-#define V_HEIGHT 224
-#define P_WIDTH 224
-#define P_HEIGHT 480
+#define CHAR_H EPD_BOOT_CHAR_H
+#define P_WIDTH EPD_NATIVE_W
+#define P_HEIGHT EPD_NATIVE_H
+#if EPD_BOOT_DIRECT
+#define V_WIDTH EPD_NATIVE_W
+#define V_HEIGHT EPD_NATIVE_H
+#else
+#define V_WIDTH EPD_NATIVE_H
+#define V_HEIGHT EPD_NATIVE_W
+#endif
 
 static bool is_pixel_black(int vx, int vy, const char *const *lines, int n_lines, int ly_start)
 {
@@ -143,6 +145,7 @@ static bool is_pixel_black(int vx, int vy, const char *const *lines, int n_lines
     return false;
 }
 
+#if !EPD_BOOT_DIRECT
 static void render_lines_rotated(const char *const *lines, int n_lines)
 {
     const int ly_start = (V_HEIGHT - n_lines * CHAR_H) / 2;
@@ -151,16 +154,21 @@ static void render_lines_rotated(const char *const *lines, int n_lines)
 
     for (int yp = 0; yp < P_HEIGHT; yp++)
     {
-        for (int xp_byte = 0; xp_byte < 56; xp_byte++)
+        for (int xp_byte = 0; xp_byte < P_WIDTH / 4; xp_byte++)
         {
             uint8_t out_byte = 0;
 
             for (int p = 0; p < 4; p++)
             {
                 int xp = xp_byte * 4 + p;
+#if EPD_BOOT_FLIP
+                int vx = (V_WIDTH - 1) - yp;
+                int vy = xp;
+#else
                 int vx = yp;
                 
                 int vy = (V_HEIGHT - 1) - xp; 
+#endif
 
                 out_byte <<= 2;
                 if (is_pixel_black(vx, vy, lines, n_lines, ly_start))
@@ -176,6 +184,35 @@ static void render_lines_rotated(const char *const *lines, int n_lines)
         }
     }
 }
+#endif
+
+#if EPD_BOOT_DIRECT
+/* Text is drawn in controller RAM order, no rotation. */
+static void render_lines_direct(const char *const *lines, int n_lines)
+{
+    const int ly_start = (V_HEIGHT - n_lines * CHAR_H) / 2;
+
+    epd_cmd(0x10);
+
+    for (int y = 0; y < P_HEIGHT; y++)
+    {
+        for (int xb = 0; xb < P_WIDTH / 4; xb++)
+        {
+            uint8_t out_byte = 0;
+
+            for (int p = 0; p < 4; p++)
+            {
+                out_byte <<= 2;
+                out_byte |= is_pixel_black(xb * 4 + p, y, lines, n_lines, ly_start) ? 0x00 : 0x01;
+            }
+            epd_data(out_byte);
+        }
+    }
+}
+#define render_lines render_lines_direct
+#else
+#define render_lines render_lines_rotated
+#endif
 
 void boot_screen_draw(const uint8_t *ble_addr_6, uint16_t battery_mv)
 {
@@ -194,7 +231,7 @@ void boot_screen_draw(const uint8_t *ble_addr_6, uint16_t battery_mv)
 
     epd_board_init();
     epd_init();
-    render_lines_rotated(ptrs, 6);
+    render_lines(ptrs, 6);
 
     printf("BOOT refresh triggered\n");
     epd_cmd(0x04);
@@ -207,7 +244,7 @@ void boot_screen_show_error(const char *const *lines, uint8_t n_lines)
 {
     epd_board_init();
     epd_init();
-    render_lines_rotated(lines, (int)n_lines);
+    render_lines(lines, (int)n_lines);
 
     printf("EPD_ERR refresh triggered\n");
     epd_cmd(0x04);

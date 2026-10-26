@@ -111,7 +111,16 @@ AS_DEFS =
 # AS Defines END
 
 # C Defines
-C_DEFS =
+PANEL ?= ELM35
+ifeq ($(PANEL),ELM35)
+C_DEFS = -DPANEL_ELM35
+else ifeq ($(PANEL),FPC7909)
+C_DEFS = -DPANEL_FPC7909
+else ifeq ($(PANEL),HINK)
+C_DEFS = -DPANEL_HINK_E0276A01
+else
+$(error PANEL must be ELM35, FPC7909 or HINK)
+endif
 # C Defines END
 
 # AS Includes
