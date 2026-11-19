@@ -19,9 +19,10 @@ Custom E-Paper firmware for Realtek RTL8762ESL and RTL8752HJL microcontrollers. 
 The following models are currently supported and have been verified:
 - **ELM35R2C4P:** 3.5" BWRY (Black/White/Red/Yellow), 224x480 pixels, based on **RTL8752HJL**.
 - **ELO58R2CRN:** 5.85" BWR (Black/White/Red), 272x792 pixels, based on **RTL8762ESL**.
+- **EL097R2CRN:** 9.7" BWR (Black/White/Red), 960x672 pixels, based on **RTL8762ESL**.
 
 ## Project Structure
-The repository contains two separate projects for the different chip variants:
+The repository contains separate projects for the supported chip and hardware variants:
 
 <p align="center">
   <img src="RTL8752HJL_Chip.jpg" width="300" title="RTL8752HJL">
@@ -30,6 +31,7 @@ The repository contains two separate projects for the different chip variants:
 
 - `ATC_RTL_BLE_OEPL_8752HJL/`: BLE firmware for the RTL8752HJL chip.
 - `ATC_RTL_BLE_OEPL_8762ESL/`: BLE firmware for the RTL8762ESL chip.
+- `ATC_RTL_BLE_OEPL_8762ESL_97/`: BLE firmware for the EL097R2CRN 9.7" BWR tag based on RTL8762ESL.
 - `ATC_RTL_ZB_OEPL_8752HJL/`: OEPL(802.15.4) firmware for the RTL8752HJL chip (see below). PLEASE NOTE: This firmware has a breaking bug and hangs after a few hours of working fine, its something with the radio not recovering after sleep
 
 ### ATC_RTL_ZB_OEPL_8752HJL - 802.15.4 Variant
@@ -53,6 +55,8 @@ Before you start, ensure the following tools are installed:
    cd ATC_RTL_BLE_OEPL_8752HJL/gcc
    # OR
    cd ATC_RTL_BLE_OEPL_8762ESL/gcc
+    # OR
+    cd ATC_RTL_BLE_OEPL_8762ESL_97/gcc
    # OR
    cd ATC_RTL_ZB_OEPL_8752HJL/gcc
    ```
